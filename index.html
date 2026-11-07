@@ -17,7 +17,7 @@
   --fk-yellow:#ffe500;
   --fk-orange:#fb641b;
   --fk-green:#388e3c;
-  --admin-dark:#1e293b;
+  --admin-dark:#0f172a;
 }
 *{box-sizing:border-box}
 html, body{width:100%;overflow-x:hidden;-webkit-text-size-adjust:100%}
@@ -144,8 +144,8 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 
 .auth-form{display:flex;flex-direction:column;gap:8px}
 .auth-form label{font-size:11px;color:var(--muted);font-weight:600}
-.auth-form input,.auth-form select{border:1px solid var(--line);border-radius:2px;padding:8px 10px;font:inherit;font-size:13px;outline:none;background:#fff;width:100%}
-.auth-form input:focus,.auth-form select:focus{border-color:var(--fk-blue)}
+.auth-form input,.auth-form select,.auth-form textarea{border:1px solid var(--line);border-radius:2px;padding:8px 10px;font:inherit;font-size:13px;outline:none;background:#fff;width:100%}
+.auth-form input:focus,.auth-form select:focus,.auth-form textarea:focus{border-color:var(--fk-blue)}
 .auth-btn-primary{background:var(--fk-orange);color:#fff;border:0;padding:10px;font-size:13px;font-weight:700;border-radius:2px;cursor:pointer;margin-top:4px}
 .auth-switch{font-size:12px;color:var(--muted);text-align:center;margin-top:10px}
 .auth-switch a{color:var(--fk-blue);font-weight:700;text-decoration:none;cursor:pointer}
@@ -225,18 +225,46 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 }
 
 /* ======================================================== */
-/* 🛡️ OWNER ADMIN PANEL & EDIT ENGINE */
+/* 🛡️ OWNER & STAFF ENTERPRISE CONSOLE */
 /* ======================================================== */
 #adminPanelModal{position:fixed;inset:0;background:var(--bg);z-index:300;display:none;flex-direction:column;overflow-y:auto}
-.admin-navbar{background:var(--admin-dark);color:#fff;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
+.admin-navbar{background:var(--admin-dark);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10;flex-wrap:wrap;gap:8px}
+.admin-navbar-left{display:flex;align-items:center;gap:10px}
 .admin-navbar h2{margin:0;font-size:16px;display:flex;align-items:center;gap:6px}
-.admin-badge{background:var(--fk-orange);color:#fff;font-size:10px;padding:2px 6px;border-radius:3px;font-weight:800}
-.admin-export-btn{background:#10b981;color:#fff;border:0;padding:6px 12px;border-radius:3px;font-weight:700;cursor:pointer;font-size:12px;margin-right:6px}
-.admin-logout{background:#ef4444;color:#fff;border:0;padding:5px 12px;border-radius:3px;font-weight:700;cursor:pointer;font-size:12px}
+.admin-badge{background:var(--fk-orange);color:#fff;font-size:10px;padding:3px 7px;border-radius:3px;font-weight:800}
+.admin-actions-wrap{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+
+/* BADA REAL TIME WATCH ON ADMIN */
+.admin-giant-clock{
+  background:rgba(255,255,255,.1);
+  border:1.5px solid var(--fk-yellow);
+  color:var(--fk-yellow);
+  padding:4px 14px;
+  border-radius:24px;
+  font-family:monospace;
+  font-size:15px;
+  font-weight:900;
+  letter-spacing:1.5px;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  box-shadow:0 0 10px rgba(255,229,0,.2);
+}
+
+.admin-export-btn{background:#10b981;color:#fff;border:0;padding:6px 12px;border-radius:3px;font-weight:700;cursor:pointer;font-size:12px}
+.admin-logout{background:#ef4444;color:#fff;border:0;padding:6px 14px;border-radius:3px;font-weight:700;cursor:pointer;font-size:12px}
 .admin-container{max-width:1200px;margin:14px auto;padding:0 10px;display:grid;gap:14px}
 .admin-tabs{display:flex;gap:8px;border-bottom:2px solid var(--line);padding-bottom:8px;flex-wrap:wrap}
 .admin-tab-btn{background:#fff;border:1px solid var(--line);padding:8px 12px;border-radius:3px;font-weight:700;cursor:pointer;font-size:12px}
 .admin-tab-btn.active{background:var(--fk-blue);color:#fff;border-color:var(--fk-blue)}
+
+/* COMPANY NOTICE BOARD CARD */
+.company-bulletin-card{background:#fff;border:1px solid #bfdbfe;border-radius:4px;padding:12px;box-shadow:0 1px 3px rgba(0,0,0,.08);display:flex;gap:14px;align-items:center}
+.company-bulletin-card img{width:70px;height:70px;object-fit:cover;border-radius:4px;border:1px solid #cbd5e1}
+.bulletin-content{flex:1}
+.bulletin-content h4{margin:0 0 4px;color:#1e3a8a;font-size:14px}
+.bulletin-content p{margin:0;font-size:12px;color:#334155}
+.bulletin-date{font-size:10px;color:var(--muted);margin-top:4px}
 
 .mailbox-card{background:#fff;border-radius:4px;box-shadow:0 1px 3px rgba(0,0,0,.1);overflow:hidden}
 .mailbox-header{background:#f8fafc;padding:10px 14px;font-weight:700;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;font-size:13px}
@@ -250,7 +278,7 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 .st-4{background:#dcfce7;color:#15803d}
 
 .admin-prod-form{background:#f8fafc;border:1px solid var(--line);padding:14px;border-radius:4px;margin-bottom:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
-.admin-prod-form input, .admin-prod-form select{border:1px solid var(--line);border-radius:3px;padding:8px;font:inherit;font-size:12px;background:#fff;width:100%}
+.admin-prod-form input, .admin-prod-form select, .admin-prod-form textarea{border:1px solid var(--line);border-radius:3px;padding:8px;font:inherit;font-size:12px;background:#fff;width:100%}
 .admin-prod-form button{background:var(--fk-green);color:#fff;border:0;padding:9px;font-weight:700;border-radius:3px;cursor:pointer;font-size:12px}
 
 /* MULTIPLE GALLERY THUMBNAILS PREVIEW */
@@ -266,6 +294,24 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 .btn-unblock-user{background:#16a34a;color:#fff;border:0;padding:5px 10px;border-radius:2px;font-weight:700;cursor:pointer;font-size:11px;margin-left:4px}
 .btn-del-prod{background:#ef4444;color:#fff;border:0;padding:5px 10px;border-radius:2px;font-weight:700;cursor:pointer;font-size:11px}
 .btn-edit-prod{background:var(--fk-blue);color:#fff;border:0;padding:5px 10px;border-radius:2px;font-weight:700;cursor:pointer;font-size:11px;margin-right:2px}
+
+/* CHAT BOX / TASK SYSTEM STYLES */
+.chat-container{display:grid;grid-template-columns:300px 1fr;gap:12px;background:#fff;border-radius:4px;border:1px solid var(--line);min-height:380px}
+.chat-list-panel{border-right:1px solid var(--line);padding:10px;background:#f8fafc}
+.chat-user-item{padding:8px 10px;border-radius:4px;cursor:pointer;margin-bottom:6px;background:#fff;border:1px solid var(--line)}
+.chat-user-item.active{background:#e0f2fe;border-color:var(--fk-blue)}
+.chat-main-panel{display:flex;flex-direction:column;padding:12px}
+.chat-messages-stream{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding-bottom:10px;max-height:300px}
+.chat-bubble{max-width:85%;padding:8px 12px;border-radius:6px;font-size:12px;line-height:1.4;position:relative}
+.bubble-admin{align-self:flex-end;background:#dbeafe;border:1px solid #bfdbfe;color:#1e3a8a}
+.bubble-staff{align-self:flex-start;background:#f1f5f9;border:1px solid #e2e8f0;color:#334155}
+.msg-status-receipt{font-size:10px;font-weight:800;display:inline-block;margin-top:4px}
+.receipt-pending{color:#d97706}
+.receipt-seen{color:#0284c7}
+.receipt-accepted{color:#16a34a}
+.chat-send-bar{display:flex;gap:6px;margin-top:auto}
+.chat-send-bar input{flex:1;border:1px solid var(--line);padding:8px 10px;font:inherit;font-size:12px;border-radius:3px}
+.chat-send-bar button{background:var(--fk-blue);color:#fff;border:0;padding:8px 16px;font-weight:700;border-radius:3px;cursor:pointer}
 
 /* EDIT PRODUCT MODAL */
 .edit-modal-box{background:#fff;width:min(600px,94%);border-radius:4px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.3)}
@@ -285,25 +331,12 @@ footer a{color:#fff;text-decoration:none}
   .main-header{padding:8px 10px;gap:8px}
   .search-box{order:3;width:100%;min-width:100%;margin-top:2px}
   .header-actions{order:2;gap:6px}
-  .btn-nav span:not(.cart-count-badge){font-size:14px}
   .layout{grid-template-columns:1fr;padding:0 6px}
   .sidebar{display:none}
   .product-grid{grid-template-columns:repeat(2, 1fr)}
-  .product-card{padding:8px}
-  .prod-img-wrap{height:120px}
-  .prod-img-wrap img{max-height:100px}
-  .prod-title{font-size:12px;height:32px;margin:4px 0}
-  .final-price{font-size:14px}
-  .orig-price{font-size:11px}
-  .disc-percent{font-size:11px}
+  .chat-container{grid-template-columns:1fr}
   .big-sale-banner{flex-direction:column;align-items:flex-start;padding:14px}
-  .big-sale-banner h1{font-size:18px}
-  .sale-timer{width:100%;text-align:left;display:flex;justify-content:space-between;align-items:center;padding:8px 12px;min-width:auto}
-  .sale-timer .time{font-size:15px;margin-top:0}
-  .auth-card{grid-template-columns:1fr}
-  .auth-left{display:none}
-  .drawer{width:100%}
-  .mail-row{grid-template-columns:1fr;gap:4px;padding:10px}
+  .admin-giant-clock{font-size:13px;padding:3px 10px}
 }
 </style>
 </head>
@@ -595,7 +628,7 @@ footer a{color:#fff;text-decoration:none}
   </div>
 </div>
 
-<!-- EDIT PRODUCT MODAL (COMPLETE ATTRIBUTE EDITING) -->
+<!-- EDIT PRODUCT MODAL (COMPLETE FULL ATTRIBUTE EDIT) -->
 <div class="overlay" id="editProductModalOverlay">
   <div class="edit-modal-box">
     <div class="modal-head" style="background:var(--fk-blue);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;">
@@ -617,14 +650,14 @@ footer a{color:#fff;text-decoration:none}
             <input type="text" id="editProdCat" required>
           </div>
           <div>
-            <label>Stock / Rating Text</label>
+            <label>Stock / Rating</label>
             <input type="number" step="0.1" id="editProdRating" placeholder="4.5">
           </div>
         </div>
 
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
           <div>
-            <label>MRP (Original Price ₹)</label>
+            <label>MRP (Original ₹)</label>
             <input type="number" id="editProdOrig" required min="1">
           </div>
           <div>
@@ -635,7 +668,7 @@ footer a{color:#fff;text-decoration:none}
 
         <div>
           <label>Primary Image URL or Base64</label>
-          <input type="text" id="editProdImg" placeholder="Image URL / Base64 Data" required oninput="document.getElementById('editImgPreview').src=this.value">
+          <input type="text" id="editProdImg" placeholder="Image URL / Base64" required oninput="document.getElementById('editImgPreview').src=this.value">
         </div>
 
         <div>
@@ -648,28 +681,48 @@ footer a{color:#fff;text-decoration:none}
           <span style="font-size:11px;color:var(--muted)">Instant image preview</span>
         </div>
 
-        <button type="submit" class="auth-btn-primary" style="background:var(--fk-green);margin-top:10px;">Update &amp; Save Changes</button>
+        <button type="submit" class="auth-btn-primary" style="background:var(--fk-green);margin-top:10px;">Save &amp; Update Product</button>
       </form>
     </div>
   </div>
 </div>
 
 <!-- ======================================================== -->
-<!-- 🛡️ OWNER ADMIN PANEL -->
+<!-- 🛡️ OWNER & STAFF WORKSPACE (ROLE LOCKED) -->
 <!-- ======================================================== -->
 <div id="adminPanelModal">
   <div class="admin-navbar">
-    <h2><span>⚙️</span> PAG Moters Workspace <span class="admin-badge" id="adminRoleDisplay">Super Admin</span></h2>
-    <div>
-      <button class="admin-export-btn" onclick="exportOrdersToExcel()">📊 Export Sales Report (Excel/CSV)</button>
+    <div class="admin-navbar-left">
+      <h2><span>⚙️</span> PAG Moters Workspace <span class="admin-badge" id="adminRoleDisplay">Super Admin</span></h2>
+    </div>
+
+    <div class="admin-actions-wrap">
+      <!-- 🕒 BADA REAL TIME WATCH ON ADMIN -->
+      <div class="admin-giant-clock">
+        <span>🕒</span> <span id="adminLiveWatch">--:--:-- --</span>
+      </div>
+
+      <button class="admin-export-btn" id="btnAdminExport" onclick="exportOrdersToExcel()">📊 Export Sales Report</button>
       <button class="admin-logout" onclick="closeAdminPortal()">Exit Workspace</button>
     </div>
   </div>
 
   <div class="admin-container">
+    <!-- COMPANY LIVE BULLETIN / THUMBNAIL NOTICE BOARD -->
+    <div id="companyBulletinView" class="company-bulletin-card">
+      <img id="bulletinThumb" src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=200" alt="Notice">
+      <div class="bulletin-content">
+        <h4 id="bulletinHeadline">📌 Company Announcement Board</h4>
+        <p id="bulletinDetails">Welcome to PAG Moters Workspace. Check active tasks and orders below.</p>
+        <div class="bulletin-date" id="bulletinTimestamp">Live Operational Notice</div>
+      </div>
+    </div>
+
     <div class="admin-tabs" id="adminTabsContainer">
       <button class="admin-tab-btn" id="btnTabOrders" onclick="switchAdminTab('orders')">📦 Orders (Mailbox)</button>
       <button class="admin-tab-btn" id="btnTabProducts" onclick="switchAdminTab('products')">🏷️ Product Management</button>
+      <button class="admin-tab-btn" id="btnTabChat" onclick="switchAdminTab('chat')">💬 Staff Task &amp; Chat Box</button>
+      <button class="admin-tab-btn" id="btnTabNotice" onclick="switchAdminTab('notice')">📢 Company Notice Board</button>
       <button class="admin-tab-btn" id="btnTabTeam" onclick="switchAdminTab('team')">👔 Staff Management</button>
       <button class="admin-tab-btn" id="btnTabUsers" onclick="switchAdminTab('users')">👥 Customer Accounts &amp; Block</button>
     </div>
@@ -683,7 +736,7 @@ footer a{color:#fff;text-decoration:none}
       <div id="adminMailboxContainer"></div>
     </div>
 
-    <!-- 2. PRODUCT MANAGEMENT (ADD / MULTI-PHOTO / EDIT FULL ATTRIBUTES) -->
+    <!-- 2. PRODUCT MANAGEMENT -->
     <div id="adminProductsSection" class="mailbox-card" style="display:none;padding:14px;">
       <div class="mailbox-header" style="background:#fff;padding:0 0 10px 0;">
         <span><b>Add New Product to Storefront (Multi-Photo Support)</b></span>
@@ -706,11 +759,8 @@ footer a{color:#fff;text-decoration:none}
         <input type="number" id="newProdOrig" placeholder="Original MRP Price (₹)" required min="1" oninput="calculateDiscountPreview()">
         <input type="number" id="newProdPrice" placeholder="Selling Offer Price (₹)" required min="1" oninput="calculateDiscountPreview()">
         
-        <!-- MULTIPLE PHOTOS UPLOAD SECTION (UP TO 4-5 PHOTOS) -->
         <div style="grid-column:1/-1;border:1px solid #cbd5e1;background:#f8fafc;padding:10px;border-radius:4px;">
           <b style="font-size:12px;color:#334155;display:block;margin-bottom:4px;">📸 Product Images (Primary + 4 Optional Photos)</b>
-          <p style="font-size:11px;color:var(--muted);margin:0 0 8px;">Select 1 to 5 images from your device or paste web link:</p>
-          
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
             <div>
               <label style="font-size:11px;font-weight:700;">📁 Upload Files (Select Multiple):</label>
@@ -721,7 +771,6 @@ footer a{color:#fff;text-decoration:none}
               <input type="url" id="newProdImgUrl" placeholder="https://..." oninput="handleUrlImagePreview(this.value)">
             </div>
           </div>
-
           <div class="multi-preview-strip" id="multiPreviewStrip">
             <span style="font-size:11px;color:var(--muted);padding:8px;">No images uploaded yet. Selected photos will appear here.</span>
           </div>
@@ -756,7 +805,56 @@ footer a{color:#fff;text-decoration:none}
       </div>
     </div>
 
-    <!-- 3. TEAM MANAGEMENT -->
+    <!-- 3. STAFF TASK & CHAT BOX (DIRECT MSG & SEEN/ACCEPT RECEIPT) -->
+    <div id="adminChatSection" class="mailbox-card" style="display:none;padding:14px;">
+      <div class="mailbox-header" style="background:#fff;padding:0 0 10px 0;">
+        <span><b>Staff Communication &amp; Live Task Delegation</b></span>
+      </div>
+      <div class="chat-container">
+        <div class="chat-list-panel">
+          <b style="font-size:12px;display:block;margin-bottom:8px;color:#475569;">Select Staff Member:</b>
+          <div id="chatStaffList"></div>
+        </div>
+        <div class="chat-main-panel">
+          <div style="padding-bottom:8px;border-bottom:1px solid var(--line);font-weight:700;font-size:13px;" id="chatActiveHeader">
+            Select a staff member on the left
+          </div>
+          <div class="chat-messages-stream" id="chatMessagesStream">
+            <div style="color:var(--muted);text-align:center;margin:auto;">No message history loaded.</div>
+          </div>
+          <form class="chat-send-bar" onsubmit="handleSendStaffMessage(event)">
+            <input type="text" id="chatMsgInput" placeholder="Type instruction, delivery task, or notice..." required>
+            <button type="submit">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. COMPANY NOTICE BOARD PUBLISHER (WITH THUMBNAIL) -->
+    <div id="adminNoticeSection" class="mailbox-card" style="display:none;padding:14px;">
+      <div class="mailbox-header" style="background:#fff;padding:0 0 10px 0;">
+        <span><b>Publish New Company Notice / Thumbnail Announcement</b></span>
+      </div>
+      <form class="admin-prod-form" onsubmit="handlePublishNotice(event)">
+        <input type="text" id="noticeHeadlineInput" placeholder="Headline / Title (e.g. Festival Shift Timings)" required style="grid-column:1/-1;">
+        <textarea id="noticeDescInput" rows="3" placeholder="Full notice description for all staff..." required style="grid-column:1/-1;"></textarea>
+        <div>
+          <label style="font-size:11px;font-weight:700;">Notice Thumbnail Image URL:</label>
+          <input type="url" id="noticeThumbUrl" placeholder="https://..." oninput="document.getElementById('noticePreviewImg').src=this.value">
+        </div>
+        <div>
+          <label style="font-size:11px;font-weight:700;">Or Upload Device Photo:</label>
+          <input type="file" accept="image/*" onchange="handleNoticeFileUpload(event)">
+        </div>
+        <div style="grid-column:1/-1;display:flex;align-items:center;gap:12px;background:#f8fafc;padding:8px;border-radius:4px;border:1px dashed var(--line);">
+          <img id="noticePreviewImg" src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=200" style="width:60px;height:60px;object-fit:cover;border-radius:4px;">
+          <span style="font-size:11px;color:var(--muted);">Thumbnail Preview. This banner will be visible to all staff on their dashboard.</span>
+        </div>
+        <button type="submit" style="grid-column:1/-1;background:var(--fk-blue);">📢 Publish Company Notice</button>
+      </form>
+    </div>
+
+    <!-- 5. TEAM MANAGEMENT -->
     <div id="adminTeamSection" class="mailbox-card" style="display:none;padding:14px;">
       <div class="mailbox-header" style="background:#fff;padding:0 0 10px 0;">
         <span id="teamFormTitle"><b>Add Team Member</b></span>
@@ -794,18 +892,18 @@ footer a{color:#fff;text-decoration:none}
       </div>
     </div>
 
-    <!-- 4. CUSTOMER ACCOUNTS WITH BLOCK / UNBLOCK -->
+    <!-- 6. CUSTOMER ACCOUNTS (ADMIN & SUB-ADMIN ONLY - STAFF BLOCKED) -->
     <div id="adminUsersSection" class="users-table-wrap" style="display:none;">
       <div class="mailbox-header">
-        <span>Registered Customers (Password Override &amp; Block Control)</span>
+        <span>Registered Customers (Super Admin &amp; Sub-Admin Confidential Directory)</span>
         <span id="adminUsersCountBadge">0 Customers</span>
       </div>
       <table class="users-table">
         <thead>
           <tr>
             <th>Customer Name</th>
-            <th>Phone / Login</th>
-            <th>Current Password</th>
+            <th>Phone / Login ID</th>
+            <th>Password Hash</th>
             <th>Status</th>
             <th>Security Status</th>
             <th>Action</th>
@@ -819,7 +917,7 @@ footer a{color:#fff;text-decoration:none}
 </div>
 
 <script>
-// SUPER ADMIN CREDENTIALS
+// SUPER ADMIN MASTER CREDENTIALS
 const ADMIN_PHONE = "6306211265";
 const ADMIN_PASS = "Rushtom@1927";
 const ADMIN_MASTER_SEC = "ajay";
@@ -843,14 +941,24 @@ let cart = [];
 let orders = [];
 let users = [];
 let teamMembers = [];
+let staffChats = []; // Array of message threads
+let companyNotice = {
+  title: "📌 Welcome to PAG Moters Workspace",
+  desc: "All staff members are requested to process orders promptly and verify delivery PINs.",
+  thumb: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=200",
+  date: "Live Operational Notice"
+};
 let currentUser = null;
-let currentMultiUploadedImages = []; // Array of Base64 / links
+let currentMultiUploadedImages = [];
+let activeChatStaffPhone = "";
 
 try { catalog = JSON.parse(localStorage.getItem('pag_catalog_db')) || defaultCatalog; } catch(e){ catalog = defaultCatalog; }
 try { cart = JSON.parse(localStorage.getItem('pag_cart_items')) || []; } catch(e){ cart = []; }
 try { orders = JSON.parse(localStorage.getItem('pag_orders_db')) || []; } catch(e){ orders = []; }
 try { users = JSON.parse(localStorage.getItem('pag_users_db')) || []; } catch(e){ users = []; }
 try { teamMembers = JSON.parse(localStorage.getItem('pag_team_db')) || []; } catch(e){ teamMembers = []; }
+try { staffChats = JSON.parse(localStorage.getItem('pag_staff_chats_db')) || []; } catch(e){ staffChats = []; }
+try { companyNotice = JSON.parse(localStorage.getItem('pag_company_notice_db')) || companyNotice; } catch(e){}
 try { currentUser = JSON.parse(localStorage.getItem('pag_active_user')) || null; } catch(e){ currentUser = null; }
 
 function persistCatalog() { 
@@ -863,6 +971,8 @@ function persistCart() { localStorage.setItem('pag_cart_items', JSON.stringify(c
 function persistOrders() { localStorage.setItem('pag_orders_db', JSON.stringify(orders)); }
 function persistUsers() { localStorage.setItem('pag_users_db', JSON.stringify(users)); renderAdminUsersTable(); }
 function persistTeam() { localStorage.setItem('pag_team_db', JSON.stringify(teamMembers)); renderAdminTeamTable(); }
+function persistChats() { localStorage.setItem('pag_staff_chats_db', JSON.stringify(staffChats)); }
+function persistNotice() { localStorage.setItem('pag_company_notice_db', JSON.stringify(companyNotice)); renderNoticeDisplay(); }
 function persistCurrentUser() { localStorage.setItem('pag_active_user', JSON.stringify(currentUser)); syncAuthUI(); }
 
 function cleanPhone(val) {
@@ -873,7 +983,7 @@ function cleanPhone(val) {
   return num;
 }
 
-// 🕒 LIVE REAL-TIME CLOCK
+// 🕒 LIVE REAL-TIME DIGITAL CLOCK FOR CUSTOMER & BADA WATCH FOR ADMIN
 function startRealTimeClock() {
   function updateClock() {
     const now = new Date();
@@ -884,8 +994,12 @@ function startRealTimeClock() {
     hours = hours % 12;
     hours = hours ? hours : 12;
     const formattedHours = String(hours).padStart(2, '0');
-    const clockElem = document.getElementById('realTimeClock');
-    if (clockElem) clockElem.innerText = `${formattedHours}:${minutes}:${seconds} ${ampm}`;
+    const formattedTime = `${formattedHours}:${minutes}:${seconds} ${ampm}`;
+
+    const customerClock = document.getElementById('realTimeClock');
+    const adminWatch = document.getElementById('adminLiveWatch');
+    if (customerClock) customerClock.innerText = formattedTime;
+    if (adminWatch) adminWatch.innerText = formattedTime;
   }
   updateClock();
   setInterval(updateClock, 1000);
@@ -930,13 +1044,13 @@ function startSaleTimer() {
 }
 
 // ==========================================
-// 📊 EXCEL REPORT EXPORT FUNCTION
+// 📊 EXCEL REPORT EXPORT
 // ==========================================
 function exportOrdersToExcel() {
   try { orders = JSON.parse(localStorage.getItem('pag_orders_db')) || []; } catch(e){ orders = []; }
   
   if(!orders.length) {
-    alert("Export Failed: No orders placed yet to export.");
+    alert("Export Failed: No orders placed yet.");
     return;
   }
 
@@ -961,7 +1075,7 @@ function exportOrdersToExcel() {
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
-  alert("✅ Sales & Orders Excel/CSV report downloaded successfully!");
+  alert("✅ Sales & Orders Excel report downloaded!");
 }
 
 // ==========================================
@@ -1101,7 +1215,7 @@ function renderMyOrdersList() {
 }
 
 // ==========================================
-// 🛡️ ROLE-BASED ACCESS CONTROL & WORKSPACE
+// 🛡️ WORKSPACE & STRICT PERMISSION LOGIC
 // ==========================================
 function openAdminPortal(role = "Super Admin") {
   closeAuthModal();
@@ -1110,15 +1224,22 @@ function openAdminPortal(role = "Super Admin") {
 
   const btnOrders = document.getElementById('btnTabOrders');
   const btnProducts = document.getElementById('btnTabProducts');
+  const btnChat = document.getElementById('btnTabChat');
+  const btnNotice = document.getElementById('btnTabNotice');
   const btnTeam = document.getElementById('btnTabTeam');
   const btnUsers = document.getElementById('btnTabUsers');
   const roleSelect = document.getElementById('newTeamRole');
 
+  renderNoticeDisplay();
+
+  // 1. SUPER ADMIN: Full Access
   if(role === "Super Admin") {
     btnOrders.style.display = 'inline-block';
     btnProducts.style.display = 'inline-block';
+    btnChat.style.display = 'inline-block';
+    btnNotice.style.display = 'inline-block';
     btnTeam.style.display = 'inline-block';
-    btnUsers.style.display = 'inline-block';
+    btnUsers.style.display = 'inline-block'; // CUSTOMER PASSWORDS VISIBLE
     document.getElementById('teamFormTitle').innerHTML = '<b>Add Sub-Admin or Staff Member</b>';
     roleSelect.innerHTML = `
       <option value="Sub-Admin">🛡️ Sub-Admin (Manager)</option>
@@ -1129,11 +1250,14 @@ function openAdminPortal(role = "Super Admin") {
     `;
     switchAdminTab('orders');
   } 
+  // 2. SUB-ADMIN: Can manage staff & view customers, cannot add Sub-Admin
   else if(role === "Sub-Admin") {
     btnOrders.style.display = 'inline-block';
     btnProducts.style.display = 'inline-block';
+    btnChat.style.display = 'inline-block';
+    btnNotice.style.display = 'inline-block';
     btnTeam.style.display = 'inline-block';
-    btnUsers.style.display = 'inline-block';
+    btnUsers.style.display = 'inline-block'; // CUSTOMER PASSWORDS VISIBLE
     document.getElementById('teamFormTitle').innerHTML = '<b>Add Staff Member (Sub-Admin Restricted)</b>';
     roleSelect.innerHTML = `
       <option value="Staff - Order Manager">📦 Staff: Order Manager</option>
@@ -1143,19 +1267,18 @@ function openAdminPortal(role = "Super Admin") {
     `;
     switchAdminTab('orders');
   } 
+  // 3. STAFF ROLES: CUSTOMER PASSWORDS STRICTLY BLOCKED & HIDDEN
   else {
+    btnUsers.style.display = 'none'; // 🚫 CUSTOMER ID/PASS COMPLETELY HIDDEN
     btnTeam.style.display = 'none';
-    btnUsers.style.display = 'none';
+    btnNotice.style.display = 'none'; // Staff cannot publish notices
+
+    btnChat.style.display = 'inline-block'; // Can access their direct tasks/messages
 
     if(role.includes("Product Manager")) {
       btnOrders.style.display = 'none';
       btnProducts.style.display = 'inline-block';
       switchAdminTab('products');
-    } else if(role.includes("Support")) {
-      btnOrders.style.display = 'inline-block';
-      btnProducts.style.display = 'none';
-      btnUsers.style.display = 'inline-block';
-      switchAdminTab('orders');
     } else {
       btnOrders.style.display = 'inline-block';
       btnProducts.style.display = 'none';
@@ -1167,6 +1290,7 @@ function openAdminPortal(role = "Super Admin") {
   renderAdminProductsTable();
   renderAdminTeamTable();
   renderAdminUsersTable();
+  initChatSystem();
 }
 
 function closeAdminPortal() {
@@ -1177,15 +1301,183 @@ function closeAdminPortal() {
 function switchAdminTab(tab) {
   document.getElementById('adminOrdersSection').style.display = tab === 'orders' ? 'block' : 'none';
   document.getElementById('adminProductsSection').style.display = tab === 'products' ? 'block' : 'none';
+  document.getElementById('adminChatSection').style.display = tab === 'chat' ? 'block' : 'none';
+  document.getElementById('adminNoticeSection').style.display = tab === 'notice' ? 'block' : 'none';
   document.getElementById('adminTeamSection').style.display = tab === 'team' ? 'block' : 'none';
   document.getElementById('adminUsersSection').style.display = tab === 'users' ? 'block' : 'none';
 
-  document.getElementById('btnTabOrders').classList.toggle('active', tab === 'orders');
-  document.getElementById('btnTabProducts').classList.toggle('active', tab === 'products');
-  document.getElementById('btnTabTeam').classList.toggle('active', tab === 'team');
-  document.getElementById('btnTabUsers').classList.toggle('active', tab === 'users');
+  document.querySelectorAll('.admin-tab-btn').forEach(btn => btn.classList.remove('active'));
+  const activeBtn = document.getElementById(`btnTab${tab.charAt(0).toUpperCase() + tab.slice(1)}`);
+  if(activeBtn) activeBtn.classList.add('active');
+
+  if(tab === 'chat') renderChatView();
 }
 
+// NOTICE BOARD ENGINE
+function renderNoticeDisplay() {
+  document.getElementById('bulletinHeadline').innerText = companyNotice.title;
+  document.getElementById('bulletinDetails').innerText = companyNotice.desc;
+  document.getElementById('bulletinThumb').src = companyNotice.thumb;
+  document.getElementById('bulletinTimestamp').innerText = companyNotice.date;
+}
+
+function handleNoticeFileUpload(e) {
+  const file = e.target.files[0];
+  if(file) {
+    const reader = new FileReader();
+    reader.onload = function(evt) {
+      document.getElementById('noticeThumbUrl').value = evt.target.result;
+      document.getElementById('noticePreviewImg').src = evt.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+function handlePublishNotice(e) {
+  e.preventDefault();
+  const title = document.getElementById('noticeHeadlineInput').value.trim();
+  const desc = document.getElementById('noticeDescInput').value.trim();
+  const thumb = document.getElementById('noticeThumbUrl').value.trim() || "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=200";
+
+  companyNotice = {
+    title,
+    desc,
+    thumb,
+    date: `Published: ${new Date().toLocaleDateString('en-IN', {day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'})}`
+  };
+  persistNotice();
+  alert("📢 Company Notice & Thumbnail successfully published to all staff dashboards!");
+}
+
+// ==========================================
+// 💬 STAFF CHAT & TASK DISPATCH WITH SEEN/ACCEPT RECEIPT
+// ==========================================
+function initChatSystem() {
+  const staffListEl = document.getElementById('chatStaffList');
+  if(!staffListEl) return;
+
+  // If Admin or Sub-Admin, show list of staff
+  if(currentUser && (currentUser.role === "Super Admin" || currentUser.role === "Sub-Admin")) {
+    if(!teamMembers.length) {
+      staffListEl.innerHTML = '<small style="color:var(--muted)">No staff registered yet.</small>';
+      return;
+    }
+    staffListEl.innerHTML = teamMembers.map(m => `
+      <div class="chat-user-item ${activeChatStaffPhone === m.phone ? 'active' : ''}" onclick="selectChatStaff('${m.phone}')">
+        <b>${m.name}</b><br>
+        <small style="color:var(--muted)">${m.role}</small>
+      </div>
+    `).join('');
+
+    if(!activeChatStaffPhone && teamMembers.length) {
+      selectChatStaff(teamMembers[0].phone);
+    }
+  } else {
+    // If logged in as staff, lock chat directly to their own account
+    staffListEl.innerHTML = `
+      <div class="chat-user-item active">
+        <b>Management Direct Line</b><br>
+        <small style="color:var(--muted)">Logged in: ${currentUser.name}</small>
+      </div>
+    `;
+    activeChatStaffPhone = currentUser.phone;
+    renderChatView();
+  }
+}
+
+function selectChatStaff(phone) {
+  activeChatStaffPhone = phone;
+  initChatSystem();
+  renderChatView();
+}
+
+function renderChatView() {
+  const stream = document.getElementById('chatMessagesStream');
+  const header = document.getElementById('chatActiveHeader');
+  if(!stream) return;
+
+  const staff = teamMembers.find(t => t.phone === activeChatStaffPhone) || currentUser;
+  if(header && staff) {
+    header.innerText = `Task & Chat with: ${staff.name} (${staff.role || 'Staff'})`;
+  }
+
+  const thread = staffChats.filter(c => c.staffPhone === activeChatStaffPhone);
+
+  if(!thread.length) {
+    stream.innerHTML = '<div style="color:var(--muted);text-align:center;margin:auto;">No tasks or messages yet. Type below to send.</div>';
+    return;
+  }
+
+  const isStaffLoggedIn = currentUser && !['Super Admin', 'Sub-Admin'].includes(currentUser.role);
+
+  stream.innerHTML = thread.map((msg, idx) => {
+    const isFromAdmin = msg.senderRole === 'Admin';
+    let receiptHtml = '';
+
+    if(msg.status === 'Accepted') {
+      receiptHtml = '<span class="msg-status-receipt receipt-accepted">✅ Accepted Task</span>';
+    } else if(msg.status === 'Seen') {
+      receiptHtml = '<span class="msg-status-receipt receipt-seen">👁️ Seen by Staff</span>';
+    } else {
+      receiptHtml = '<span class="msg-status-receipt receipt-pending">🕒 Sent (Unread)</span>';
+    }
+
+    let staffActionButtons = '';
+    if(isStaffLoggedIn && msg.senderRole === 'Admin') {
+      if(msg.status === 'Sent') {
+        staffActionButtons = `<button style="background:var(--fk-blue);color:#fff;border:0;padding:3px 8px;border-radius:2px;font-size:10px;cursor:pointer;margin-top:4px;" onclick="markMessageStatus(${idx}, 'Seen')">👁️ Mark as Seen</button>`;
+      } else if(msg.status === 'Seen') {
+        staffActionButtons = `<button style="background:var(--fk-green);color:#fff;border:0;padding:3px 8px;border-radius:2px;font-size:10px;cursor:pointer;margin-top:4px;" onclick="markMessageStatus(${idx}, 'Accepted')">👍 Accept Task</button>`;
+      }
+    }
+
+    return `
+      <div class="chat-bubble ${isFromAdmin ? 'bubble-admin' : 'bubble-staff'}">
+        <div><b>${msg.senderName}:</b> ${msg.text}</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:4px;">
+          <small style="font-size:9px;opacity:.7;">${msg.time}</small>
+          ${receiptHtml}
+        </div>
+        ${staffActionButtons}
+      </div>
+    `;
+  }).join('');
+
+  stream.scrollTop = stream.scrollHeight;
+}
+
+function handleSendStaffMessage(e) {
+  e.preventDefault();
+  const input = document.getElementById('chatMsgInput');
+  const text = input.value.trim();
+  if(!text || !activeChatStaffPhone) return;
+
+  const isAdmin = ['Super Admin', 'Sub-Admin'].includes(currentUser.role);
+  const newMsg = {
+    staffPhone: activeChatStaffPhone,
+    senderName: currentUser.name,
+    senderRole: isAdmin ? 'Admin' : 'Staff',
+    text: text,
+    time: new Date().toLocaleTimeString('en-IN', {hour:'2-digit', minute:'2-digit'}),
+    status: 'Sent'
+  };
+
+  staffChats.push(newMsg);
+  persistChats();
+  input.value = '';
+  renderChatView();
+}
+
+function markMessageStatus(idx, status) {
+  const staffMsgs = staffChats.filter(c => c.staffPhone === activeChatStaffPhone);
+  if(staffMsgs[idx]) {
+    staffMsgs[idx].status = status;
+    persistChats();
+    renderChatView();
+  }
+}
+
+// TEAM MANAGEMENT
 function adminSaveTeamMember(e) {
   e.preventDefault();
   const name = document.getElementById('newTeamName').value.trim();
@@ -1218,6 +1510,7 @@ function adminSaveTeamMember(e) {
   });
 
   persistTeam();
+  initChatSystem();
   e.target.reset();
   alert(`${role} "${name}" added successfully!`);
 }
@@ -1270,6 +1563,7 @@ function adminDeleteTeamMember(phone) {
     if(confirm(`Are you sure you want to remove ${teamMembers[idx].name}?`)) {
       teamMembers.splice(idx, 1);
       persistTeam();
+      initChatSystem();
     }
   }
 }
@@ -1286,7 +1580,7 @@ function toggleOtherCatInput(val) {
   }
 }
 
-// MULTI-PHOTO UPLOAD HANDLER (UP TO 5 PHOTOS)
+// MULTI-PHOTO UPLOAD HANDLER
 function handleMultipleImagesUpload(e) {
   const files = Array.from(e.target.files).slice(0, 5);
   currentMultiUploadedImages = [];
@@ -1401,7 +1695,7 @@ function renderAdminProductsTable() {
         <td><s>₹${p.orig.toLocaleString('en-IN')}</s></td>
         <td><span style="color:var(--fk-green);font-weight:700;">${discount}% OFF</span></td>
         <td style="white-space:nowrap;">
-          <button class="btn-edit-prod" onclick="openEditProductModal(${idx})">Edit Product</button>
+          <button class="btn-edit-prod" onclick="openEditProductModal(${idx})">✏️ Edit Product</button>
           <button class="btn-del-prod" onclick="adminDeleteProduct(${idx})">Remove</button>
         </td>
       </tr>
@@ -1409,17 +1703,18 @@ function renderAdminProductsTable() {
   }).join('');
 }
 
-// EDIT PRODUCT MODAL HANDLERS
+// EDIT PRODUCT MODAL HANDLERS (SOLVES THE EDIT NOT OPENING ISSUE)
 function openEditProductModal(idx) {
   const p = catalog[idx];
+  if(!p) return;
   document.getElementById('editProdIndex').value = idx;
-  document.getElementById('editProdName').value = p.name;
-  document.getElementById('editProdCat').value = p.cat;
+  document.getElementById('editProdName').value = p.name || '';
+  document.getElementById('editProdCat').value = p.cat || '';
   document.getElementById('editProdRating').value = p.rating || 4.5;
-  document.getElementById('editProdOrig').value = p.orig;
-  document.getElementById('editProdPrice').value = p.price;
-  document.getElementById('editProdImg').value = p.img;
-  document.getElementById('editImgPreview').src = p.img;
+  document.getElementById('editProdOrig').value = p.orig || '';
+  document.getElementById('editProdPrice').value = p.price || '';
+  document.getElementById('editProdImg').value = p.img || '';
+  document.getElementById('editImgPreview').src = p.img || '';
 
   document.getElementById('editProductModalOverlay').classList.add('show');
 }
@@ -1466,7 +1761,7 @@ function handleSaveEditedProduct(e) {
 
   persistCatalog();
   closeEditProductModal();
-  alert("✅ Product details and photo updated successfully!");
+  alert("✅ Product updated successfully!");
 }
 
 function adminDeleteProduct(idx) {
@@ -1573,6 +1868,7 @@ function viewOrderDetailsInAdmin(idx) {
   }
 }
 
+// CUSTOMER ACCOUNTS (CONFIDENTIAL FOR SUPER ADMIN & SUB ADMIN ONLY)
 function renderAdminUsersTable() {
   const tbody = document.getElementById('adminUsersTableBody');
   const badge = document.getElementById('adminUsersCountBadge');
