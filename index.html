@@ -207,7 +207,7 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 .order-pill{background:#f1f3f6;padding:8px;border-radius:4px;font-family:monospace;font-size:15px;font-weight:700;margin:10px 0}
 .btn-wa-order{background:#25d366;color:#fff;padding:12px;border-radius:2px;text-decoration:none;font-weight:700;display:block;margin-top:12px}
 
-/* OWNER ADMIN PANEL (OPENS ONLY ON 6306211265 LOGIN) */
+/* OWNER ADMIN PANEL */
 #adminPanelModal{position:fixed;inset:0;background:var(--bg);z-index:300;display:none;flex-direction:column;overflow-y:auto}
 .admin-navbar{background:var(--admin-dark);color:#fff;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
 .admin-navbar h2{margin:0;font-size:18px;display:flex;align-items:center;gap:8px}
@@ -229,10 +229,16 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 .st-3{background:#ede9fe;color:#6d28d9}
 .st-4{background:#dcfce7;color:#15803d}
 
-/* PRODUCT MANAGEMENT ADMIN FORMS & TABLES */
+/* PRODUCT MANAGEMENT ADMIN FORMS */
 .admin-prod-form{background:#f8fafc;border:1px solid var(--line);padding:16px;border-radius:4px;margin-bottom:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
 .admin-prod-form input, .admin-prod-form select{border:1px solid var(--line);border-radius:3px;padding:9px 10px;font:inherit;background:#fff}
 .admin-prod-form button{background:var(--fk-green);color:#fff;border:0;padding:10px;font-weight:700;border-radius:3px;cursor:pointer}
+
+/* IMAGE UPLOAD TOGGLE BUTTONS & PREVIEW */
+.image-source-toggle{grid-column:1/-1;display:flex;gap:10px;align-items:center;margin-top:4px}
+.image-source-toggle label{font-size:13px;font-weight:700;display:flex;align-items:center;gap:4px;cursor:pointer}
+.image-preview-box{display:flex;align-items:center;gap:10px;grid-column:1/-1;background:#fff;padding:8px 12px;border:1px dashed var(--line);border-radius:4px}
+.image-preview-box img{width:50px;height:50px;object-fit:contain;border:1px solid #ddd;border-radius:2px;display:none}
 
 .users-table-wrap{background:#fff;border-radius:4px;box-shadow:0 1px 3px rgba(0,0,0,.1);overflow-x:auto}
 .users-table{width:100%;border-collapse:collapse;text-align:left;font-size:13px}
@@ -343,7 +349,7 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
 <div class="layout">
   <aside class="sidebar">
     <h3>Filters</h3>
-    <div class="filter-group">
+    <div class="filter-group" id="sidebarFilterGroup">
       <b>Categories</b>
       <label><input type="radio" name="f_cat" checked onclick="filterByCategory('All')"> All Products</label>
       <label><input type="radio" name="f_cat" onclick="filterByCategory('Helmets')"> Helmets &amp; Safety</label>
@@ -593,26 +599,49 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
       <div id="adminMailboxContainer"></div>
     </div>
 
-    <!-- 2. PRODUCT MANAGEMENT (ADD / REMOVE / PRICE / DISCOUNT) -->
+    <!-- 2. PRODUCT MANAGEMENT (ADD / REMOVE / PRICE / DISCOUNT / 2 IMAGE OPTIONS) -->
     <div id="adminProductsSection" class="mailbox-card" style="display:none;padding:16px;">
       <div class="mailbox-header" style="background:#fff;padding:0 0 12px 0;">
         <span><b>Add New Product to Storefront</b></span>
       </div>
       
-      <!-- ADD PRODUCT FORM -->
       <form class="admin-prod-form" onsubmit="adminSaveProduct(event)">
-        <input type="text" id="newProdName" placeholder="Product Name (e.g. Smart EV Charger)" required>
-        <select id="newProdCat" required>
+        <input type="text" id="newProdName" placeholder="Product Name (e.g. Mobile Phone, Smart Helmet)" required>
+        
+        <select id="newProdCat" onchange="toggleOtherCatInput(this.value)" required>
           <option value="Helmets">Helmets</option>
           <option value="Chargers">Chargers</option>
           <option value="Batteries">Batteries</option>
           <option value="Mobile Cables">Mobile Cables</option>
           <option value="Earphones">Earphones</option>
           <option value="Accessories">Accessories</option>
+          <option value="Other">➕ Other (Type Custom Category)</option>
         </select>
+
+        <input type="text" id="newProdCustomCat" placeholder="Type Your Custom Category Name" style="display:none;border-color:var(--fk-blue);background:#eff6ff;">
+
         <input type="number" id="newProdOrig" placeholder="Original MRP Price (₹)" required min="1" oninput="calculateDiscountPreview()">
         <input type="number" id="newProdPrice" placeholder="Selling Offer Price (₹)" required min="1" oninput="calculateDiscountPreview()">
-        <input type="url" id="newProdImg" placeholder="Image Direct URL (https://...)" required>
+        
+        <!-- 📸 DUAL PRODUCT IMAGE OPTIONS (CHOOSE FILE OR URL) -->
+        <div class="image-source-toggle">
+          <span style="font-size:12px;color:var(--muted);font-weight:700;">Image Source:</span>
+          <label><input type="radio" name="imgUploadType" value="file" checked onchange="toggleImageInputMode('file')"> 📁 Choose File from Device</label>
+          <label><input type="radio" name="imgUploadType" value="url" onchange="toggleImageInputMode('url')"> 🔗 Image Web URL Link</label>
+        </div>
+
+        <!-- 1. CHOOSE FILE INPUT -->
+        <input type="file" id="newProdFileInput" accept="image/*" onchange="handleDeviceImageUpload(event)" style="background:#fff;">
+
+        <!-- 2. DIRECT URL LINK INPUT -->
+        <input type="url" id="newProdImgUrl" placeholder="Image Direct URL (https://...)" style="display:none;" oninput="handleUrlImagePreview(this.value)">
+
+        <!-- IMAGE PREVIEW BOX -->
+        <div class="image-preview-box">
+          <img id="adminImagePreview" src="" alt="Preview">
+          <span id="previewStatusText" style="font-size:12px;color:var(--muted);">No image selected yet.</span>
+        </div>
+
         <div style="grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;background:#e2e8f0;padding:8px 12px;border-radius:3px;">
           <span id="discountPreviewText" style="font-weight:700;color:var(--fk-green)">Discount: 0% OFF</span>
           <button type="submit">+ Publish Product to Website</button>
@@ -670,7 +699,6 @@ const ADMIN_PHONE = "6306211265";
 const ADMIN_PASS = "Rushtom@1927";
 const ADMIN_MASTER_SEC = "ajay";
 
-// DEFAULT PRODUCTS (Can be modified/removed dynamically by Admin)
 const defaultCatalog = [
   {id: 1, name: "Vega Cruiser ISI Certified Safety Helmet", cat: "Helmets", price: 899, orig: 1499, rating: 4.4, reviews: 342, img: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=400"},
   {id: 2, name: "Steelbird Full Face Matte Black Aerodynamic Helmet", cat: "Helmets", price: 1199, orig: 1899, rating: 4.6, reviews: 610, img: "https://images.unsplash.com/photo-1558980664-3a031cf67ea8?w=400"},
@@ -690,6 +718,7 @@ let cart = [];
 let orders = [];
 let users = [];
 let currentUser = null;
+let activeUploadedImageData = ""; // Holds device base64 or URL
 
 try { catalog = JSON.parse(localStorage.getItem('pag_catalog_db')) || defaultCatalog; } catch(e){ catalog = defaultCatalog; }
 try { cart = JSON.parse(localStorage.getItem('pag_cart_items')) || []; } catch(e){ cart = []; }
@@ -697,7 +726,12 @@ try { orders = JSON.parse(localStorage.getItem('pag_orders_db')) || []; } catch(
 try { users = JSON.parse(localStorage.getItem('pag_users_db')) || []; } catch(e){ users = []; }
 try { currentUser = JSON.parse(localStorage.getItem('pag_active_user')) || null; } catch(e){ currentUser = null; }
 
-function persistCatalog() { localStorage.setItem('pag_catalog_db', JSON.stringify(catalog)); displayProducts(catalog); renderAdminProductsTable(); }
+function persistCatalog() { 
+  localStorage.setItem('pag_catalog_db', JSON.stringify(catalog)); 
+  displayProducts(catalog); 
+  renderAdminProductsTable(); 
+  syncCategoryMenus();
+}
 function persistCart() { localStorage.setItem('pag_cart_items', JSON.stringify(cart)); syncCartUI(); }
 function persistOrders() { localStorage.setItem('pag_orders_db', JSON.stringify(orders)); }
 function persistUsers() { localStorage.setItem('pag_users_db', JSON.stringify(users)); }
@@ -744,7 +778,7 @@ function startSaleTimer() {
 }
 
 // ==========================================
-// 🛡️ ADMIN PORTAL LOGIC & PRODUCT ENGINE
+// 🛡️ ADMIN PORTAL & DUAL IMAGE MANAGEMENT
 // ==========================================
 function openAdminPortal() {
   closeAuthModal();
@@ -769,6 +803,62 @@ function switchAdminTab(tab) {
   document.getElementById('btnTabUsers').classList.toggle('active', tab === 'users');
 }
 
+function toggleOtherCatInput(val) {
+  const customBox = document.getElementById('newProdCustomCat');
+  if(val === 'Other') {
+    customBox.style.display = 'block';
+    customBox.setAttribute('required', 'true');
+    customBox.focus();
+  } else {
+    customBox.style.display = 'none';
+    customBox.removeAttribute('required');
+  }
+}
+
+// TOGGLE BETWEEN DEVICE CHOOSE FILE & URL
+function toggleImageInputMode(mode) {
+  const fileInput = document.getElementById('newProdFileInput');
+  const urlInput = document.getElementById('newProdImgUrl');
+  if(mode === 'file') {
+    fileInput.style.display = 'block';
+    urlInput.style.display = 'none';
+  } else {
+    fileInput.style.display = 'none';
+    urlInput.style.display = 'block';
+    urlInput.focus();
+  }
+}
+
+// READ LOCAL FILE FROM DEVICE AS BASE64
+function handleDeviceImageUpload(e) {
+  const file = e.target.files[0];
+  if(file) {
+    const reader = new FileReader();
+    reader.onload = function(evt) {
+      activeUploadedImageData = evt.target.result;
+      const preview = document.getElementById('adminImagePreview');
+      preview.src = activeUploadedImageData;
+      preview.style.display = 'block';
+      document.getElementById('previewStatusText').innerText = `Loaded: ${file.name} (${Math.round(file.size/1024)} KB)`;
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+// URL PREVIEW
+function handleUrlImagePreview(url) {
+  activeUploadedImageData = url.trim();
+  const preview = document.getElementById('adminImagePreview');
+  if(activeUploadedImageData) {
+    preview.src = activeUploadedImageData;
+    preview.style.display = 'block';
+    document.getElementById('previewStatusText').innerText = "Image URL Preview Ready";
+  } else {
+    preview.style.display = 'none';
+    document.getElementById('previewStatusText').innerText = "No image selected yet.";
+  }
+}
+
 function calculateDiscountPreview() {
   const orig = Number(document.getElementById('newProdOrig').value) || 0;
   const price = Number(document.getElementById('newProdPrice').value) || 0;
@@ -784,15 +874,27 @@ function calculateDiscountPreview() {
 function adminSaveProduct(e) {
   e.preventDefault();
   const name = document.getElementById('newProdName').value.trim();
-  const cat = document.getElementById('newProdCat').value;
+  let cat = document.getElementById('newProdCat').value;
+  
+  if(cat === 'Other') {
+    const customCat = document.getElementById('newProdCustomCat').value.trim();
+    if(!customCat) {
+      alert("Please type a custom category name!");
+      return;
+    }
+    cat = customCat;
+  }
+
   const orig = Number(document.getElementById('newProdOrig').value);
   const price = Number(document.getElementById('newProdPrice').value);
-  const img = document.getElementById('newProdImg').value.trim();
-
+  
   if(price > orig) {
     alert("Selling price cannot be greater than original MRP price!");
     return;
   }
+
+  // Ensure image exists
+  const finalImage = activeUploadedImageData || "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=400";
 
   const newProduct = {
     id: Date.now(),
@@ -802,15 +904,20 @@ function adminSaveProduct(e) {
     orig,
     rating: 4.5,
     reviews: 1,
-    img: img || "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=400"
+    img: finalImage
   };
 
   catalog.unshift(newProduct);
   persistCatalog();
 
   e.target.reset();
+  activeUploadedImageData = "";
+  document.getElementById('adminImagePreview').style.display = 'none';
+  document.getElementById('previewStatusText').innerText = "No image selected yet.";
+  toggleOtherCatInput('Helmets');
+  toggleImageInputMode('file');
   calculateDiscountPreview();
-  alert(`Product "${name}" has been published to storefront successfully!`);
+  alert(`Product "${name}" (${cat}) has been added successfully with chosen image!`);
 }
 
 function renderAdminProductsTable() {
@@ -855,6 +962,28 @@ function adminDeleteProduct(idx) {
   if(confirm(`Are you sure you want to remove "${p.name}" from website?`)) {
     catalog.splice(idx, 1);
     persistCatalog();
+  }
+}
+
+function syncCategoryMenus() {
+  const cats = Array.from(new Set(catalog.map(p => p.cat)));
+  const navList = document.getElementById('catNavList');
+  const sideFilter = document.getElementById('sidebarFilterGroup');
+  
+  if(navList) {
+    let navHtml = `<li class="active" onclick="filterByCategory('All')">All Products</li>`;
+    cats.forEach(c => {
+      navHtml += `<li onclick="filterByCategory('${c}')">${c}</li>`;
+    });
+    navList.innerHTML = navHtml;
+  }
+
+  if(sideFilter) {
+    let sideHtml = `<b>Categories</b><label><input type="radio" name="f_cat" checked onclick="filterByCategory('All')"> All Products</label>`;
+    cats.forEach(c => {
+      sideHtml += `<label><input type="radio" name="f_cat" onclick="filterByCategory('${c}')"> ${c}</label>`;
+    });
+    sideFilter.innerHTML = sideHtml;
   }
 }
 
@@ -1564,6 +1693,7 @@ function performOrderSearch() {
 
 window.addEventListener('DOMContentLoaded', () => {
   displayProducts(catalog);
+  syncCategoryMenus();
   syncCartUI();
   syncAuthUI();
   startSaleTimer();
