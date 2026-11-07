@@ -199,7 +199,9 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 .timeline-step.current .timeline-dot{background:var(--fk-blue);box-shadow:0 0 0 3px rgba(40,116,240,.2)}
 .timeline-step span{font-size:10px;font-weight:600;margin-top:4px;color:#555}
 
-/* OWNER ADMIN PANEL WITH SUB-ADMIN & STAFF SUITE */
+/* ======================================================== */
+/* 🛡️ OWNER ADMIN PANEL (WITH STRICT ROLE-BASED ACCESS) */
+/* ======================================================== */
 #adminPanelModal{position:fixed;inset:0;background:var(--bg);z-index:300;display:none;flex-direction:column;overflow-y:auto}
 .admin-navbar{background:var(--admin-dark);color:#fff;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
 .admin-navbar h2{margin:0;font-size:16px;display:flex;align-items:center;gap:6px}
@@ -565,19 +567,19 @@ footer a{color:#fff;text-decoration:none}
 </div>
 
 <!-- ======================================================== -->
-<!-- 🛡️ OWNER ADMIN PANEL (WITH SUB-ADMIN & STAFF SUITE) -->
+<!-- 🛡️ OWNER ADMIN PANEL (WITH STRICT ROLE-BASED ACCESS) -->
 <!-- ======================================================== -->
 <div id="adminPanelModal">
   <div class="admin-navbar">
-    <h2><span>⚙️</span> PAG Moters Owner Portal <span class="admin-badge" id="adminRoleDisplay">Super Admin</span></h2>
-    <button class="admin-logout" onclick="closeAdminPortal()">Exit Admin</button>
+    <h2><span>⚙️</span> PAG Moters Workspace <span class="admin-badge" id="adminRoleDisplay">Super Admin</span></h2>
+    <button class="admin-logout" onclick="closeAdminPortal()">Exit Workspace</button>
   </div>
 
   <div class="admin-container">
-    <div class="admin-tabs">
-      <button class="admin-tab-btn active" id="btnTabOrders" onclick="switchAdminTab('orders')">📦 Orders (Mailbox)</button>
+    <div class="admin-tabs" id="adminTabsContainer">
+      <button class="admin-tab-btn" id="btnTabOrders" onclick="switchAdminTab('orders')">📦 Orders (Mailbox)</button>
       <button class="admin-tab-btn" id="btnTabProducts" onclick="switchAdminTab('products')">🏷️ Product Management</button>
-      <button class="admin-tab-btn" id="btnTabTeam" onclick="switchAdminTab('team')">👔 Sub-Admin &amp; Staff (Team)</button>
+      <button class="admin-tab-btn" id="btnTabTeam" onclick="switchAdminTab('team')">👔 Staff Management</button>
       <button class="admin-tab-btn" id="btnTabUsers" onclick="switchAdminTab('users')">👥 Customer Accounts</button>
     </div>
 
@@ -656,10 +658,10 @@ footer a{color:#fff;text-decoration:none}
       </div>
     </div>
 
-    <!-- 3. SUB-ADMIN & STAFF TEAM MANAGEMENT -->
+    <!-- 3. TEAM MANAGEMENT -->
     <div id="adminTeamSection" class="mailbox-card" style="display:none;padding:14px;">
       <div class="mailbox-header" style="background:#fff;padding:0 0 10px 0;">
-        <span><b>Add Sub-Admin or Staff Member</b></span>
+        <span id="teamFormTitle"><b>Add Team Member</b></span>
       </div>
 
       <form class="admin-prod-form" onsubmit="adminSaveTeamMember(event)">
@@ -668,18 +670,14 @@ footer a{color:#fff;text-decoration:none}
         <input type="password" id="newTeamPass" placeholder="Login Password" minlength="4" required>
         
         <select id="newTeamRole" required>
-          <option value="Sub-Admin">🛡️ Sub-Admin (Manager)</option>
-          <option value="Staff - Order Manager">📦 Staff: Order Manager</option>
-          <option value="Staff - Product Manager">🏷️ Staff: Product Manager</option>
-          <option value="Staff - Delivery Partner">🚚 Staff: Delivery Partner</option>
-          <option value="Staff - Support">💬 Staff: Customer Support</option>
+          <!-- Options populated based on logged-in role -->
         </select>
 
-        <button type="submit" style="grid-column:1/-1;background:var(--fk-blue);">+ Add Team Member</button>
+        <button type="submit" style="grid-column:1/-1;background:var(--fk-blue);">+ Add Member</button>
       </form>
 
       <div class="mailbox-header" style="background:#fff;padding:10px 0 6px 0;">
-        <span><b>Registered Sub-Admins &amp; Staff Members</b></span>
+        <span><b>Active Team Members</b></span>
         <span id="adminTeamCountBadge">0 Members</span>
       </div>
 
@@ -964,12 +962,75 @@ function renderMyOrdersList() {
 }
 
 // ==========================================
-// 🛡️ ADMIN PORTAL & SUB-ADMIN/STAFF SUITE
+// 🛡️ ROLE-BASED ACCESS CONTROL (RBAC) LOGIC
 // ==========================================
 function openAdminPortal(role = "Super Admin") {
   closeAuthModal();
   document.getElementById('adminPanelModal').style.display = 'flex';
   document.getElementById('adminRoleDisplay').innerText = role;
+
+  // TAB BUTTON REFERENCES
+  const btnOrders = document.getElementById('btnTabOrders');
+  const btnProducts = document.getElementById('btnTabProducts');
+  const btnTeam = document.getElementById('btnTabTeam');
+  const btnUsers = document.getElementById('btnTabUsers');
+
+  // FORM ROLE OPTIONS
+  const roleSelect = document.getElementById('newTeamRole');
+
+  // 1. SUPER ADMIN ACCESS: Full Access to all modules
+  if(role === "Super Admin") {
+    btnOrders.style.display = 'inline-block';
+    btnProducts.style.display = 'inline-block';
+    btnTeam.style.display = 'inline-block';
+    btnUsers.style.display = 'inline-block';
+    document.getElementById('teamFormTitle').innerHTML = '<b>Add Sub-Admin or Staff Member</b>';
+    roleSelect.innerHTML = `
+      <option value="Sub-Admin">🛡️ Sub-Admin (Manager)</option>
+      <option value="Staff - Order Manager">📦 Staff: Order Manager</option>
+      <option value="Staff - Product Manager">🏷️ Staff: Product Manager</option>
+      <option value="Staff - Delivery Partner">🚚 Staff: Delivery Partner</option>
+      <option value="Staff - Support">💬 Staff: Customer Support</option>
+    `;
+    switchAdminTab('orders');
+  } 
+  // 2. SUB-ADMIN ACCESS: Can manage Staff and Orders, but CANNOT create Sub-Admins or access Super Admin
+  else if(role === "Sub-Admin") {
+    btnOrders.style.display = 'inline-block';
+    btnProducts.style.display = 'inline-block';
+    btnTeam.style.display = 'inline-block';
+    btnUsers.style.display = 'inline-block';
+    document.getElementById('teamFormTitle').innerHTML = '<b>Add Staff Member (Sub-Admin Restricted)</b>';
+    roleSelect.innerHTML = `
+      <option value="Staff - Order Manager">📦 Staff: Order Manager</option>
+      <option value="Staff - Product Manager">🏷️ Staff: Product Manager</option>
+      <option value="Staff - Delivery Partner">🚚 Staff: Delivery Partner</option>
+      <option value="Staff - Support">💬 Staff: Customer Support</option>
+    `;
+    switchAdminTab('orders');
+  } 
+  // 3. STAFF ROLE: ISOLATED TO THEIR SPECIFIC TASK
+  else {
+    btnTeam.style.display = 'none'; // Staff cannot add staff
+    btnUsers.style.display = 'none'; // Staff cannot access user reset
+
+    if(role.includes("Product Manager")) {
+      btnOrders.style.display = 'none';
+      btnProducts.style.display = 'inline-block';
+      switchAdminTab('products');
+    } else if(role.includes("Support")) {
+      btnOrders.style.display = 'inline-block';
+      btnProducts.style.display = 'none';
+      btnUsers.style.display = 'inline-block';
+      switchAdminTab('orders');
+    } else {
+      // Order Manager / Delivery Partner
+      btnOrders.style.display = 'inline-block';
+      btnProducts.style.display = 'none';
+      switchAdminTab('orders');
+    }
+  }
+
   renderAdminMailbox();
   renderAdminProductsTable();
   renderAdminTeamTable();
@@ -1006,6 +1067,12 @@ function adminSaveTeamMember(e) {
     return;
   }
 
+  // Sub-Admin cannot add another Sub-Admin
+  if(currentUser && currentUser.role === "Sub-Admin" && role === "Sub-Admin") {
+    alert("Access Denied: Only Super Admin can create Sub-Admins!");
+    return;
+  }
+
   if(teamMembers.some(t => cleanPhone(t.phone) === phone)) {
     alert("A team member with this mobile number already exists!");
     return;
@@ -1021,49 +1088,59 @@ function adminSaveTeamMember(e) {
 
   persistTeam();
   e.target.reset();
-  alert(`${role} "${name}" added successfully! They can now log in.`);
+  alert(`${role} "${name}" added successfully!`);
 }
 
 function renderAdminTeamTable() {
   const tbody = document.getElementById('adminTeamTableBody');
   const countBadge = document.getElementById('adminTeamCountBadge');
   if(!tbody) return;
-  countBadge.innerText = `${teamMembers.length} Members`;
 
-  if(!teamMembers.length) {
-    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:16px;color:#64748b;">No Sub-Admins or Staff added yet. Use form above to add.</td></tr>';
+  // Filter out Sub-Admins from view if logged in as Sub-Admin
+  let visibleMembers = teamMembers;
+  if(currentUser && currentUser.role === "Sub-Admin") {
+    visibleMembers = teamMembers.filter(m => m.role !== "Sub-Admin");
+  }
+
+  countBadge.innerText = `${visibleMembers.length} Members`;
+
+  if(!visibleMembers.length) {
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:16px;color:#64748b;">No members found in your clearance level.</td></tr>';
     return;
   }
 
-  tbody.innerHTML = teamMembers.map((m, idx) => `
+  tbody.innerHTML = visibleMembers.map((m) => `
     <tr>
       <td><b>${m.name}</b></td>
       <td>${m.phone}</td>
       <td><code style="background:#f1f5f9;padding:2px 4px;border-radius:2px;">${m.pass}</code></td>
       <td><span style="background:${m.role === 'Sub-Admin' ? '#e0f2fe' : '#fef3c7'};color:${m.role === 'Sub-Admin' ? '#0369a1' : '#92400e'};padding:2px 8px;border-radius:10px;font-weight:700;">${m.role}</span></td>
       <td>
-        <button class="btn-override-pass" onclick="adminEditTeamMemberPass(${idx})">Change Pass</button>
-        <button class="btn-del-prod" onclick="adminDeleteTeamMember(${idx})">Remove</button>
+        <button class="btn-override-pass" onclick="adminEditTeamMemberPass('${m.phone}')">Change Pass</button>
+        <button class="btn-del-prod" onclick="adminDeleteTeamMember('${m.phone}')">Remove</button>
       </td>
     </tr>
   `).join('');
 }
 
-function adminEditTeamMemberPass(idx) {
-  const m = teamMembers[idx];
+function adminEditTeamMemberPass(phone) {
+  const m = teamMembers.find(t => t.phone === phone);
+  if(!m) return;
   const newPass = prompt(`Enter new password for ${m.name} (${m.role}):`, m.pass);
   if(newPass && newPass.trim().length >= 4) {
-    teamMembers[idx].pass = newPass.trim();
+    m.pass = newPass.trim();
     persistTeam();
     alert(`Password updated for ${m.name}`);
   }
 }
 
-function adminDeleteTeamMember(idx) {
-  const m = teamMembers[idx];
-  if(confirm(`Are you sure you want to remove ${m.role}: "${m.name}"?`)) {
-    teamMembers.splice(idx, 1);
-    persistTeam();
+function adminDeleteTeamMember(phone) {
+  const idx = teamMembers.findIndex(t => t.phone === phone);
+  if(idx > -1) {
+    if(confirm(`Are you sure you want to remove ${teamMembers[idx].name}?`)) {
+      teamMembers.splice(idx, 1);
+      persistTeam();
+    }
   }
 }
 
@@ -1587,7 +1664,7 @@ function syncAuthUI() {
       <div class="user-menu">
         <button class="user-menu-btn">👤 ${currentUser.name.split(' ')[0]} ▾</button>
         <div class="user-dropdown">
-          ${currentUser.isAdmin ? `<a onclick="openAdminPortal('${currentUser.role || 'Super Admin'}')" style="color:#d97706;font-weight:700;">⚙️ Admin Portal</a>` : ''}
+          ${currentUser.isAdmin ? `<a onclick="openAdminPortal('${currentUser.role || 'Super Admin'}')" style="color:#d97706;font-weight:700;">⚙️ Workspace</a>` : ''}
           <a onclick="openMyOrdersModal()">📋 My Orders</a>
           <a onclick="openTrackModal()">📦 Track Order</a>
           <a onclick="openAuthModal('mandatory_security')">Update Security</a>
@@ -1891,9 +1968,7 @@ function processOrderPlacement(e) {
   `;
 }
 
-// ==========================================
-// 🚀 SESSION RESTORE ON REFRESH
-// ==========================================
+// SESSION RESTORE ON REFRESH
 window.addEventListener('DOMContentLoaded', () => {
   displayProducts(catalog);
   syncCategoryMenus();
@@ -1902,7 +1977,6 @@ window.addEventListener('DOMContentLoaded', () => {
   startSaleTimer();
   startRealTimeClock();
 
-  // CHECK IF ADMIN / STAFF WAS LOGGED IN BEFORE REFRESH
   if(currentUser && currentUser.isAdmin) {
     openAdminPortal(currentUser.role || "Super Admin");
   }
