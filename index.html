@@ -48,7 +48,7 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 /* USER PROFILE DROPDOWN */
 .user-menu{position:relative;display:inline-block}
 .user-menu-btn{background:none;border:0;color:#fff;font-weight:700;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:6px;padding:6px}
-.user-dropdown{position:absolute;top:100%;right:0;background:#fff;color:#212121;box-shadow:0 4px 12px rgba(0,0,0,.15);border-radius:2px;display:none;min-width:140px;z-index:150}
+.user-dropdown{position:absolute;top:100%;right:0;background:#fff;color:#212121;box-shadow:0 4px 12px rgba(0,0,0,.15);border-radius:2px;display:none;min-width:150px;z-index:150}
 .user-dropdown a,.user-dropdown button{display:block;width:100%;padding:10px 14px;text-align:left;border:0;background:none;font:inherit;font-size:13px;cursor:pointer;text-decoration:none;color:#212121}
 .user-dropdown a:hover,.user-dropdown button:hover{background:#f1f3f6}
 .user-menu:hover .user-dropdown{display:block}
@@ -116,29 +116,31 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 .fly-item{position:fixed;width:24px;height:24px;background:var(--fk-orange);border-radius:50%;color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:9999;box-shadow:0 3px 8px rgba(0,0,0,.3);transition:all .55s cubic-bezier(0.18, 0.89, 0.32, 1.28)}
 
 /* MODAL SYSTEM */
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:none}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;display:none}
 .overlay.show{display:flex;align-items:center;justify-content:center}
 
-/* FLIPKART STYLE AUTH MODAL (Login/Signup/Forgot) */
-.auth-card{background:#fff;width:min(720px,95%);border-radius:4px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.3);display:grid;grid-template-columns:260px 1fr;position:relative}
+/* FLIPKART STYLE AUTH MODAL */
+.auth-card{background:#fff;width:min(740px,95%);border-radius:4px;overflow:hidden;box-shadow:0 6px 30px rgba(0,0,0,.35);display:grid;grid-template-columns:260px 1fr;position:relative}
 .auth-left{background:var(--fk-blue);color:#fff;padding:34px 28px;display:flex;flex-direction:column;justify-content:space-between}
 .auth-left h2{margin:0 0 10px;font-size:24px}
 .auth-left p{margin:0;font-size:14px;line-height:1.5;color:#dbeafe}
-.auth-left img{max-width:180px;margin-top:20px;opacity:.9}
-.auth-right{padding:30px 28px;position:relative}
+.auth-left .shield-icon{font-size:54px;margin-top:20px}
+.auth-right{padding:26px 28px;position:relative;max-height:85vh;overflow-y:auto}
 .auth-close{position:absolute;top:10px;right:14px;background:none;border:0;font-size:22px;color:var(--muted);cursor:pointer}
 
-.auth-form{display:flex;flex-direction:column;gap:12px}
+.auth-form{display:flex;flex-direction:column;gap:10px}
 .auth-form label{font-size:12px;color:var(--muted);font-weight:600}
-.auth-form input{border:1px solid var(--line);border-radius:2px;padding:10px 12px;font:inherit;font-size:14px;outline:none}
-.auth-form input:focus{border-color:var(--fk-blue)}
-.auth-btn-primary{background:var(--fk-orange);color:#fff;border:0;padding:12px;font-size:14px;font-weight:700;border-radius:2px;cursor:pointer;margin-top:8px}
-.auth-btn-secondary{background:#fff;color:var(--fk-blue);border:1px solid var(--line);padding:10px;font-size:13px;font-weight:700;border-radius:2px;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.08)}
-.auth-switch{font-size:13px;color:var(--muted);text-align:center;margin-top:14px}
+.auth-form input,.auth-form select{border:1px solid var(--line);border-radius:2px;padding:9px 12px;font:inherit;font-size:14px;outline:none;background:#fff}
+.auth-form input:focus,.auth-form select:focus{border-color:var(--fk-blue)}
+.auth-btn-primary{background:var(--fk-orange);color:#fff;border:0;padding:11px;font-size:14px;font-weight:700;border-radius:2px;cursor:pointer;margin-top:6px}
+.auth-switch{font-size:13px;color:var(--muted);text-align:center;margin-top:12px}
 .auth-switch a{color:var(--fk-blue);font-weight:700;text-decoration:none;cursor:pointer}
-.auth-msg{font-size:13px;padding:8px;border-radius:2px;display:none}
+.auth-msg{font-size:13px;padding:8px 10px;border-radius:2px;display:none;line-height:1.4}
 .auth-msg.err{background:#ffebee;color:#c62828;display:block}
 .auth-msg.ok{background:#e8f5e9;color:#2e7d32;display:block}
+
+/* SECURITY ALERT PROMPT CARD */
+.sec-badge{background:#fff3e0;border-left:4px solid var(--fk-orange);padding:10px;font-size:12px;color:#d84315;border-radius:2px;margin-bottom:10px;line-height:1.4}
 
 /* CART DRAWER */
 .drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:#fff;z-index:201;display:flex;flex-direction:column;box-shadow:-2px 0 10px rgba(0,0,0,.2);transform:translateX(100%);transition:transform .3s ease}
@@ -217,7 +219,6 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
 </head>
 <body>
 
-<!-- TOP STRIP -->
 <div class="top-strip">
   <div class="top-strip-inner">
     <span>📍 PAG Moters – MIDC Gate, Near Gram Panchayat Office, Mharal Gaon 421001</span>
@@ -225,7 +226,6 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
   </div>
 </div>
 
-<!-- FLIPKART STYLE HEADER -->
 <header>
   <div class="main-header">
     <div class="brand" onclick="location.reload()">
@@ -239,17 +239,14 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
     </div>
 
     <div class="header-actions">
-      <!-- AUTH STATE BUTTON (LOGIN OR USER PROFILE) -->
       <div id="authHeaderContainer">
         <button class="btn-login-main" onclick="openAuthModal('login')">Login</button>
       </div>
 
-      <!-- TRACK ORDER BUTTON -->
       <button class="btn-nav" onclick="openTrackModal()">
         <span>📦</span> Track Order
       </button>
 
-      <!-- CART TRIGGER BUTTON -->
       <button class="cart-trigger" id="cartTriggerBtn" onclick="toggleCartDrawer(true)">
         <span>🛒</span>
         <span id="cartCountBadge" class="cart-count-badge">0</span>
@@ -259,7 +256,6 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
   </div>
 </header>
 
-<!-- CATEGORY NAVIGATION -->
 <nav class="nav-sub">
   <ul id="catNavList">
     <li class="active" onclick="filterByCategory('All')">All Products</li>
@@ -272,7 +268,6 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
   </ul>
 </nav>
 
-<!-- HERO BANNER -->
 <section class="hero-slider">
   <div class="banner-card">
     <div>
@@ -283,7 +278,6 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
   </div>
 </section>
 
-<!-- MAIN CONTENT -->
 <div class="layout">
   <aside class="sidebar">
     <h3>Filters</h3>
@@ -308,7 +302,6 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
   </main>
 </div>
 
-<!-- TRUST PERKS -->
 <div class="trust-strip">
   <div class="trust-box">
     <div class="icon">⚡</div>
@@ -328,7 +321,6 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
   </div>
 </div>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
     <div>
@@ -349,7 +341,7 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
   </div>
 </footer>
 
-<!-- AUTH MODAL (LOGIN / SIGNUP / FORGOT PASSWORD) -->
+<!-- AUTH MODAL WITH SECURITY VERIFICATION -->
 <div class="overlay" id="authOverlay">
   <div class="auth-card">
     <div class="auth-left">
@@ -357,10 +349,10 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
         <h2 id="authLeftTitle">Login</h2>
         <p id="authLeftDesc">Get access to your Orders, Wishlist and Recommendations</p>
       </div>
-      <div style="font-size:48px;">⚡</div>
+      <div class="shield-icon">🛡️</div>
     </div>
     <div class="auth-right">
-      <button class="auth-close" onclick="closeAuthModal()">✕</button>
+      <button class="auth-close" id="authCloseBtn" onclick="closeAuthModal()">✕</button>
 
       <!-- 1. LOGIN FORM -->
       <div id="loginSection">
@@ -384,8 +376,9 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
         </div>
       </div>
 
-      <!-- 2. SIGN UP FORM -->
+      <!-- 2. SECURE SIGNUP FORM (WITH SECURITY QUESTION) -->
       <div id="signupSection" style="display:none;">
+        <div class="sec-badge">🔒 <b>Security Check:</b> Choose a secret question. Without this, no one (not even with your mobile number) can reset your password.</div>
         <form class="auth-form" onsubmit="handleSignupSubmit(event)">
           <div id="signupMsg" class="auth-msg"></div>
           <div>
@@ -397,40 +390,95 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
             <input type="tel" id="regPhone" placeholder="Enter 10-digit mobile" pattern="[0-9]{10}" required>
           </div>
           <div>
-            <label>Email ID (Optional)</label>
-            <input type="email" id="regEmail" placeholder="Enter email address">
-          </div>
-          <div>
             <label>Set Password</label>
             <input type="password" id="regPass" placeholder="Create password (min 6 characters)" minlength="6" required>
           </div>
-          <button type="submit" class="auth-btn-primary">Sign Up</button>
+          <div>
+            <label>Select Security Question</label>
+            <select id="regSecQ" required>
+              <option value="" disabled selected>-- Select a Secret Question --</option>
+              <option value="What is your first bike/scooter model?">What is your first bike/scooter model?</option>
+              <option value="What is your birthplace / hometown?">What is your birthplace / hometown?</option>
+              <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
+              <option value="What is your favourite childhood school name?">What is your favourite childhood school name?</option>
+            </select>
+          </div>
+          <div>
+            <label>Secret Security Answer</label>
+            <input type="text" id="regSecA" placeholder="Type answer (remember this)" required>
+          </div>
+          <button type="submit" class="auth-btn-primary">Create Secure Account</button>
         </form>
         <div class="auth-switch">
           Existing user? <a onclick="openAuthModal('login')">Log in</a>
         </div>
       </div>
 
-      <!-- 3. FORGOT PASSWORD FORM -->
-      <div id="forgotSection" style="display:none;">
-        <form class="auth-form" onsubmit="handleForgotSubmit(event)">
-          <div id="forgotMsg" class="auth-msg"></div>
-          <p style="font-size:13px;color:#555;margin:0 0 6px;">Enter your registered mobile or email to recover or reset your password.</p>
+      <!-- 3. MANDATORY SECURITY SETUP (FOR EXISTING ACCOUNTS WITHOUT SECURITY) -->
+      <div id="mandatorySecuritySection" style="display:none;">
+        <div class="sec-badge">⚠️ <b>Action Required:</b> Protect your account! Please set up a security question so no one can unauthorizedly change your password.</div>
+        <form class="auth-form" onsubmit="handleSaveMandatorySecurity(event)">
+          <div id="mandSecMsg" class="auth-msg"></div>
           <div>
-            <label>Mobile Number or Email</label>
-            <input type="text" id="forgotId" placeholder="Enter registered number" required>
+            <label>Choose Security Question</label>
+            <select id="mandSecQ" required>
+              <option value="" disabled selected>-- Select a Question --</option>
+              <option value="What is your first bike/scooter model?">What is your first bike/scooter model?</option>
+              <option value="What is your birthplace / hometown?">What is your birthplace / hometown?</option>
+              <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
+              <option value="What is your favourite childhood school name?">What is your favourite childhood school name?</option>
+            </select>
           </div>
-          <button type="submit" class="auth-btn-primary">Search Account</button>
+          <div>
+            <label>Your Secret Answer</label>
+            <input type="text" id="mandSecA" placeholder="Enter secret answer" required>
+          </div>
+          <button type="submit" class="auth-btn-primary" style="background:var(--fk-green);">Save Security Question</button>
         </form>
-        <div id="forgotResetBox" style="display:none;margin-top:14px;border-top:1px dashed var(--line);padding-top:10px;">
-          <form class="auth-form" onsubmit="handleSaveNewPass(event)">
+      </div>
+
+      <!-- 4. SECURE FORGOT PASSWORD (STEP 1: PHONE -> STEP 2: VERIFY ANSWER -> STEP 3: RESET) -->
+      <div id="forgotSection" style="display:none;">
+        <div id="forgotMsg" class="auth-msg"></div>
+
+        <!-- Step 1: Input Identifier -->
+        <form id="forgotStep1Form" class="auth-form" onsubmit="handleForgotStep1(event)">
+          <p style="font-size:13px;color:#555;margin:0 0 6px;">Enter your registered 10-digit mobile number or email:</p>
+          <div>
+            <label>Mobile Number</label>
+            <input type="text" id="forgotId" placeholder="Enter mobile number" required>
+          </div>
+          <button type="submit" class="auth-btn-primary">Verify Account</button>
+        </form>
+
+        <!-- Step 2: Answer Security Question -->
+        <div id="forgotStep2Box" style="display:none;margin-top:12px;border-top:1px dashed var(--line);padding-top:10px;">
+          <form class="auth-form" onsubmit="handleForgotStep2(event)">
+            <div class="sec-badge">🔒 <b>Identity Verification:</b> Please answer the security question you set during registration.</div>
             <div>
-              <label>Set New Password</label>
-              <input type="password" id="newPassVal" placeholder="Enter new password" minlength="6" required>
+              <label>Security Question:</label>
+              <div id="displaySecQuestion" style="font-weight:700;padding:8px;background:#f1f3f6;border-radius:2px;font-size:13px;"></div>
             </div>
-            <button type="submit" class="auth-btn-primary" style="background:var(--fk-green)">Update Password</button>
+            <div>
+              <label>Your Security Answer:</label>
+              <input type="text" id="verifySecAnswer" placeholder="Type your secret answer" required>
+            </div>
+            <button type="submit" class="auth-btn-primary">Verify Answer</button>
           </form>
         </div>
+
+        <!-- Step 3: Enter New Password (ONLY IF ANSWER MATCHES) -->
+        <div id="forgotStep3Box" style="display:none;margin-top:12px;border-top:1px dashed var(--line);padding-top:10px;">
+          <form class="auth-form" onsubmit="handleForgotStep3(event)">
+            <div class="auth-msg ok" style="display:block;margin-bottom:8px;">✅ Identity Verified! You can now set a new password.</div>
+            <div>
+              <label>New Password (Min 6 characters)</label>
+              <input type="password" id="newPassFinal" placeholder="Enter new strong password" minlength="6" required>
+            </div>
+            <button type="submit" class="auth-btn-primary" style="background:var(--fk-green)">Update Password &amp; Login</button>
+          </form>
+        </div>
+
         <div class="auth-switch">
           Remember password? <a onclick="openAuthModal('login')">Back to Login</a>
         </div>
@@ -500,29 +548,41 @@ function persistOrders() { localStorage.setItem('pag_orders_db', JSON.stringify(
 function persistUsers() { localStorage.setItem('pag_users_db', JSON.stringify(users)); }
 function persistCurrentUser() { localStorage.setItem('pag_active_user', JSON.stringify(currentUser)); syncAuthUI(); }
 
-// AUTH MODAL SYSTEM
+// AUTH & SECURITY SYSTEM
 function openAuthModal(view) {
   document.getElementById('authOverlay').classList.add('show');
   document.getElementById('loginSection').style.display = 'none';
   document.getElementById('signupSection').style.display = 'none';
+  document.getElementById('mandatorySecuritySection').style.display = 'none';
   document.getElementById('forgotSection').style.display = 'none';
-  document.getElementById('forgotResetBox').style.display = 'none';
+  document.getElementById('forgotStep2Box').style.display = 'none';
+  document.getElementById('forgotStep3Box').style.display = 'none';
+  document.getElementById('authCloseBtn').style.display = 'block';
+
+  // Reset messages
+  document.querySelectorAll('.auth-msg').forEach(m => { m.className = 'auth-msg'; m.innerText = ''; });
 
   const title = document.getElementById('authLeftTitle');
   const desc = document.getElementById('authLeftDesc');
 
   if(view === 'signup') {
     document.getElementById('signupSection').style.display = 'block';
-    title.innerText = "Looks like you're new here!";
-    desc.innerText = "Sign up with your mobile number to get started";
+    title.innerText = "Create Account";
+    desc.innerText = "Register with security protection to prevent unauthorized password resets.";
   } else if(view === 'forgot') {
     document.getElementById('forgotSection').style.display = 'block';
-    title.innerText = "Forgot Password";
-    desc.innerText = "Recover your account easily using your registered phone or email";
+    document.getElementById('forgotStep1Form').style.display = 'flex';
+    title.innerText = "Account Recovery";
+    desc.innerText = "Two-step identity verification: only you can reset your credentials.";
+  } else if(view === 'mandatory_security') {
+    document.getElementById('mandatorySecuritySection').style.display = 'block';
+    document.getElementById('authCloseBtn').style.display = 'none'; // Cannot close until set!
+    title.innerText = "Security Check";
+    desc.innerText = "Your account is missing a security question. Set it now to protect your data.";
   } else {
     document.getElementById('loginSection').style.display = 'block';
     title.innerText = "Login";
-    desc.innerText = "Get access to your Orders, Wishlist and Recommendations";
+    desc.innerText = "Get access to your Orders, Wishlist and Saved Details.";
   }
 }
 
@@ -530,22 +590,40 @@ function closeAuthModal() {
   document.getElementById('authOverlay').classList.remove('show');
 }
 
-function syncAuthUI() {
-  const container = document.getElementById('authHeaderContainer');
-  if(!container) return;
-  if(currentUser) {
-    container.innerHTML = `
-      <div class="user-menu">
-        <button class="user-menu-btn">👤 ${currentUser.name.split(' ')[0]} ▾</button>
-        <div class="user-dropdown">
-          <a onclick="openTrackModal()">My Orders</a>
-          <button onclick="handleUserLogout()">Logout</button>
-        </div>
-      </div>
-    `;
-  } else {
-    container.innerHTML = `<button class="btn-login-main" onclick="openAuthModal('login')">Login</button>`;
+function checkUserSecurityStatus() {
+  // If user is logged in but has no security question set, force prompt
+  if(currentUser && (!currentUser.secQuestion || !currentUser.secAnswer)) {
+    openAuthModal('mandatory_security');
   }
+}
+
+function handleSaveMandatorySecurity(e) {
+  e.preventDefault();
+  const q = document.getElementById('mandSecQ').value;
+  const a = document.getElementById('mandSecA').value.trim().toLowerCase();
+  const msg = document.getElementById('mandSecMsg');
+
+  if(!q || !a) {
+    msg.className = "auth-msg err";
+    msg.innerText = "Please select a question and provide an answer.";
+    return;
+  }
+
+  currentUser.secQuestion = q;
+  currentUser.secAnswer = a;
+
+  // Update in users database
+  const uIdx = users.findIndex(u => u.phone === currentUser.phone);
+  if(uIdx > -1) {
+    users[uIdx].secQuestion = q;
+    users[uIdx].secAnswer = a;
+    persistUsers();
+  }
+  persistCurrentUser();
+
+  msg.className = "auth-msg ok";
+  msg.innerText = "Security Question successfully configured! Account secured.";
+  setTimeout(() => { closeAuthModal(); }, 1000);
 }
 
 function handleLoginSubmit(e) {
@@ -560,10 +638,13 @@ function handleLoginSubmit(e) {
     persistCurrentUser();
     msg.className = "auth-msg ok";
     msg.innerText = "Login successful!";
-    setTimeout(() => { closeAuthModal(); }, 600);
+    setTimeout(() => {
+      closeAuthModal();
+      checkUserSecurityStatus();
+    }, 600);
   } else {
     msg.className = "auth-msg err";
-    msg.innerText = "Invalid Mobile/Email or Password. Please check.";
+    msg.innerText = "Invalid Mobile or Password. Please try again.";
   }
 }
 
@@ -571,8 +652,9 @@ function handleSignupSubmit(e) {
   e.preventDefault();
   const name = document.getElementById('regName').value.trim();
   const phone = document.getElementById('regPhone').value.trim();
-  const email = document.getElementById('regEmail').value.trim();
   const pass = document.getElementById('regPass').value.trim();
+  const secQuestion = document.getElementById('regSecQ').value;
+  const secAnswer = document.getElementById('regSecA').value.trim().toLowerCase();
   const msg = document.getElementById('signupMsg');
 
   if(users.some(u => u.phone === phone)) {
@@ -581,7 +663,14 @@ function handleSignupSubmit(e) {
     return;
   }
 
-  const newUser = { name, phone, email, pass };
+  const newUser = {
+    name,
+    phone,
+    pass,
+    secQuestion,
+    secAnswer
+  };
+
   users.push(newUser);
   persistUsers();
 
@@ -589,40 +678,93 @@ function handleSignupSubmit(e) {
   persistCurrentUser();
 
   msg.className = "auth-msg ok";
-  msg.innerText = "Account created successfully!";
-  setTimeout(() => { closeAuthModal(); }, 600);
+  msg.innerText = "Secure account created successfully!";
+  setTimeout(() => { closeAuthModal(); }, 800);
 }
 
-let userPendingReset = null;
+// FORGOT PASSWORD FLOW (3 STEPS)
+let userVerifying = null;
 
-function handleForgotSubmit(e) {
+function handleForgotStep1(e) {
   e.preventDefault();
   const id = document.getElementById('forgotId').value.trim();
   const msg = document.getElementById('forgotMsg');
   const user = users.find(u => u.phone === id || u.email === id);
 
-  if(user) {
-    userPendingReset = user;
+  if(!user) {
+    msg.className = "auth-msg err";
+    msg.innerHTML = `No account found with this number! <a target="_blank" href="https://wa.me/918766641866?text=Help%20recovering%20account%20for%20${id}" style="color:var(--fk-blue);font-weight:700;">Contact Shop Support</a>`;
+    return;
+  }
+
+  if(!user.secQuestion || !user.secAnswer) {
+    msg.className = "auth-msg err";
+    msg.innerHTML = `This account does not have a security question set yet. Please <a target="_blank" href="https://wa.me/918766641866?text=Please%20reset%20my%20password%20for%20phone%20${user.phone}" style="color:var(--fk-blue);font-weight:700;">WhatsApp Shop Admin</a> for manual identity verification.`;
+    return;
+  }
+
+  userVerifying = user;
+  msg.className = "auth-msg ok";
+  msg.innerText = `Account located for ${user.name}. Please answer your secret question below.`;
+
+  document.getElementById('displaySecQuestion').innerText = user.secQuestion;
+  document.getElementById('forgotStep1Form').style.display = 'none';
+  document.getElementById('forgotStep2Box').style.display = 'block';
+}
+
+function handleForgotStep2(e) {
+  e.preventDefault();
+  const ans = document.getElementById('verifySecAnswer').value.trim().toLowerCase();
+  const msg = document.getElementById('forgotMsg');
+
+  if(ans === userVerifying.secAnswer.toLowerCase()) {
     msg.className = "auth-msg ok";
-    msg.innerText = `Account found for ${user.name}! Enter new password below.`;
-    document.getElementById('forgotResetBox').style.display = 'block';
+    msg.innerText = "Answer matched! Proceed to reset password.";
+    document.getElementById('forgotStep2Box').style.display = 'none';
+    document.getElementById('forgotStep3Box').style.display = 'block';
   } else {
     msg.className = "auth-msg err";
-    msg.innerHTML = `No account found with this details. <a style="color:#2874f0;" target="_blank" href="https://wa.me/918766641866?text=Help%20recovering%20account%20for%20${id}">Contact shop on WhatsApp</a>`;
+    msg.innerText = "❌ Incorrect Security Answer! Unauthorized access blocked.";
   }
 }
 
-function handleSaveNewPass(e) {
+function handleForgotStep3(e) {
   e.preventDefault();
-  if(!userPendingReset) return;
-  const newPass = document.getElementById('newPassVal').value.trim();
-  userPendingReset.pass = newPass;
-  persistUsers();
-
+  const newPass = document.getElementById('newPassFinal').value.trim();
   const msg = document.getElementById('forgotMsg');
+
+  userVerifying.pass = newPass;
+  const idx = users.findIndex(u => u.phone === userVerifying.phone);
+  if(idx > -1) {
+    users[idx].pass = newPass;
+    persistUsers();
+  }
+
+  currentUser = userVerifying;
+  persistCurrentUser();
+
   msg.className = "auth-msg ok";
-  msg.innerText = "Password updated! You can now login.";
-  setTimeout(() => { openAuthModal('login'); }, 1000);
+  msg.innerText = "🎉 Password updated successfully! Logging you in...";
+  setTimeout(() => { closeAuthModal(); }, 1000);
+}
+
+function syncAuthUI() {
+  const container = document.getElementById('authHeaderContainer');
+  if(!container) return;
+  if(currentUser) {
+    container.innerHTML = `
+      <div class="user-menu">
+        <button class="user-menu-btn">👤 ${currentUser.name.split(' ')[0]} ▾</button>
+        <div class="user-dropdown">
+          <a onclick="openTrackModal()">My Orders</a>
+          <a onclick="openAuthModal('mandatory_security')">Update Security</a>
+          <button onclick="handleUserLogout()">Logout</button>
+        </div>
+      </div>
+    `;
+  } else {
+    container.innerHTML = `<button class="btn-login-main" onclick="openAuthModal('login')">Login</button>`;
+  }
 }
 
 function handleUserLogout() {
@@ -630,7 +772,7 @@ function handleUserLogout() {
   persistCurrentUser();
 }
 
-// CART & BUTTON INTERACTIONS
+// CART & FLYING ANIMATION
 function syncCartUI() {
   const totalCount = cart.reduce((acc, it) => acc + it.qty, 0);
   const totalPrice = cart.reduce((acc, it) => acc + (it.price * it.qty), 0);
@@ -996,6 +1138,7 @@ window.addEventListener('DOMContentLoaded', () => {
   displayProducts(catalog);
   syncCartUI();
   syncAuthUI();
+  checkUserSecurityStatus();
 });
 </script>
 </body>
