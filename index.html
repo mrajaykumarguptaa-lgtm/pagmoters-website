@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>PAG Moters – EV Spare Parts, Accessories &amp; Service</title>
 <meta name="description" content="PAG Moters – Genuine EV Spare Parts, Fast Chargers, Helmets, Lithium Batteries & Accessories. Hand-to-hand fast delivery.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%232874f0%22/%3E%3Ctext x=%2216%22 y=%2223%22 font-size=%2218%22 text-anchor=%22middle%22 fill=%22%23ffe500%22 font-family=%22Arial%22 font-weight=%22bold%22 font-style=%22italic%22%3EP%3C/text%3E%3C/svg%3E">
@@ -20,256 +20,258 @@
   --admin-dark:#1e293b;
 }
 *{box-sizing:border-box}
+html, body{width:100%;overflow-x:hidden;-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--text);font:14px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
 
 /* TOP STRIP & REAL TIME CLOCK */
-.top-strip{background:#172337;color:#c2c2c2;font-size:12px;padding:6px 14px}
-.top-strip-inner{max-width:1240px;margin:auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.top-strip{background:#172337;color:#c2c2c2;font-size:11px;padding:6px 10px}
+.top-strip-inner{max-width:1240px;margin:auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
 .top-strip a{color:var(--fk-yellow);text-decoration:none;font-weight:700}
 .realtime-clock-badge{
   background:rgba(255,255,255,.08);
   border:1px solid rgba(255,229,0,.4);
   color:var(--fk-yellow);
-  padding:3px 10px;
-  border-radius:20px;
+  padding:2px 8px;
+  border-radius:15px;
   font-family:monospace;
-  font-size:12px;
+  font-size:11px;
   font-weight:700;
   letter-spacing:1px;
   display:inline-flex;
   align-items:center;
-  gap:6px;
+  gap:4px;
 }
 
-/* HEADER */
+/* FLIPKART STYLE HEADER */
 header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;box-shadow:0 2px 4px rgba(0,0,0,.15)}
-.main-header{max-width:1240px;margin:auto;display:flex;align-items:center;gap:18px;padding:12px 14px}
+.main-header{max-width:1240px;margin:auto;display:flex;align-items:center;gap:12px;padding:10px 12px;flex-wrap:wrap}
 .brand{text-decoration:none;color:#fff;display:flex;flex-direction:column;cursor:pointer}
-.brand .title{font-size:20px;font-weight:800;font-style:italic;line-height:1}
-.brand small{font-size:11px;font-style:italic;color:var(--fk-yellow);display:flex;align-items:center;gap:2px}
+.brand .title{font-size:19px;font-weight:800;font-style:italic;line-height:1}
+.brand small{font-size:10px;font-style:italic;color:var(--fk-yellow);display:flex;align-items:center;gap:2px}
 .brand small span{color:#fff;font-weight:700}
 
-.search-box{flex:1;max-width:540px;display:flex;background:#fff;border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.2);overflow:hidden}
-.search-box input{flex:1;border:0;padding:10px 14px;font-size:14px;outline:none;color:#212121}
-.search-box button{border:0;background:#fff;color:var(--fk-blue);padding:0 16px;cursor:pointer;font-size:18px}
+.search-box{flex:1;min-width:200px;display:flex;background:#fff;border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.2);overflow:hidden}
+.search-box input{flex:1;border:0;padding:9px 10px;font-size:13px;outline:none;color:#212121;min-width:0}
+.search-box button{border:0;background:#fff;color:var(--fk-blue);padding:0 12px;cursor:pointer;font-size:16px}
 
-.header-actions{display:flex;align-items:center;gap:12px;margin-left:auto}
-.btn-nav{background:none;border:0;color:#fff;font-weight:700;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:6px;padding:6px 10px;border-radius:2px}
+.header-actions{display:flex;align-items:center;gap:8px;margin-left:auto}
+.btn-nav{background:none;border:0;color:#fff;font-weight:700;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:4px;padding:5px 8px;border-radius:2px;white-space:nowrap}
 .btn-nav:hover{background:rgba(255,255,255,.1)}
 
 /* LOGIN BUTTON */
-.btn-login-main{background:#fff;color:var(--fk-blue);border:0;padding:7px 20px;font-weight:700;border-radius:2px;cursor:pointer;font-size:14px}
+.btn-login-main{background:#fff;color:var(--fk-blue);border:0;padding:6px 14px;font-weight:700;border-radius:2px;cursor:pointer;font-size:13px;white-space:nowrap}
 .btn-login-main:hover{background:#f0f0f0}
 
 /* USER PROFILE DROPDOWN */
 .user-menu{position:relative;display:inline-block}
-.user-menu-btn{background:none;border:0;color:#fff;font-weight:700;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:6px;padding:6px}
-.user-dropdown{position:absolute;top:100%;right:0;background:#fff;color:#212121;box-shadow:0 4px 12px rgba(0,0,0,.15);border-radius:2px;display:none;min-width:160px;z-index:150}
+.user-menu-btn{background:none;border:0;color:#fff;font-weight:700;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:4px;padding:5px}
+.user-dropdown{position:absolute;top:100%;right:0;background:#fff;color:#212121;box-shadow:0 4px 12px rgba(0,0,0,.15);border-radius:2px;display:none;min-width:150px;z-index:150}
 .user-dropdown a,.user-dropdown button{display:block;width:100%;padding:10px 14px;text-align:left;border:0;background:none;font:inherit;font-size:13px;cursor:pointer;text-decoration:none;color:#212121}
 .user-dropdown a:hover,.user-dropdown button:hover{background:#f1f3f6}
 .user-menu:hover .user-dropdown{display:block}
 
 /* FLIPKART STYLE CART BUTTON */
-.cart-trigger{background:#fff;color:var(--fk-blue);padding:7px 16px;border-radius:2px;font-weight:700;display:flex;align-items:center;gap:8px;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.15);border:0;position:relative}
+.cart-trigger{background:#fff;color:var(--fk-blue);padding:6px 12px;border-radius:2px;font-weight:700;display:flex;align-items:center;gap:6px;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.15);border:0;position:relative;white-space:nowrap;font-size:13px}
 .cart-trigger:hover{background:#f8f9fa}
-.cart-count-badge{background:var(--fk-orange);color:#fff;font-size:11px;padding:2px 7px;border-radius:10px;font-weight:800}
+.cart-count-badge{background:var(--fk-orange);color:#fff;font-size:10px;padding:2px 6px;border-radius:10px;font-weight:800}
 
 /* NAVIGATION TABS */
-.nav-sub{background:var(--surface);box-shadow:0 1px 1px rgba(0,0,0,.1)}
-.nav-sub ul{max-width:1240px;margin:auto;display:flex;gap:26px;list-style:none;padding:12px 14px;overflow-x:auto;white-space:nowrap}
-.nav-sub li{font-size:14px;font-weight:600;cursor:pointer;color:#333;display:flex;flex-direction:column;align-items:center;gap:4px;transition:color .2s}
-.nav-sub li.active{color:var(--fk-blue);border-bottom:2px solid var(--fk-blue);padding-bottom:4px}
+.nav-sub{background:var(--surface);box-shadow:0 1px 1px rgba(0,0,0,.1);width:100%;overflow:hidden}
+.nav-sub ul{max-width:1240px;margin:auto;display:flex;gap:18px;list-style:none;padding:10px 14px;overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch}
+.nav-sub ul::-webkit-scrollbar{display:none}
+.nav-sub li{font-size:13px;font-weight:600;cursor:pointer;color:#333;display:inline-block;padding-bottom:3px}
+.nav-sub li.active{color:var(--fk-blue);border-bottom:2px solid var(--fk-blue);font-weight:700}
 
-/* BADA SALE BANNER */
-.sale-banner-wrap{max-width:1240px;margin:14px auto 0;padding:0 14px}
-.big-sale-banner{background:radial-gradient(circle at 80% 50%, #ff5252, #b71c1c 45%, #0d47a1 95%);color:#fff;border-radius:6px;padding:32px 36px;display:flex;justify-content:space-between;align-items:center;gap:20px;box-shadow:0 4px 18px rgba(0,0,0,.18);position:relative;overflow:hidden}
-.sale-tag-pill{background:var(--fk-yellow);color:#111;font-size:12px;font-weight:800;padding:4px 12px;border-radius:20px;display:inline-block;margin-bottom:8px;letter-spacing:1px}
-.big-sale-banner h1{margin:0;font-size:32px;font-weight:900;letter-spacing:-.5px;line-height:1.2}
-.big-sale-banner p{margin:8px 0 0;font-size:15px;color:#fce4ec}
-.sale-timer{background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.25);padding:14px 20px;border-radius:6px;text-align:center;min-width:180px}
-.sale-timer .label{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--fk-yellow);font-weight:700}
-.sale-timer .time{font-size:24px;font-weight:800;letter-spacing:1px;margin-top:2px}
+/* SALE BANNER */
+.sale-banner-wrap{max-width:1240px;margin:10px auto 0;padding:0 10px}
+.big-sale-banner{background:radial-gradient(circle at 80% 50%, #ff5252, #b71c1c 45%, #0d47a1 95%);color:#fff;border-radius:4px;padding:20px;display:flex;justify-content:space-between;align-items:center;gap:14px;box-shadow:0 2px 8px rgba(0,0,0,.12);position:relative;overflow:hidden}
+.sale-tag-pill{background:var(--fk-yellow);color:#111;font-size:11px;font-weight:800;padding:3px 10px;border-radius:20px;display:inline-block;margin-bottom:6px;letter-spacing:1px}
+.big-sale-banner h1{margin:0;font-size:22px;font-weight:900;letter-spacing:-.5px;line-height:1.2}
+.big-sale-banner p{margin:6px 0 0;font-size:13px;color:#fce4ec}
+.sale-timer{background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.25);padding:10px 14px;border-radius:4px;text-align:center;min-width:140px;white-space:nowrap}
+.sale-timer .label{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--fk-yellow);font-weight:700}
+.sale-timer .time{font-size:18px;font-weight:800;letter-spacing:1px;margin-top:2px}
 
 /* MAIN LAYOUT */
-.layout{max-width:1240px;margin:14px auto;padding:0 14px;display:grid;grid-template-columns:230px 1fr;gap:12px}
+.layout{max-width:1240px;margin:10px auto;padding:0 10px;display:grid;grid-template-columns:220px 1fr;gap:10px}
 .sidebar{background:var(--surface);padding:14px;border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.08);height:fit-content;position:sticky;top:70px}
-.sidebar h3{font-size:16px;margin:0 0 12px;padding-bottom:10px;border-bottom:1px solid var(--line)}
-.filter-group{display:flex;flex-direction:column;gap:8px}
-.filter-group label{font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer;color:#444}
+.sidebar h3{font-size:15px;margin:0 0 10px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.filter-group{display:flex;flex-direction:column;gap:6px}
+.filter-group label{font-size:13px;display:flex;align-items:center;gap:6px;cursor:pointer;color:#444}
 
 /* PRODUCT GRID */
-.product-panel{background:var(--surface);border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.08)}
-.panel-head{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:1px solid var(--line)}
-.panel-head h2{margin:0;font-size:18px;font-weight:700}
-.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:0}
+.product-panel{background:var(--surface);border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.08);overflow:hidden}
+.panel-head{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-bottom:1px solid var(--line)}
+.panel-head h2{margin:0;font-size:16px;font-weight:700}
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:0}
 
 /* PRODUCT CARD */
-.product-card{padding:18px 16px;background:#fff;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;flex-direction:column;position:relative;transition:box-shadow .2s}
-.product-card:hover{box-shadow:0 3px 16px rgba(0,0,0,.12);z-index:2}
-.prod-img-wrap{height:160px;display:flex;align-items:center;justify-content:center;position:relative}
-.prod-img-wrap img{max-height:140px;max-width:90%;object-fit:contain}
-.assured-tag{position:absolute;bottom:0;right:0;font-size:10px;background:#f7f9fa;border:1px solid #dcdcdc;border-radius:2px;padding:2px 5px;font-weight:800;color:var(--fk-blue)}
-.prod-title{margin:12px 0 4px;font-size:14px;font-weight:600;color:#212121;line-height:1.3;height:36px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
-.rating-pill{background:var(--fk-green);color:#fff;font-size:11px;font-weight:700;padding:2px 6px;border-radius:3px;display:inline-flex;align-items:center;gap:2px;width:fit-content}
-.rating-count{font-size:12px;color:var(--muted);margin-left:6px}
-.price-row{display:flex;align-items:baseline;gap:8px;margin:8px 0 2px}
-.final-price{font-size:18px;font-weight:700;color:#212121}
-.orig-price{font-size:13px;color:var(--muted);text-decoration:line-through}
-.disc-percent{font-size:13px;font-weight:700;color:var(--fk-green)}
-.delivery-badge{font-size:11px;color:#212121;font-weight:600;margin-bottom:10px}
+.product-card{padding:12px;background:#fff;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;flex-direction:column;position:relative}
+.prod-img-wrap{height:140px;display:flex;align-items:center;justify-content:center;position:relative}
+.prod-img-wrap img{max-height:120px;max-width:90%;object-fit:contain}
+.assured-tag{position:absolute;bottom:0;right:0;font-size:9px;background:#f7f9fa;border:1px solid #dcdcdc;border-radius:2px;padding:2px 4px;font-weight:800;color:var(--fk-blue)}
+.prod-title{margin:8px 0 4px;font-size:13px;font-weight:600;color:#212121;line-height:1.3;height:34px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.rating-pill{background:var(--fk-green);color:#fff;font-size:10px;font-weight:700;padding:2px 5px;border-radius:3px;display:inline-flex;align-items:center;gap:2px;width:fit-content}
+.rating-count{font-size:11px;color:var(--muted);margin-left:4px}
+.price-row{display:flex;align-items:baseline;gap:6px;margin:6px 0 2px}
+.final-price{font-size:16px;font-weight:700;color:#212121}
+.orig-price{font-size:12px;color:var(--muted);text-decoration:line-through}
+.disc-percent{font-size:12px;font-weight:700;color:var(--fk-green)}
+.delivery-badge{font-size:10px;color:#212121;font-weight:600;margin-bottom:8px}
 .delivery-badge span{color:var(--fk-green);font-weight:700}
 
-/* IN-CARD BUTTONS & STEPPER */
+/* CARD CONTROLS */
 .card-actions{margin-top:auto}
-.btn-add-cart{background:var(--fk-yellow);color:#212121;border:0;width:100%;padding:9px;font-weight:700;font-size:13px;border-radius:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:background .2s}
-.btn-add-cart:hover{background:#ebd300}
+.btn-add-cart{background:var(--fk-yellow);color:#212121;border:0;width:100%;padding:8px;font-weight:700;font-size:12px;border-radius:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px}
 .qty-stepper{display:flex;align-items:center;justify-content:space-between;background:var(--fk-blue);color:#fff;border-radius:2px;overflow:hidden}
-.qty-stepper button{background:none;border:0;color:#fff;padding:8px 14px;font-size:16px;font-weight:800;cursor:pointer}
-.qty-stepper button:hover{background:rgba(0,0,0,.15)}
-.qty-stepper span{font-size:13px;font-weight:700}
+.qty-stepper button{background:none;border:0;color:#fff;padding:6px 12px;font-size:15px;font-weight:800;cursor:pointer}
+.qty-stepper span{font-size:12px;font-weight:700}
 
-/* FLY BALL ANIMATION */
-.fly-item{position:fixed;width:24px;height:24px;background:var(--fk-orange);border-radius:50%;color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:9999;box-shadow:0 3px 8px rgba(0,0,0,.3);transition:all .55s cubic-bezier(0.18, 0.89, 0.32, 1.28)}
+/* FLY BALL */
+.fly-item{position:fixed;width:20px;height:20px;background:var(--fk-orange);border-radius:50%;color:#fff;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:9999;transition:all .55s cubic-bezier(0.18, 0.89, 0.32, 1.28)}
 
 /* OVERLAYS & MODALS */
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;display:none}
 .overlay.show{display:flex;align-items:center;justify-content:center}
 
-/* AUTH MODAL */
-.auth-card{background:#fff;width:min(740px,95%);border-radius:4px;overflow:hidden;box-shadow:0 6px 30px rgba(0,0,0,.35);display:grid;grid-template-columns:260px 1fr;position:relative}
-.auth-left{background:var(--fk-blue);color:#fff;padding:34px 28px;display:flex;flex-direction:column;justify-content:space-between}
-.auth-left h2{margin:0 0 10px;font-size:24px}
-.auth-left p{margin:0;font-size:14px;line-height:1.5;color:#dbeafe}
-.auth-left .shield-icon{font-size:54px;margin-top:20px}
-.auth-right{padding:26px 28px;position:relative;max-height:85vh;overflow-y:auto}
-.auth-close{position:absolute;top:10px;right:14px;background:none;border:0;font-size:22px;color:var(--muted);cursor:pointer}
+.auth-card{background:#fff;width:min(740px,94%);border-radius:4px;overflow:hidden;box-shadow:0 6px 30px rgba(0,0,0,.35);display:grid;grid-template-columns:240px 1fr;position:relative}
+.auth-left{background:var(--fk-blue);color:#fff;padding:26px 20px;display:flex;flex-direction:column;justify-content:space-between}
+.auth-left h2{margin:0 0 8px;font-size:20px}
+.auth-left p{margin:0;font-size:13px;line-height:1.4;color:#dbeafe}
+.auth-left .shield-icon{font-size:42px;margin-top:16px}
+.auth-right{padding:20px;position:relative;max-height:85vh;overflow-y:auto}
+.auth-close{position:absolute;top:8px;right:12px;background:none;border:0;font-size:20px;color:var(--muted);cursor:pointer}
 
-.auth-form{display:flex;flex-direction:column;gap:10px}
-.auth-form label{font-size:12px;color:var(--muted);font-weight:600}
-.auth-form input,.auth-form select{border:1px solid var(--line);border-radius:2px;padding:9px 12px;font:inherit;font-size:14px;outline:none;background:#fff}
+.auth-form{display:flex;flex-direction:column;gap:8px}
+.auth-form label{font-size:11px;color:var(--muted);font-weight:600}
+.auth-form input,.auth-form select{border:1px solid var(--line);border-radius:2px;padding:8px 10px;font:inherit;font-size:13px;outline:none;background:#fff;width:100%}
 .auth-form input:focus,.auth-form select:focus{border-color:var(--fk-blue)}
-.auth-btn-primary{background:var(--fk-orange);color:#fff;border:0;padding:11px;font-size:14px;font-weight:700;border-radius:2px;cursor:pointer;margin-top:6px}
-.auth-switch{font-size:13px;color:var(--muted);text-align:center;margin-top:12px}
+.auth-btn-primary{background:var(--fk-orange);color:#fff;border:0;padding:10px;font-size:13px;font-weight:700;border-radius:2px;cursor:pointer;margin-top:4px}
+.auth-switch{font-size:12px;color:var(--muted);text-align:center;margin-top:10px}
 .auth-switch a{color:var(--fk-blue);font-weight:700;text-decoration:none;cursor:pointer}
-.auth-msg{font-size:13px;padding:8px 10px;border-radius:2px;display:none;line-height:1.4}
+.auth-msg{font-size:12px;padding:8px;border-radius:2px;display:none;line-height:1.4}
 .auth-msg.err{background:#ffebee;color:#c62828;display:block}
 .auth-msg.ok{background:#e8f5e9;color:#2e7d32;display:block}
-.sec-badge{background:#fff3e0;border-left:4px solid var(--fk-orange);padding:10px;font-size:12px;color:#d84315;border-radius:2px;margin-bottom:10px;line-height:1.4}
+.sec-badge{background:#fff3e0;border-left:4px solid var(--fk-orange);padding:8px;font-size:11px;color:#d84315;border-radius:2px;margin-bottom:8px;line-height:1.4}
 
 /* CART DRAWER */
-.drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:#fff;z-index:201;display:flex;flex-direction:column;box-shadow:-2px 0 10px rgba(0,0,0,.2);transform:translateX(100%);transition:transform .3s ease}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(400px,100%);background:#fff;z-index:201;display:flex;flex-direction:column;box-shadow:-2px 0 10px rgba(0,0,0,.2);transform:translateX(100%);transition:transform .3s ease}
 .drawer.open{transform:translateX(0)}
-.drawer-head{background:var(--fk-blue);color:#fff;padding:14px 18px;display:flex;justify-content:space-between;align-items:center}
-.drawer-head h2{margin:0;font-size:17px;font-weight:700}
-.btn-close{background:none;border:0;color:#fff;font-size:22px;cursor:pointer}
-.drawer-body{flex:1;overflow-y:auto;padding:16px;background:#f1f3f6}
+.drawer-head{background:var(--fk-blue);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
+.drawer-head h2{margin:0;font-size:16px;font-weight:700}
+.btn-close{background:none;border:0;color:#fff;font-size:20px;cursor:pointer}
+.drawer-body{flex:1;overflow-y:auto;padding:14px;background:#f1f3f6}
 
-.cart-item-row{background:#fff;border-radius:2px;padding:12px;margin-bottom:10px;box-shadow:0 1px 2px rgba(0,0,0,.06);display:flex;gap:12px}
-.cart-item-row img{width:60px;height:60px;object-fit:contain}
+.cart-item-row{background:#fff;border-radius:2px;padding:10px;margin-bottom:8px;box-shadow:0 1px 2px rgba(0,0,0,.06);display:flex;gap:10px}
+.cart-item-row img{width:50px;height:50px;object-fit:contain}
 .cart-item-details{flex:1}
-.cart-item-details h4{margin:0 0 4px;font-size:13px}
-.cart-item-details .price{font-weight:700;font-size:14px}
-.cart-item-ctrl{display:flex;align-items:center;gap:8px;margin-top:6px}
-.cart-item-ctrl button{border:1px solid #c2c2c2;background:#fff;width:24px;height:24px;border-radius:50%;cursor:pointer;font-weight:700}
+.cart-item-details h4{margin:0 0 3px;font-size:12px}
+.cart-item-details .price{font-weight:700;font-size:13px}
+.cart-item-ctrl{display:flex;align-items:center;gap:6px;margin-top:6px}
+.cart-item-ctrl button{border:1px solid #c2c2c2;background:#fff;width:22px;height:22px;border-radius:50%;cursor:pointer;font-weight:700}
 
-.price-summary{background:#fff;border-radius:2px;padding:14px;box-shadow:0 1px 2px rgba(0,0,0,.06);margin-bottom:12px}
-.summary-row{display:flex;justify-content:space-between;margin-bottom:8px;font-size:13px}
-.summary-total{display:flex;justify-content:space-between;border-top:1px dashed var(--line);padding-top:10px;font-weight:800;font-size:16px}
+.price-summary{background:#fff;border-radius:2px;padding:12px;box-shadow:0 1px 2px rgba(0,0,0,.06);margin-bottom:10px}
+.summary-row{display:flex;justify-content:space-between;margin-bottom:6px;font-size:12px}
+.summary-total{display:flex;justify-content:space-between;border-top:1px dashed var(--line);padding-top:8px;font-weight:800;font-size:15px}
 
-.checkout-box{background:#fff;padding:14px;border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
-.checkout-box h3{margin:0 0 10px;font-size:14px}
-.checkout-box input,.checkout-box textarea{width:100%;border:1px solid var(--line);padding:9px 10px;font:inherit;border-radius:2px;margin-bottom:8px}
-.payment-choice{display:flex;flex-direction:column;gap:6px;margin:8px 0 12px}
-.payment-choice label{display:flex;align-items:center;gap:8px;font-size:13px;border:1px solid var(--line);padding:8px;border-radius:2px;cursor:pointer}
-.btn-place-order{background:var(--fk-orange);color:#fff;border:0;width:100%;padding:13px;font-weight:700;font-size:15px;border-radius:2px;cursor:pointer}
+.checkout-box{background:#fff;padding:12px;border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.checkout-box h3{margin:0 0 8px;font-size:13px}
+.checkout-box input,.checkout-box textarea{width:100%;border:1px solid var(--line);padding:8px;font:inherit;border-radius:2px;margin-bottom:6px;font-size:12px}
+.payment-choice{display:flex;flex-direction:column;gap:5px;margin:6px 0 10px}
+.payment-choice label{display:flex;align-items:center;gap:6px;font-size:12px;border:1px solid var(--line);padding:6px;border-radius:2px;cursor:pointer}
+.btn-place-order{background:var(--fk-orange);color:#fff;border:0;width:100%;padding:11px;font-weight:700;font-size:14px;border-radius:2px;cursor:pointer}
 
-/* TRACK ORDER & MY ORDERS MODALS */
-.modal-track{background:#fff;width:min(600px,94%);border-radius:4px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.2)}
-.modal-head{background:var(--fk-blue);color:#fff;padding:14px 18px;display:flex;justify-content:space-between;align-items:center}
-.modal-head h3{margin:0;font-size:16px}
-.modal-body{padding:20px;max-height:80vh;overflow-y:auto}
-.track-input-group{display:flex;gap:8px;margin-bottom:16px}
-.track-input-group input{flex:1;padding:10px 12px;border:1px solid var(--line);border-radius:2px;font:inherit}
-.track-input-group button{background:var(--fk-blue);color:#fff;border:0;padding:10px 18px;font-weight:700;border-radius:2px;cursor:pointer}
+/* MODALS */
+.modal-track{background:#fff;width:min(540px,94%);border-radius:4px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.2)}
+.modal-head{background:var(--fk-blue);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
+.modal-head h3{margin:0;font-size:15px}
+.modal-body{padding:16px;max-height:80vh;overflow-y:auto}
+.track-input-group{display:flex;gap:6px;margin-bottom:12px}
+.track-input-group input{flex:1;padding:8px 10px;border:1px solid var(--line);border-radius:2px;font:inherit;font-size:13px}
+.track-input-group button{background:var(--fk-blue);color:#fff;border:0;padding:8px 14px;font-weight:700;border-radius:2px;cursor:pointer;font-size:13px;white-space:nowrap}
 
-.tracker-status-box{background:#f9f9f9;border:1px solid var(--line);border-radius:4px;padding:16px;margin-bottom:14px}
-.timeline{display:flex;justify-content:space-between;position:relative;margin:24px 0 14px}
-.timeline::before{content:"";position:absolute;top:12px;left:10%;right:10%;height:3px;background:#e0e0e0;z-index:1}
+.tracker-status-box{background:#f9f9f9;border:1px solid var(--line);border-radius:4px;padding:12px;margin-bottom:12px}
+.timeline{display:flex;justify-content:space-between;position:relative;margin:18px 0 12px}
+.timeline::before{content:"";position:absolute;top:10px;left:10%;right:10%;height:3px;background:#e0e0e0;z-index:1}
 .timeline-step{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center;width:25%}
-.timeline-dot{width:26px;height:26px;border-radius:50%;background:#e0e0e0;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800}
+.timeline-dot{width:22px;height:22px;border-radius:50%;background:#e0e0e0;color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800}
 .timeline-step.completed .timeline-dot{background:var(--fk-green)}
-.timeline-step.current .timeline-dot{background:var(--fk-blue);box-shadow:0 0 0 4px rgba(40,116,240,.2)}
-.timeline-step span{font-size:11px;font-weight:600;margin-top:6px;color:#555}
-
-/* ORDER SUCCESS CARD */
-.success-screen{background:#fff;border-radius:4px;padding:20px;text-align:center}
-.success-screen .icon{font-size:48px;color:var(--fk-green);margin-bottom:8px}
-.order-pill{background:#f1f3f6;padding:8px;border-radius:4px;font-family:monospace;font-size:15px;font-weight:700;margin:10px 0}
-.btn-wa-order{background:#25d366;color:#fff;padding:12px;border-radius:2px;text-decoration:none;font-weight:700;display:block;margin-top:12px}
+.timeline-step.current .timeline-dot{background:var(--fk-blue);box-shadow:0 0 0 3px rgba(40,116,240,.2)}
+.timeline-step span{font-size:10px;font-weight:600;margin-top:4px;color:#555}
 
 /* OWNER ADMIN PANEL */
 #adminPanelModal{position:fixed;inset:0;background:var(--bg);z-index:300;display:none;flex-direction:column;overflow-y:auto}
-.admin-navbar{background:var(--admin-dark);color:#fff;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
-.admin-navbar h2{margin:0;font-size:18px;display:flex;align-items:center;gap:8px}
-.admin-badge{background:var(--fk-orange);color:#fff;font-size:11px;padding:3px 8px;border-radius:4px;font-weight:800}
-.admin-logout{background:#ef4444;color:#fff;border:0;padding:6px 14px;border-radius:4px;font-weight:700;cursor:pointer}
-.admin-container{max-width:1200px;margin:20px auto;padding:0 16px;display:grid;gap:20px}
-.admin-tabs{display:flex;gap:12px;border-bottom:2px solid var(--line);padding-bottom:10px;flex-wrap:wrap}
-.admin-tab-btn{background:#fff;border:1px solid var(--line);padding:10px 18px;border-radius:4px;font-weight:700;cursor:pointer}
+.admin-navbar{background:var(--admin-dark);color:#fff;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
+.admin-navbar h2{margin:0;font-size:16px;display:flex;align-items:center;gap:6px}
+.admin-badge{background:var(--fk-orange);color:#fff;font-size:10px;padding:2px 6px;border-radius:3px;font-weight:800}
+.admin-logout{background:#ef4444;color:#fff;border:0;padding:5px 12px;border-radius:3px;font-weight:700;cursor:pointer;font-size:12px}
+.admin-container{max-width:1200px;margin:14px auto;padding:0 10px;display:grid;gap:14px}
+.admin-tabs{display:flex;gap:8px;border-bottom:2px solid var(--line);padding-bottom:8px;flex-wrap:wrap}
+.admin-tab-btn{background:#fff;border:1px solid var(--line);padding:8px 12px;border-radius:3px;font-weight:700;cursor:pointer;font-size:12px}
 .admin-tab-btn.active{background:var(--fk-blue);color:#fff;border-color:var(--fk-blue)}
-
 .mailbox-card{background:#fff;border-radius:4px;box-shadow:0 1px 3px rgba(0,0,0,.1);overflow:hidden}
-.mailbox-header{background:#f8fafc;padding:12px 18px;font-weight:700;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
-.mail-row{display:grid;grid-template-columns:120px 180px 1fr 120px 100px;align-items:center;padding:14px 18px;border-bottom:1px solid var(--line);cursor:pointer;transition:background .2s}
+.mailbox-header{background:#f8fafc;padding:10px 14px;font-weight:700;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;font-size:13px}
+.mail-row{display:grid;grid-template-columns:100px 160px 1fr 100px 90px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line);cursor:pointer;font-size:12px}
 .mail-row:hover{background:#f1f5f9}
 .mail-orderid{color:var(--fk-blue);font-weight:800}
-.mail-status-pill{padding:3px 8px;border-radius:12px;font-size:11px;font-weight:700;text-align:center}
+.mail-status-pill{padding:2px 6px;border-radius:10px;font-size:10px;font-weight:700;text-align:center}
 .st-1{background:#fef3c7;color:#92400e}
 .st-2{background:#e0f2fe;color:#0369a1}
 .st-3{background:#ede9fe;color:#6d28d9}
 .st-4{background:#dcfce7;color:#15803d}
 
-/* PRODUCT MANAGEMENT ADMIN FORMS */
-.admin-prod-form{background:#f8fafc;border:1px solid var(--line);padding:16px;border-radius:4px;margin-bottom:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
-.admin-prod-form input, .admin-prod-form select{border:1px solid var(--line);border-radius:3px;padding:9px 10px;font:inherit;background:#fff}
-.admin-prod-form button{background:var(--fk-green);color:#fff;border:0;padding:10px;font-weight:700;border-radius:3px;cursor:pointer}
-
-.image-source-toggle{grid-column:1/-1;display:flex;gap:10px;align-items:center;margin-top:4px}
-.image-source-toggle label{font-size:13px;font-weight:700;display:flex;align-items:center;gap:4px;cursor:pointer}
-.image-preview-box{display:flex;align-items:center;gap:10px;grid-column:1/-1;background:#fff;padding:8px 12px;border:1px dashed var(--line);border-radius:4px}
-.image-preview-box img{width:50px;height:50px;object-fit:contain;border:1px solid #ddd;border-radius:2px;display:none}
+.admin-prod-form{background:#f8fafc;border:1px solid var(--line);padding:14px;border-radius:4px;margin-bottom:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+.admin-prod-form input, .admin-prod-form select{border:1px solid var(--line);border-radius:3px;padding:8px;font:inherit;font-size:12px;background:#fff;width:100%}
+.admin-prod-form button{background:var(--fk-green);color:#fff;border:0;padding:9px;font-weight:700;border-radius:3px;cursor:pointer;font-size:12px}
+.image-source-toggle{grid-column:1/-1;display:flex;gap:10px;align-items:center}
+.image-source-toggle label{font-size:12px;font-weight:700;display:flex;align-items:center;gap:4px;cursor:pointer}
+.image-preview-box{display:flex;align-items:center;gap:10px;grid-column:1/-1;background:#fff;padding:6px 10px;border:1px dashed var(--line);border-radius:3px}
+.image-preview-box img{width:40px;height:40px;object-fit:contain;border:1px solid #ddd;border-radius:2px;display:none}
 
 .users-table-wrap{background:#fff;border-radius:4px;box-shadow:0 1px 3px rgba(0,0,0,.1);overflow-x:auto}
-.users-table{width:100%;border-collapse:collapse;text-align:left;font-size:13px}
-.users-table th{background:#f8fafc;padding:12px 16px;border-bottom:2px solid var(--line);font-weight:700}
-.users-table td{padding:12px 16px;border-bottom:1px solid var(--line)}
-.btn-override-pass{background:var(--fk-orange);color:#fff;border:0;padding:6px 12px;border-radius:2px;font-weight:700;cursor:pointer}
-.btn-del-prod{background:#ef4444;color:#fff;border:0;padding:6px 12px;border-radius:2px;font-weight:700;cursor:pointer}
-.btn-edit-prod{background:var(--fk-blue);color:#fff;border:0;padding:6px 12px;border-radius:2px;font-weight:700;cursor:pointer;margin-right:4px}
+.users-table{width:100%;border-collapse:collapse;text-align:left;font-size:12px}
+.users-table th{background:#f8fafc;padding:10px 12px;border-bottom:2px solid var(--line);font-weight:700}
+.users-table td{padding:10px 12px;border-bottom:1px solid var(--line)}
+.btn-override-pass{background:var(--fk-orange);color:#fff;border:0;padding:5px 10px;border-radius:2px;font-weight:700;cursor:pointer;font-size:11px}
+.btn-del-prod{background:#ef4444;color:#fff;border:0;padding:5px 10px;border-radius:2px;font-weight:700;cursor:pointer;font-size:11px}
+.btn-edit-prod{background:var(--fk-blue);color:#fff;border:0;padding:5px 10px;border-radius:2px;font-weight:700;cursor:pointer;font-size:11px;margin-right:2px}
 
-/* TRUST FOOTER */
-.trust-strip{max-width:1240px;margin:20px auto;padding:0 14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
-.trust-box{background:#fff;padding:16px;border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.08);display:flex;align-items:center;gap:12px}
-.trust-box .icon{font-size:26px;color:var(--fk-blue)}
-.trust-box div b{display:block;font-size:14px}
-.trust-box div small{color:var(--muted);font-size:12px}
+/* FOOTER */
+.trust-strip{max-width:1240px;margin:16px auto;padding:0 10px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.trust-box{background:#fff;padding:12px;border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.08);display:flex;align-items:center;gap:10px}
+.trust-box .icon{font-size:22px;color:var(--fk-blue)}
+.trust-box div b{display:block;font-size:13px}
+.trust-box div small{color:var(--muted);font-size:11px}
+footer{background:#172337;color:#878787;padding:20px 10px 16px;font-size:11px;border-top:1px solid #2d3e56;margin-top:20px;text-align:center}
+footer a{color:#fff;text-decoration:none}
 
-footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;border-top:1px solid #2d3e56;margin-top:30px}
-.footer-inner{max-width:1240px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;line-height:1.6}
-.footer-inner h4{color:#fff;margin:0 0 8px;font-size:13px;text-transform:uppercase}
-.footer-inner a{color:#fff;text-decoration:none}
-.footer-copy{max-width:1240px;margin:20px auto 0;padding-top:16px;border-top:1px solid #28374d;text-align:center;color:#6b7c96}
-
-@media(max-width:860px){
-  .layout{grid-template-columns:1fr}
-  .sidebar{display:none}
-  .search-box{max-width:none}
-  .product-grid{grid-template-columns:repeat(2,1fr)}
+/* ======================================================== */
+/* 📱 AUTOMATIC MOBILE-RESPONSIVE FIX (NO DESKTOP MODE NEEDED) */
+/* ======================================================== */
+@media (max-width: 768px) {
+  .top-strip-inner{justify-content:center;text-align:center;gap:4px}
+  .main-header{padding:8px 10px;gap:8px}
+  .search-box{order:3;width:100%;min-width:100%;margin-top:2px}
+  .header-actions{order:2;gap:6px}
+  .btn-nav span:not(.cart-count-badge){font-size:14px}
+  .layout{grid-template-columns:1fr;padding:0 6px}
+  .sidebar{display:none} /* Clean mobile view */
+  .product-grid{grid-template-columns:repeat(2, 1fr)} /* 2 items per row Flipkart mobile layout */
+  .product-card{padding:8px}
+  .prod-img-wrap{height:120px}
+  .prod-img-wrap img{max-height:100px}
+  .prod-title{font-size:12px;height:32px;margin:4px 0}
+  .final-price{font-size:14px}
+  .orig-price{font-size:11px}
+  .disc-percent{font-size:11px}
+  .big-sale-banner{flex-direction:column;align-items:flex-start;padding:14px}
+  .big-sale-banner h1{font-size:18px}
+  .sale-timer{width:100%;text-align:left;display:flex;justify-content:space-between;align-items:center;padding:8px 12px;min-width:auto}
+  .sale-timer .time{font-size:15px;margin-top:0}
   .auth-card{grid-template-columns:1fr}
   .auth-left{display:none}
-  .big-sale-banner{padding:20px;flex-direction:column;align-items:flex-start}
-  .big-sale-banner h1{font-size:24px}
-  .mail-row{grid-template-columns:1fr 1fr;gap:6px}
+  .drawer{width:100%}
+  .mail-row{grid-template-columns:1fr;gap:4px;padding:10px}
 }
 </style>
 </head>
@@ -278,13 +280,11 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
 <!-- TOP STRIP WITH REAL-TIME CLOCK -->
 <div class="top-strip">
   <div class="top-strip-inner">
-    <span>📍 PAG Moters – MIDC Gate, Near Gram Panchayat Office, Mharal Gaon 421001</span>
-    
+    <span>📍 PAG Moters – MIDC Gate, Mharal Gaon 421001</span>
     <div class="realtime-clock-badge">
       <span>🕒</span> <span id="realTimeClock">--:--:-- --</span>
     </div>
-
-    <span>Helpline: <a href="tel:+918766641866">8766641866</a> / <a href="tel:+917379595655">7379595655</a></span>
+    <span>Call: <a href="tel:+918766641866">8766641866</a></span>
   </div>
 </div>
 
@@ -295,20 +295,15 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
       <small>Explore <span>Plus ✦</span></small>
     </div>
 
-    <div class="search-box">
-      <input type="search" id="searchQuery" placeholder="Search for genuine spare parts, chargers, helmets & more" oninput="liveSearch()">
-      <button onclick="liveSearch()">🔍</button>
-    </div>
-
     <div class="header-actions">
-      <!-- MY ORDERS BUTTON -->
+      <!-- 📋 MY ORDERS (DIRECT HEADER ACCESS) -->
       <button class="btn-nav" onclick="openMyOrdersModal()">
         <span>📋</span> My Orders
       </button>
 
-      <!-- TRACK ORDER BUTTON -->
+      <!-- 📦 TRACK ORDER BUTTON -->
       <button class="btn-nav" onclick="openTrackModal()">
-        <span>📦</span> Track Order
+        <span>📦</span> Track
       </button>
 
       <div id="authHeaderContainer">
@@ -320,6 +315,12 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
         <span id="cartCountBadge" class="cart-count-badge">0</span>
         <span id="headerCartTotal">₹0</span>
       </button>
+    </div>
+
+    <!-- RESPONSIVE FULL WIDTH ON MOBILE SEARCH BAR -->
+    <div class="search-box">
+      <input type="search" id="searchQuery" placeholder="Search helmets, chargers, batteries..." oninput="liveSearch()">
+      <button onclick="liveSearch()">🔍</button>
     </div>
   </div>
 </header>
@@ -336,7 +337,7 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
   </ul>
 </nav>
 
-<!-- BADA SALE BANNER (12-HOURS EXACT COUNTDOWN) -->
+<!-- 12-HOUR SALE BANNER -->
 <section class="sale-banner-wrap" id="saleBannerSection">
   <div class="big-sale-banner">
     <div>
@@ -369,7 +370,7 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
   <main class="product-panel">
     <div class="panel-head">
       <h2 id="productSectionTitle">Deals of the Day</h2>
-      <span style="font-size:13px;color:var(--muted)" id="totalProductsCount">Showing items</span>
+      <span style="font-size:12px;color:var(--muted)" id="totalProductsCount">Showing items</span>
     </div>
     <div class="product-grid" id="productGrid"></div>
   </main>
@@ -378,40 +379,24 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
 <div class="trust-strip">
   <div class="trust-box">
     <div class="icon">⚡</div>
-    <div><b>Hand-to-Hand Delivery</b><small>Direct to your doorstep in Mharal</small></div>
+    <div><b>Hand-to-Hand Delivery</b><small>Doorstep in Mharal Gaon</small></div>
   </div>
   <div class="trust-box">
     <div class="icon">🛡️</div>
-    <div><b>100% Genuine Guarantee</b><small>Tested and verified parts</small></div>
+    <div><b>100% Genuine Guarantee</b><small>Tested parts</small></div>
   </div>
   <div class="trust-box">
     <div class="icon">💬</div>
-    <div><b>Instant WhatsApp Support</b><small>Quick replies from our shop team</small></div>
+    <div><b>WhatsApp Support</b><small>Quick replies</small></div>
   </div>
   <div class="trust-box">
     <div class="icon">💵</div>
-    <div><b>Cash on Delivery Available</b><small>Pay after inspecting item</small></div>
+    <div><b>Cash on Delivery</b><small>Pay at doorstep</small></div>
   </div>
 </div>
 
 <footer>
-  <div class="footer-inner">
-    <div>
-      <h4>PAG Moters</h4>
-      <p>Your trusted local destination for Electric Vehicle spare parts, high-speed smart chargers, certified safety helmets, and battery servicing.</p>
-    </div>
-    <div>
-      <h4>Shop Location</h4>
-      <p>Shop no 68, MIDC Gate,<br>Near Gram Panchayat Office,<br>Mharal Gaon, 421001</p>
-    </div>
-    <div>
-      <h4>Quick Contact</h4>
-      <p>Call: <a href="tel:+918766641866">8766641866</a><br>Support: <a href="tel:+917379595655">7379595655</a><br>WhatsApp: <a href="https://wa.me/918766641866" target="_blank">Chat with us</a></p>
-    </div>
-  </div>
-  <div class="footer-copy">
-    © 2026 PAG Moters · pagmoters.online · All Rights Reserved
-  </div>
+  <p><b>PAG Moters</b> – EV Spare Parts, Accessories &amp; Service<br>Shop no 68, MIDC Gate, Mharal Gaon 421001 · Call <a href="tel:+918766641866">8766641866</a><br>© 2026 PAG Moters · pagmoters.online</p>
 </footer>
 
 <!-- AUTH MODAL -->
@@ -449,12 +434,12 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
       </div>
 
       <div id="signupSection" style="display:none;">
-        <div class="sec-badge">🔒 <b>Security Check:</b> Choose a secret question. Without this, no one can reset your password.</div>
+        <div class="sec-badge">🔒 <b>Security Check:</b> Choose a secret question for password reset.</div>
         <form class="auth-form" onsubmit="handleSignupSubmit(event)">
           <div id="signupMsg" class="auth-msg"></div>
           <div>
             <label>Full Name</label>
-            <input type="text" id="regName" placeholder="Enter your full name" required>
+            <input type="text" id="regName" placeholder="Enter full name" required>
           </div>
           <div>
             <label>Mobile Number</label>
@@ -462,12 +447,12 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
           </div>
           <div>
             <label>Set Password</label>
-            <input type="password" id="regPass" placeholder="Create password (min 6 characters)" minlength="6" required>
+            <input type="password" id="regPass" placeholder="Create password (min 6 chars)" minlength="6" required>
           </div>
           <div>
             <label>Select Security Question</label>
             <select id="regSecQ" required>
-              <option value="" disabled selected>-- Select a Secret Question --</option>
+              <option value="" disabled selected>-- Select a Question --</option>
               <option value="What is your first bike/scooter model?">What is your first bike/scooter model?</option>
               <option value="What is your birthplace / hometown?">What is your birthplace / hometown?</option>
               <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
@@ -475,7 +460,7 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
           </div>
           <div>
             <label>Secret Security Answer</label>
-            <input type="text" id="regSecA" placeholder="Type answer (remember this)" required>
+            <input type="text" id="regSecA" placeholder="Type answer" required>
           </div>
           <button type="submit" class="auth-btn-primary">Create Secure Account</button>
         </form>
@@ -485,7 +470,7 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
       </div>
 
       <div id="mandatorySecuritySection" style="display:none;">
-        <div class="sec-badge">⚠️ <b>Action Required:</b> Protect your account! Please set up a security question.</div>
+        <div class="sec-badge">⚠️ <b>Action Required:</b> Set a security question to secure account.</div>
         <form class="auth-form" onsubmit="handleSaveMandatorySecurity(event)">
           <div id="mandSecMsg" class="auth-msg"></div>
           <div>
@@ -507,38 +492,27 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
 
       <div id="forgotSection" style="display:none;">
         <div id="forgotMsg" class="auth-msg"></div>
-
         <form id="forgotStep1Form" class="auth-form" onsubmit="handleForgotStep1(event)">
-          <p style="font-size:13px;color:#555;margin:0 0 6px;">Enter your registered 10-digit mobile number:</p>
+          <p style="font-size:12px;color:#555;margin:0 0 4px;">Enter registered 10-digit mobile number:</p>
           <div>
-            <label>Mobile Number</label>
             <input type="text" id="forgotId" placeholder="Enter mobile number" required>
           </div>
           <button type="submit" class="auth-btn-primary">Verify Account</button>
         </form>
 
-        <div id="forgotStep2Box" style="display:none;margin-top:12px;border-top:1px dashed var(--line);padding-top:10px;">
+        <div id="forgotStep2Box" style="display:none;margin-top:10px;border-top:1px dashed var(--line);padding-top:8px;">
           <form class="auth-form" onsubmit="handleForgotStep2(event)">
             <div class="sec-badge">🔒 <b>Identity Verification:</b> Please answer your secret question.</div>
-            <div>
-              <label>Security Question:</label>
-              <div id="displaySecQuestion" style="font-weight:700;padding:8px;background:#f1f3f6;border-radius:2px;font-size:13px;"></div>
-            </div>
-            <div>
-              <label>Your Security Answer:</label>
-              <input type="text" id="verifySecAnswer" placeholder="Type your secret answer" required>
-            </div>
+            <div id="displaySecQuestion" style="font-weight:700;padding:6px;background:#f1f3f6;border-radius:2px;font-size:12px;"></div>
+            <input type="text" id="verifySecAnswer" placeholder="Type your secret answer" required>
             <button type="submit" class="auth-btn-primary">Verify Answer</button>
           </form>
         </div>
 
-        <div id="forgotStep3Box" style="display:none;margin-top:12px;border-top:1px dashed var(--line);padding-top:10px;">
+        <div id="forgotStep3Box" style="display:none;margin-top:10px;border-top:1px dashed var(--line);padding-top:8px;">
           <form class="auth-form" onsubmit="handleForgotStep3(event)">
-            <div class="auth-msg ok" style="display:block;margin-bottom:8px;">✅ Identity Verified! Set a new password.</div>
-            <div>
-              <label>New Password (Min 6 characters)</label>
-              <input type="password" id="newPassFinal" placeholder="Enter new strong password" minlength="6" required>
-            </div>
+            <div class="auth-msg ok" style="display:block;margin-bottom:6px;">✅ Verified! Set a new password.</div>
+            <input type="password" id="newPassFinal" placeholder="Enter new strong password" minlength="6" required>
             <button type="submit" class="auth-btn-primary" style="background:var(--fk-green)">Update Password &amp; Login</button>
           </form>
         </div>
@@ -561,29 +535,29 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
   <div class="drawer-body" id="cartBody"></div>
 </div>
 
-<!-- 📦 TRACK ORDER MODAL -->
+<!-- TRACK ORDER MODAL -->
 <div class="overlay" id="trackModalOverlay">
   <div class="modal-track">
     <div class="modal-head">
-      <h3>📦 Track Your Order Status</h3>
+      <h3>📦 Track Order Live Status</h3>
       <button class="btn-close" onclick="closeTrackModal()">✕</button>
     </div>
     <div class="modal-body">
-      <p style="font-size:13px;color:#555;margin:0 0 12px;">Enter your <b>10-digit Mobile Number</b> or <b>Order ID (e.g. PAG-123456)</b>:</p>
+      <p style="font-size:12px;color:#555;margin:0 0 10px;">Enter your <b>10-digit Mobile Number</b> or <b>Order ID</b>:</p>
       <div class="track-input-group">
-        <input type="text" id="trackInput" placeholder="Enter Mobile Number or Order ID">
-        <button onclick="performOrderSearch()">Track Order</button>
+        <input type="text" id="trackInput" placeholder="Mobile Number or Order ID">
+        <button onclick="performOrderSearch()">Track</button>
       </div>
       <div id="trackResultContainer"></div>
     </div>
   </div>
 </div>
 
-<!-- 📋 MY ORDERS MODAL (ALL ORDERS FOR CUSTOMER) -->
+<!-- MY ORDERS MODAL -->
 <div class="overlay" id="myOrdersModalOverlay">
   <div class="modal-track">
     <div class="modal-head">
-      <h3>📋 My Orders &amp; Delivery History</h3>
+      <h3>📋 My Orders History</h3>
       <button class="btn-close" onclick="closeMyOrdersModal()">✕</button>
     </div>
     <div class="modal-body">
@@ -596,17 +570,17 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
 <div id="adminPanelModal">
   <div class="admin-navbar">
     <h2><span>⚙️</span> PAG Moters Owner Portal <span class="admin-badge">Super Admin</span></h2>
-    <button class="admin-logout" onclick="closeAdminPortal()">Exit Admin Portal</button>
+    <button class="admin-logout" onclick="closeAdminPortal()">Exit Admin</button>
   </div>
 
   <div class="admin-container">
     <div class="admin-tabs">
-      <button class="admin-tab-btn active" id="btnTabOrders" onclick="switchAdminTab('orders')">📦 Customer Orders (Mailbox)</button>
-      <button class="admin-tab-btn" id="btnTabProducts" onclick="switchAdminTab('products')">🏷️ Product Management (Add/Edit/Remove)</button>
-      <button class="admin-tab-btn" id="btnTabUsers" onclick="switchAdminTab('users')">👥 Customer Accounts &amp; Password Reset</button>
+      <button class="admin-tab-btn active" id="btnTabOrders" onclick="switchAdminTab('orders')">📦 Orders (Mailbox)</button>
+      <button class="admin-tab-btn" id="btnTabProducts" onclick="switchAdminTab('products')">🏷️ Product Management</button>
+      <button class="admin-tab-btn" id="btnTabUsers" onclick="switchAdminTab('users')">👥 Customer Accounts</button>
     </div>
 
-    <!-- 1. ORDERS MAILBOX -->
+    <!-- ORDERS MAILBOX -->
     <div id="adminOrdersSection" class="mailbox-card">
       <div class="mailbox-header">
         <span>Incoming Customer Orders Inbox</span>
@@ -615,14 +589,14 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
       <div id="adminMailboxContainer"></div>
     </div>
 
-    <!-- 2. PRODUCT MANAGEMENT -->
-    <div id="adminProductsSection" class="mailbox-card" style="display:none;padding:16px;">
-      <div class="mailbox-header" style="background:#fff;padding:0 0 12px 0;">
+    <!-- PRODUCT MANAGEMENT -->
+    <div id="adminProductsSection" class="mailbox-card" style="display:none;padding:14px;">
+      <div class="mailbox-header" style="background:#fff;padding:0 0 10px 0;">
         <span><b>Add New Product to Storefront</b></span>
       </div>
       
       <form class="admin-prod-form" onsubmit="adminSaveProduct(event)">
-        <input type="text" id="newProdName" placeholder="Product Name (e.g. Mobile Phone, Smart Helmet)" required>
+        <input type="text" id="newProdName" placeholder="Product Name (e.g. Smart Helmet)" required>
         
         <select id="newProdCat" onchange="toggleOtherCatInput(this.value)" required>
           <option value="Helmets">Helmets</option>
@@ -634,16 +608,14 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
           <option value="Other">➕ Other (Type Custom Category)</option>
         </select>
 
-        <input type="text" id="newProdCustomCat" placeholder="Type Your Custom Category Name" style="display:none;border-color:var(--fk-blue);background:#eff6ff;">
-
+        <input type="text" id="newProdCustomCat" placeholder="Type Custom Category Name" style="display:none;border-color:var(--fk-blue);background:#eff6ff;">
         <input type="number" id="newProdOrig" placeholder="Original MRP Price (₹)" required min="1" oninput="calculateDiscountPreview()">
         <input type="number" id="newProdPrice" placeholder="Selling Offer Price (₹)" required min="1" oninput="calculateDiscountPreview()">
         
-        <!-- IMAGE DUAL OPTIONS -->
         <div class="image-source-toggle">
-          <span style="font-size:12px;color:var(--muted);font-weight:700;">Image Source:</span>
-          <label><input type="radio" name="imgUploadType" value="file" checked onchange="toggleImageInputMode('file')"> 📁 Choose File from Device</label>
-          <label><input type="radio" name="imgUploadType" value="url" onchange="toggleImageInputMode('url')"> 🔗 Image Web URL Link</label>
+          <span style="font-size:11px;color:var(--muted);font-weight:700;">Image Source:</span>
+          <label><input type="radio" name="imgUploadType" value="file" checked onchange="toggleImageInputMode('file')"> 📁 File from Device</label>
+          <label><input type="radio" name="imgUploadType" value="url" onchange="toggleImageInputMode('url')"> 🔗 Web URL Link</label>
         </div>
 
         <input type="file" id="newProdFileInput" accept="image/*" onchange="handleDeviceImageUpload(event)" style="background:#fff;">
@@ -651,17 +623,17 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
 
         <div class="image-preview-box">
           <img id="adminImagePreview" src="" alt="Preview">
-          <span id="previewStatusText" style="font-size:12px;color:var(--muted);">No image selected yet.</span>
+          <span id="previewStatusText" style="font-size:11px;color:var(--muted);">No image selected.</span>
         </div>
 
-        <div style="grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;background:#e2e8f0;padding:8px 12px;border-radius:3px;">
-          <span id="discountPreviewText" style="font-weight:700;color:var(--fk-green)">Discount: 0% OFF</span>
-          <button type="submit">+ Publish Product to Website</button>
+        <div style="grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;background:#e2e8f0;padding:6px 10px;border-radius:3px;">
+          <span id="discountPreviewText" style="font-weight:700;color:var(--fk-green);font-size:12px;">Discount: 0% OFF</span>
+          <button type="submit">+ Publish Product</button>
         </div>
       </form>
 
-      <div class="mailbox-header" style="background:#fff;padding:12px 0 8px 0;">
-        <span><b>Current Active Products in Catalog</b></span>
+      <div class="mailbox-header" style="background:#fff;padding:10px 0 6px 0;">
+        <span><b>Active Products in Catalog</b></span>
         <span id="adminCatalogCountBadge">0 Products</span>
       </div>
 
@@ -673,7 +645,7 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
               <th>Product Name</th>
               <th>Category</th>
               <th>Selling Price</th>
-              <th>MRP (Original)</th>
+              <th>MRP</th>
               <th>Discount</th>
               <th>Actions</th>
             </tr>
@@ -683,7 +655,7 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
       </div>
     </div>
 
-    <!-- 3. CUSTOMER ACCOUNTS -->
+    <!-- CUSTOMER ACCOUNTS -->
     <div id="adminUsersSection" class="users-table-wrap" style="display:none;">
       <div class="mailbox-header">
         <span>Registered Customers (Instant Password Override)</span>
@@ -757,7 +729,7 @@ function cleanPhone(val) {
   return num;
 }
 
-// 🕒 LIVE REAL-TIME CLOCK
+// 🕒 REAL-TIME DIGITAL CLOCK
 function startRealTimeClock() {
   function updateClock() {
     const now = new Date();
@@ -775,13 +747,13 @@ function startRealTimeClock() {
   setInterval(updateClock, 1000);
 }
 
-// ⏳ 12-HOURS EXACT COUNTDOWN (REFRESH PAR RESTART NAHI HOGA)
+// ⏳ 12-HOURS EXACT TIMER (REFRESH PAR RESTART NAHI HOGA)
 function startSaleTimer() {
   const STORAGE_KEY = 'pag_sale_fixed_end_time';
   let endTime = localStorage.getItem(STORAGE_KEY);
   
   if(!endTime) {
-    endTime = Date.now() + (12 * 60 * 60 * 1000); // 12 hours from now
+    endTime = Date.now() + (12 * 60 * 60 * 1000);
     localStorage.setItem(STORAGE_KEY, endTime.toString());
   } else {
     endTime = parseInt(endTime, 10);
@@ -797,7 +769,7 @@ function startSaleTimer() {
       if(clockEl) {
         clockEl.innerText = "OFFER ENDED";
         clockEl.style.color = "#ffdddd";
-        clockEl.style.fontSize = "18px";
+        clockEl.style.fontSize = "16px";
       }
       if(labelEl) labelEl.innerText = "Sale Status";
       return;
@@ -814,7 +786,7 @@ function startSaleTimer() {
 }
 
 // ==========================================
-// 📦 ORDER TRACKING & MY ORDERS LOGIC
+// 📦 ORDER TRACKING & MY ORDERS
 // ==========================================
 function openTrackModal() {
   document.getElementById('trackModalOverlay').classList.add('show');
@@ -828,7 +800,6 @@ function closeTrackModal() {
   document.getElementById('trackModalOverlay').classList.remove('show');
 }
 
-// ROBUST ORDER SEARCH BY MOBILE NUMBER OR ORDER ID
 function performOrderSearch() {
   try { orders = JSON.parse(localStorage.getItem('pag_orders_db')) || []; } catch(e){ orders = []; }
   
@@ -838,11 +809,10 @@ function performOrderSearch() {
   const container = document.getElementById('trackResultContainer');
 
   if(!rawInput) {
-    container.innerHTML = '<div style="color:#d32f2f;font-size:13px;margin-top:10px;">Please enter your mobile number or Order ID.</div>';
+    container.innerHTML = '<div style="color:#d32f2f;font-size:12px;margin-top:8px;">Please enter your mobile number or Order ID.</div>';
     return;
   }
 
-  // Search by cleaned mobile or direct ID
   const matchedList = orders.filter(o => {
     const oPhone = cleanPhone(o.customerPhone);
     const oId = (o.id || '').toUpperCase();
@@ -852,10 +822,10 @@ function performOrderSearch() {
   if(!matchedList.length) {
     container.innerHTML = `
       <div class="tracker-status-box" style="text-align:center;">
-        <div style="font-size:32px;">🔍</div>
+        <div style="font-size:30px;">🔍</div>
         <b>No Order Found for "${rawInput}"</b>
-        <p style="font-size:12px;color:#878787;margin:4px 0 0;">Make sure you entered the correct 10-digit number used during ordering.</p>
-        <a style="display:inline-block;margin-top:8px;font-size:12px;color:var(--fk-blue);font-weight:700;" href="https://wa.me/918766641866?text=Track%20Order%20for%20${rawInput}" target="_blank">Contact Helpline on WhatsApp</a>
+        <p style="font-size:12px;color:#878787;margin:4px 0 0;">Check your 10-digit number used during ordering.</p>
+        <a style="display:inline-block;margin-top:6px;font-size:12px;color:var(--fk-blue);font-weight:700;" href="https://wa.me/918766641866?text=Track%20Order%20for%20${rawInput}" target="_blank">Contact WhatsApp Support</a>
       </div>`;
     return;
   }
@@ -863,13 +833,12 @@ function performOrderSearch() {
   container.innerHTML = matchedList.map(matched => buildOrderCardHTML(matched)).join('');
 }
 
-// RENDER SINGLE ORDER CARD WITH 4-STEP TRACKER
 function buildOrderCardHTML(matched) {
   return `
     <div class="tracker-status-box">
       <div style="display:flex;justify-content:space-between;align-items:center;">
         <b>Order ID: ${matched.id}</b>
-        <span style="font-size:12px;color:var(--muted)">${matched.date}</span>
+        <span style="font-size:11px;color:var(--muted)">${matched.date}</span>
       </div>
 
       <div class="timeline">
@@ -891,14 +860,14 @@ function buildOrderCardHTML(matched) {
         </div>
       </div>
 
-      <div style="font-size:13px;line-height:1.5;margin-top:14px;border-top:1px solid #e0e0e0;padding-top:10px;">
+      <div style="font-size:12px;line-height:1.5;margin-top:10px;border-top:1px solid #e0e0e0;padding-top:8px;">
         <div><b>Delivery To:</b> ${matched.customerName} (${matched.customerPhone})</div>
         <div><b>Address:</b> ${matched.address}</div>
         <div><b>Ordered Items:</b> ${matched.items}</div>
         <div><b>Total:</b> ₹${matched.totalPayable.toLocaleString('en-IN')} (${matched.paymentMethod})</div>
       </div>
 
-      <a style="display:block;text-align:center;font-size:13px;color:var(--fk-blue);font-weight:700;margin-top:10px;text-decoration:none;" 
+      <a style="display:block;text-align:center;font-size:12px;color:var(--fk-blue);font-weight:700;margin-top:8px;text-decoration:none;" 
          target="_blank" href="https://wa.me/918766641866?text=Track%20Order%20Status%20for%20${matched.id}">
          Need immediate delivery update? Chat on WhatsApp
       </a>
@@ -906,7 +875,6 @@ function buildOrderCardHTML(matched) {
   `;
 }
 
-// 📋 MY ORDERS MODAL SYSTEM
 function openMyOrdersModal() {
   try { orders = JSON.parse(localStorage.getItem('pag_orders_db')) || []; } catch(e){ orders = []; }
   document.getElementById('myOrdersModalOverlay').classList.add('show');
@@ -925,31 +893,30 @@ function renderMyOrdersList() {
     const userPhone = cleanPhone(currentUser.phone);
     customerOrders = orders.filter(o => cleanPhone(o.customerPhone) === userPhone);
   } else {
-    // If not logged in, show orders saved on this device or prompt phone search
     customerOrders = orders;
   }
 
   if(!customerOrders.length) {
     content.innerHTML = `
-      <div style="text-align:center;padding:40px 10px;color:var(--muted)">
-        <div style="font-size:46px;margin-bottom:10px;">📦</div>
-        <b style="font-size:15px;color:#212121;">No Orders Placed Yet</b>
-        <p style="font-size:13px;margin:6px 0 14px;">Once you place an order, you can view its entire history and live status here.</p>
-        <button class="btn-nav" style="background:var(--fk-blue);color:#fff;margin:auto;padding:8px 16px;" onclick="closeMyOrdersModal()">Start Shopping</button>
+      <div style="text-align:center;padding:30px 10px;color:var(--muted)">
+        <div style="font-size:42px;margin-bottom:8px;">📦</div>
+        <b style="font-size:14px;color:#212121;">No Orders Placed Yet</b>
+        <p style="font-size:12px;margin:4px 0 12px;">Place your first order to view delivery status and tracking here.</p>
+        <button class="btn-nav" style="background:var(--fk-blue);color:#fff;margin:auto;padding:6px 14px;" onclick="closeMyOrdersModal()">Start Shopping</button>
       </div>`;
     return;
   }
 
   content.innerHTML = `
-    <div style="margin-bottom:14px;font-size:13px;color:#555;">
-      Showing <b>${customerOrders.length} Order(s)</b> placed by you:
+    <div style="margin-bottom:10px;font-size:12px;color:#555;">
+      Showing <b>${customerOrders.length} Order(s)</b> placed:
     </div>
     ${customerOrders.map(o => buildOrderCardHTML(o)).join('')}
   `;
 }
 
 // ==========================================
-// 🛡️ ADMIN PORTAL & DUAL IMAGE MANAGEMENT
+// 🛡️ ADMIN PORTAL & IMAGE UPLOAD
 // ==========================================
 function openAdminPortal() {
   closeAuthModal();
@@ -1008,7 +975,7 @@ function handleDeviceImageUpload(e) {
       const preview = document.getElementById('adminImagePreview');
       preview.src = activeUploadedImageData;
       preview.style.display = 'block';
-      document.getElementById('previewStatusText').innerText = `Loaded: ${file.name} (${Math.round(file.size/1024)} KB)`;
+      document.getElementById('previewStatusText').innerText = `Loaded: ${file.name}`;
     };
     reader.readAsDataURL(file);
   }
@@ -1020,10 +987,10 @@ function handleUrlImagePreview(url) {
   if(activeUploadedImageData) {
     preview.src = activeUploadedImageData;
     preview.style.display = 'block';
-    document.getElementById('previewStatusText').innerText = "Image URL Preview Ready";
+    document.getElementById('previewStatusText').innerText = "Preview Ready";
   } else {
     preview.style.display = 'none';
-    document.getElementById('previewStatusText').innerText = "No image selected yet.";
+    document.getElementById('previewStatusText').innerText = "No image selected.";
   }
 }
 
@@ -1033,7 +1000,7 @@ function calculateDiscountPreview() {
   const prev = document.getElementById('discountPreviewText');
   if(orig > 0 && price > 0 && orig > price) {
     const disc = Math.round((1 - price / orig) * 100);
-    prev.innerText = `Discount: ${disc}% OFF (Savings: ₹${orig - price})`;
+    prev.innerText = `Discount: ${disc}% OFF`;
   } else {
     prev.innerText = `Discount: 0% OFF`;
   }
@@ -1080,7 +1047,7 @@ function adminSaveProduct(e) {
   e.target.reset();
   activeUploadedImageData = "";
   document.getElementById('adminImagePreview').style.display = 'none';
-  document.getElementById('previewStatusText').innerText = "No image selected yet.";
+  document.getElementById('previewStatusText').innerText = "No image selected.";
   toggleOtherCatInput('Helmets');
   toggleImageInputMode('file');
   calculateDiscountPreview();
@@ -1097,9 +1064,9 @@ function renderAdminProductsTable() {
     const discount = Math.round((1 - p.price / p.orig) * 100);
     return `
       <tr>
-        <td><img src="${p.img}" style="width:40px;height:40px;object-fit:contain;border:1px solid #ddd;border-radius:2px;"></td>
+        <td><img src="${p.img}" style="width:36px;height:36px;object-fit:contain;border:1px solid #ddd;border-radius:2px;"></td>
         <td><b>${p.name}</b></td>
-        <td><span style="background:#e0f2fe;color:#0369a1;padding:2px 8px;border-radius:10px;font-weight:700;">${p.cat}</span></td>
+        <td><span style="background:#e0f2fe;color:#0369a1;padding:2px 6px;border-radius:10px;font-weight:700;">${p.cat}</span></td>
         <td><b>₹${p.price.toLocaleString('en-IN')}</b></td>
         <td><s>₹${p.orig.toLocaleString('en-IN')}</s></td>
         <td><span style="color:var(--fk-green);font-weight:700;">${discount}% OFF</span></td>
@@ -1160,7 +1127,7 @@ function renderAdminMailbox() {
   badge.innerText = `${orders.length} Orders`;
 
   if(!orders.length) {
-    container.innerHTML = '<div style="padding:40px;text-align:center;color:#64748b;">No customer orders placed yet.</div>';
+    container.innerHTML = '<div style="padding:30px;text-align:center;color:#64748b;">No customer orders placed yet.</div>';
     return;
   }
 
@@ -1207,7 +1174,7 @@ function renderAdminUsersTable() {
   badge.innerText = `${users.length} Customers`;
 
   if(!users.length) {
-    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:20px;color:#64748b;">No registered customers found.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:16px;color:#64748b;">No registered customers found.</td></tr>';
     return;
   }
 
@@ -1215,7 +1182,7 @@ function renderAdminUsersTable() {
     <tr>
       <td><b>${u.name}</b></td>
       <td>${u.phone}</td>
-      <td><code style="background:#f1f5f9;padding:2px 6px;border-radius:2px;">${u.pass}</code></td>
+      <td><code style="background:#f1f5f9;padding:2px 4px;border-radius:2px;">${u.pass}</code></td>
       <td>${u.secQuestion ? '✅ Secured' : '⚠️ Missing Question'}</td>
       <td>
         <button class="btn-override-pass" onclick="overrideCustomerPassword(${idx})">Change Password</button>
@@ -1235,7 +1202,7 @@ function overrideCustomerPassword(idx) {
   }
 }
 
-// AUTH MODAL SYSTEM
+// AUTH & FORGOT PASSWORD SYSTEM
 function openAuthModal(view) {
   document.getElementById('authOverlay').classList.add('show');
   document.getElementById('loginSection').style.display = 'none';
@@ -1557,14 +1524,14 @@ function triggerFly(startElem) {
   const ball = document.createElement('div');
   ball.className = 'fly-item';
   ball.innerText = '+1';
-  ball.style.left = `${sRect.left + (sRect.width / 2) - 12}px`;
+  ball.style.left = `${sRect.left + (sRect.width / 2) - 10}px`;
   ball.style.top = `${sRect.top}px`;
   document.body.appendChild(ball);
 
   requestAnimationFrame(() => {
-    ball.style.left = `${tRect.left + (tRect.width / 2) - 12}px`;
-    ball.style.top = `${tRect.top + (tRect.height / 2) - 12}px`;
-    ball.style.transform = 'scale(1.3)';
+    ball.style.left = `${tRect.left + (tRect.width / 2) - 10}px`;
+    ball.style.top = `${tRect.top + (tRect.height / 2) - 10}px`;
+    ball.style.transform = 'scale(1.2)';
     ball.style.opacity = '0.3';
   });
 
@@ -1584,10 +1551,10 @@ function displayProducts(items) {
   const grid = document.getElementById('productGrid');
   const countLabel = document.getElementById('totalProductsCount');
   if(!grid) return;
-  countLabel.innerText = `${items.length} items found`;
+  countLabel.innerText = `${items.length} items`;
 
   if(!items.length) {
-    grid.innerHTML = '<div style="padding:50px;text-align:center;grid-column:1/-1;color:#878787;">No matching products found.</div>';
+    grid.innerHTML = '<div style="padding:40px;text-align:center;grid-column:1/-1;color:#878787;">No matching products found.</div>';
     return;
   }
 
@@ -1603,7 +1570,7 @@ function displayProducts(items) {
           <span class="assured-tag">PAG Assured</span>
         </div>
         <div class="prod-title" title="${p.name}">${p.name}</div>
-        <div style="display:flex;align-items:center;margin-bottom:6px;">
+        <div style="display:flex;align-items:center;margin-bottom:4px;">
           <span class="rating-pill">${p.rating} ★</span>
           <span class="rating-count">(${p.reviews.toLocaleString()})</span>
         </div>
@@ -1652,10 +1619,10 @@ function renderCartDrawerContent() {
   const body = document.getElementById('cartBody');
   if(!cart.length) {
     body.innerHTML = `
-      <div style="text-align:center;padding:50px 10px;">
-        <div style="font-size:54px;margin-bottom:10px;">🛒</div>
-        <b style="font-size:16px;">Your Cart is Empty!</b>
-        <p style="color:#878787;font-size:13px;margin:6px 0 16px;">Add items to it now to enjoy fast delivery.</p>
+      <div style="text-align:center;padding:40px 10px;">
+        <div style="font-size:48px;margin-bottom:8px;">🛒</div>
+        <b style="font-size:15px;">Your Cart is Empty!</b>
+        <p style="color:#878787;font-size:12px;margin:4px 0 14px;">Add items to it now to enjoy fast delivery.</p>
         <button class="btn-place-order" onclick="toggleCartDrawer(false)" style="background:var(--fk-blue)">Shop Now</button>
       </div>`;
     return;
@@ -1675,12 +1642,12 @@ function renderCartDrawerContent() {
           <img src="${it.img}" alt="${it.name}">
           <div class="cart-item-details">
             <h4>${it.name}</h4>
-            <div class="price">₹${(it.price * it.qty).toLocaleString('en-IN')} <span style="font-size:11px;color:#878787;font-weight:normal">(₹${it.price} each)</span></div>
+            <div class="price">₹${(it.price * it.qty).toLocaleString('en-IN')} <span style="font-size:10px;color:#878787;font-weight:normal">(₹${it.price} each)</span></div>
             <div class="cart-item-ctrl">
               <button onclick="updateItemQuantity(${it.id}, -1)">−</button>
-              <span style="font-weight:700;font-size:13px;">${it.qty}</span>
+              <span style="font-weight:700;font-size:12px;">${it.qty}</span>
               <button onclick="updateItemQuantity(${it.id}, 1)">+</button>
-              <span style="margin-left:auto;font-size:12px;color:#d32f2f;cursor:pointer;font-weight:700;" onclick="updateItemQuantity(${it.id}, -${it.qty})">REMOVE</span>
+              <span style="margin-left:auto;font-size:11px;color:#d32f2f;cursor:pointer;font-weight:700;" onclick="updateItemQuantity(${it.id}, -${it.qty})">REMOVE</span>
             </div>
           </div>
         </div>
@@ -1688,7 +1655,7 @@ function renderCartDrawerContent() {
     </div>
 
     <div class="price-summary">
-      <div style="font-weight:700;font-size:13px;color:#878787;margin-bottom:10px;text-transform:uppercase;">Price Details</div>
+      <div style="font-weight:700;font-size:12px;color:#878787;margin-bottom:8px;text-transform:uppercase;">Price Details</div>
       <div class="summary-row">
         <span>Price (${cart.reduce((a,b)=>a+b.qty,0)} items)</span>
         <span>₹${origTotal.toLocaleString('en-IN')}</span>
@@ -1759,12 +1726,12 @@ function processOrderPlacement(e) {
   body.innerHTML = `
     <div class="success-screen">
       <div class="icon">✅</div>
-      <h2 style="margin:0 0 6px;color:#212121;">Order Placed Successfully!</h2>
-      <p style="color:#555;font-size:13px;margin:0 0 10px;">Thank you for shopping with PAG Moters.</p>
+      <h2 style="margin:0 0 6px;color:#212121;font-size:18px;">Order Placed Successfully!</h2>
+      <p style="color:#555;font-size:12px;margin:0 0 8px;">Thank you for shopping with PAG Moters.</p>
       
       <div class="order-pill">ORDER ID: ${orderId}</div>
 
-      <div style="text-align:left;background:#f9f9f9;border:1px solid #e0e0e0;padding:12px;border-radius:4px;font-size:13px;line-height:1.6;margin:12px 0;">
+      <div style="text-align:left;background:#f9f9f9;border:1px solid #e0e0e0;padding:10px;border-radius:4px;font-size:12px;line-height:1.5;margin:10px 0;">
         <div><b>Name:</b> ${name} (${phone})</div>
         <div><b>Address:</b> ${addr}</div>
         <div><b>Items:</b> ${itemsText}</div>
@@ -1777,7 +1744,7 @@ function processOrderPlacement(e) {
         Send Order on WhatsApp 💬
       </a>
 
-      <button onclick="toggleCartDrawer(false); openMyOrdersModal();" class="btn-add-cart" style="margin-top:12px;">View in My Orders</button>
+      <button onclick="toggleCartDrawer(false); openMyOrdersModal();" class="btn-add-cart" style="margin-top:10px;">View in My Orders</button>
     </div>
   `;
 }
