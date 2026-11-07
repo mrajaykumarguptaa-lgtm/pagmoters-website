@@ -182,7 +182,7 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 .btn-place-order{background:var(--fk-orange);color:#fff;border:0;width:100%;padding:11px;font-weight:700;font-size:14px;border-radius:2px;cursor:pointer}
 
 /* MODALS */
-.modal-track{background:#fff;width:min(540px,94%);border-radius:4px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.2)}
+.modal-track{background:#fff;width:min(560px,94%);border-radius:4px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.2)}
 .modal-head{background:var(--fk-blue);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
 .modal-head h3{margin:0;font-size:15px}
 .modal-body{padding:16px;max-height:80vh;overflow-y:auto}
@@ -225,12 +225,13 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 }
 
 /* ======================================================== */
-/* 🛡️ OWNER ADMIN PANEL (STRICT RBAC & DELIVERY OTP CHECK) */
+/* 🛡️ OWNER ADMIN PANEL & EDIT ENGINE */
 /* ======================================================== */
 #adminPanelModal{position:fixed;inset:0;background:var(--bg);z-index:300;display:none;flex-direction:column;overflow-y:auto}
 .admin-navbar{background:var(--admin-dark);color:#fff;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
 .admin-navbar h2{margin:0;font-size:16px;display:flex;align-items:center;gap:6px}
 .admin-badge{background:var(--fk-orange);color:#fff;font-size:10px;padding:2px 6px;border-radius:3px;font-weight:800}
+.admin-export-btn{background:#10b981;color:#fff;border:0;padding:6px 12px;border-radius:3px;font-weight:700;cursor:pointer;font-size:12px;margin-right:6px}
 .admin-logout{background:#ef4444;color:#fff;border:0;padding:5px 12px;border-radius:3px;font-weight:700;cursor:pointer;font-size:12px}
 .admin-container{max-width:1200px;margin:14px auto;padding:0 10px;display:grid;gap:14px}
 .admin-tabs{display:flex;gap:8px;border-bottom:2px solid var(--line);padding-bottom:8px;flex-wrap:wrap}
@@ -251,10 +252,10 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 .admin-prod-form{background:#f8fafc;border:1px solid var(--line);padding:14px;border-radius:4px;margin-bottom:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
 .admin-prod-form input, .admin-prod-form select{border:1px solid var(--line);border-radius:3px;padding:8px;font:inherit;font-size:12px;background:#fff;width:100%}
 .admin-prod-form button{background:var(--fk-green);color:#fff;border:0;padding:9px;font-weight:700;border-radius:3px;cursor:pointer;font-size:12px}
-.image-source-toggle{grid-column:1/-1;display:flex;gap:10px;align-items:center}
-.image-source-toggle label{font-size:12px;font-weight:700;display:flex;align-items:center;gap:4px;cursor:pointer}
-.image-preview-box{display:flex;align-items:center;gap:10px;grid-column:1/-1;background:#fff;padding:6px 10px;border:1px dashed var(--line);border-radius:3px}
-.image-preview-box img{width:40px;height:40px;object-fit:contain;border:1px solid #ddd;border-radius:2px;display:none}
+
+/* MULTIPLE GALLERY THUMBNAILS PREVIEW */
+.multi-preview-strip{grid-column:1/-1;display:flex;gap:8px;flex-wrap:wrap;background:#fff;padding:8px;border:1px dashed var(--line);border-radius:4px}
+.multi-preview-strip img{width:50px;height:50px;object-fit:contain;border:1px solid #cbd5e1;border-radius:3px;background:#fafafa}
 
 .users-table-wrap{background:#fff;border-radius:4px;box-shadow:0 1px 3px rgba(0,0,0,.1);overflow-x:auto}
 .users-table{width:100%;border-collapse:collapse;text-align:left;font-size:12px}
@@ -265,6 +266,9 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 .btn-unblock-user{background:#16a34a;color:#fff;border:0;padding:5px 10px;border-radius:2px;font-weight:700;cursor:pointer;font-size:11px;margin-left:4px}
 .btn-del-prod{background:#ef4444;color:#fff;border:0;padding:5px 10px;border-radius:2px;font-weight:700;cursor:pointer;font-size:11px}
 .btn-edit-prod{background:var(--fk-blue);color:#fff;border:0;padding:5px 10px;border-radius:2px;font-weight:700;cursor:pointer;font-size:11px;margin-right:2px}
+
+/* EDIT PRODUCT MODAL */
+.edit-modal-box{background:#fff;width:min(600px,94%);border-radius:4px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.3)}
 
 /* FOOTER */
 .trust-strip{max-width:1240px;margin:16px auto;padding:0 10px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
@@ -591,13 +595,75 @@ footer a{color:#fff;text-decoration:none}
   </div>
 </div>
 
+<!-- EDIT PRODUCT MODAL (COMPLETE ATTRIBUTE EDITING) -->
+<div class="overlay" id="editProductModalOverlay">
+  <div class="edit-modal-box">
+    <div class="modal-head" style="background:var(--fk-blue);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;">
+      <h3 style="margin:0;font-size:15px;">✏️ Edit Product Details</h3>
+      <button class="btn-close" onclick="closeEditProductModal()">✕</button>
+    </div>
+    <div class="modal-body" style="padding:16px;">
+      <form class="auth-form" onsubmit="handleSaveEditedProduct(event)">
+        <input type="hidden" id="editProdIndex">
+        
+        <div>
+          <label>Product Name</label>
+          <input type="text" id="editProdName" required>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div>
+            <label>Category</label>
+            <input type="text" id="editProdCat" required>
+          </div>
+          <div>
+            <label>Stock / Rating Text</label>
+            <input type="number" step="0.1" id="editProdRating" placeholder="4.5">
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div>
+            <label>MRP (Original Price ₹)</label>
+            <input type="number" id="editProdOrig" required min="1">
+          </div>
+          <div>
+            <label>Selling Offer Price (₹)</label>
+            <input type="number" id="editProdPrice" required min="1">
+          </div>
+        </div>
+
+        <div>
+          <label>Primary Image URL or Base64</label>
+          <input type="text" id="editProdImg" placeholder="Image URL / Base64 Data" required oninput="document.getElementById('editImgPreview').src=this.value">
+        </div>
+
+        <div>
+          <label>Replace Primary Image via Device</label>
+          <input type="file" accept="image/*" onchange="handleEditFileChange(event)">
+        </div>
+
+        <div style="display:flex;align-items:center;gap:10px;margin-top:6px;">
+          <img id="editImgPreview" src="" style="width:60px;height:60px;object-fit:contain;border:1px solid #ddd;border-radius:3px;">
+          <span style="font-size:11px;color:var(--muted)">Instant image preview</span>
+        </div>
+
+        <button type="submit" class="auth-btn-primary" style="background:var(--fk-green);margin-top:10px;">Update &amp; Save Changes</button>
+      </form>
+    </div>
+  </div>
+</div>
+
 <!-- ======================================================== -->
-<!-- 🛡️ OWNER ADMIN PANEL (WITH SUB-ADMIN, STAFF & BLOCK USERS) -->
+<!-- 🛡️ OWNER ADMIN PANEL -->
 <!-- ======================================================== -->
 <div id="adminPanelModal">
   <div class="admin-navbar">
     <h2><span>⚙️</span> PAG Moters Workspace <span class="admin-badge" id="adminRoleDisplay">Super Admin</span></h2>
-    <button class="admin-logout" onclick="closeAdminPortal()">Exit Workspace</button>
+    <div>
+      <button class="admin-export-btn" onclick="exportOrdersToExcel()">📊 Export Sales Report (Excel/CSV)</button>
+      <button class="admin-logout" onclick="closeAdminPortal()">Exit Workspace</button>
+    </div>
   </div>
 
   <div class="admin-container">
@@ -617,10 +683,10 @@ footer a{color:#fff;text-decoration:none}
       <div id="adminMailboxContainer"></div>
     </div>
 
-    <!-- 2. PRODUCT MANAGEMENT -->
+    <!-- 2. PRODUCT MANAGEMENT (ADD / MULTI-PHOTO / EDIT FULL ATTRIBUTES) -->
     <div id="adminProductsSection" class="mailbox-card" style="display:none;padding:14px;">
       <div class="mailbox-header" style="background:#fff;padding:0 0 10px 0;">
-        <span><b>Add New Product to Storefront</b></span>
+        <span><b>Add New Product to Storefront (Multi-Photo Support)</b></span>
       </div>
       
       <form class="admin-prod-form" onsubmit="adminSaveProduct(event)">
@@ -640,23 +706,30 @@ footer a{color:#fff;text-decoration:none}
         <input type="number" id="newProdOrig" placeholder="Original MRP Price (₹)" required min="1" oninput="calculateDiscountPreview()">
         <input type="number" id="newProdPrice" placeholder="Selling Offer Price (₹)" required min="1" oninput="calculateDiscountPreview()">
         
-        <div class="image-source-toggle">
-          <span style="font-size:11px;color:var(--muted);font-weight:700;">Image Source:</span>
-          <label><input type="radio" name="imgUploadType" value="file" checked onchange="toggleImageInputMode('file')"> 📁 File from Device</label>
-          <label><input type="radio" name="imgUploadType" value="url" onchange="toggleImageInputMode('url')"> 🔗 Web URL Link</label>
-        </div>
+        <!-- MULTIPLE PHOTOS UPLOAD SECTION (UP TO 4-5 PHOTOS) -->
+        <div style="grid-column:1/-1;border:1px solid #cbd5e1;background:#f8fafc;padding:10px;border-radius:4px;">
+          <b style="font-size:12px;color:#334155;display:block;margin-bottom:4px;">📸 Product Images (Primary + 4 Optional Photos)</b>
+          <p style="font-size:11px;color:var(--muted);margin:0 0 8px;">Select 1 to 5 images from your device or paste web link:</p>
+          
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div>
+              <label style="font-size:11px;font-weight:700;">📁 Upload Files (Select Multiple):</label>
+              <input type="file" id="newProdMultiFiles" accept="image/*" multiple onchange="handleMultipleImagesUpload(event)">
+            </div>
+            <div>
+              <label style="font-size:11px;font-weight:700;">🔗 Or Primary Image URL Link:</label>
+              <input type="url" id="newProdImgUrl" placeholder="https://..." oninput="handleUrlImagePreview(this.value)">
+            </div>
+          </div>
 
-        <input type="file" id="newProdFileInput" accept="image/*" onchange="handleDeviceImageUpload(event)" style="background:#fff;">
-        <input type="url" id="newProdImgUrl" placeholder="Image Direct URL (https://...)" style="display:none;" oninput="handleUrlImagePreview(this.value)">
-
-        <div class="image-preview-box">
-          <img id="adminImagePreview" src="" alt="Preview">
-          <span id="previewStatusText" style="font-size:11px;color:var(--muted);">No image selected.</span>
+          <div class="multi-preview-strip" id="multiPreviewStrip">
+            <span style="font-size:11px;color:var(--muted);padding:8px;">No images uploaded yet. Selected photos will appear here.</span>
+          </div>
         </div>
 
         <div style="grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;background:#e2e8f0;padding:6px 10px;border-radius:3px;">
           <span id="discountPreviewText" style="font-weight:700;color:var(--fk-green);font-size:12px;">Discount: 0% OFF</span>
-          <button type="submit">+ Publish Product</button>
+          <button type="submit">+ Publish Product to Website</button>
         </div>
       </form>
 
@@ -752,17 +825,17 @@ const ADMIN_PASS = "Rushtom@1927";
 const ADMIN_MASTER_SEC = "ajay";
 
 const defaultCatalog = [
-  {id: 1, name: "Vega Cruiser ISI Certified Safety Helmet", cat: "Helmets", price: 899, orig: 1499, rating: 4.4, reviews: 342, img: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=400"},
-  {id: 2, name: "Steelbird Full Face Matte Black Aerodynamic Helmet", cat: "Helmets", price: 1199, orig: 1899, rating: 4.6, reviews: 610, img: "https://images.unsplash.com/photo-1558980664-3a031cf67ea8?w=400"},
-  {id: 3, name: "60V Smart Auto Cut-Off Fast Charger for EV Scooters", cat: "Chargers", price: 1850, orig: 2499, rating: 4.5, reviews: 184, img: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=400"},
-  {id: 4, name: "48V 3A Heavy Duty Copper Heat Sink EV Charger", cat: "Chargers", price: 1650, orig: 2200, rating: 4.3, reviews: 92, img: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400"},
-  {id: 5, name: "65W Type-C Super Fast Braided Charging Cable", cat: "Mobile Cables", price: 249, orig: 499, rating: 4.4, reviews: 852, img: "https://images.unsplash.com/photo-1588508065123-287b28e013da?w=400"},
-  {id: 6, name: "3-in-1 Fast Nylon Braided Cable (Type-C, iPhone, Micro)", cat: "Mobile Cables", price: 349, orig: 699, rating: 4.2, reviews: 412, img: "https://images.unsplash.com/photo-1608156639585-b3a032ef9689?w=400"},
-  {id: 7, name: "Bass Pro Magnetic Wireless Neckband (30H Playtime)", cat: "Earphones", price: 499, orig: 999, rating: 4.3, reviews: 960, img: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=400"},
-  {id: 8, name: "TWS True Wireless Stereo Earbuds with Digital Display", cat: "Earphones", price: 799, orig: 1999, rating: 4.5, reviews: 1205, img: "https://images.unsplash.com/photo-1572536147248-ac59a8abfa4b?w=400"},
-  {id: 9, name: "Heavy-Duty All-Weather Waterproof Scooter Cover", cat: "Accessories", price: 399, orig: 799, rating: 4.2, reviews: 219, img: "https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=400"},
-  {id: 10, name: "Universal 360° Metal Handlebar Mobile Mount Holder", cat: "Accessories", price: 299, orig: 599, rating: 4.4, reviews: 310, img: "https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?w=400"},
-  {id: 11, name: "48V 24Ah Lithium-Ion Scooter Battery Pack (3 Yr Warranty)", cat: "Batteries", price: 14500, orig: 18000, rating: 4.7, reviews: 78, img: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=400"}
+  {id: 1, name: "Vega Cruiser ISI Certified Safety Helmet", cat: "Helmets", price: 899, orig: 1499, rating: 4.4, reviews: 342, img: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=400", gallery: []},
+  {id: 2, name: "Steelbird Full Face Matte Black Aerodynamic Helmet", cat: "Helmets", price: 1199, orig: 1899, rating: 4.6, reviews: 610, img: "https://images.unsplash.com/photo-1558980664-3a031cf67ea8?w=400", gallery: []},
+  {id: 3, name: "60V Smart Auto Cut-Off Fast Charger for EV Scooters", cat: "Chargers", price: 1850, orig: 2499, rating: 4.5, reviews: 184, img: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=400", gallery: []},
+  {id: 4, name: "48V 3A Heavy Duty Copper Heat Sink EV Charger", cat: "Chargers", price: 1650, orig: 2200, rating: 4.3, reviews: 92, img: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400", gallery: []},
+  {id: 5, name: "65W Type-C Super Fast Braided Charging Cable", cat: "Mobile Cables", price: 249, orig: 499, rating: 4.4, reviews: 852, img: "https://images.unsplash.com/photo-1588508065123-287b28e013da?w=400", gallery: []},
+  {id: 6, name: "3-in-1 Fast Nylon Braided Cable (Type-C, iPhone, Micro)", cat: "Mobile Cables", price: 349, orig: 699, rating: 4.2, reviews: 412, img: "https://images.unsplash.com/photo-1608156639585-b3a032ef9689?w=400", gallery: []},
+  {id: 7, name: "Bass Pro Magnetic Wireless Neckband (30H Playtime)", cat: "Earphones", price: 499, orig: 999, rating: 4.3, reviews: 960, img: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=400", gallery: []},
+  {id: 8, name: "TWS True Wireless Stereo Earbuds with Digital Display", cat: "Earphones", price: 799, orig: 1999, rating: 4.5, reviews: 1205, img: "https://images.unsplash.com/photo-1572536147248-ac59a8abfa4b?w=400", gallery: []},
+  {id: 9, name: "Heavy-Duty All-Weather Waterproof Scooter Cover", cat: "Accessories", price: 399, orig: 799, rating: 4.2, reviews: 219, img: "https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=400", gallery: []},
+  {id: 10, name: "Universal 360° Metal Handlebar Mobile Mount Holder", cat: "Accessories", price: 299, orig: 599, rating: 4.4, reviews: 310, img: "https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?w=400", gallery: []},
+  {id: 11, name: "48V 24Ah Lithium-Ion Scooter Battery Pack (3 Yr Warranty)", cat: "Batteries", price: 14500, orig: 18000, rating: 4.7, reviews: 78, img: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=400", gallery: []}
 ];
 
 let catalog = [];
@@ -771,7 +844,7 @@ let orders = [];
 let users = [];
 let teamMembers = [];
 let currentUser = null;
-let activeUploadedImageData = "";
+let currentMultiUploadedImages = []; // Array of Base64 / links
 
 try { catalog = JSON.parse(localStorage.getItem('pag_catalog_db')) || defaultCatalog; } catch(e){ catalog = defaultCatalog; }
 try { cart = JSON.parse(localStorage.getItem('pag_cart_items')) || []; } catch(e){ cart = []; }
@@ -857,6 +930,41 @@ function startSaleTimer() {
 }
 
 // ==========================================
+// 📊 EXCEL REPORT EXPORT FUNCTION
+// ==========================================
+function exportOrdersToExcel() {
+  try { orders = JSON.parse(localStorage.getItem('pag_orders_db')) || []; } catch(e){ orders = []; }
+  
+  if(!orders.length) {
+    alert("Export Failed: No orders placed yet to export.");
+    return;
+  }
+
+  const statusNames = ["", "Order Placed", "Packed", "Out for Delivery", "Delivered"];
+
+  let csvContent = "data:text/csv;charset=utf-8,";
+  csvContent += "Order ID,Date,Customer Name,Phone Number,Delivery Address,Items,Total Amount (INR),Payment Method,Secret Delivery PIN,Status\n";
+
+  orders.forEach(o => {
+    const safeItems = `"${(o.items || '').replace(/"/g, '""')}"`;
+    const safeAddr = `"${(o.address || '').replace(/"/g, '""')}"`;
+    const safeName = `"${(o.customerName || '').replace(/"/g, '""')}"`;
+    const statusText = statusNames[o.statusStep] || 'Processing';
+
+    csvContent += `${o.id},"${o.date}",${safeName},${o.customerPhone},${safeAddr},${safeItems},${o.totalPayable},${o.paymentMethod},${o.deliveryPin || 'N/A'},${statusText}\n`;
+  });
+
+  const encodedUri = encodeURI(csvContent);
+  const link = document.createElement("a");
+  link.setAttribute("href", encodedUri);
+  link.setAttribute("download", `PAG_Moters_Sales_Report_${new Date().toISOString().slice(0,10)}.csv`);
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  alert("✅ Sales & Orders Excel/CSV report downloaded successfully!");
+}
+
+// ==========================================
 // 📦 ORDER TRACKING & MY ORDERS LOGIC
 // ==========================================
 function openTrackModal() {
@@ -912,7 +1020,6 @@ function buildOrderCardHTML(matched) {
         <span style="font-size:11px;color:var(--muted)">${matched.date}</span>
       </div>
 
-      <!-- SECRET DELIVERY CODE (FOR CUSTOMER) -->
       <div class="delivery-code-pill">
         <span>🔐 Secret Delivery Code:</span>
         <span class="code-num">${matched.deliveryPin || '9999'}</span>
@@ -994,7 +1101,7 @@ function renderMyOrdersList() {
 }
 
 // ==========================================
-// 🛡️ ROLE-BASED ACCESS CONTROL & DELIVERY AUTH
+// 🛡️ ROLE-BASED ACCESS CONTROL & WORKSPACE
 // ==========================================
 function openAdminPortal(role = "Super Admin") {
   closeAuthModal();
@@ -1179,44 +1286,37 @@ function toggleOtherCatInput(val) {
   }
 }
 
-function toggleImageInputMode(mode) {
-  const fileInput = document.getElementById('newProdFileInput');
-  const urlInput = document.getElementById('newProdImgUrl');
-  if(mode === 'file') {
-    fileInput.style.display = 'block';
-    urlInput.style.display = 'none';
-  } else {
-    fileInput.style.display = 'none';
-    urlInput.style.display = 'block';
-    urlInput.focus();
-  }
-}
+// MULTI-PHOTO UPLOAD HANDLER (UP TO 5 PHOTOS)
+function handleMultipleImagesUpload(e) {
+  const files = Array.from(e.target.files).slice(0, 5);
+  currentMultiUploadedImages = [];
+  const strip = document.getElementById('multiPreviewStrip');
+  strip.innerHTML = '';
 
-function handleDeviceImageUpload(e) {
-  const file = e.target.files[0];
-  if(file) {
+  if(!files.length) {
+    strip.innerHTML = '<span style="font-size:11px;color:var(--muted);padding:8px;">No images uploaded yet.</span>';
+    return;
+  }
+
+  files.forEach((file, index) => {
     const reader = new FileReader();
     reader.onload = function(evt) {
-      activeUploadedImageData = evt.target.result;
-      const preview = document.getElementById('adminImagePreview');
-      preview.src = activeUploadedImageData;
-      preview.style.display = 'block';
-      document.getElementById('previewStatusText').innerText = `Loaded: ${file.name}`;
+      currentMultiUploadedImages.push(evt.target.result);
+      const img = document.createElement('img');
+      img.src = evt.target.result;
+      img.title = `Image ${index + 1}: ${file.name}`;
+      strip.appendChild(img);
     };
     reader.readAsDataURL(file);
-  }
+  });
 }
 
 function handleUrlImagePreview(url) {
-  activeUploadedImageData = url.trim();
-  const preview = document.getElementById('adminImagePreview');
-  if(activeUploadedImageData) {
-    preview.src = activeUploadedImageData;
-    preview.style.display = 'block';
-    document.getElementById('previewStatusText').innerText = "Preview Ready";
-  } else {
-    preview.style.display = 'none';
-    document.getElementById('previewStatusText').innerText = "No image selected.";
+  const trimmed = url.trim();
+  const strip = document.getElementById('multiPreviewStrip');
+  if(trimmed) {
+    currentMultiUploadedImages = [trimmed];
+    strip.innerHTML = `<img src="${trimmed}" title="Primary Image Link" style="width:50px;height:50px;object-fit:contain;border:1px solid #ddd;">`;
   }
 }
 
@@ -1254,7 +1354,8 @@ function adminSaveProduct(e) {
     return;
   }
 
-  const finalImage = activeUploadedImageData || "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=400";
+  const primaryImage = (currentMultiUploadedImages.length > 0) ? currentMultiUploadedImages[0] : "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=400";
+  const galleryImages = currentMultiUploadedImages.slice(1);
 
   const newProduct = {
     id: Date.now(),
@@ -1264,20 +1365,19 @@ function adminSaveProduct(e) {
     orig,
     rating: 4.5,
     reviews: 1,
-    img: finalImage
+    img: primaryImage,
+    gallery: galleryImages
   };
 
   catalog.unshift(newProduct);
   persistCatalog();
 
   e.target.reset();
-  activeUploadedImageData = "";
-  document.getElementById('adminImagePreview').style.display = 'none';
-  document.getElementById('previewStatusText').innerText = "No image selected.";
+  currentMultiUploadedImages = [];
+  document.getElementById('multiPreviewStrip').innerHTML = '<span style="font-size:11px;color:var(--muted);padding:8px;">No images uploaded yet.</span>';
   toggleOtherCatInput('Helmets');
-  toggleImageInputMode('file');
   calculateDiscountPreview();
-  alert(`Product "${name}" (${cat}) has been added successfully!`);
+  alert(`Product "${name}" (${cat}) with ${galleryImages.length + 1} photos added successfully!`);
 }
 
 function renderAdminProductsTable() {
@@ -1288,16 +1388,20 @@ function renderAdminProductsTable() {
 
   tbody.innerHTML = catalog.map((p, idx) => {
     const discount = Math.round((1 - p.price / p.orig) * 100);
+    const photoCount = 1 + (p.gallery ? p.gallery.length : 0);
     return `
       <tr>
-        <td><img src="${p.img}" style="width:36px;height:36px;object-fit:contain;border:1px solid #ddd;border-radius:2px;"></td>
+        <td>
+          <img src="${p.img}" style="width:36px;height:36px;object-fit:contain;border:1px solid #ddd;border-radius:2px;">
+          <small style="display:block;font-size:9px;color:var(--muted);text-align:center;">${photoCount} photo(s)</small>
+        </td>
         <td><b>${p.name}</b></td>
         <td><span style="background:#e0f2fe;color:#0369a1;padding:2px 6px;border-radius:10px;font-weight:700;">${p.cat}</span></td>
         <td><b>₹${p.price.toLocaleString('en-IN')}</b></td>
         <td><s>₹${p.orig.toLocaleString('en-IN')}</s></td>
         <td><span style="color:var(--fk-green);font-weight:700;">${discount}% OFF</span></td>
         <td style="white-space:nowrap;">
-          <button class="btn-edit-prod" onclick="adminEditProductPrice(${idx})">Edit Price</button>
+          <button class="btn-edit-prod" onclick="openEditProductModal(${idx})">Edit Product</button>
           <button class="btn-del-prod" onclick="adminDeleteProduct(${idx})">Remove</button>
         </td>
       </tr>
@@ -1305,16 +1409,64 @@ function renderAdminProductsTable() {
   }).join('');
 }
 
-function adminEditProductPrice(idx) {
+// EDIT PRODUCT MODAL HANDLERS
+function openEditProductModal(idx) {
   const p = catalog[idx];
-  const newPrice = prompt(`Enter new Selling Price for "${p.name}":`, p.price);
-  if(newPrice && Number(newPrice) > 0) {
-    const newOrig = prompt(`Enter new Original MRP:`, p.orig);
-    catalog[idx].price = Number(newPrice);
-    if(newOrig && Number(newOrig) > 0) catalog[idx].orig = Number(newOrig);
-    persistCatalog();
-    alert("Product pricing updated successfully!");
+  document.getElementById('editProdIndex').value = idx;
+  document.getElementById('editProdName').value = p.name;
+  document.getElementById('editProdCat').value = p.cat;
+  document.getElementById('editProdRating').value = p.rating || 4.5;
+  document.getElementById('editProdOrig').value = p.orig;
+  document.getElementById('editProdPrice').value = p.price;
+  document.getElementById('editProdImg').value = p.img;
+  document.getElementById('editImgPreview').src = p.img;
+
+  document.getElementById('editProductModalOverlay').classList.add('show');
+}
+
+function closeEditProductModal() {
+  document.getElementById('editProductModalOverlay').classList.remove('show');
+}
+
+function handleEditFileChange(e) {
+  const file = e.target.files[0];
+  if(file) {
+    const reader = new FileReader();
+    reader.onload = function(evt) {
+      document.getElementById('editProdImg').value = evt.target.result;
+      document.getElementById('editImgPreview').src = evt.target.result;
+    };
+    reader.readAsDataURL(file);
   }
+}
+
+function handleSaveEditedProduct(e) {
+  e.preventDefault();
+  const idx = parseInt(document.getElementById('editProdIndex').value, 10);
+  if(isNaN(idx) || !catalog[idx]) return;
+
+  const name = document.getElementById('editProdName').value.trim();
+  const cat = document.getElementById('editProdCat').value.trim();
+  const rating = parseFloat(document.getElementById('editProdRating').value) || 4.5;
+  const orig = Number(document.getElementById('editProdOrig').value);
+  const price = Number(document.getElementById('editProdPrice').value);
+  const img = document.getElementById('editProdImg').value.trim();
+
+  if(price > orig) {
+    alert("Selling price cannot be greater than original MRP!");
+    return;
+  }
+
+  catalog[idx].name = name;
+  catalog[idx].cat = cat;
+  catalog[idx].rating = rating;
+  catalog[idx].orig = orig;
+  catalog[idx].price = price;
+  catalog[idx].img = img;
+
+  persistCatalog();
+  closeEditProductModal();
+  alert("✅ Product details and photo updated successfully!");
 }
 
 function adminDeleteProduct(idx) {
@@ -1370,13 +1522,11 @@ function renderAdminMailbox() {
   `).join('');
 }
 
-// 🔐 ULTRA-STRICT DELIVERY OTP VERIFICATION FOR ALL (INCLUDING ADMIN)
 function viewOrderDetailsInAdmin(idx) {
   const o = orders[idx];
   const nextStatus = o.statusStep < 4 ? o.statusStep + 1 : 4;
   const statusNames = ["", "Order Placed", "Packed", "Out for Delivery", "Delivered"];
 
-  // IF NEXT STEP IS DELIVERED (STEP 4) -> FORCE VERIFY CUSTOMER'S SECRET CODE
   if(o.statusStep === 3) {
     const enteredPin = prompt(
       `🔒 SECURITY CHECK - ORDER DELIVERY VERIFICATION\n` +
@@ -1404,7 +1554,6 @@ function viewOrderDetailsInAdmin(idx) {
     return;
   }
 
-  // FOR STEPS 1 -> 2 (Packed) -> 3 (Out for Delivery)
   const promptRes = confirm(
     `Order Details:\n` +
     `---------------------------------\n` +
@@ -2016,7 +2165,6 @@ function processOrderPlacement(e) {
   const addr = document.getElementById('orderCustAddr').value.trim();
   const payment = document.querySelector('input[name="payOption"]:checked').value;
 
-  // BLOCK VERIFICATION BEFORE ORDER
   try { users = JSON.parse(localStorage.getItem('pag_users_db')) || []; } catch(err){ users = []; }
   const matchedUser = users.find(u => cleanPhone(u.phone) === phone);
   if(matchedUser && matchedUser.isBlocked) {
@@ -2025,7 +2173,7 @@ function processOrderPlacement(e) {
   }
 
   const orderId = 'PAG-' + Math.floor(100000 + Math.random() * 900000);
-  const deliveryPin = Math.floor(1000 + Math.random() * 9000); // Generate 4-digit unique delivery PIN
+  const deliveryPin = Math.floor(1000 + Math.random() * 9000);
   const total = cart.reduce((acc, it) => acc + (it.price * it.qty), 0);
   const itemsText = cart.map(i => `${i.name} (Qty: ${i.qty})`).join(', ');
 
@@ -2039,7 +2187,7 @@ function processOrderPlacement(e) {
     paymentMethod: payment,
     date: new Date().toLocaleDateString('en-IN', {day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit'}),
     statusStep: 1,
-    deliveryPin: deliveryPin // Unique delivery code saved
+    deliveryPin: deliveryPin
   };
 
   orders.unshift(newOrder);
@@ -2057,7 +2205,6 @@ function processOrderPlacement(e) {
       
       <div class="order-pill">ORDER ID: ${orderId}</div>
 
-      <!-- UNIQUE DELIVERY PIN SHOWN TO CUSTOMER -->
       <div class="delivery-code-pill">
         <span>🔐 Secret Delivery Code:</span>
         <span class="code-num">${deliveryPin}</span>
