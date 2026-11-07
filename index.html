@@ -527,7 +527,7 @@ footer a{color:#fff;text-decoration:none}
     </div>
   </aside>
 
-  <!-- 2. CENTER PANEL (PRODUCT GRID WITH OUT-OF-STOCK LOCK) -->
+  <!-- 2. CENTER PANEL (PRODUCT GRID) -->
   <main class="product-panel">
     <div class="panel-head">
       <h2 id="productSectionTitle">Deals of the Day</h2>
@@ -812,7 +812,7 @@ footer a{color:#fff;text-decoration:none}
     <!-- 1. ORDERS MAILBOX -->
     <div id="adminOrdersSection" class="mailbox-card">
       <div class="mailbox-header">
-        <span>Incoming Customer Orders Inbox (Click Order ID to view Items with Photos)[span_3](start_span)[span_3](end_span)</span>
+        <span>Incoming Customer Orders Inbox (Click Order ID to view Items with Photos)</span>
         <span id="adminOrdersCountBadge">0 Orders</span>
       </div>
       <div id="adminMailboxContainer"></div>
@@ -840,8 +840,6 @@ footer a{color:#fff;text-decoration:none}
         <input type="text" id="newProdCustomCat" placeholder="Type Custom Category Name" style="display:none;border-color:var(--fk-blue);background:#eff6ff;">
         <input type="number" id="newProdOrig" placeholder="Original MRP Price (₹)" required min="1" oninput="calculateDiscountPreview()">
         <input type="number" id="newProdPrice" placeholder="Selling Offer Price (₹)" required min="1" oninput="calculateDiscountPreview()">
-        
-        <!-- INVENTORY STOCK FIELD -->
         <input type="number" id="newProdStock" placeholder="Inventory Units in Stock (e.g. 50)" required min="0" value="20">
         
         <div style="grid-column:1/-1;border:1px solid #cbd5e1;background:#f8fafc;padding:10px;border-radius:4px;">
@@ -891,7 +889,7 @@ footer a{color:#fff;text-decoration:none}
       </div>
     </div>
 
-    <!-- 3. STAFF TASK & CHAT BOX (WITH BLOCK / UNBLOCK CHAT) -->
+    <!-- 3. STAFF TASK & CHAT BOX -->
     <div id="adminChatSection" class="mailbox-card" style="display:none;padding:14px;">
       <div class="mailbox-header" style="background:#fff;padding:0 0 10px 0;">
         <span><b>Staff Communication &amp; Live Task Delegation</b></span>
@@ -1008,7 +1006,7 @@ footer a{color:#fff;text-decoration:none}
 
   </div>
 
-  <!-- 📸 ULTRA ORDER DETAILS MODAL (WITH ITEMS, PHOTOS, AMOUNTS & PIN) -->
+  <!-- 📸 ULTRA ORDER DETAILS MODAL (WITH EXACT FORMAT NUMBERED LIST & FALLBACK PHOTOS) -->
   <div id="orderDetailsModalOverlay">
     <div class="edit-modal-box">
       <div class="modal-head" style="background:var(--fk-blue);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;">
@@ -1652,7 +1650,6 @@ function renderChatView() {
     toggleBtn.style.background = isChatBlocked ? "#16a34a" : "#dc2626";
   }
 
-  // Lock input if staff is chat-blocked
   if(isStaffLoggedIn && isChatBlocked) {
     sendInput.disabled = true;
     sendBtn.disabled = true;
@@ -2122,7 +2119,7 @@ function syncCategoryMenus() {
   }
 }
 
-// 📦 ORDER DETAILS MODAL (OPENS ON ORDER ID CLICK WITH PRODUCT PHOTOS)
+// 📦 ORDER DETAILS MODAL (WITH PHOTO + EXACT FORMAT NUMBERED LIST: 1. Name 2 Pes)
 function renderAdminMailbox() {
   const container = document.getElementById('adminMailboxContainer');
   const badge = document.getElementById('adminOrdersCountBadge');
@@ -2146,6 +2143,7 @@ function renderAdminMailbox() {
   `).join('');
 }
 
+// INTELLIGENT ORDER PARSER: PARSES BOTH NEW & OLD ORDERS INTO NUMBERED LIST WITH HD IMAGES
 function openOrderDetailsModal(idx) {
   const o = orders[idx];
   if(!o) return;
@@ -2153,14 +2151,57 @@ function openOrderDetailsModal(idx) {
 
   document.getElementById('orderDetailModalTitle').innerText = `📦 Order Invoice: ${o.id}`;
 
-  let itemsHtml = '';
+  let parsedItems = [];
+
+  // Case 1: Order has saved itemList with images
   if (o.itemList && Array.isArray(o.itemList) && o.itemList.length > 0) {
-    itemsHtml = o.itemList.map(item => `
-      <div style="display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid #e2e8f0;">
-        <img src="${item.img || 'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=100'}" style="width:50px;height:50px;object-fit:contain;border:1px solid #cbd5e1;border-radius:4px;">
+    parsedItems = o.itemList.map(item => {
+      const match = catalog.find(p => p.id === item.id || p.name.toLowerCase() === item.name.toLowerCase());
+      return {
+        name: item.name,
+        qty: item.qty || 1,
+        price: item.price || (match ? match.price : 0),
+        img: item.img || (match ? match.img : 'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=100')
+      };
+    });
+  } 
+  // Case 2: Older orders stored as text string (e.g. "Vega Cruiser (Qty: 1), Fast Charger (Qty: 2)")
+  else if (o.items && typeof o.items === 'string') {
+    const rawParts = o.items.split(',');
+    parsedItems = rawParts.map(part => {
+      const trimmed = part.trim();
+      let itemName = trimmed;
+      let qty = 1;
+
+      // Extract Qty if exists
+      const qtyMatch = trimmed.match(/(.+)\(Qty:\s*(\d+)\)/i);
+      if (qtyMatch) {
+        itemName = qtyMatch[1].trim();
+        qty = parseInt(qtyMatch[2], 10) || 1;
+      }
+
+      // Match with active catalog for HD Image & Pricing
+      const match = catalog.find(p => itemName.toLowerCase().includes(p.name.toLowerCase()) || p.name.toLowerCase().includes(itemName.toLowerCase()));
+
+      return {
+        name: itemName,
+        qty: qty,
+        price: match ? match.price : 0,
+        img: match ? match.img : 'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=100'
+      };
+    });
+  }
+
+  // BUILD NUMBERED LIST WITH PRODUCT PICTURES AND "X Pes" FORMAT
+  let itemsHtml = '';
+  if (parsedItems.length > 0) {
+    itemsHtml = parsedItems.map((item, index) => `
+      <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #e2e8f0;">
+        <span style="font-weight:900;font-size:14px;color:var(--fk-blue);min-width:20px;">${index + 1}.</span>
+        <img src="${item.img}" style="width:55px;height:55px;object-fit:contain;border:1px solid #cbd5e1;border-radius:4px;background:#fff;" onerror="this.src='https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=100'">
         <div style="flex:1;">
-          <b style="font-size:13px;color:#1e293b;">${item.name}</b>
-          <div style="font-size:12px;color:#64748b;">Quantity: <b>${item.qty}</b> × ₹${item.price} = <b>₹${item.qty * item.price}</b></div>
+          <div style="font-size:14px;font-weight:800;color:#1e293b;">${item.name} <span style="color:#d97706;background:#fef3c7;padding:2px 8px;border-radius:12px;font-size:12px;margin-left:6px;">${item.qty} Pes</span></div>
+          <div style="font-size:12px;color:#64748b;margin-top:2px;">Rate: ₹${item.price.toLocaleString('en-IN')} each ${item.price > 0 ? `· Subtotal: <b>₹${(item.qty * item.price).toLocaleString('en-IN')}</b>` : ''}</div>
         </div>
       </div>
     `).join('');
@@ -2189,7 +2230,7 @@ function openOrderDetailsModal(idx) {
       <span style="font-size:18px;font-weight:900;letter-spacing:2px;background:#fff;padding:2px 8px;border-radius:3px;border:1px solid #fcd34d;color:#b45309;">${o.deliveryPin || 'N/A'}</span>
     </div>
 
-    <h4 style="margin:0 0 8px;font-size:13px;color:#334155;">Ordered Products:</h4>
+    <h4 style="margin:0 0 4px;font-size:13px;color:#334155;">Ordered Items Breakdown:</h4>
     ${itemsHtml}
 
     <div style="margin-top:14px;background:#f8fafc;padding:10px;border-radius:4px;font-size:12px;line-height:1.6;">
@@ -2263,7 +2304,7 @@ function verifyDeliveryCodePrompt(idx) {
   }
 }
 
-// CUSTOMER ACCOUNTS (CONFIDENTIAL)
+// CUSTOMER ACCOUNTS
 function renderAdminUsersTable() {
   const tbody = document.getElementById('adminUsersTableBody');
   const badge = document.getElementById('adminUsersCountBadge');
@@ -2920,7 +2961,7 @@ function renderCartDrawerContent() {
   `;
 }
 
-// ORDER SUBMISSION WITH REAL-TIME INVENTORY DEDUCTION & ITEM PICTURE STORAGE
+// ORDER SUBMISSION WITH COMPLETE CART ITEMS + IMAGES STORED
 function processOrderPlacement(e) {
   e.preventDefault();
   const name = document.getElementById('orderCustName').value.trim();
@@ -2968,7 +3009,7 @@ function processOrderPlacement(e) {
   const total = cart.reduce((acc, it) => acc + (it.price * it.qty), 0);
   const itemsText = cart.map(i => `${i.name} (Qty: ${i.qty})`).join(', ');
 
-  // Store rich items array with images for invoice modal
+  // Store rich items array with exact images for invoice modal
   const richItemList = cart.map(i => ({
     id: i.id,
     name: i.name,
