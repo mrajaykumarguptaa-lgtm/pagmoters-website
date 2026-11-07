@@ -199,8 +199,33 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 .timeline-step.current .timeline-dot{background:var(--fk-blue);box-shadow:0 0 0 3px rgba(40,116,240,.2)}
 .timeline-step span{font-size:10px;font-weight:600;margin-top:4px;color:#555}
 
+/* UNIQUE DELIVERY CODE BADGE */
+.delivery-code-pill{
+  background:#fef3c7;
+  border:1px dashed #d97706;
+  color:#92400e;
+  padding:8px 12px;
+  border-radius:4px;
+  font-weight:800;
+  font-size:14px;
+  text-align:center;
+  margin:10px 0;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.delivery-code-pill span.code-num{
+  font-size:18px;
+  letter-spacing:3px;
+  color:#b45309;
+  background:#fff;
+  padding:2px 8px;
+  border-radius:3px;
+  border:1px solid #fcd34d;
+}
+
 /* ======================================================== */
-/* 🛡️ OWNER ADMIN PANEL (WITH BLOCK/UNBLOCK CAPABILITIES) */
+/* 🛡️ OWNER ADMIN PANEL (STRICT RBAC & DELIVERY OTP CHECK) */
 /* ======================================================== */
 #adminPanelModal{position:fixed;inset:0;background:var(--bg);z-index:300;display:none;flex-direction:column;overflow-y:auto}
 .admin-navbar{background:var(--admin-dark);color:#fff;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
@@ -887,6 +912,13 @@ function buildOrderCardHTML(matched) {
         <span style="font-size:11px;color:var(--muted)">${matched.date}</span>
       </div>
 
+      <!-- SECRET DELIVERY CODE (FOR CUSTOMER) -->
+      <div class="delivery-code-pill">
+        <span>🔐 Secret Delivery Code:</span>
+        <span class="code-num">${matched.deliveryPin || '9999'}</span>
+      </div>
+      <small style="color:#d97706;display:block;margin-bottom:6px;font-size:11px;">⚠️ Share this code with delivery person ONLY when you physically receive the item.</small>
+
       <div class="timeline">
         <div class="timeline-step completed">
           <div class="timeline-dot">✓</div>
@@ -947,7 +979,7 @@ function renderMyOrdersList() {
       <div style="text-align:center;padding:30px 10px;color:var(--muted)">
         <div style="font-size:42px;margin-bottom:8px;">📦</div>
         <b style="font-size:14px;color:#212121;">No Orders Placed Yet</b>
-        <p style="font-size:12px;margin:4px 0 12px;">Place your first order to view delivery status and tracking here.</p>
+        <p style="font-size:12px;margin:4px 0 12px;">Place your first order to view delivery status and secret PIN here.</p>
         <button class="btn-nav" style="background:var(--fk-blue);color:#fff;margin:auto;padding:6px 14px;" onclick="closeMyOrdersModal()">Start Shopping</button>
       </div>`;
     return;
@@ -962,7 +994,7 @@ function renderMyOrdersList() {
 }
 
 // ==========================================
-// 🛡️ ROLE-BASED ACCESS CONTROL (RBAC) LOGIC
+// 🛡️ ROLE-BASED ACCESS CONTROL & DELIVERY AUTH
 // ==========================================
 function openAdminPortal(role = "Super Admin") {
   closeAuthModal();
@@ -1338,11 +1370,41 @@ function renderAdminMailbox() {
   `).join('');
 }
 
+// 🔐 ULTRA-STRICT DELIVERY OTP VERIFICATION FOR ALL (INCLUDING ADMIN)
 function viewOrderDetailsInAdmin(idx) {
   const o = orders[idx];
   const nextStatus = o.statusStep < 4 ? o.statusStep + 1 : 4;
   const statusNames = ["", "Order Placed", "Packed", "Out for Delivery", "Delivered"];
 
+  // IF NEXT STEP IS DELIVERED (STEP 4) -> FORCE VERIFY CUSTOMER'S SECRET CODE
+  if(o.statusStep === 3) {
+    const enteredPin = prompt(
+      `🔒 SECURITY CHECK - ORDER DELIVERY VERIFICATION\n` +
+      `--------------------------------------------------\n` +
+      `Order: ${o.id}\n` +
+      `Customer: ${o.customerName} (${o.customerPhone})\n` +
+      `Address: ${o.address}\n\n` +
+      `⚠️ Bina Customer ke 4-digit Secret Code ke delivery verify NAHI ho sakti!\n\n` +
+      `Customer se code lekar yahan daalein:`
+    );
+
+    if(!enteredPin) {
+      alert("❌ Delivery Aborted: Code nahi daala gaya. Order delivered mark nahi hua!");
+      return;
+    }
+
+    if(enteredPin.trim() === String(o.deliveryPin).trim()) {
+      orders[idx].statusStep = 4;
+      persistOrders();
+      renderAdminMailbox();
+      alert("✅ CODE MATCHED! Order successfully marked as [ DELIVERED ]!");
+    } else {
+      alert("❌ WRONG CODE! Yeh code customer ke code se match nahi karta. Delivery declined!");
+    }
+    return;
+  }
+
+  // FOR STEPS 1 -> 2 (Packed) -> 3 (Out for Delivery)
   const promptRes = confirm(
     `Order Details:\n` +
     `---------------------------------\n` +
@@ -1355,14 +1417,13 @@ function viewOrderDetailsInAdmin(idx) {
     `Click OK to update status to: [ ${statusNames[nextStatus]} ]`
   );
 
-  if(promptRes && o.statusStep < 4) {
+  if(promptRes && o.statusStep < 3) {
     orders[idx].statusStep = nextStatus;
     persistOrders();
     renderAdminMailbox();
   }
 }
 
-// CUSTOMER ACCOUNTS TABLE WITH BLOCK / UNBLOCK
 function renderAdminUsersTable() {
   const tbody = document.getElementById('adminUsersTableBody');
   const badge = document.getElementById('adminUsersCountBadge');
@@ -1398,7 +1459,6 @@ function renderAdminUsersTable() {
   }).join('');
 }
 
-// TOGGLE BLOCK / UNBLOCK HANDLER
 function toggleBlockCustomer(idx) {
   const u = users[idx];
   const newStatus = !u.isBlocked;
@@ -1408,7 +1468,6 @@ function toggleBlockCustomer(idx) {
     users[idx].isBlocked = newStatus;
     persistUsers();
 
-    // If currently logged in user gets blocked, log them out
     if(currentUser && cleanPhone(currentUser.phone) === cleanPhone(u.phone) && newStatus) {
       handleUserLogout();
     }
@@ -1957,7 +2016,7 @@ function processOrderPlacement(e) {
   const addr = document.getElementById('orderCustAddr').value.trim();
   const payment = document.querySelector('input[name="payOption"]:checked').value;
 
-  // BLOCK VERIFICATION BEFORE PLACING ORDER
+  // BLOCK VERIFICATION BEFORE ORDER
   try { users = JSON.parse(localStorage.getItem('pag_users_db')) || []; } catch(err){ users = []; }
   const matchedUser = users.find(u => cleanPhone(u.phone) === phone);
   if(matchedUser && matchedUser.isBlocked) {
@@ -1966,6 +2025,7 @@ function processOrderPlacement(e) {
   }
 
   const orderId = 'PAG-' + Math.floor(100000 + Math.random() * 900000);
+  const deliveryPin = Math.floor(1000 + Math.random() * 9000); // Generate 4-digit unique delivery PIN
   const total = cart.reduce((acc, it) => acc + (it.price * it.qty), 0);
   const itemsText = cart.map(i => `${i.name} (Qty: ${i.qty})`).join(', ');
 
@@ -1978,7 +2038,8 @@ function processOrderPlacement(e) {
     totalPayable: total,
     paymentMethod: payment,
     date: new Date().toLocaleDateString('en-IN', {day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit'}),
-    statusStep: 1
+    statusStep: 1,
+    deliveryPin: deliveryPin // Unique delivery code saved
   };
 
   orders.unshift(newOrder);
@@ -1995,6 +2056,13 @@ function processOrderPlacement(e) {
       <p style="color:#555;font-size:12px;margin:0 0 8px;">Thank you for shopping with PAG Moters.</p>
       
       <div class="order-pill">ORDER ID: ${orderId}</div>
+
+      <!-- UNIQUE DELIVERY PIN SHOWN TO CUSTOMER -->
+      <div class="delivery-code-pill">
+        <span>🔐 Secret Delivery Code:</span>
+        <span class="code-num">${deliveryPin}</span>
+      </div>
+      <small style="color:#d97706;display:block;margin-bottom:8px;font-size:11px;">⚠️ Keep this 4-digit PIN secret. Delivery person will ask for this code when handing over your parcel.</small>
 
       <div style="text-align:left;background:#f9f9f9;border:1px solid #e0e0e0;padding:10px;border-radius:4px;font-size:12px;line-height:1.5;margin:10px 0;">
         <div><b>Name:</b> ${name} (${rawPhone})</div>
@@ -2023,7 +2091,6 @@ window.addEventListener('DOMContentLoaded', () => {
   startSaleTimer();
   startRealTimeClock();
 
-  // If customer is blocked in background, kick out
   if(currentUser && !currentUser.isAdmin) {
     try { users = JSON.parse(localStorage.getItem('pag_users_db')) || []; } catch(e){ users = []; }
     const me = users.find(u => cleanPhone(u.phone) === cleanPhone(currentUser.phone));
@@ -2032,7 +2099,6 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Restore Admin Session
   if(currentUser && currentUser.isAdmin) {
     openAdminPortal(currentUser.role || "Super Admin");
   }
