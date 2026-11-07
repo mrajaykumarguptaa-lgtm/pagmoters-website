@@ -53,8 +53,8 @@ body{margin:0;background:var(--bg);color:var(--text);font:14px/1.4 -apple-system
 @keyframes toastSlide{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
 
 /* TOP STRIP & REAL TIME CLOCK */
-.top-strip{background:#172337;color:#c2c2c2;font-size:11px;padding:6px 10px}
-.top-strip-inner{max-width:1240px;margin:auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
+.top-strip{background:#172337;color:#c2c2c2;font-size:11px;padding:6px 14px}
+.top-strip-inner{max-width:1480px;margin:auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
 .top-strip a{color:var(--fk-yellow);text-decoration:none;font-weight:700}
 .realtime-clock-badge{
   background:rgba(255,255,255,.08);
@@ -73,22 +73,22 @@ body{margin:0;background:var(--bg);color:var(--text);font:14px/1.4 -apple-system
 
 /* FLIPKART STYLE HEADER */
 header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;box-shadow:0 2px 4px rgba(0,0,0,.15)}
-.main-header{max-width:1240px;margin:auto;display:flex;align-items:center;gap:12px;padding:10px 12px;flex-wrap:wrap}
+.main-header{max-width:1480px;margin:auto;display:flex;align-items:center;gap:14px;padding:10px 14px;flex-wrap:wrap}
 .brand{text-decoration:none;color:#fff;display:flex;flex-direction:column;cursor:pointer}
-.brand .title{font-size:19px;font-weight:800;font-style:italic;line-height:1}
+.brand .title{font-size:20px;font-weight:800;font-style:italic;line-height:1}
 .brand small{font-size:10px;font-style:italic;color:var(--fk-yellow);display:flex;align-items:center;gap:2px}
 .brand small span{color:#fff;font-weight:700}
 
-.search-box{flex:1;min-width:200px;display:flex;background:#fff;border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.2);overflow:hidden}
-.search-box input{flex:1;border:0;padding:9px 10px;font-size:13px;outline:none;color:#212121;min-width:0}
-.search-box button{border:0;background:#fff;color:var(--fk-blue);padding:0 12px;cursor:pointer;font-size:16px}
+.search-box{flex:1;min-width:240px;display:flex;background:#fff;border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.2);overflow:hidden}
+.search-box input{flex:1;border:0;padding:9px 12px;font-size:13px;outline:none;color:#212121;min-width:0}
+.search-box button{border:0;background:#fff;color:var(--fk-blue);padding:0 14px;cursor:pointer;font-size:16px}
 
-.header-actions{display:flex;align-items:center;gap:8px;margin-left:auto}
-.btn-nav{background:none;border:0;color:#fff;font-weight:700;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:4px;padding:5px 8px;border-radius:2px;white-space:nowrap}
+.header-actions{display:flex;align-items:center;gap:10px;margin-left:auto}
+.btn-nav{background:none;border:0;color:#fff;font-weight:700;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:4px;padding:6px 10px;border-radius:2px;white-space:nowrap}
 .btn-nav:hover{background:rgba(255,255,255,.1)}
 
 /* LOGIN BUTTON */
-.btn-login-main{background:#fff;color:var(--fk-blue);border:0;padding:6px 14px;font-weight:700;border-radius:2px;cursor:pointer;font-size:13px;white-space:nowrap}
+.btn-login-main{background:#fff;color:var(--fk-blue);border:0;padding:6px 16px;font-weight:700;border-radius:2px;cursor:pointer;font-size:13px;white-space:nowrap}
 .btn-login-main:hover{background:#f0f0f0}
 
 /* USER PROFILE DROPDOWN */
@@ -100,42 +100,65 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 .user-menu:hover .user-dropdown{display:block}
 
 /* FLIPKART STYLE CART BUTTON */
-.cart-trigger{background:#fff;color:var(--fk-blue);padding:6px 12px;border-radius:2px;font-weight:700;display:flex;align-items:center;gap:6px;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.15);border:0;position:relative;white-space:nowrap;font-size:13px}
+.cart-trigger{background:#fff;color:var(--fk-blue);padding:6px 14px;border-radius:2px;font-weight:700;display:flex;align-items:center;gap:6px;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.15);border:0;position:relative;white-space:nowrap;font-size:13px}
 .cart-trigger:hover{background:#f8f9fa}
 .cart-count-badge{background:var(--fk-orange);color:#fff;font-size:10px;padding:2px 6px;border-radius:10px;font-weight:800}
 
 /* NAVIGATION TABS */
 .nav-sub{background:var(--surface);box-shadow:0 1px 1px rgba(0,0,0,.1);width:100%;overflow:hidden}
-.nav-sub ul{max-width:1240px;margin:auto;display:flex;gap:18px;list-style:none;padding:10px 14px;overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch}
+.nav-sub ul{max-width:1480px;margin:auto;display:flex;gap:22px;list-style:none;padding:10px 14px;overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch}
 .nav-sub ul::-webkit-scrollbar{display:none}
 .nav-sub li{font-size:13px;font-weight:600;cursor:pointer;color:#333;display:inline-block;padding-bottom:3px}
 .nav-sub li.active{color:var(--fk-blue);border-bottom:2px solid var(--fk-blue);font-weight:700}
 
 /* SALE BANNER */
-.sale-banner-wrap{max-width:1240px;margin:10px auto 0;padding:0 10px}
-.big-sale-banner{background:radial-gradient(circle at 80% 50%, #ff5252, #b71c1c 45%, #0d47a1 95%);color:#fff;border-radius:4px;padding:20px;display:flex;justify-content:space-between;align-items:center;gap:14px;box-shadow:0 2px 8px rgba(0,0,0,.12);position:relative;overflow:hidden}
+.sale-banner-wrap{max-width:1480px;margin:12px auto 0;padding:0 14px}
+.big-sale-banner{background:radial-gradient(circle at 80% 50%, #ff5252, #b71c1c 45%, #0d47a1 95%);color:#fff;border-radius:4px;padding:22px 28px;display:flex;justify-content:space-between;align-items:center;gap:14px;box-shadow:0 2px 8px rgba(0,0,0,.12);position:relative;overflow:hidden}
 .sale-tag-pill{background:var(--fk-yellow);color:#111;font-size:11px;font-weight:800;padding:3px 10px;border-radius:20px;display:inline-block;margin-bottom:6px;letter-spacing:1px}
-.big-sale-banner h1{margin:0;font-size:22px;font-weight:900;letter-spacing:-.5px;line-height:1.2}
+.big-sale-banner h1{margin:0;font-size:24px;font-weight:900;letter-spacing:-.5px;line-height:1.2}
 .big-sale-banner p{margin:6px 0 0;font-size:13px;color:#fce4ec}
-.sale-timer{background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.25);padding:10px 14px;border-radius:4px;text-align:center;min-width:140px;white-space:nowrap}
+.sale-timer{background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.25);padding:10px 16px;border-radius:4px;text-align:center;min-width:150px;white-space:nowrap}
 .sale-timer .label{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--fk-yellow);font-weight:700}
-.sale-timer .time{font-size:18px;font-weight:800;letter-spacing:1px;margin-top:2px}
+.sale-timer .time{font-size:19px;font-weight:800;letter-spacing:1px;margin-top:2px}
 
-/* MAIN LAYOUT */
-.layout{max-width:1240px;margin:10px auto;padding:0 10px;display:grid;grid-template-columns:220px 1fr;gap:10px}
+/* ======================================================== */
+/* 🖥️ WIDE 3-COLUMN DESKTOP LAYOUT (FILLS SIDE SPACES) */
+/* ======================================================== */
+.layout{
+  max-width:1480px;
+  margin:14px auto;
+  padding:0 14px;
+  display:grid;
+  grid-template-columns:220px 1fr 280px; /* Left Sidebar | Product Center | Right Widgets */
+  gap:14px;
+  align-items:start;
+}
 .sidebar{background:var(--surface);padding:14px;border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.08);height:fit-content;position:sticky;top:70px}
 .sidebar h3{font-size:15px;margin:0 0 10px;padding-bottom:8px;border-bottom:1px solid var(--line)}
 .filter-group{display:flex;flex-direction:column;gap:6px}
 .filter-group label{font-size:13px;display:flex;align-items:center;gap:6px;cursor:pointer;color:#444}
 
+/* RIGHT SIDEBAR WIDGETS */
+.right-sidebar{display:flex;flex-direction:column;gap:12px;position:sticky;top:70px}
+.widget-box{background:var(--surface);padding:14px;border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.widget-box h4{margin:0 0 10px;font-size:13px;font-weight:700;display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.widget-box p{margin:0 0 10px;font-size:12px;color:#475569;line-height:1.4}
+.btn-widget-wa{background:#25d366;color:#fff;border:0;width:100%;padding:8px 10px;font-weight:700;font-size:12px;border-radius:3px;cursor:pointer;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px}
+.btn-widget-call{background:var(--fk-blue);color:#fff;border:0;width:100%;padding:8px 10px;font-weight:700;font-size:12px;border-radius:3px;cursor:pointer;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px;margin-top:6px}
+.hot-deal-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line)}
+.hot-deal-item:last-child{border-bottom:none;padding-bottom:0}
+.hot-deal-item img{width:46px;height:46px;object-fit:contain;border:1px solid #e2e8f0;border-radius:2px}
+.hot-deal-info b{font-size:12px;display:block;line-height:1.2;color:#1e293b}
+.hot-deal-info span{font-size:11px;color:var(--fk-green);font-weight:700}
+
 /* PRODUCT GRID */
 .product-panel{background:var(--surface);border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.08);overflow:hidden}
-.panel-head{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-bottom:1px solid var(--line)}
+.panel-head{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line)}
 .panel-head h2{margin:0;font-size:16px;font-weight:700}
-.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:0}
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:0}
 
 /* PRODUCT CARD */
-.product-card{padding:12px;background:#fff;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;flex-direction:column;position:relative}
+.product-card{padding:14px;background:#fff;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;flex-direction:column;position:relative}
 .prod-img-wrap{height:140px;display:flex;align-items:center;justify-content:center;position:relative}
 .prod-img-wrap img{max-height:120px;max-width:90%;object-fit:contain}
 .assured-tag{position:absolute;bottom:0;right:0;font-size:9px;background:#f7f9fa;border:1px solid #dcdcdc;border-radius:2px;padding:2px 4px;font-weight:800;color:var(--fk-blue)}
@@ -304,7 +327,7 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 
 .admin-export-btn{background:#10b981;color:#fff;border:0;padding:6px 12px;border-radius:3px;font-weight:700;cursor:pointer;font-size:12px}
 .admin-logout{background:#ef4444;color:#fff;border:0;padding:6px 14px;border-radius:3px;font-weight:700;cursor:pointer;font-size:12px}
-.admin-container{max-width:1200px;margin:14px auto;padding:0 10px;display:grid;gap:14px}
+.admin-container{max-width:1480px;margin:14px auto;padding:0 10px;display:grid;gap:14px}
 .admin-tabs{display:flex;gap:8px;border-bottom:2px solid var(--line);padding-bottom:8px;flex-wrap:wrap}
 .admin-tab-btn{background:#fff;border:1px solid var(--line);padding:8px 12px;border-radius:3px;font-weight:700;cursor:pointer;font-size:12px}
 .admin-tab-btn.active{background:var(--fk-blue);color:#fff;border-color:var(--fk-blue)}
@@ -378,15 +401,20 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 @keyframes popupIn{from{transform:scale(0.95);opacity:0}to{transform:scale(1);opacity:1}}
 
 /* FOOTER */
-.trust-strip{max-width:1240px;margin:16px auto;padding:0 10px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.trust-strip{max-width:1480px;margin:16px auto;padding:0 14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
 .trust-box{background:#fff;padding:12px;border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.08);display:flex;align-items:center;gap:10px}
 .trust-box .icon{font-size:22px;color:var(--fk-blue)}
 .trust-box div b{display:block;font-size:13px}
 .trust-box div small{color:var(--muted);font-size:11px}
-footer{background:#172337;color:#878787;padding:20px 10px 16px;font-size:11px;border-top:1px solid #2d3e56;margin-top:20px;text-align:center}
+footer{background:#172337;color:#878787;padding:20px 14px 16px;font-size:11px;border-top:1px solid #2d3e56;margin-top:20px;text-align:center}
 footer a{color:#fff;text-decoration:none}
 
 /* 📱 AUTOMATIC MOBILE RESPONSIVENESS */
+@media (max-width: 1024px) {
+  .layout{grid-template-columns:200px 1fr}
+  .right-sidebar{display:none} /* Hide widgets on tablets/mobiles for clean view */
+}
+
 @media (max-width: 768px) {
   .top-strip-inner{justify-content:center;text-align:center;gap:4px}
   .main-header{padding:8px 10px;gap:8px}
@@ -394,6 +422,7 @@ footer a{color:#fff;text-decoration:none}
   .header-actions{order:2;gap:6px}
   .layout{grid-template-columns:1fr;padding:0 6px}
   .sidebar{display:none}
+  .right-sidebar{display:none}
   .product-grid{grid-template-columns:repeat(2, 1fr)}
   .chat-container{grid-template-columns:1fr}
   .big-sale-banner{flex-direction:column;align-items:flex-start;padding:14px}
@@ -478,7 +507,11 @@ footer a{color:#fff;text-decoration:none}
   </div>
 </section>
 
+<!-- ======================================================== -->
+<!-- 🖥️ MAIN 3-COLUMN DESKTOP LAYOUT (EXPANDED TO FILL SIDES) -->
+<!-- ======================================================== -->
 <div class="layout">
+  <!-- 1. LEFT SIDEBAR (FILTERS) -->
   <aside class="sidebar">
     <h3>Filters</h3>
     <div class="filter-group" id="sidebarFilterGroup">
@@ -493,6 +526,7 @@ footer a{color:#fff;text-decoration:none}
     </div>
   </aside>
 
+  <!-- 2. CENTER PANEL (PRODUCT GRID) -->
   <main class="product-panel">
     <div class="panel-head">
       <h2 id="productSectionTitle">Deals of the Day</h2>
@@ -500,6 +534,55 @@ footer a{color:#fff;text-decoration:none}
     </div>
     <div class="product-grid" id="productGrid"></div>
   </main>
+
+  <!-- 3. RIGHT SIDEBAR (FEATURED DEALS & DIRECT SHOP ASSISTANCE) -->
+  <aside class="right-sidebar">
+    <!-- WIDGET 1: DIRECT SHOP ASSISTANCE -->
+    <div class="widget-box">
+      <h4><span>💬</span> Need Urgent EV Part?</h4>
+      <p>Direct chat with shopkeeper at Mharal Gaon. Fast local doorstep delivery assistance.</p>
+      <a class="btn-widget-wa" target="_blank" href="https://wa.me/918766641866?text=Hello%20PAG%20Moters!%20I%20need%20assistance%20with%20EV%20spare%20parts.">
+        Chat on WhatsApp
+      </a>
+      <a class="btn-widget-call" href="tel:+918766641866">
+        📞 Call: 8766641866
+      </a>
+    </div>
+
+    <!-- WIDGET 2: TOP BEST SELLER PICKS -->
+    <div class="widget-box">
+      <h4><span>🔥</span> Hot Selling Parts</h4>
+      <div class="hot-deal-item">
+        <img src="https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=100" alt="Charger">
+        <div class="hot-deal-info">
+          <b>60V Fast Auto Cut Charger</b>
+          <span>₹1,850 · 26% off</span>
+        </div>
+      </div>
+      <div class="hot-deal-item">
+        <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=100" alt="Battery">
+        <div class="hot-deal-info">
+          <b>48V Lithium Battery Pack</b>
+          <span>₹14,500 · 3 Yr Warranty</span>
+        </div>
+      </div>
+      <div class="hot-deal-item">
+        <img src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=100" alt="Helmet">
+        <div class="hot-deal-info">
+          <b>Vega Cruiser ISI Helmet</b>
+          <span>₹899 · Top Rated</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- WIDGET 3: STORE ASSURANCE & TIMING -->
+    <div class="widget-box">
+      <h4><span>🛡️</span> Store Assurance</h4>
+      <p style="margin-bottom:6px;">⚡ <b>2-Hour Hand Delivery:</b> Available within Mharal Gaon.</p>
+      <p style="margin-bottom:6px;">⏱️ <b>Open Daily:</b> 9:00 AM – 9:00 PM</p>
+      <p style="margin-bottom:0;">📍 <b>Shop 68, MIDC Gate</b>, Near Gram Panchayat Office.</p>
+    </div>
+  </aside>
 </div>
 
 <div class="trust-strip">
@@ -559,7 +642,6 @@ footer a{color:#fff;text-decoration:none}
         </div>
       </div>
 
-      <!-- SIGNUP WITH BROWSER SAVE PROMPT ATTR -->
       <div id="signupSection" style="display:none;">
         <div class="sec-badge">🔒 <b>Security Check:</b> Password will be auto-prompted to save on your device.</div>
         <form class="auth-form" method="post" action="javascript:void(0);" onsubmit="handleSignupSubmit(event)">
