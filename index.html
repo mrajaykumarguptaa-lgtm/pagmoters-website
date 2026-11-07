@@ -746,7 +746,7 @@ let catalog = [];
 let cart = [];
 let orders = [];
 let users = [];
-let teamMembers = []; // Sub-Admins & Staff Members
+let teamMembers = [];
 let currentUser = null;
 let activeUploadedImageData = "";
 
@@ -993,7 +993,6 @@ function switchAdminTab(tab) {
   document.getElementById('btnTabUsers').classList.toggle('active', tab === 'users');
 }
 
-// SUB-ADMIN & STAFF SAVE HANDLER
 function adminSaveTeamMember(e) {
   e.preventDefault();
   const name = document.getElementById('newTeamName').value.trim();
@@ -1329,9 +1328,7 @@ function overrideCustomerPassword(idx) {
   }
 }
 
-// ==========================================
-// 🔐 AUTHENTICATION & ROLE-BASED DISPATCHER
-// ==========================================
+// AUTH & FORGOT PASSWORD
 function openAuthModal(view) {
   document.getElementById('authOverlay').classList.add('show');
   document.getElementById('loginSection').style.display = 'none';
@@ -1894,6 +1891,9 @@ function processOrderPlacement(e) {
   `;
 }
 
+// ==========================================
+// 🚀 SESSION RESTORE ON REFRESH
+// ==========================================
 window.addEventListener('DOMContentLoaded', () => {
   displayProducts(catalog);
   syncCategoryMenus();
@@ -1901,6 +1901,11 @@ window.addEventListener('DOMContentLoaded', () => {
   syncAuthUI();
   startSaleTimer();
   startRealTimeClock();
+
+  // CHECK IF ADMIN / STAFF WAS LOGGED IN BEFORE REFRESH
+  if(currentUser && currentUser.isAdmin) {
+    openAdminPortal(currentUser.role || "Super Admin");
+  }
 });
 </script>
 </body>
