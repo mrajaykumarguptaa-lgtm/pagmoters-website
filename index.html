@@ -33,13 +33,25 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 .brand small{font-size:11px;font-style:italic;color:var(--fk-yellow);display:flex;align-items:center;gap:2px}
 .brand small span{color:#fff;font-weight:700}
 
-.search-box{flex:1;max-width:580px;display:flex;background:#fff;border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.2);overflow:hidden}
+.search-box{flex:1;max-width:540px;display:flex;background:#fff;border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.2);overflow:hidden}
 .search-box input{flex:1;border:0;padding:10px 14px;font-size:14px;outline:none;color:#212121}
 .search-box button{border:0;background:#fff;color:var(--fk-blue);padding:0 16px;cursor:pointer;font-size:18px}
 
-.header-actions{display:flex;align-items:center;gap:16px;margin-left:auto}
+.header-actions{display:flex;align-items:center;gap:14px;margin-left:auto}
 .btn-nav{background:none;border:0;color:#fff;font-weight:700;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:6px;padding:6px 10px;border-radius:2px}
 .btn-nav:hover{background:rgba(255,255,255,.1)}
+
+/* LOGIN BUTTON */
+.btn-login-main{background:#fff;color:var(--fk-blue);border:0;padding:7px 20px;font-weight:700;border-radius:2px;cursor:pointer;font-size:14px}
+.btn-login-main:hover{background:#f0f0f0}
+
+/* USER PROFILE DROPDOWN */
+.user-menu{position:relative;display:inline-block}
+.user-menu-btn{background:none;border:0;color:#fff;font-weight:700;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:6px;padding:6px}
+.user-dropdown{position:absolute;top:100%;right:0;background:#fff;color:#212121;box-shadow:0 4px 12px rgba(0,0,0,.15);border-radius:2px;display:none;min-width:140px;z-index:150}
+.user-dropdown a,.user-dropdown button{display:block;width:100%;padding:10px 14px;text-align:left;border:0;background:none;font:inherit;font-size:13px;cursor:pointer;text-decoration:none;color:#212121}
+.user-dropdown a:hover,.user-dropdown button:hover{background:#f1f3f6}
+.user-menu:hover .user-dropdown{display:block}
 
 /* FLIPKART STYLE CART BUTTON */
 .cart-trigger{background:#fff;color:var(--fk-blue);padding:7px 16px;border-radius:2px;font-weight:700;display:flex;align-items:center;gap:8px;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.15);border:0;position:relative}
@@ -72,7 +84,7 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 .panel-head h2{margin:0;font-size:18px;font-weight:700}
 .product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:0}
 
-/* PRODUCT CARD (FLIPKART STYLE) */
+/* PRODUCT CARD */
 .product-card{padding:18px 16px;background:#fff;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;flex-direction:column;position:relative;transition:box-shadow .2s}
 .product-card:hover{box-shadow:0 3px 16px rgba(0,0,0,.12);z-index:2}
 .prod-img-wrap{height:160px;display:flex;align-items:center;justify-content:center;position:relative}
@@ -91,7 +103,7 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 .delivery-badge{font-size:11px;color:#212121;font-weight:600;margin-bottom:10px}
 .delivery-badge span{color:var(--fk-green);font-weight:700}
 
-/* ADD TO CART & COUNTER BUTTON */
+/* BUTTONS */
 .card-actions{margin-top:auto}
 .btn-add-cart{background:var(--fk-yellow);color:#212121;border:0;width:100%;padding:9px;font-weight:700;font-size:13px;border-radius:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:background .2s}
 .btn-add-cart:hover{background:#ebd300}
@@ -100,12 +112,33 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 .qty-stepper button:hover{background:rgba(0,0,0,.15)}
 .qty-stepper span{font-size:13px;font-weight:700}
 
-/* FLY-TO-CART BALL */
+/* FLY BALL */
 .fly-item{position:fixed;width:24px;height:24px;background:var(--fk-orange);border-radius:50%;color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:9999;box-shadow:0 3px 8px rgba(0,0,0,.3);transition:all .55s cubic-bezier(0.18, 0.89, 0.32, 1.28)}
 
-/* MODAL & DRAWER SYSTEM */
+/* MODAL SYSTEM */
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:none}
 .overlay.show{display:flex;align-items:center;justify-content:center}
+
+/* FLIPKART STYLE AUTH MODAL (Login/Signup/Forgot) */
+.auth-card{background:#fff;width:min(720px,95%);border-radius:4px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.3);display:grid;grid-template-columns:260px 1fr;position:relative}
+.auth-left{background:var(--fk-blue);color:#fff;padding:34px 28px;display:flex;flex-direction:column;justify-content:space-between}
+.auth-left h2{margin:0 0 10px;font-size:24px}
+.auth-left p{margin:0;font-size:14px;line-height:1.5;color:#dbeafe}
+.auth-left img{max-width:180px;margin-top:20px;opacity:.9}
+.auth-right{padding:30px 28px;position:relative}
+.auth-close{position:absolute;top:10px;right:14px;background:none;border:0;font-size:22px;color:var(--muted);cursor:pointer}
+
+.auth-form{display:flex;flex-direction:column;gap:12px}
+.auth-form label{font-size:12px;color:var(--muted);font-weight:600}
+.auth-form input{border:1px solid var(--line);border-radius:2px;padding:10px 12px;font:inherit;font-size:14px;outline:none}
+.auth-form input:focus{border-color:var(--fk-blue)}
+.auth-btn-primary{background:var(--fk-orange);color:#fff;border:0;padding:12px;font-size:14px;font-weight:700;border-radius:2px;cursor:pointer;margin-top:8px}
+.auth-btn-secondary{background:#fff;color:var(--fk-blue);border:1px solid var(--line);padding:10px;font-size:13px;font-weight:700;border-radius:2px;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.auth-switch{font-size:13px;color:var(--muted);text-align:center;margin-top:14px}
+.auth-switch a{color:var(--fk-blue);font-weight:700;text-decoration:none;cursor:pointer}
+.auth-msg{font-size:13px;padding:8px;border-radius:2px;display:none}
+.auth-msg.err{background:#ffebee;color:#c62828;display:block}
+.auth-msg.ok{background:#e8f5e9;color:#2e7d32;display:block}
 
 /* CART DRAWER */
 .drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:#fff;z-index:201;display:flex;flex-direction:column;box-shadow:-2px 0 10px rgba(0,0,0,.2);transform:translateX(100%);transition:transform .3s ease}
@@ -133,7 +166,7 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 .checkout-box input,.checkout-box textarea{width:100%;border:1px solid var(--line);padding:9px 10px;font:inherit;border-radius:2px;margin-bottom:8px}
 .payment-choice{display:flex;flex-direction:column;gap:6px;margin:8px 0 12px}
 .payment-choice label{display:flex;align-items:center;gap:8px;font-size:13px;border:1px solid var(--line);padding:8px;border-radius:2px;cursor:pointer}
-.btn-place-order{background:var(--fk-orange);color:#fff;border:0;width:100%;padding:13px;font-weight:700;font-size:15px;border-radius:2px;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.2)}
+.btn-place-order{background:var(--fk-orange);color:#fff;border:0;width:100%;padding:13px;font-weight:700;font-size:15px;border-radius:2px;cursor:pointer}
 
 /* TRACK ORDER MODAL */
 .modal-track{background:#fff;width:min(520px,94%);border-radius:4px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.2)}
@@ -144,7 +177,6 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 .track-input-group input{flex:1;padding:10px 12px;border:1px solid var(--line);border-radius:2px;font:inherit}
 .track-input-group button{background:var(--fk-blue);color:#fff;border:0;padding:10px 18px;font-weight:700;border-radius:2px;cursor:pointer}
 
-/* STATUS PROGRESS BAR */
 .tracker-status-box{background:#f9f9f9;border:1px solid var(--line);border-radius:4px;padding:16px;margin-top:14px}
 .timeline{display:flex;justify-content:space-between;position:relative;margin:24px 0 14px}
 .timeline::before{content:"";position:absolute;top:12px;left:10%;right:10%;height:3px;background:#e0e0e0;z-index:1}
@@ -158,9 +190,9 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 .success-screen{background:#fff;border-radius:4px;padding:20px;text-align:center}
 .success-screen .icon{font-size:48px;color:var(--fk-green);margin-bottom:8px}
 .order-pill{background:#f1f3f6;padding:8px;border-radius:4px;font-family:monospace;font-size:15px;font-weight:700;margin:10px 0}
-.btn-wa-order{background:#25d366;color:#fff;padding:12px;border-radius:2px;text-decoration:none;font-weight:700;display:block;margin-top:12px;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.btn-wa-order{background:#25d366;color:#fff;padding:12px;border-radius:2px;text-decoration:none;font-weight:700;display:block;margin-top:12px}
 
-/* FOOTER & TRUST BADGES */
+/* TRUST FOOTER */
 .trust-strip{max-width:1240px;margin:20px auto;padding:0 14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
 .trust-box{background:#fff;padding:16px;border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.08);display:flex;align-items:center;gap:12px}
 .trust-box .icon{font-size:26px;color:var(--fk-blue)}
@@ -178,8 +210,8 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
   .sidebar{display:none}
   .search-box{max-width:none}
   .product-grid{grid-template-columns:repeat(2,1fr)}
-  .brand .title{font-size:17px}
-  .main-header{gap:10px}
+  .auth-card{grid-template-columns:1fr}
+  .auth-left{display:none}
 }
 </style>
 </head>
@@ -207,6 +239,11 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
     </div>
 
     <div class="header-actions">
+      <!-- AUTH STATE BUTTON (LOGIN OR USER PROFILE) -->
+      <div id="authHeaderContainer">
+        <button class="btn-login-main" onclick="openAuthModal('login')">Login</button>
+      </div>
+
       <!-- TRACK ORDER BUTTON -->
       <button class="btn-nav" onclick="openTrackModal()">
         <span>📦</span> Track Order
@@ -235,7 +272,7 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
   </ul>
 </nav>
 
-<!-- BANNER -->
+<!-- HERO BANNER -->
 <section class="hero-slider">
   <div class="banner-card">
     <div>
@@ -248,7 +285,6 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
 
 <!-- MAIN CONTENT -->
 <div class="layout">
-  <!-- SIDEBAR FILTERS -->
   <aside class="sidebar">
     <h3>Filters</h3>
     <div class="filter-group">
@@ -263,19 +299,16 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
     </div>
   </aside>
 
-  <!-- PRODUCTS CONTAINER -->
   <main class="product-panel">
     <div class="panel-head">
       <h2 id="productSectionTitle">All Products</h2>
       <span style="font-size:13px;color:var(--muted)" id="totalProductsCount">Showing items</span>
     </div>
-    <div class="product-grid" id="productGrid">
-      <!-- Cards render via JavaScript -->
-    </div>
+    <div class="product-grid" id="productGrid"></div>
   </main>
 </div>
 
-<!-- TRUST PERKS (FLIPKART STYLE) -->
+<!-- TRUST PERKS -->
 <div class="trust-strip">
   <div class="trust-box">
     <div class="icon">⚡</div>
@@ -316,6 +349,97 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
   </div>
 </footer>
 
+<!-- AUTH MODAL (LOGIN / SIGNUP / FORGOT PASSWORD) -->
+<div class="overlay" id="authOverlay">
+  <div class="auth-card">
+    <div class="auth-left">
+      <div>
+        <h2 id="authLeftTitle">Login</h2>
+        <p id="authLeftDesc">Get access to your Orders, Wishlist and Recommendations</p>
+      </div>
+      <div style="font-size:48px;">⚡</div>
+    </div>
+    <div class="auth-right">
+      <button class="auth-close" onclick="closeAuthModal()">✕</button>
+
+      <!-- 1. LOGIN FORM -->
+      <div id="loginSection">
+        <form class="auth-form" onsubmit="handleLoginSubmit(event)">
+          <div id="loginMsg" class="auth-msg"></div>
+          <div>
+            <label>Mobile Number or Email</label>
+            <input type="text" id="loginId" placeholder="Enter 10-digit mobile or email" required>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <label>Password</label>
+              <a onclick="openAuthModal('forgot')" style="font-size:11px;color:var(--fk-blue);cursor:pointer;font-weight:600;">Forgot Password?</a>
+            </div>
+            <input type="password" id="loginPass" placeholder="Enter Password" required>
+          </div>
+          <button type="submit" class="auth-btn-primary">Login</button>
+        </form>
+        <div class="auth-switch">
+          New to PAG Moters? <a onclick="openAuthModal('signup')">Create an account</a>
+        </div>
+      </div>
+
+      <!-- 2. SIGN UP FORM -->
+      <div id="signupSection" style="display:none;">
+        <form class="auth-form" onsubmit="handleSignupSubmit(event)">
+          <div id="signupMsg" class="auth-msg"></div>
+          <div>
+            <label>Full Name</label>
+            <input type="text" id="regName" placeholder="Enter your full name" required>
+          </div>
+          <div>
+            <label>Mobile Number</label>
+            <input type="tel" id="regPhone" placeholder="Enter 10-digit mobile" pattern="[0-9]{10}" required>
+          </div>
+          <div>
+            <label>Email ID (Optional)</label>
+            <input type="email" id="regEmail" placeholder="Enter email address">
+          </div>
+          <div>
+            <label>Set Password</label>
+            <input type="password" id="regPass" placeholder="Create password (min 6 characters)" minlength="6" required>
+          </div>
+          <button type="submit" class="auth-btn-primary">Sign Up</button>
+        </form>
+        <div class="auth-switch">
+          Existing user? <a onclick="openAuthModal('login')">Log in</a>
+        </div>
+      </div>
+
+      <!-- 3. FORGOT PASSWORD FORM -->
+      <div id="forgotSection" style="display:none;">
+        <form class="auth-form" onsubmit="handleForgotSubmit(event)">
+          <div id="forgotMsg" class="auth-msg"></div>
+          <p style="font-size:13px;color:#555;margin:0 0 6px;">Enter your registered mobile or email to recover or reset your password.</p>
+          <div>
+            <label>Mobile Number or Email</label>
+            <input type="text" id="forgotId" placeholder="Enter registered number" required>
+          </div>
+          <button type="submit" class="auth-btn-primary">Search Account</button>
+        </form>
+        <div id="forgotResetBox" style="display:none;margin-top:14px;border-top:1px dashed var(--line);padding-top:10px;">
+          <form class="auth-form" onsubmit="handleSaveNewPass(event)">
+            <div>
+              <label>Set New Password</label>
+              <input type="password" id="newPassVal" placeholder="Enter new password" minlength="6" required>
+            </div>
+            <button type="submit" class="auth-btn-primary" style="background:var(--fk-green)">Update Password</button>
+          </form>
+        </div>
+        <div class="auth-switch">
+          Remember password? <a onclick="openAuthModal('login')">Back to Login</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <!-- CART DRAWER OVERLAY -->
 <div class="overlay" id="cartOverlay" onclick="toggleCartDrawer(false)"></div>
 <div class="drawer" id="cartDrawer">
@@ -323,9 +447,7 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
     <h2>My Cart (<span id="drawerItemCount">0</span>)</h2>
     <button class="btn-close" onclick="toggleCartDrawer(false)">✕</button>
   </div>
-  <div class="drawer-body" id="cartBody">
-    <!-- Cart Items or Form -->
-  </div>
+  <div class="drawer-body" id="cartBody"></div>
 </div>
 
 <!-- TRACK ORDER MODAL -->
@@ -341,51 +463,174 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
         <input type="text" id="trackInput" placeholder="Enter Order ID or Mobile Number">
         <button onclick="performOrderSearch()">Track</button>
       </div>
-
-      <!-- TRACK RESULTS SHOW HERE -->
       <div id="trackResultContainer"></div>
     </div>
   </div>
 </div>
 
 <script>
-// PRODUCT REPOSITORY
+// PRODUCT CATALOG
 const catalog = [
-  {id: 1, name: "Vega Cruiser ISI Certified Helmet", cat: "Helmets", price: 899, orig: 1499, rating: 4.4, reviews: 342, img: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=400", desc: "ISI certified outer shell with anti-scratch clear visor"},
-  {id: 2, name: "Steelbird Full Face Matte Black Helmet", cat: "Helmets", price: 1199, orig: 1899, rating: 4.6, reviews: 610, img: "https://images.unsplash.com/photo-1558980664-3a031cf67ea8?w=400", desc: "Quick release chinstrap, high impact resistant"},
-  {id: 3, name: "60V Smart Fast Charger for EV Scooters", cat: "Chargers", price: 1850, orig: 2499, rating: 4.5, reviews: 184, img: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=400", desc: "Auto cut-off technology with heat sink protection"},
-  {id: 4, name: "48V 3A Heavy Duty EV Battery Charger", cat: "Chargers", price: 1650, orig: 2200, rating: 4.3, reviews: 92, img: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400", desc: "Copper cooling fan, stabilized voltage output"},
-  {id: 5, name: "65W Type-C Super Fast Braided Cable", cat: "Mobile Cables", price: 249, orig: 499, rating: 4.4, reviews: 852, img: "https://images.unsplash.com/photo-1588508065123-287b28e013da?w=400", desc: "Heavy nylon braid, 480Mbps high speed data sync"},
-  {id: 6, name: "3-in-1 Fast Nylon Charging Cable (1.2m)", cat: "Mobile Cables", price: 349, orig: 699, rating: 4.2, reviews: 412, img: "https://images.unsplash.com/photo-1608156639585-b3a032ef9689?w=400", desc: "Supports iPhone Lightning, Type-C & Micro USB"},
-  {id: 7, name: "Bass Pro Magnetic Wireless Neckband", cat: "Earphones", price: 499, orig: 999, rating: 4.3, reviews: 960, img: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=400", desc: "30-hour battery life, sweat-resistant silicone neckband"},
-  {id: 8, name: "TWS True Wireless Stereo Earbuds", cat: "Earphones", price: 799, orig: 1999, rating: 4.5, reviews: 1205, img: "https://images.unsplash.com/photo-1572536147248-ac59a8abfa4b?w=400", desc: "Touch sensor controls with digital battery display case"},
-  {id: 9, name: "All-Weather Waterproof Scooter Body Cover", cat: "Accessories", price: 399, orig: 799, rating: 4.2, reviews: 219, img: "https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=400", desc: "Tear-resistant PVC material with mirror pockets"},
-  {id: 10, name: "360° Metal Handlebar Mobile Mount", cat: "Accessories", price: 299, orig: 599, rating: 4.4, reviews: 310, img: "https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?w=400", desc: "Shockproof grip with firm four-corner lock"},
-  {id: 11, name: "48V 24Ah Lithium-Ion Scooter Battery Pack", cat: "Batteries", price: 14500, orig: 18000, rating: 4.7, reviews: 78, img: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=400", desc: "A-grade cells with 3 Years warranty coverage"}
+  {id: 1, name: "Vega Cruiser ISI Certified Helmet", cat: "Helmets", price: 899, orig: 1499, rating: 4.4, reviews: 342, img: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=400"},
+  {id: 2, name: "Steelbird Full Face Matte Black Helmet", cat: "Helmets", price: 1199, orig: 1899, rating: 4.6, reviews: 610, img: "https://images.unsplash.com/photo-1558980664-3a031cf67ea8?w=400"},
+  {id: 3, name: "60V Smart Fast Charger for EV Scooters", cat: "Chargers", price: 1850, orig: 2499, rating: 4.5, reviews: 184, img: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=400"},
+  {id: 4, name: "48V 3A Heavy Duty EV Battery Charger", cat: "Chargers", price: 1650, orig: 2200, rating: 4.3, reviews: 92, img: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400"},
+  {id: 5, name: "65W Type-C Super Fast Braided Cable", cat: "Mobile Cables", price: 249, orig: 499, rating: 4.4, reviews: 852, img: "https://images.unsplash.com/photo-1588508065123-287b28e013da?w=400"},
+  {id: 6, name: "3-in-1 Fast Nylon Charging Cable (1.2m)", cat: "Mobile Cables", price: 349, orig: 699, rating: 4.2, reviews: 412, img: "https://images.unsplash.com/photo-1608156639585-b3a032ef9689?w=400"},
+  {id: 7, name: "Bass Pro Magnetic Wireless Neckband", cat: "Earphones", price: 499, orig: 999, rating: 4.3, reviews: 960, img: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=400"},
+  {id: 8, name: "TWS True Wireless Stereo Earbuds", cat: "Earphones", price: 799, orig: 1999, rating: 4.5, reviews: 1205, img: "https://images.unsplash.com/photo-1572536147248-ac59a8abfa4b?w=400"},
+  {id: 9, name: "All-Weather Waterproof Scooter Body Cover", cat: "Accessories", price: 399, orig: 799, rating: 4.2, reviews: 219, img: "https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=400"},
+  {id: 10, name: "360° Metal Handlebar Mobile Mount", cat: "Accessories", price: 299, orig: 599, rating: 4.4, reviews: 310, img: "https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?w=400"},
+  {id: 11, name: "48V 24Ah Lithium-Ion Scooter Battery Pack", cat: "Batteries", price: 14500, orig: 18000, rating: 4.7, reviews: 78, img: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=400"}
 ];
 
-// CART & ORDERS STORAGE
+// DATA STORES
 let cart = [];
 let orders = [];
+let users = [];
+let currentUser = null;
 
-try {
-  cart = JSON.parse(localStorage.getItem('pag_cart_items')) || [];
-} catch(e) { cart = []; }
+try { cart = JSON.parse(localStorage.getItem('pag_cart_items')) || []; } catch(e){ cart = []; }
+try { orders = JSON.parse(localStorage.getItem('pag_orders_db')) || []; } catch(e){ orders = []; }
+try { users = JSON.parse(localStorage.getItem('pag_users_db')) || []; } catch(e){ users = []; }
+try { currentUser = JSON.parse(localStorage.getItem('pag_active_user')) || null; } catch(e){ currentUser = null; }
 
-try {
-  orders = JSON.parse(localStorage.getItem('pag_orders_db')) || [];
-} catch(e) { orders = []; }
+function persistCart() { localStorage.setItem('pag_cart_items', JSON.stringify(cart)); syncCartUI(); }
+function persistOrders() { localStorage.setItem('pag_orders_db', JSON.stringify(orders)); }
+function persistUsers() { localStorage.setItem('pag_users_db', JSON.stringify(users)); }
+function persistCurrentUser() { localStorage.setItem('pag_active_user', JSON.stringify(currentUser)); syncAuthUI(); }
 
-function persistCart() {
-  localStorage.setItem('pag_cart_items', JSON.stringify(cart));
-  syncCartUI();
+// AUTH MODAL SYSTEM
+function openAuthModal(view) {
+  document.getElementById('authOverlay').classList.add('show');
+  document.getElementById('loginSection').style.display = 'none';
+  document.getElementById('signupSection').style.display = 'none';
+  document.getElementById('forgotSection').style.display = 'none';
+  document.getElementById('forgotResetBox').style.display = 'none';
+
+  const title = document.getElementById('authLeftTitle');
+  const desc = document.getElementById('authLeftDesc');
+
+  if(view === 'signup') {
+    document.getElementById('signupSection').style.display = 'block';
+    title.innerText = "Looks like you're new here!";
+    desc.innerText = "Sign up with your mobile number to get started";
+  } else if(view === 'forgot') {
+    document.getElementById('forgotSection').style.display = 'block';
+    title.innerText = "Forgot Password";
+    desc.innerText = "Recover your account easily using your registered phone or email";
+  } else {
+    document.getElementById('loginSection').style.display = 'block';
+    title.innerText = "Login";
+    desc.innerText = "Get access to your Orders, Wishlist and Recommendations";
+  }
 }
 
-function persistOrders() {
-  localStorage.setItem('pag_orders_db', JSON.stringify(orders));
+function closeAuthModal() {
+  document.getElementById('authOverlay').classList.remove('show');
 }
 
-// SYNC ALL CART BADGES & IN-CARD BUTTONS
+function syncAuthUI() {
+  const container = document.getElementById('authHeaderContainer');
+  if(!container) return;
+  if(currentUser) {
+    container.innerHTML = `
+      <div class="user-menu">
+        <button class="user-menu-btn">👤 ${currentUser.name.split(' ')[0]} ▾</button>
+        <div class="user-dropdown">
+          <a onclick="openTrackModal()">My Orders</a>
+          <button onclick="handleUserLogout()">Logout</button>
+        </div>
+      </div>
+    `;
+  } else {
+    container.innerHTML = `<button class="btn-login-main" onclick="openAuthModal('login')">Login</button>`;
+  }
+}
+
+function handleLoginSubmit(e) {
+  e.preventDefault();
+  const id = document.getElementById('loginId').value.trim();
+  const pass = document.getElementById('loginPass').value.trim();
+  const msg = document.getElementById('loginMsg');
+
+  const user = users.find(u => (u.phone === id || u.email === id) && u.pass === pass);
+  if(user) {
+    currentUser = user;
+    persistCurrentUser();
+    msg.className = "auth-msg ok";
+    msg.innerText = "Login successful!";
+    setTimeout(() => { closeAuthModal(); }, 600);
+  } else {
+    msg.className = "auth-msg err";
+    msg.innerText = "Invalid Mobile/Email or Password. Please check.";
+  }
+}
+
+function handleSignupSubmit(e) {
+  e.preventDefault();
+  const name = document.getElementById('regName').value.trim();
+  const phone = document.getElementById('regPhone').value.trim();
+  const email = document.getElementById('regEmail').value.trim();
+  const pass = document.getElementById('regPass').value.trim();
+  const msg = document.getElementById('signupMsg');
+
+  if(users.some(u => u.phone === phone)) {
+    msg.className = "auth-msg err";
+    msg.innerText = "This mobile number is already registered! Please log in.";
+    return;
+  }
+
+  const newUser = { name, phone, email, pass };
+  users.push(newUser);
+  persistUsers();
+
+  currentUser = newUser;
+  persistCurrentUser();
+
+  msg.className = "auth-msg ok";
+  msg.innerText = "Account created successfully!";
+  setTimeout(() => { closeAuthModal(); }, 600);
+}
+
+let userPendingReset = null;
+
+function handleForgotSubmit(e) {
+  e.preventDefault();
+  const id = document.getElementById('forgotId').value.trim();
+  const msg = document.getElementById('forgotMsg');
+  const user = users.find(u => u.phone === id || u.email === id);
+
+  if(user) {
+    userPendingReset = user;
+    msg.className = "auth-msg ok";
+    msg.innerText = `Account found for ${user.name}! Enter new password below.`;
+    document.getElementById('forgotResetBox').style.display = 'block';
+  } else {
+    msg.className = "auth-msg err";
+    msg.innerHTML = `No account found with this details. <a style="color:#2874f0;" target="_blank" href="https://wa.me/918766641866?text=Help%20recovering%20account%20for%20${id}">Contact shop on WhatsApp</a>`;
+  }
+}
+
+function handleSaveNewPass(e) {
+  e.preventDefault();
+  if(!userPendingReset) return;
+  const newPass = document.getElementById('newPassVal').value.trim();
+  userPendingReset.pass = newPass;
+  persistUsers();
+
+  const msg = document.getElementById('forgotMsg');
+  msg.className = "auth-msg ok";
+  msg.innerText = "Password updated! You can now login.";
+  setTimeout(() => { openAuthModal('login'); }, 1000);
+}
+
+function handleUserLogout() {
+  currentUser = null;
+  persistCurrentUser();
+}
+
+// CART & BUTTON INTERACTIONS
 function syncCartUI() {
   const totalCount = cart.reduce((acc, it) => acc + it.qty, 0);
   const totalPrice = cart.reduce((acc, it) => acc + (it.price * it.qty), 0);
@@ -398,7 +643,6 @@ function syncCartUI() {
   if(totalHead) totalHead.innerText = `₹${totalPrice.toLocaleString('en-IN')}`;
   if(drawerCount) drawerCount.innerText = totalCount;
 
-  // Refresh in-card buttons
   catalog.forEach(item => {
     const container = document.getElementById(`btn-area-${item.id}`);
     if(container) {
@@ -412,7 +656,6 @@ function syncCartUI() {
   }
 }
 
-// BUTTON TEMPLATE
 function makeButtonHtml(id, qty) {
   if(qty > 0) {
     return `
@@ -430,25 +673,18 @@ function makeButtonHtml(id, qty) {
   `;
 }
 
-// FLYING ANIMATION (To Header Cart)
 function handleAddToCartAnimation(id, btn) {
   triggerFly(btn);
-
   const product = catalog.find(p => p.id === id);
   const exist = cart.find(c => c.id === id);
-
-  if(exist) {
-    exist.qty += 1;
-  } else {
-    cart.push({...product, qty: 1});
-  }
+  if(exist) exist.qty += 1;
+  else cart.push({...product, qty: 1});
   persistCart();
 }
 
 function triggerFly(startElem) {
   const target = document.getElementById('cartTriggerBtn');
   if(!startElem || !target) return;
-
   const sRect = startElem.getBoundingClientRect();
   const tRect = target.getBoundingClientRect();
 
@@ -478,12 +714,10 @@ function updateItemQuantity(id, delta) {
   }
 }
 
-// RENDER PRODUCTS
 function displayProducts(items) {
   const grid = document.getElementById('productGrid');
   const countLabel = document.getElementById('totalProductsCount');
   if(!grid) return;
-
   countLabel.innerText = `${items.length} items found`;
 
   if(!items.length) {
@@ -521,7 +755,6 @@ function displayProducts(items) {
   }).join('');
 }
 
-// FILTER & SEARCH
 function filterByCategory(cat) {
   document.querySelectorAll('#catNavList li').forEach(li => {
     li.classList.toggle('active', li.innerText === cat || (cat === 'All' && li.innerText === 'All Products'));
@@ -533,11 +766,9 @@ function filterByCategory(cat) {
 
 function liveSearch() {
   const query = document.getElementById('searchQuery').value.toLowerCase().trim();
-  const res = catalog.filter(p => p.name.toLowerCase().includes(query) || p.cat.toLowerCase().includes(query));
-  displayProducts(res);
+  displayProducts(catalog.filter(p => p.name.toLowerCase().includes(query) || p.cat.toLowerCase().includes(query)));
 }
 
-// DRAWER TOGGLE
 function toggleCartDrawer(open) {
   const drawer = document.getElementById('cartDrawer');
   const overlay = document.getElementById('cartOverlay');
@@ -551,7 +782,6 @@ function toggleCartDrawer(open) {
   }
 }
 
-// DRAWER RENDER
 function renderCartDrawerContent() {
   const body = document.getElementById('cartBody');
   if(!cart.length) {
@@ -568,6 +798,9 @@ function renderCartDrawerContent() {
   const subTotal = cart.reduce((acc, it) => acc + (it.price * it.qty), 0);
   const origTotal = cart.reduce((acc, it) => acc + (it.orig * it.qty), 0);
   const totalSavings = origTotal - subTotal;
+
+  const defaultName = currentUser ? currentUser.name : '';
+  const defaultPhone = currentUser ? currentUser.phone : '';
 
   body.innerHTML = `
     <div>
@@ -606,14 +839,13 @@ function renderCartDrawerContent() {
         <span>Total Amount</span>
         <span>₹${subTotal.toLocaleString('en-IN')}</span>
       </div>
-      <div style="font-size:12px;color:var(--fk-green);font-weight:700;margin-top:8px;">You will save ₹${totalSavings.toLocaleString('en-IN')} on this order</div>
     </div>
 
     <div class="checkout-box">
       <h3>Delivery Address</h3>
       <form onsubmit="processOrderPlacement(event)">
-        <input type="text" id="orderCustName" placeholder="Customer Full Name" required>
-        <input type="tel" id="orderCustPhone" placeholder="Mobile Number (10 digits)" required pattern="[0-9]{10}">
+        <input type="text" id="orderCustName" placeholder="Customer Full Name" value="${defaultName}" required>
+        <input type="tel" id="orderCustPhone" placeholder="Mobile Number (10 digits)" value="${defaultPhone}" required pattern="[0-9]{10}">
         <textarea id="orderCustAddr" placeholder="Delivery Address, Shop/Flat No, Landmark" rows="2" required></textarea>
         
         <div class="payment-choice">
@@ -628,10 +860,8 @@ function renderCartDrawerContent() {
   `;
 }
 
-// HANDLE ORDER SUBMISSION
 function processOrderPlacement(e) {
   e.preventDefault();
-
   const name = document.getElementById('orderCustName').value.trim();
   const phone = document.getElementById('orderCustPhone').value.trim();
   const addr = document.getElementById('orderCustAddr').value.trim();
@@ -650,17 +880,15 @@ function processOrderPlacement(e) {
     totalPayable: total,
     paymentMethod: payment,
     date: new Date().toLocaleDateString('en-IN', {day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit'}),
-    statusStep: 1 // 1: Placed, 2: Packed, 3: Out for Delivery, 4: Delivered
+    statusStep: 1
   };
 
   orders.unshift(newOrder);
   persistOrders();
 
-  // Clear current cart
   cart = [];
   persistCart();
 
-  // Render Confirmation inside drawer
   const body = document.getElementById('cartBody');
   body.innerHTML = `
     <div class="success-screen">
@@ -678,7 +906,7 @@ function processOrderPlacement(e) {
       </div>
 
       <a class="btn-wa-order" target="_blank" href="https://wa.me/918766641866?text=${encodeURIComponent(
-        `Hello PAG Moters! I have placed an order.\n\n*Order ID:* ${orderId}\n*Name:* ${name}\n*Phone:* ${phone}\n*Address:* ${addr}\n*Items:* ${itemsText}\n*Total:* ₹${total}\n*Payment:* ${payment}`
+        `Hello PAG Moters! I placed an order.\n\n*Order ID:* ${orderId}\n*Name:* ${name}\n*Phone:* ${phone}\n*Address:* ${addr}\n*Items:* ${itemsText}\n*Total:* ₹${total}\n*Payment:* ${payment}`
       )}">
         Send Order on WhatsApp 💬
       </a>
@@ -688,11 +916,12 @@ function processOrderPlacement(e) {
   `;
 }
 
-// TRACK ORDER MODAL SYSTEM
 function openTrackModal() {
   document.getElementById('trackModalOverlay').classList.add('show');
-  // Auto-fill recent order if available
-  if(orders.length) {
+  if(currentUser) {
+    document.getElementById('trackInput').value = currentUser.phone;
+    performOrderSearch();
+  } else if(orders.length) {
     document.getElementById('trackInput').value = orders[0].id;
     performOrderSearch();
   }
@@ -729,7 +958,6 @@ function performOrderSearch() {
         <span style="font-size:12px;color:var(--muted)">${matched.date}</span>
       </div>
 
-      <!-- 4 STAGE PROGRESS TRACKER -->
       <div class="timeline">
         <div class="timeline-step completed">
           <div class="timeline-dot">✓</div>
@@ -764,10 +992,10 @@ function performOrderSearch() {
   `;
 }
 
-// INITIAL STARTUP
 window.addEventListener('DOMContentLoaded', () => {
   displayProducts(catalog);
   syncCartUI();
+  syncAuthUI();
 });
 </script>
 </body>
