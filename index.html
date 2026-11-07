@@ -10,44 +10,69 @@
 :root{box-sizing:border-box;--bg:#f1f3f6;--surface:#fff;--text:#212121;--muted:#6b6f76;--line:#e0e0e0;--brand:#2874f0;--brand-ink:#fff;--accent:#ffe500;--accent-ink:#212121;--cta:#fb641b;--good:#388e3c;--good-ink:#fff}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font:14px/1.45 Roboto,"Segoe UI",Arial,sans-serif}
-header{background:var(--brand);color:var(--brand-ink);position:sticky;top:0;z-index:10}
-.bar{max-width:1200px;margin:auto;display:flex;align-items:center;gap:16px;padding:10px 14px}
+header{background:var(--brand);color:var(--brand-ink);position:sticky;top:0;z-index:20;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.bar{max-width:1200px;margin:auto;display:flex;align-items:center;gap:14px;padding:10px 14px}
 .logo{font-weight:800;font-size:22px;font-style:italic;letter-spacing:-.5px;white-space:nowrap;cursor:pointer}
 .logo small{display:block;font-size:11px;font-weight:500;font-style:italic;color:var(--accent);margin-top:-4px}
 .search{flex:1;display:flex;max-width:560px}
 .search input{flex:1;border:0;padding:10px 12px;font-size:14px;border-radius:2px 0 0 2px;background:#fff;color:#212121;min-width:0}
 .search button{border:0;background:#fff;color:var(--brand);padding:0 14px;border-radius:0 2px 2px 0;font-size:16px;cursor:pointer}
-.cart{background:var(--accent);color:var(--accent-ink);border:0;font-weight:700;padding:9px 16px;border-radius:2px;cursor:pointer;font-size:14px;white-space:nowrap}
+
+/* COMPACT HEADER CART BOX */
+.cart-box{background:#fff;color:var(--brand);border:2px solid var(--accent);padding:6px 14px;border-radius:6px;cursor:pointer;display:flex;align-items:center;gap:10px;font-weight:700;transition:transform .2s,box-shadow .2s;white-space:nowrap}
+.cart-box:hover{transform:scale(1.03);box-shadow:0 3px 10px rgba(0,0,0,.2)}
+.cart-icon{font-size:20px;position:relative}
+.cart-badge{position:absolute;top:-8px;right:-12px;background:var(--cta);color:#fff;font-size:11px;padding:1px 6px;border-radius:12px;font-weight:800;border:2px solid #fff}
+.cart-info{display:flex;flex-direction:column;align-items:flex-start;line-height:1.2}
+.cart-info small{font-size:11px;color:var(--muted);font-weight:500}
+.cart-bounce{animation:bump .35s ease}
+
+@keyframes bump{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.22)}
+  100%{transform:scale(1)}
+}
+
+/* FLYING BALL ANIMATION */
+.fly-ball{position:fixed;width:24px;height:24px;background:var(--cta);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;pointer-events:none;z-index:9999;box-shadow:0 4px 10px rgba(251,100,27,.6);transition:all .6s cubic-bezier(0.18, 0.89, 0.32, 1.28)}
+
 nav{background:var(--surface);border-bottom:1px solid var(--line)}
-nav ul{max-width:1200px;margin:auto;display:flex;gap:22px;list-style:none;padding:9px 14px;overflow-x:auto;white-space:nowrap}
+nav ul{max-width:1200px;margin:auto;display:flex;gap:20px;list-style:none;padding:9px 14px;overflow-x:auto;white-space:nowrap}
 nav li{font-weight:500;cursor:pointer;padding-bottom:2px}
 nav li.on{color:var(--brand);border-bottom:2px solid var(--brand)}
 .hero{max-width:1200px;margin:12px auto 0;padding:0 14px}
-.banner{background:var(--accent);color:var(--accent-ink);border-radius:2px;padding:22px 26px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
-.banner h1{margin:0;font-size:24px;line-height:1.15}
+.banner{background:var(--accent);color:var(--accent-ink);border-radius:4px;padding:18px 24px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.banner h1{margin:0;font-size:22px;line-height:1.15}
 .banner p{margin:4px 0 0}
-.tag{background:#212121;color:#ffe500;padding:8px 14px;font-weight:700;border-radius:2px}
-main{max-width:1200px;margin:12px auto;padding:0 14px;display:grid;grid-template-columns:240px 1fr;gap:12px}
-aside{background:var(--surface);align-self:start;border-radius:2px;position:sticky;top:62px}
-aside h2{font-size:16px;margin:0;padding:14px 16px;border-bottom:1px solid var(--line)}
-.f{padding:14px 16px;border-bottom:1px solid var(--line)}
-.f h3{margin:0 0 8px;font-size:12px;color:var(--muted);font-weight:500}
-.f label{display:flex;gap:8px;align-items:center;padding:3px 0;cursor:pointer}
-.panel{background:var(--surface);border-radius:2px}
+.tag{background:#212121;color:#ffe500;padding:8px 14px;font-weight:700;border-radius:4px}
+main{max-width:1200px;margin:12px auto;padding:0 14px;display:grid;grid-template-columns:220px 1fr;gap:12px}
+aside{background:var(--surface);align-self:start;border-radius:4px;position:sticky;top:66px}
+aside h2{font-size:15px;margin:0;padding:12px 16px;border-bottom:1px solid var(--line)}
+.f{padding:12px 16px;border-bottom:1px solid var(--line)}
+.f label{display:flex;gap:8px;align-items:center;padding:4px 0;cursor:pointer}
+.panel{background:var(--surface);border-radius:4px}
 .top{display:flex;gap:16px;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap}
 .top b{margin-right:auto}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
-.card{padding:16px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:6px}
-.card:hover{box-shadow:0 3px 12px rgba(0,0,0,.12);z-index:1}
-.pic{height:140px;border-radius:2px;display:grid;place-items:center;background:#f9f9f9;overflow:hidden;font-size:40px}
-.card h4{margin:6px 0 0;font-size:14px;font-weight:500}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}
+.card{padding:14px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:6px;position:relative}
+.card:hover{box-shadow:0 3px 12px rgba(0,0,0,.1);z-index:1}
+.pic{height:130px;border-radius:4px;display:grid;place-items:center;background:#f8f9fa;overflow:hidden;font-size:42px}
+.card h4{margin:4px 0 0;font-size:14px;font-weight:600}
 .spec{color:var(--muted);font-size:12px;margin:0}
 .pr{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
-.pr strong{font-size:18px}.pr s{color:var(--muted);font-size:13px}.pr em{color:var(--good);font-style:normal;font-weight:500;font-size:13px}
-.buy{margin-top:auto;background:var(--cta);color:#fff;border:0;padding:9px;font-weight:700;border-radius:2px;cursor:pointer}
-.buy:hover{opacity:.95}
+.pr strong{font-size:17px}.pr s{color:var(--muted);font-size:12px}.pr em{color:var(--good);font-style:normal;font-weight:600;font-size:12px}
+
+/* IN-CARD BUTTONS & QTY SELECTOR */
+.btn-holder{margin-top:auto;padding-top:6px}
+.buy{background:var(--cta);color:#fff;border:0;padding:9px 12px;font-weight:700;border-radius:4px;cursor:pointer;width:100%;font-size:13px;display:flex;align-items:center;justify-content:center;gap:6px}
+.buy:hover{opacity:.94}
+.qty-ctrl{display:flex;align-items:center;justify-content:space-between;background:var(--brand);color:#fff;border-radius:4px;overflow:hidden;font-weight:700}
+.qty-ctrl button{background:none;border:0;color:#fff;padding:8px 14px;font-size:16px;cursor:pointer;font-weight:800}
+.qty-ctrl button:hover{background:rgba(255,255,255,.2)}
+.qty-ctrl span{font-size:14px}
+
 .perks{max-width:1200px;margin:16px auto;padding:0 14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
-.perks div{background:var(--surface);padding:14px 16px;border-radius:2px}
+.perks div{background:var(--surface);padding:14px 16px;border-radius:4px}
 .perks b{display:block}
 footer{background:#172337;color:#c8ccd2;padding:22px 14px;text-align:center;font-size:12px;margin-top:24px}
 .strip{background:#172337;color:#fff;font-size:12px}
@@ -60,13 +85,13 @@ footer{background:#172337;color:#c8ccd2;padding:22px 14px;text-align:center;font
 .biz dl{margin:0;display:grid;gap:10px}
 .biz dt{font-size:12px;color:var(--muted)}
 .biz dd{margin:0;font-weight:500}
-.biz dd a{color:var(--brand);font-weight:700;text-decoration:none;font-size:16px;margin-right:14px;white-space:nowrap}
+.biz dd a{color:var(--brand);font-weight:700;text-decoration:none;font-size:16px;margin-right:14px}
 .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
-.acts a{background:var(--cta);color:#fff;text-decoration:none;font-weight:700;padding:9px 14px;border-radius:2px}
+.acts a{background:var(--cta);color:#fff;text-decoration:none;font-weight:700;padding:9px 14px;border-radius:4px}
 .acts a.alt{background:var(--brand)}
 .biz img{width:100%;height:auto;border-radius:6px;display:block}
 
-/* CART DRAWER & CHECKOUT */
+/* DRAWER (Only opens on header cart click) */
 .drawer{position:fixed;inset:0;display:none;z-index:100}
 .drawer.open{display:block}
 .drawer .shade{position:absolute;inset:0;background:rgba(0,0,0,.5)}
@@ -81,12 +106,12 @@ footer{background:#172337;color:#c8ccd2;padding:22px 14px;text-align:center;font
 .it .rem{background:none;border:0;color:#d32f2f;cursor:pointer;font-size:12px;font-weight:700}
 .tot{font-size:16px;font-weight:700;display:flex;justify-content:space-between;padding:12px 0;border-top:2px solid var(--line)}
 .chk-form{display:grid;gap:10px}
-.chk-form input,.chk-form textarea,.chk-form select{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:2px;background:var(--bg);font:inherit}
+.chk-form input,.chk-form textarea{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:4px;background:var(--bg);font:inherit}
 .pay-opt{display:grid;gap:6px;margin:6px 0}
-.pay-opt label{display:flex;align-items:center;gap:8px;padding:8px;border:1px solid var(--line);border-radius:2px;cursor:pointer}
+.pay-opt label{display:flex;align-items:center;gap:8px;padding:8px;border:1px solid var(--line);border-radius:4px;cursor:pointer}
 .status-card{background:#e8f5e9;border:1px solid #c8e6c9;padding:16px;border-radius:4px;text-align:center}
 .status-card h3{margin:0 0 6px;color:var(--good)}
-.btn-wa{background:#25d366;color:#fff;border:0;padding:12px;width:100%;font-weight:700;border-radius:2px;cursor:pointer;font-size:15px;text-decoration:none;display:block;text-align:center;margin-top:10px}
+.btn-wa{background:#25d366;color:#fff;border:0;padding:12px;width:100%;font-weight:700;border-radius:4px;cursor:pointer;font-size:15px;text-decoration:none;display:block;text-align:center;margin-top:10px}
 @media (max-width:800px){main{grid-template-columns:1fr}aside{display:none}.biz .panel{grid-template-columns:1fr}}
 </style>
 </head>
@@ -99,7 +124,19 @@ footer{background:#172337;color:#c8ccd2;padding:22px 14px;text-align:center;font
   <input id="q" type="search" placeholder="Search helmets, chargers, batteries..." oninput="searchProducts()">
   <button type="button" onclick="searchProducts()">⌕</button>
 </form>
-<button class="cart" id="cartBtn" onclick="toggleCart()">Cart (0)</button>
+
+<!-- COMPACT CART BOX WITH BADGE -->
+<div class="cart-box" id="cartBox" onclick="toggleCart()">
+  <div class="cart-icon">
+    🛒
+    <span class="cart-badge" id="cartBadge">0</span>
+  </div>
+  <div class="cart-info">
+    <span id="cartBoxText">Cart</span>
+    <small id="cartBoxTotal">₹0</small>
+  </div>
+</div>
+
 </div>
 </header>
 <nav>
@@ -137,235 +174,3 @@ footer{background:#172337;color:#c8ccd2;padding:22px 14px;text-align:center;font
 <div class="top"><b id="pCount">Showing Products</b></div>
 <div class="grid" id="grid"></div>
 </div>
-</main>
-
-<div class="perks">
-<div><b>Fast Hand-to-Hand Delivery</b>Local doorstep service in Mharal Gaon</div>
-<div><b>100% Genuine Parts</b>Checked and tested by specialists</div>
-<div><b>Instant Support</b>Call / WhatsApp anytime for help</div>
-</div>
-
-<section class="biz" id="shop"><div class="panel">
-<div>
-<h2>PAG Moters</h2>
-<p class="sub">Spare Parts, EV Accessories &amp; Repair</p>
-<dl>
-<div><dt>Shop Address</dt><dd>Shop no 68, MIDC Gate,<br>Near Gram Panchayat Office,<br>Mharal Gaon 421001</dd></div>
-<div><dt>Contact Numbers</dt><dd><a href="tel:+918766641866">8766641866</a><a href="tel:+917379595655">7379595655</a></dd></div>
-</dl>
-<div class="acts">
-  <a href="tel:+918766641866">Call Now</a>
-  <a class="alt" href="https://wa.me/918766641866" target="_blank">WhatsApp Us</a>
-  <a class="alt" href="https://www.google.com/maps/search/?api=1&amp;query=MIDC+Gate+Gram+Panchayat+Office+Mharal+Gaon+421001" target="_blank">View Map</a>
-</div>
-</div>
-<img src="/pag-moters-card.jpg" alt="PAG Moters Shop visiting card" width="1536" height="1024" loading="lazy">
-</div></section>
-
-<footer>
-<b style="color:#fff">PAG Moters</b> – EV Spare Parts, Accessories &amp; Service<br>
-Shop no 68, MIDC Gate, Mharal Gaon 421001 · Call 8766641866 / 7379595655<br>
-© 2026 PAG Moters · pagmoters.online
-</footer>
-
-<!-- CART / CHECKOUT DRAWER -->
-<div class="drawer" id="cartDrawer">
-<div class="shade" onclick="toggleCart()"></div>
-<div class="box">
-  <div class="hd">
-    <h2 id="cartHeading">Your Cart</h2>
-    <button class="x" onclick="toggleCart()">×</button>
-  </div>
-  
-  <div class="cart-body" id="cartContent">
-    <!-- Cart Items will render here -->
-  </div>
-</div>
-</div>
-
-<script>
-// PRODUCTS LIST (Scooters completely removed)
-const products = [
-  {id: 1, name: "ISI Full Face Safety Helmet", cat: "Helmets", price: 899, orig: 1499, icon: "🪖", spec: "ISI certified, scratch-proof visor"},
-  {id: 2, name: "Open Face City Rider Helmet", cat: "Helmets", price: 650, orig: 999, icon: "🪖", spec: "Lightweight, breathable interior"},
-  {id: 3, name: "60V EV Smart Battery Fast Charger", cat: "Chargers", price: 1850, orig: 2499, icon: "🔌", spec: "Auto cut-off, short circuit protection"},
-  {id: 4, name: "48V High Efficiency EV Charger", cat: "Chargers", price: 1650, orig: 2200, icon: "🔌", spec: "Heavy duty copper cooling fan"},
-  {id: 5, name: "Type-C Fast Braided Cable (65W)", cat: "Mobile Cables", price: 249, orig: 499, icon: "⚡", spec: "Super fast charging, unbreakable nylon"},
-  {id: 6, name: "3-in-1 Multi Fast Charging Cable", cat: "Mobile Cables", price: 349, orig: 699, icon: "🔌", spec: "Lightning + Type-C + Micro USB"},
-  {id: 7, name: "Bass Pro Magnetic Wireless Neckband", cat: "Earphones", price: 499, orig: 999, icon: "🎧", spec: "30 hrs playtime, deep bass sound"},
-  {id: 8, name: "True Wireless Stereo Earbuds", cat: "Earphones", price: 799, orig: 1999, icon: "🎵", spec: "Touch controls, noise cancellation mic"},
-  {id: 9, name: "Heavy Duty All-Weather Scooter Cover", cat: "Accessories", price: 399, orig: 799, icon: "🛡️", spec: "Waterproof, dust and UV protect"},
-  {id: 10, name: "Universal Waterproof Mobile Mount", cat: "Accessories", price: 299, orig: 599, icon: "📱", spec: "360° rotation for handlebar"},
-  {id: 11, name: "48V 24Ah Lithium-Ion Battery Pack", cat: "Batteries", price: 14500, orig: 18000, icon: "🔋", spec: "High grade cells, 3 yr life guarantee"}
-];
-
-let cart = JSON.parse(localStorage.getItem('pag_cart') || '[]');
-
-function saveCart() {
-  localStorage.setItem('pag_cart', JSON.stringify(cart));
-  updateCartBadge();
-}
-
-function updateCartBadge() {
-  const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
-  document.getElementById('cartBtn').innerText = `Cart (${totalCount})`;
-}
-
-function renderProducts(list) {
-  const grid = document.getElementById('grid');
-  document.getElementById('pCount').innerText = `${list.length} Products Available`;
-  if(!list.length) {
-    grid.innerHTML = '<div style="padding:40px;text-align:center;grid-column:1/-1;">No products found in this category.</div>';
-    return;
-  }
-  grid.innerHTML = list.map(p => `
-    <div class="card">
-      <div class="pic">${p.icon}</div>
-      <h4>${p.name}</h4>
-      <p class="spec">${p.spec}</p>
-      <div class="pr">
-        <strong>₹${p.price.toLocaleString('en-IN')}</strong>
-        <s>₹${p.orig.toLocaleString('en-IN')}</s>
-        <em>${Math.round((1 - p.price/p.orig)*100)}% off</em>
-      </div>
-      <button class="buy" onclick="addToCart(${p.id})">Add to Cart</button>
-    </div>
-  `).join('');
-}
-
-function filterCat(catName) {
-  document.querySelectorAll('#navCats li').forEach(li => {
-    li.classList.toggle('on', li.innerText === catName || (catName === 'All' && li.innerText === 'All Products'));
-  });
-  if(catName === 'All') renderProducts(products);
-  else renderProducts(products.filter(p => p.cat === catName));
-}
-
-function searchProducts() {
-  const term = document.getElementById('q').value.toLowerCase();
-  const filtered = products.filter(p => p.name.toLowerCase().includes(term) || p.cat.toLowerCase().includes(term));
-  renderProducts(filtered);
-}
-
-function addToCart(id) {
-  const item = products.find(p => p.id === id);
-  const existing = cart.find(c => c.id === id);
-  if(existing) {
-    existing.qty += 1;
-  } else {
-    cart.push({...item, qty: 1});
-  }
-  saveCart();
-  toggleCart(true);
-}
-
-function changeQty(id, delta) {
-  const idx = cart.findIndex(c => c.id === id);
-  if(idx > -1) {
-    cart[idx].qty += delta;
-    if(cart[idx].qty <= 0) cart.splice(idx, 1);
-    saveCart();
-    renderCartDrawer();
-  }
-}
-
-function toggleCart(forceOpen = false) {
-  const drawer = document.getElementById('cartDrawer');
-  if(forceOpen) drawer.classList.add('open');
-  else drawer.classList.toggle('open');
-  if(drawer.classList.contains('open')) renderCartDrawer();
-}
-
-function renderCartDrawer() {
-  const c = document.getElementById('cartContent');
-  if(!cart.length) {
-    c.innerHTML = `
-      <div style="text-align:center;padding:40px 10px;color:var(--muted)">
-        <div style="font-size:40px;margin-bottom:10px;">🛒</div>
-        <b>Your cart is empty</b><br>
-        <p>Add some parts or accessories to continue.</p>
-      </div>`;
-    return;
-  }
-
-  const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-
-  c.innerHTML = `
-    <div>
-      ${cart.map(item => `
-        <div class="it">
-          <div>
-            <b>${item.name}</b>
-            <small>₹${item.price} x ${item.qty} = ₹${item.price * item.qty}</small>
-          </div>
-          <div style="display:flex;gap:6px;align-items:center;">
-            <button onclick="changeQty(${item.id}, -1)" style="padding:2px 8px;cursor:pointer">-</button>
-            <span>${item.qty}</span>
-            <button onclick="changeQty(${item.id}, 1)" style="padding:2px 8px;cursor:pointer">+</button>
-            <button class="rem" onclick="changeQty(${item.id}, -${item.qty})">✕</button>
-          </div>
-        </div>
-      `).join('')}
-    </div>
-    
-    <div class="tot">
-      <span>Grand Total</span>
-      <span>₹${total.toLocaleString('en-IN')}</span>
-    </div>
-
-    <form class="chk-form" onsubmit="handlePlaceOrder(event)">
-      <h3 style="margin:4px 0;">Delivery Details</h3>
-      <input type="text" id="custName" placeholder="Full Name" required>
-      <input type="tel" id="custPhone" placeholder="Mobile Number (10 digits)" required pattern="[0-9]{10}">
-      <textarea id="custAddr" placeholder="Delivery Address / Landmark" rows="2" required></textarea>
-      
-      <div class="pay-opt">
-        <b>Payment Option:</b>
-        <label><input type="radio" name="payMethod" value="Cash on Delivery" checked> Cash on Delivery (COD)</label>
-        <label><input type="radio" name="payMethod" value="UPI / Online Payment"> UPI / Online Payment</label>
-      </div>
-      <button class="buy" type="submit" style="padding:12px;font-size:15px;">Confirm &amp; Place Order</button>
-    </form>
-  `;
-}
-
-function handlePlaceOrder(e) {
-  e.preventDefault();
-  const name = document.getElementById('custName').value;
-  const phone = document.getElementById('custPhone').value;
-  const addr = document.getElementById('custAddr').value;
-  const pay = document.querySelector('input[name="payMethod"]:checked').value;
-  
-  const orderId = 'PAG-' + Math.floor(100000 + Math.random() * 900000);
-  const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-  const itemList = cart.map(i => `${i.name} (Qty: ${i.qty})`).join(', ');
-
-  const c = document.getElementById('cartContent');
-  c.innerHTML = `
-    <div class="status-card">
-      <h3>🎉 Order Placed Successfully!</h3>
-      <p style="margin:4px 0;">Status: <b>Confirmed &amp; Under Processing</b></p>
-      <p style="font-size:13px;color:var(--muted);">Order ID: <b>${orderId}</b></p>
-    </div>
-
-    <div style="background:var(--bg);padding:12px;border-radius:4px;font-size:13px;display:grid;gap:4px;">
-      <div><b>Customer:</b> ${name} (${phone})</div>
-      <div><b>Address:</b> ${addr}</div>
-      <div><b>Items:</b> ${itemList}</div>
-      <div><b>Total Payable:</b> ₹${total.toLocaleString('en-IN')} (${pay})</div>
-    </div>
-
-    <a class="btn-wa" target="_blank" href="https://wa.me/918766641866?text=${encodeURIComponent(
-      `Hello PAG Moters, I placed an order!\n\nOrder ID: ${orderId}\nName: ${name}\nPhone: ${phone}\nAddress: ${addr}\nItems: ${itemList}\nTotal: ₹${total}\nPayment: ${pay}`
-    )}">Send Order Details to WhatsApp 💬</a>
-    
-    <button class="buy" onclick="cart=[];saveCart();toggleCart();" style="background:#212121;margin-top:8px;">Back to Shopping</button>
-  `;
-}
-
-// Initial render on load
-renderProducts(products);
-updateCartBadge();
-</script>
-</body>
-</html>
