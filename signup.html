@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sign up – PAG Moters</title><link rel="stylesheet" href="/auth.css"></head>
+<body>
+<header><a href="/">PAG Moters<small>Electric Vehicles</small></a></header>
+<div class="wrap">
+  <div class="side"><h1>Sign up</h1><p>Create an account with your mobile number to save addresses and order faster next time.</p></div>
+  <form class="main" id="f" novalidate>
+    <label for="name">Full name</label>
+    <input id="name" autocomplete="name" maxlength="80" required>
+    <label for="phone">Mobile number</label>
+    <div class="ph"><span>+91</span><input id="phone" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="10" placeholder="10-digit mobile number" required></div>
+    <label for="email">Email (optional)</label>
+    <input id="email" type="email" autocomplete="email" maxlength="120">
+    <label for="pw">Password</label>
+    <input id="pw" type="password" autocomplete="new-password" minlength="6" placeholder="At least 6 characters" required>
+    <label for="pw2">Confirm password</label>
+    <input id="pw2" type="password" autocomplete="new-password" required>
+    <div class="err" role="alert"></div>
+    <button class="btn" type="submit">Create account</button>
+    <p class="alt">Already have an account? <a href="/login" data-keep>Login</a></p>
+  </form>
+</div>
+<script src="/auth.js"></script>
+<script>
+keepNext(); digits($("phone"));
+me().then((c) => { if (c) location.replace(nextUrl() === "/" ? "/account" : nextUrl()); });
+submitForm($("f"), "/api/auth/signup", () => {
+  const name = $("name").value.trim();
+  if (name.length < 2) throw new Error("Enter your full name");
+  const phone = checkPhone($("phone").value);
+  const email = $("email").value.trim();
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new Error("Enter a valid email");
+  const password = $("pw").value;
+  if (password.length < 6) throw new Error("Password must be at least 6 characters");
+  if (password !== $("pw2").value) throw new Error("Passwords do not match");
+  return { name, phone, email, password };
+});
+</script>
+</body></html>

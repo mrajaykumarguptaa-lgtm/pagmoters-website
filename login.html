@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Login – PAG Moters</title><link rel="stylesheet" href="/auth.css"></head>
+<body>
+<header><a href="/">PAG Moters<small>Electric Vehicles</small></a></header>
+<div class="wrap">
+  <div class="side"><h1>Login</h1><p>Log in with your mobile number to see your saved addresses and check out faster.</p></div>
+  <form class="main" id="f" novalidate>
+    <label for="phone">Mobile number</label>
+    <div class="ph"><span>+91</span><input id="phone" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="10" placeholder="10-digit mobile number" required></div>
+    <label for="pw">Password</label>
+    <input id="pw" type="password" autocomplete="current-password" required>
+    <div class="err" role="alert"></div>
+    <button class="btn" type="submit">Login</button>
+    <p class="alt">New to PAG Moters? <a href="/signup" data-keep>Create an account</a></p>
+  </form>
+</div>
+<script src="/auth.js"></script>
+<script>
+keepNext(); digits($("phone"));
+me().then((c) => { if (c) location.replace(nextUrl() === "/" ? "/account" : nextUrl()); });
+submitForm($("f"), "/api/auth/login", () => {
+  const phone = checkPhone($("phone").value), password = $("pw").value;
+  if (!password) throw new Error("Enter your password");
+  return { phone, password };
+});
+</script>
+</body></html>

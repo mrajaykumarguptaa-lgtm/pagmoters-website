@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>My account – PAG Moters</title><link rel="stylesheet" href="/auth.css"></head>
+<body>
+<header><a href="/">PAG Moters<small>Electric Vehicles</small></a></header>
+<div class="wrap">
+  <div class="side"><h1>My account</h1><p id="who">Loading…</p></div>
+  <div class="main">
+    <h2 id="hname"></h2>
+    <p class="muted" id="hinfo"></p>
+    <h3>Saved addresses</h3>
+    <div id="list"><p class="muted">Loading…</p></div>
+    <h3>Add a new address</h3>
+    <form id="f" novalidate>
+      <label for="label">Save as</label>
+      <select id="label"><option>Home</option><option>Work</option><option>Other</option></select>
+      <label for="aname">Receiver's name</label><input id="aname" maxlength="80" autocomplete="name">
+      <label for="aphone">Mobile number</label>
+      <div class="ph"><span>+91</span><input id="aphone" type="tel" inputmode="numeric" maxlength="10"></div>
+      <label for="line">Full address</label><textarea id="line" rows="3" maxlength="300" autocomplete="street-address"></textarea>
+      <label for="pin">PIN code</label><input id="pin" inputmode="numeric" maxlength="6" autocomplete="postal-code">
+      <div class="err" role="alert"></div>
+      <button class="btn" type="submit">Save address</button>
+    </form>
+    <a class="btn sec" href="/" style="text-align:center;text-decoration:none">Continue shopping</a>
+    <button class="btn sec" id="out" type="button">Logout</button>
+  </div>
+</div>
+<script src="/auth.js"></script>
+<script>
+digits($("aphone"));
+$("pin").addEventListener("input", (e) => { e.target.value = e.target.value.replace(/\D/g, "").slice(0, 6); });
+async function load() {
+  try {
+    const { addresses } = await api("/api/addresses");
+    $("list").innerHTML = addresses.length ? addresses.map((a) => `<div class="card"><div><b>${esc(a.name)}<small>${esc(a.label)}</small></b><br>${esc(a.line)} – ${esc(a.pin)}<br><span class="muted">${esc(a.phone)}</span></div><button data-id="${a.id}" aria-label="Delete address">Delete</button></div>`).join("") : '<p class="muted">No saved addresses yet.</p>';
+  } catch (x) { $("list").innerHTML = `<p class="err">${esc(x.message)}</p>`; }
+}
+me().then((c) => {
+  if (!c) return location.replace("/login?next=/account");
+  $("who").textContent = "Hi, " + c.name.split(" ")[0] + "! Manage your details and saved addresses here.";
+  $("hname").textContent = c.name;
+  $("hinfo").textContent = "+91 " + c.phone + (c.email ? " · " + c.email : "");
+  $("aname").value = c.name; $("aphone").value = c.phone;
+  load();
+});
+$("list").addEventListener("click", async (e) => {
+  const id = e.target.dataset.id; if (!id || !confirm("Delete this address?")) return;
+  try { await api("/api/addresses?id=" + encodeURIComponent(id), { method: "DELETE" }); load(); } catch (x) { alert(x.message); }
+});
+$("f").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const err = e.target.querySelector(".err"), btn = e.target.querySelector("button[type=submit]");
+  err.textContent = "";
+  const b = { label: $("label").value, name: $("aname").value.trim(), phone: $("aphone").value, line: $("line").value.trim(), pin: $("pin").value };
+  try {
+    if (b.name.length < 2) throw new Error("Enter the receiver's name");
+    checkPhone(b.phone);
+    if (b.line.length < 8) throw new Error("Enter the full address");
+    if (!/^[1-9]\d{5}$/.test(b.pin)) throw new Error("Enter a valid 6-digit PIN code");
+  } catch (x) { err.textContent = x.message; return; }
+  btn.disabled = true;
+  try { await api("/api/addresses", { method: "POST", body: b }); $("line").value = ""; $("pin").value = ""; load(); }
+  catch (x) { err.textContent = x.message; }
+  btn.disabled = false;
+});
+$("out").addEventListener("click", async () => {
+  try { await api("/api/auth/logout", { method: "POST" }); } catch {}
+  location.href = "/";
+});
+</script>
+</body></html>
