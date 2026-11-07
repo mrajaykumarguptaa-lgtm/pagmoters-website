@@ -64,15 +64,57 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 .nav-sub li{font-size:14px;font-weight:600;cursor:pointer;color:#333;display:flex;flex-direction:column;align-items:center;gap:4px;transition:color .2s}
 .nav-sub li.active{color:var(--fk-blue);border-bottom:2px solid var(--fk-blue);padding-bottom:4px}
 
-/* HERO BANNER */
-.hero-slider{max-width:1240px;margin:12px auto;padding:0 14px}
-.banner-card{background:linear-gradient(90deg, #1c4fa8 0%, #2874f0 100%);color:#fff;padding:20px 28px;border-radius:4px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
-.banner-card h1{margin:0;font-size:24px;font-weight:800}
-.banner-card p{margin:6px 0 0;font-size:14px;color:#e0e7ff}
-.banner-badge{background:var(--fk-yellow);color:#212121;font-weight:800;padding:8px 16px;border-radius:4px;font-size:13px}
+/* BIG SALE BANNER (FLIPKART STYLE) */
+.sale-banner-wrap{max-width:1240px;margin:14px auto 0;padding:0 14px}
+.big-sale-banner{
+  background: radial-gradient(circle at 80% 50%, #ff5252, #b71c1c 45%, #0d47a1 95%);
+  color:#fff;
+  border-radius:6px;
+  padding:32px 36px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);
+  position:relative;
+  overflow:hidden;
+}
+.big-sale-banner::after{
+  content:"SALE";
+  position:absolute;
+  right:15px;
+  bottom:-25px;
+  font-size:130px;
+  font-weight:900;
+  color:rgba(255,255,255,.07);
+  pointer-events:none;
+}
+.sale-tag-pill{
+  background:var(--fk-yellow);
+  color:#111;
+  font-size:12px;
+  font-weight:800;
+  padding:4px 12px;
+  border-radius:20px;
+  display:inline-block;
+  margin-bottom:8px;
+  letter-spacing:1px;
+}
+.big-sale-banner h1{margin:0;font-size:32px;font-weight:900;letter-spacing:-.5px;line-height:1.2}
+.big-sale-banner p{margin:8px 0 0;font-size:15px;color:#fce4ec}
+.sale-timer{
+  background:rgba(0,0,0,.35);
+  border:1px solid rgba(255,255,255,.25);
+  padding:14px 20px;
+  border-radius:6px;
+  text-align:center;
+  min-width:180px;
+}
+.sale-timer .label{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--fk-yellow);font-weight:700}
+.sale-timer .time{font-size:24px;font-weight:800;letter-spacing:1px;margin-top:2px}
 
 /* MAIN LAYOUT */
-.layout{max-width:1240px;margin:12px auto;padding:0 14px;display:grid;grid-template-columns:230px 1fr;gap:12px}
+.layout{max-width:1240px;margin:14px auto;padding:0 14px;display:grid;grid-template-columns:230px 1fr;gap:12px}
 .sidebar{background:var(--surface);padding:14px;border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.08);height:fit-content;position:sticky;top:70px}
 .sidebar h3{font-size:16px;margin:0 0 12px;padding-bottom:10px;border-bottom:1px solid var(--line)}
 .filter-group{display:flex;flex-direction:column;gap:8px}
@@ -138,8 +180,6 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 .auth-msg{font-size:13px;padding:8px 10px;border-radius:2px;display:none;line-height:1.4}
 .auth-msg.err{background:#ffebee;color:#c62828;display:block}
 .auth-msg.ok{background:#e8f5e9;color:#2e7d32;display:block}
-
-/* SECURITY ALERT PROMPT CARD */
 .sec-badge{background:#fff3e0;border-left:4px solid var(--fk-orange);padding:10px;font-size:12px;color:#d84315;border-radius:2px;margin-bottom:10px;line-height:1.4}
 
 /* CART DRAWER */
@@ -214,6 +254,8 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
   .product-grid{grid-template-columns:repeat(2,1fr)}
   .auth-card{grid-template-columns:1fr}
   .auth-left{display:none}
+  .big-sale-banner{padding:20px;flex-direction:column;align-items:flex-start}
+  .big-sale-banner h1{font-size:24px}
 }
 </style>
 </head>
@@ -268,13 +310,18 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
   </ul>
 </nav>
 
-<section class="hero-slider">
-  <div class="banner-card">
+<!-- BADA SALE BANNER (FLIPKART STYLE) -->
+<section class="sale-banner-wrap">
+  <div class="big-sale-banner">
     <div>
-      <h1>Big Savings on Genuine EV Spares</h1>
-      <p>Guaranteed authentic parts with instant hand-to-hand delivery in Mharal Gaon</p>
+      <span class="sale-tag-pill">🔥 MEGA FESTIVAL SALE</span>
+      <h1>BIGGEST DEALS ON EV ACCESSORIES</h1>
+      <p>Up to 60% Off on Fast Chargers, ISI Helmets &amp; Battery Packs. Limited Time Local Deals!</p>
     </div>
-    <div class="banner-badge">⚡ Special Local Offers</div>
+    <div class="sale-timer">
+      <div class="label">Offer Ends In</div>
+      <div class="time" id="saleClock">12h : 45m : 20s</div>
+    </div>
   </div>
 </section>
 
@@ -295,7 +342,7 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
 
   <main class="product-panel">
     <div class="panel-head">
-      <h2 id="productSectionTitle">All Products</h2>
+      <h2 id="productSectionTitle">Deals of the Day</h2>
       <span style="font-size:13px;color:var(--muted)" id="totalProductsCount">Showing items</span>
     </div>
     <div class="product-grid" id="productGrid"></div>
@@ -341,20 +388,19 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
   </div>
 </footer>
 
-<!-- AUTH MODAL WITH SECURITY VERIFICATION -->
+<!-- AUTH MODAL -->
 <div class="overlay" id="authOverlay">
   <div class="auth-card">
     <div class="auth-left">
       <div>
         <h2 id="authLeftTitle">Login</h2>
-        <p id="authLeftDesc">Get access to your Orders, Wishlist and Recommendations</p>
+        <p id="authLeftDesc">Get access to your Orders, Wishlist and Saved Details.</p>
       </div>
       <div class="shield-icon">🛡️</div>
     </div>
     <div class="auth-right">
       <button class="auth-close" id="authCloseBtn" onclick="closeAuthModal()">✕</button>
 
-      <!-- 1. LOGIN FORM -->
       <div id="loginSection">
         <form class="auth-form" onsubmit="handleLoginSubmit(event)">
           <div id="loginMsg" class="auth-msg"></div>
@@ -376,9 +422,8 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
         </div>
       </div>
 
-      <!-- 2. SECURE SIGNUP FORM (WITH SECURITY QUESTION) -->
       <div id="signupSection" style="display:none;">
-        <div class="sec-badge">🔒 <b>Security Check:</b> Choose a secret question. Without this, no one (not even with your mobile number) can reset your password.</div>
+        <div class="sec-badge">🔒 <b>Security Check:</b> Choose a secret question. Without this, no one can reset your password.</div>
         <form class="auth-form" onsubmit="handleSignupSubmit(event)">
           <div id="signupMsg" class="auth-msg"></div>
           <div>
@@ -400,7 +445,6 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
               <option value="What is your first bike/scooter model?">What is your first bike/scooter model?</option>
               <option value="What is your birthplace / hometown?">What is your birthplace / hometown?</option>
               <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
-              <option value="What is your favourite childhood school name?">What is your favourite childhood school name?</option>
             </select>
           </div>
           <div>
@@ -414,9 +458,8 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
         </div>
       </div>
 
-      <!-- 3. MANDATORY SECURITY SETUP (FOR EXISTING ACCOUNTS WITHOUT SECURITY) -->
       <div id="mandatorySecuritySection" style="display:none;">
-        <div class="sec-badge">⚠️ <b>Action Required:</b> Protect your account! Please set up a security question so no one can unauthorizedly change your password.</div>
+        <div class="sec-badge">⚠️ <b>Action Required:</b> Protect your account! Please set up a security question.</div>
         <form class="auth-form" onsubmit="handleSaveMandatorySecurity(event)">
           <div id="mandSecMsg" class="auth-msg"></div>
           <div>
@@ -426,7 +469,6 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
               <option value="What is your first bike/scooter model?">What is your first bike/scooter model?</option>
               <option value="What is your birthplace / hometown?">What is your birthplace / hometown?</option>
               <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
-              <option value="What is your favourite childhood school name?">What is your favourite childhood school name?</option>
             </select>
           </div>
           <div>
@@ -437,13 +479,11 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
         </form>
       </div>
 
-      <!-- 4. SECURE FORGOT PASSWORD (STEP 1: PHONE -> STEP 2: VERIFY ANSWER -> STEP 3: RESET) -->
       <div id="forgotSection" style="display:none;">
         <div id="forgotMsg" class="auth-msg"></div>
 
-        <!-- Step 1: Input Identifier -->
         <form id="forgotStep1Form" class="auth-form" onsubmit="handleForgotStep1(event)">
-          <p style="font-size:13px;color:#555;margin:0 0 6px;">Enter your registered 10-digit mobile number or email:</p>
+          <p style="font-size:13px;color:#555;margin:0 0 6px;">Enter your registered 10-digit mobile number:</p>
           <div>
             <label>Mobile Number</label>
             <input type="text" id="forgotId" placeholder="Enter mobile number" required>
@@ -451,10 +491,9 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
           <button type="submit" class="auth-btn-primary">Verify Account</button>
         </form>
 
-        <!-- Step 2: Answer Security Question -->
         <div id="forgotStep2Box" style="display:none;margin-top:12px;border-top:1px dashed var(--line);padding-top:10px;">
           <form class="auth-form" onsubmit="handleForgotStep2(event)">
-            <div class="sec-badge">🔒 <b>Identity Verification:</b> Please answer the security question you set during registration.</div>
+            <div class="sec-badge">🔒 <b>Identity Verification:</b> Please answer your secret question.</div>
             <div>
               <label>Security Question:</label>
               <div id="displaySecQuestion" style="font-weight:700;padding:8px;background:#f1f3f6;border-radius:2px;font-size:13px;"></div>
@@ -467,10 +506,9 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
           </form>
         </div>
 
-        <!-- Step 3: Enter New Password (ONLY IF ANSWER MATCHES) -->
         <div id="forgotStep3Box" style="display:none;margin-top:12px;border-top:1px dashed var(--line);padding-top:10px;">
           <form class="auth-form" onsubmit="handleForgotStep3(event)">
-            <div class="auth-msg ok" style="display:block;margin-bottom:8px;">✅ Identity Verified! You can now set a new password.</div>
+            <div class="auth-msg ok" style="display:block;margin-bottom:8px;">✅ Identity Verified! Set a new password.</div>
             <div>
               <label>New Password (Min 6 characters)</label>
               <input type="password" id="newPassFinal" placeholder="Enter new strong password" minlength="6" required>
@@ -483,12 +521,11 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
           Remember password? <a onclick="openAuthModal('login')">Back to Login</a>
         </div>
       </div>
-
     </div>
   </div>
 </div>
 
-<!-- CART DRAWER OVERLAY -->
+<!-- CART DRAWER -->
 <div class="overlay" id="cartOverlay" onclick="toggleCartDrawer(false)"></div>
 <div class="drawer" id="cartDrawer">
   <div class="drawer-head">
@@ -506,7 +543,7 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
       <button class="btn-close" onclick="closeTrackModal()">✕</button>
     </div>
     <div class="modal-body">
-      <p style="font-size:13px;color:#555;margin:0 0 12px;">Enter your <b>Order ID (e.g. PAG-123456)</b> or <b>Registered 10-digit Phone Number</b> to track live delivery:</p>
+      <p style="font-size:13px;color:#555;margin:0 0 12px;">Enter your <b>Order ID (e.g. PAG-123456)</b> or <b>Registered 10-digit Phone Number</b>:</p>
       <div class="track-input-group">
         <input type="text" id="trackInput" placeholder="Enter Order ID or Mobile Number">
         <button onclick="performOrderSearch()">Track</button>
@@ -517,19 +554,120 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
 </div>
 
 <script>
-// PRODUCT CATALOG
+// ==========================================
+// 📦 PRODUCTS LIST (YAHAN SE AAP KUCH BHI BADAL SAKTE HAIN)
+// ==========================================
 const catalog = [
-  {id: 1, name: "Vega Cruiser ISI Certified Helmet", cat: "Helmets", price: 899, orig: 1499, rating: 4.4, reviews: 342, img: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=400"},
-  {id: 2, name: "Steelbird Full Face Matte Black Helmet", cat: "Helmets", price: 1199, orig: 1899, rating: 4.6, reviews: 610, img: "https://images.unsplash.com/photo-1558980664-3a031cf67ea8?w=400"},
-  {id: 3, name: "60V Smart Fast Charger for EV Scooters", cat: "Chargers", price: 1850, orig: 2499, rating: 4.5, reviews: 184, img: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=400"},
-  {id: 4, name: "48V 3A Heavy Duty EV Battery Charger", cat: "Chargers", price: 1650, orig: 2200, rating: 4.3, reviews: 92, img: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400"},
-  {id: 5, name: "65W Type-C Super Fast Braided Cable", cat: "Mobile Cables", price: 249, orig: 499, rating: 4.4, reviews: 852, img: "https://images.unsplash.com/photo-1588508065123-287b28e013da?w=400"},
-  {id: 6, name: "3-in-1 Fast Nylon Charging Cable (1.2m)", cat: "Mobile Cables", price: 349, orig: 699, rating: 4.2, reviews: 412, img: "https://images.unsplash.com/photo-1608156639585-b3a032ef9689?w=400"},
-  {id: 7, name: "Bass Pro Magnetic Wireless Neckband", cat: "Earphones", price: 499, orig: 999, rating: 4.3, reviews: 960, img: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=400"},
-  {id: 8, name: "TWS True Wireless Stereo Earbuds", cat: "Earphones", price: 799, orig: 1999, rating: 4.5, reviews: 1205, img: "https://images.unsplash.com/photo-1572536147248-ac59a8abfa4b?w=400"},
-  {id: 9, name: "All-Weather Waterproof Scooter Body Cover", cat: "Accessories", price: 399, orig: 799, rating: 4.2, reviews: 219, img: "https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=400"},
-  {id: 10, name: "360° Metal Handlebar Mobile Mount", cat: "Accessories", price: 299, orig: 599, rating: 4.4, reviews: 310, img: "https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?w=400"},
-  {id: 11, name: "48V 24Ah Lithium-Ion Scooter Battery Pack", cat: "Batteries", price: 14500, orig: 18000, rating: 4.7, reviews: 78, img: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=400"}
+  {
+    id: 1,
+    name: "Vega Cruiser ISI Certified Safety Helmet",
+    cat: "Helmets",
+    price: 899,
+    orig: 1499,
+    rating: 4.4,
+    reviews: 342,
+    img: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=400"
+  },
+  {
+    id: 2,
+    name: "Steelbird Full Face Matte Black Aerodynamic Helmet",
+    cat: "Helmets",
+    price: 1199,
+    orig: 1899,
+    rating: 4.6,
+    reviews: 610,
+    img: "https://images.unsplash.com/photo-1558980664-3a031cf67ea8?w=400"
+  },
+  {
+    id: 3,
+    name: "60V Smart Auto Cut-Off Fast Charger for EV Scooters",
+    cat: "Chargers",
+    price: 1850,
+    orig: 2499,
+    rating: 4.5,
+    reviews: 184,
+    img: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=400"
+  },
+  {
+    id: 4,
+    name: "48V 3A Heavy Duty Copper Heat Sink EV Charger",
+    cat: "Chargers",
+    price: 1650,
+    orig: 2200,
+    rating: 4.3,
+    reviews: 92,
+    img: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400"
+  },
+  {
+    id: 5,
+    name: "65W Type-C Super Fast Braided Charging Cable",
+    cat: "Mobile Cables",
+    price: 249,
+    orig: 499,
+    rating: 4.4,
+    reviews: 852,
+    img: "https://images.unsplash.com/photo-1588508065123-287b28e013da?w=400"
+  },
+  {
+    id: 6,
+    name: "3-in-1 Fast Nylon Braided Cable (Type-C, iPhone, Micro)",
+    cat: "Mobile Cables",
+    price: 349,
+    orig: 699,
+    rating: 4.2,
+    reviews: 412,
+    img: "https://images.unsplash.com/photo-1608156639585-b3a032ef9689?w=400"
+  },
+  {
+    id: 7,
+    name: "Bass Pro Magnetic Wireless Neckband (30H Playtime)",
+    cat: "Earphones",
+    price: 499,
+    orig: 999,
+    rating: 4.3,
+    reviews: 960,
+    img: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=400"
+  },
+  {
+    id: 8,
+    name: "TWS True Wireless Stereo Earbuds with Digital Display",
+    cat: "Earphones",
+    price: 799,
+    orig: 1999,
+    rating: 4.5,
+    reviews: 1205,
+    img: "https://images.unsplash.com/photo-1572536147248-ac59a8abfa4b?w=400"
+  },
+  {
+    id: 9,
+    name: "Heavy-Duty All-Weather Waterproof Scooter Cover",
+    cat: "Accessories",
+    price: 399,
+    orig: 799,
+    rating: 4.2,
+    reviews: 219,
+    img: "https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=400"
+  },
+  {
+    id: 10,
+    name: "Universal 360° Metal Handlebar Mobile Mount Holder",
+    cat: "Accessories",
+    price: 299,
+    orig: 599,
+    rating: 4.4,
+    reviews: 310,
+    img: "https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?w=400"
+  },
+  {
+    id: 11,
+    name: "48V 24Ah Lithium-Ion Scooter Battery Pack (3 Yr Warranty)",
+    cat: "Batteries",
+    price: 14500,
+    orig: 18000,
+    rating: 4.7,
+    reviews: 78,
+    img: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=400"
+  }
 ];
 
 // DATA STORES
@@ -548,6 +686,20 @@ function persistOrders() { localStorage.setItem('pag_orders_db', JSON.stringify(
 function persistUsers() { localStorage.setItem('pag_users_db', JSON.stringify(users)); }
 function persistCurrentUser() { localStorage.setItem('pag_active_user', JSON.stringify(currentUser)); syncAuthUI(); }
 
+// TIMER FUNCTION FOR SALE BANNER
+function startSaleTimer() {
+  let secondsLeft = 12 * 3600 + 45 * 60 + 20;
+  setInterval(() => {
+    secondsLeft--;
+    if(secondsLeft <= 0) secondsLeft = 24 * 3600;
+    const h = String(Math.floor(secondsLeft / 3600)).padStart(2, '0');
+    const m = String(Math.floor((secondsLeft % 3600) / 60)).padStart(2, '0');
+    const s = String(secondsLeft % 60).padStart(2, '0');
+    const clockEl = document.getElementById('saleClock');
+    if(clockEl) clockEl.innerText = `${h}h : ${m}m : ${s}s`;
+  }, 1000);
+}
+
 // AUTH & SECURITY SYSTEM
 function openAuthModal(view) {
   document.getElementById('authOverlay').classList.add('show');
@@ -559,7 +711,6 @@ function openAuthModal(view) {
   document.getElementById('forgotStep3Box').style.display = 'none';
   document.getElementById('authCloseBtn').style.display = 'block';
 
-  // Reset messages
   document.querySelectorAll('.auth-msg').forEach(m => { m.className = 'auth-msg'; m.innerText = ''; });
 
   const title = document.getElementById('authLeftTitle');
@@ -576,7 +727,7 @@ function openAuthModal(view) {
     desc.innerText = "Two-step identity verification: only you can reset your credentials.";
   } else if(view === 'mandatory_security') {
     document.getElementById('mandatorySecuritySection').style.display = 'block';
-    document.getElementById('authCloseBtn').style.display = 'none'; // Cannot close until set!
+    document.getElementById('authCloseBtn').style.display = 'none';
     title.innerText = "Security Check";
     desc.innerText = "Your account is missing a security question. Set it now to protect your data.";
   } else {
@@ -591,7 +742,6 @@ function closeAuthModal() {
 }
 
 function checkUserSecurityStatus() {
-  // If user is logged in but has no security question set, force prompt
   if(currentUser && (!currentUser.secQuestion || !currentUser.secAnswer)) {
     openAuthModal('mandatory_security');
   }
@@ -612,7 +762,6 @@ function handleSaveMandatorySecurity(e) {
   currentUser.secQuestion = q;
   currentUser.secAnswer = a;
 
-  // Update in users database
   const uIdx = users.findIndex(u => u.phone === currentUser.phone);
   if(uIdx > -1) {
     users[uIdx].secQuestion = q;
@@ -622,7 +771,7 @@ function handleSaveMandatorySecurity(e) {
   persistCurrentUser();
 
   msg.className = "auth-msg ok";
-  msg.innerText = "Security Question successfully configured! Account secured.";
+  msg.innerText = "Security Question successfully configured!";
   setTimeout(() => { closeAuthModal(); }, 1000);
 }
 
@@ -663,14 +812,7 @@ function handleSignupSubmit(e) {
     return;
   }
 
-  const newUser = {
-    name,
-    phone,
-    pass,
-    secQuestion,
-    secAnswer
-  };
-
+  const newUser = { name, phone, pass, secQuestion, secAnswer };
   users.push(newUser);
   persistUsers();
 
@@ -682,7 +824,6 @@ function handleSignupSubmit(e) {
   setTimeout(() => { closeAuthModal(); }, 800);
 }
 
-// FORGOT PASSWORD FLOW (3 STEPS)
 let userVerifying = null;
 
 function handleForgotStep1(e) {
@@ -699,13 +840,13 @@ function handleForgotStep1(e) {
 
   if(!user.secQuestion || !user.secAnswer) {
     msg.className = "auth-msg err";
-    msg.innerHTML = `This account does not have a security question set yet. Please <a target="_blank" href="https://wa.me/918766641866?text=Please%20reset%20my%20password%20for%20phone%20${user.phone}" style="color:var(--fk-blue);font-weight:700;">WhatsApp Shop Admin</a> for manual identity verification.`;
+    msg.innerHTML = `No security question set. <a target="_blank" href="https://wa.me/918766641866?text=Please%20reset%20my%20password%20for%20phone%20${user.phone}" style="color:var(--fk-blue);font-weight:700;">WhatsApp Admin</a> for verification.`;
     return;
   }
 
   userVerifying = user;
   msg.className = "auth-msg ok";
-  msg.innerText = `Account located for ${user.name}. Please answer your secret question below.`;
+  msg.innerText = `Account located for ${user.name}. Please answer below.`;
 
   document.getElementById('displaySecQuestion').innerText = user.secQuestion;
   document.getElementById('forgotStep1Form').style.display = 'none';
@@ -901,7 +1042,7 @@ function filterByCategory(cat) {
   document.querySelectorAll('#catNavList li').forEach(li => {
     li.classList.toggle('active', li.innerText === cat || (cat === 'All' && li.innerText === 'All Products'));
   });
-  document.getElementById('productSectionTitle').innerText = cat === 'All' ? 'All Products' : cat;
+  document.getElementById('productSectionTitle').innerText = cat === 'All' ? 'Deals of the Day' : cat;
   if(cat === 'All') displayProducts(catalog);
   else displayProducts(catalog.filter(p => p.cat === cat));
 }
@@ -1139,6 +1280,7 @@ window.addEventListener('DOMContentLoaded', () => {
   syncCartUI();
   syncAuthUI();
   checkUserSecurityStatus();
+  startSaleTimer();
 });
 </script>
 </body>
