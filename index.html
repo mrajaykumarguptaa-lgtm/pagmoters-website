@@ -53,7 +53,7 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 .search-box input{flex:1;border:0;padding:10px 14px;font-size:14px;outline:none;color:#212121}
 .search-box button{border:0;background:#fff;color:var(--fk-blue);padding:0 16px;cursor:pointer;font-size:18px}
 
-.header-actions{display:flex;align-items:center;gap:14px;margin-left:auto}
+.header-actions{display:flex;align-items:center;gap:12px;margin-left:auto}
 .btn-nav{background:none;border:0;color:#fff;font-weight:700;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:6px;padding:6px 10px;border-radius:2px}
 .btn-nav:hover{background:rgba(255,255,255,.1)}
 
@@ -64,7 +64,7 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 /* USER PROFILE DROPDOWN */
 .user-menu{position:relative;display:inline-block}
 .user-menu-btn{background:none;border:0;color:#fff;font-weight:700;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:6px;padding:6px}
-.user-dropdown{position:absolute;top:100%;right:0;background:#fff;color:#212121;box-shadow:0 4px 12px rgba(0,0,0,.15);border-radius:2px;display:none;min-width:150px;z-index:150}
+.user-dropdown{position:absolute;top:100%;right:0;background:#fff;color:#212121;box-shadow:0 4px 12px rgba(0,0,0,.15);border-radius:2px;display:none;min-width:160px;z-index:150}
 .user-dropdown a,.user-dropdown button{display:block;width:100%;padding:10px 14px;text-align:left;border:0;background:none;font:inherit;font-size:13px;cursor:pointer;text-decoration:none;color:#212121}
 .user-dropdown a:hover,.user-dropdown button:hover{background:#f1f3f6}
 .user-menu:hover .user-dropdown{display:block}
@@ -183,8 +183,8 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 .payment-choice label{display:flex;align-items:center;gap:8px;font-size:13px;border:1px solid var(--line);padding:8px;border-radius:2px;cursor:pointer}
 .btn-place-order{background:var(--fk-orange);color:#fff;border:0;width:100%;padding:13px;font-weight:700;font-size:15px;border-radius:2px;cursor:pointer}
 
-/* TRACK ORDER MODAL */
-.modal-track{background:#fff;width:min(520px,94%);border-radius:4px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.2)}
+/* TRACK ORDER & MY ORDERS MODALS */
+.modal-track{background:#fff;width:min(600px,94%);border-radius:4px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.2)}
 .modal-head{background:var(--fk-blue);color:#fff;padding:14px 18px;display:flex;justify-content:space-between;align-items:center}
 .modal-head h3{margin:0;font-size:16px}
 .modal-body{padding:20px;max-height:80vh;overflow-y:auto}
@@ -192,7 +192,7 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 .track-input-group input{flex:1;padding:10px 12px;border:1px solid var(--line);border-radius:2px;font:inherit}
 .track-input-group button{background:var(--fk-blue);color:#fff;border:0;padding:10px 18px;font-weight:700;border-radius:2px;cursor:pointer}
 
-.tracker-status-box{background:#f9f9f9;border:1px solid var(--line);border-radius:4px;padding:16px;margin-top:14px}
+.tracker-status-box{background:#f9f9f9;border:1px solid var(--line);border-radius:4px;padding:16px;margin-bottom:14px}
 .timeline{display:flex;justify-content:space-between;position:relative;margin:24px 0 14px}
 .timeline::before{content:"";position:absolute;top:12px;left:10%;right:10%;height:3px;background:#e0e0e0;z-index:1}
 .timeline-step{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center;width:25%}
@@ -234,7 +234,6 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 .admin-prod-form input, .admin-prod-form select{border:1px solid var(--line);border-radius:3px;padding:9px 10px;font:inherit;background:#fff}
 .admin-prod-form button{background:var(--fk-green);color:#fff;border:0;padding:10px;font-weight:700;border-radius:3px;cursor:pointer}
 
-/* IMAGE UPLOAD TOGGLE BUTTONS & PREVIEW */
 .image-source-toggle{grid-column:1/-1;display:flex;gap:10px;align-items:center;margin-top:4px}
 .image-source-toggle label{font-size:13px;font-weight:700;display:flex;align-items:center;gap:4px;cursor:pointer}
 .image-preview-box{display:flex;align-items:center;gap:10px;grid-column:1/-1;background:#fff;padding:8px 12px;border:1px dashed var(--line);border-radius:4px}
@@ -302,13 +301,19 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
     </div>
 
     <div class="header-actions">
-      <div id="authHeaderContainer">
-        <button class="btn-login-main" onclick="openAuthModal('login')">Login</button>
-      </div>
+      <!-- MY ORDERS BUTTON -->
+      <button class="btn-nav" onclick="openMyOrdersModal()">
+        <span>📋</span> My Orders
+      </button>
 
+      <!-- TRACK ORDER BUTTON -->
       <button class="btn-nav" onclick="openTrackModal()">
         <span>📦</span> Track Order
       </button>
+
+      <div id="authHeaderContainer">
+        <button class="btn-login-main" onclick="openAuthModal('login')">Login</button>
+      </div>
 
       <button class="cart-trigger" id="cartTriggerBtn" onclick="toggleCartDrawer(true)">
         <span>🛒</span>
@@ -331,8 +336,8 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
   </ul>
 </nav>
 
-<!-- BADA SALE BANNER -->
-<section class="sale-banner-wrap">
+<!-- BADA SALE BANNER (12-HOURS EXACT COUNTDOWN) -->
+<section class="sale-banner-wrap" id="saleBannerSection">
   <div class="big-sale-banner">
     <div>
       <span class="sale-tag-pill">🔥 MEGA FESTIVAL SALE</span>
@@ -340,8 +345,8 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
       <p>Up to 60% Off on Fast Chargers, ISI Helmets &amp; Battery Packs. Limited Time Local Deals!</p>
     </div>
     <div class="sale-timer">
-      <div class="label">Offer Ends In</div>
-      <div class="time" id="saleClock">12h : 45m : 20s</div>
+      <div class="label" id="saleClockLabel">Offer Ends In</div>
+      <div class="time" id="saleClock">12h : 00m : 00s</div>
     </div>
   </div>
 </section>
@@ -556,7 +561,7 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
   <div class="drawer-body" id="cartBody"></div>
 </div>
 
-<!-- TRACK ORDER MODAL -->
+<!-- 📦 TRACK ORDER MODAL -->
 <div class="overlay" id="trackModalOverlay">
   <div class="modal-track">
     <div class="modal-head">
@@ -564,19 +569,30 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
       <button class="btn-close" onclick="closeTrackModal()">✕</button>
     </div>
     <div class="modal-body">
-      <p style="font-size:13px;color:#555;margin:0 0 12px;">Enter your <b>Order ID (e.g. PAG-123456)</b> or <b>Registered 10-digit Phone Number</b>:</p>
+      <p style="font-size:13px;color:#555;margin:0 0 12px;">Enter your <b>10-digit Mobile Number</b> or <b>Order ID (e.g. PAG-123456)</b>:</p>
       <div class="track-input-group">
-        <input type="text" id="trackInput" placeholder="Enter Order ID or Mobile Number">
-        <button onclick="performOrderSearch()">Track</button>
+        <input type="text" id="trackInput" placeholder="Enter Mobile Number or Order ID">
+        <button onclick="performOrderSearch()">Track Order</button>
       </div>
       <div id="trackResultContainer"></div>
     </div>
   </div>
 </div>
 
-<!-- ======================================================== -->
-<!-- 🛡️ OWNER ADMIN PANEL (ORDERS, USERS & PRODUCT MANAGEMENT) -->
-<!-- ======================================================== -->
+<!-- 📋 MY ORDERS MODAL (ALL ORDERS FOR CUSTOMER) -->
+<div class="overlay" id="myOrdersModalOverlay">
+  <div class="modal-track">
+    <div class="modal-head">
+      <h3>📋 My Orders &amp; Delivery History</h3>
+      <button class="btn-close" onclick="closeMyOrdersModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div id="myOrdersContent"></div>
+    </div>
+  </div>
+</div>
+
+<!-- OWNER ADMIN PANEL -->
 <div id="adminPanelModal">
   <div class="admin-navbar">
     <h2><span>⚙️</span> PAG Moters Owner Portal <span class="admin-badge">Super Admin</span></h2>
@@ -599,7 +615,7 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
       <div id="adminMailboxContainer"></div>
     </div>
 
-    <!-- 2. PRODUCT MANAGEMENT (ADD / REMOVE / PRICE / DISCOUNT / 2 IMAGE OPTIONS) -->
+    <!-- 2. PRODUCT MANAGEMENT -->
     <div id="adminProductsSection" class="mailbox-card" style="display:none;padding:16px;">
       <div class="mailbox-header" style="background:#fff;padding:0 0 12px 0;">
         <span><b>Add New Product to Storefront</b></span>
@@ -623,20 +639,16 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
         <input type="number" id="newProdOrig" placeholder="Original MRP Price (₹)" required min="1" oninput="calculateDiscountPreview()">
         <input type="number" id="newProdPrice" placeholder="Selling Offer Price (₹)" required min="1" oninput="calculateDiscountPreview()">
         
-        <!-- 📸 DUAL PRODUCT IMAGE OPTIONS (CHOOSE FILE OR URL) -->
+        <!-- IMAGE DUAL OPTIONS -->
         <div class="image-source-toggle">
           <span style="font-size:12px;color:var(--muted);font-weight:700;">Image Source:</span>
           <label><input type="radio" name="imgUploadType" value="file" checked onchange="toggleImageInputMode('file')"> 📁 Choose File from Device</label>
           <label><input type="radio" name="imgUploadType" value="url" onchange="toggleImageInputMode('url')"> 🔗 Image Web URL Link</label>
         </div>
 
-        <!-- 1. CHOOSE FILE INPUT -->
         <input type="file" id="newProdFileInput" accept="image/*" onchange="handleDeviceImageUpload(event)" style="background:#fff;">
-
-        <!-- 2. DIRECT URL LINK INPUT -->
         <input type="url" id="newProdImgUrl" placeholder="Image Direct URL (https://...)" style="display:none;" oninput="handleUrlImagePreview(this.value)">
 
-        <!-- IMAGE PREVIEW BOX -->
         <div class="image-preview-box">
           <img id="adminImagePreview" src="" alt="Preview">
           <span id="previewStatusText" style="font-size:12px;color:var(--muted);">No image selected yet.</span>
@@ -718,7 +730,7 @@ let cart = [];
 let orders = [];
 let users = [];
 let currentUser = null;
-let activeUploadedImageData = ""; // Holds device base64 or URL
+let activeUploadedImageData = "";
 
 try { catalog = JSON.parse(localStorage.getItem('pag_catalog_db')) || defaultCatalog; } catch(e){ catalog = defaultCatalog; }
 try { cart = JSON.parse(localStorage.getItem('pag_cart_items')) || []; } catch(e){ cart = []; }
@@ -745,7 +757,7 @@ function cleanPhone(val) {
   return num;
 }
 
-// 🕒 REAL-TIME CLOCK
+// 🕒 LIVE REAL-TIME CLOCK
 function startRealTimeClock() {
   function updateClock() {
     const now = new Date();
@@ -763,18 +775,177 @@ function startRealTimeClock() {
   setInterval(updateClock, 1000);
 }
 
-// SALE BANNER TIMER
+// ⏳ 12-HOURS EXACT COUNTDOWN (REFRESH PAR RESTART NAHI HOGA)
 function startSaleTimer() {
-  let secondsLeft = 12 * 3600 + 45 * 60 + 20;
-  setInterval(() => {
-    secondsLeft--;
-    if(secondsLeft <= 0) secondsLeft = 24 * 3600;
-    const h = String(Math.floor(secondsLeft / 3600)).padStart(2, '0');
-    const m = String(Math.floor((secondsLeft % 3600) / 60)).padStart(2, '0');
-    const s = String(secondsLeft % 60).padStart(2, '0');
+  const STORAGE_KEY = 'pag_sale_fixed_end_time';
+  let endTime = localStorage.getItem(STORAGE_KEY);
+  
+  if(!endTime) {
+    endTime = Date.now() + (12 * 60 * 60 * 1000); // 12 hours from now
+    localStorage.setItem(STORAGE_KEY, endTime.toString());
+  } else {
+    endTime = parseInt(endTime, 10);
+  }
+
+  function tick() {
+    const now = Date.now();
+    const remaining = Math.max(0, Math.floor((endTime - now) / 1000));
     const clockEl = document.getElementById('saleClock');
+    const labelEl = document.getElementById('saleClockLabel');
+
+    if(remaining <= 0) {
+      if(clockEl) {
+        clockEl.innerText = "OFFER ENDED";
+        clockEl.style.color = "#ffdddd";
+        clockEl.style.fontSize = "18px";
+      }
+      if(labelEl) labelEl.innerText = "Sale Status";
+      return;
+    }
+
+    const h = String(Math.floor(remaining / 3600)).padStart(2, '0');
+    const m = String(Math.floor((remaining % 3600) / 60)).padStart(2, '0');
+    const s = String(remaining % 60).padStart(2, '0');
     if(clockEl) clockEl.innerText = `${h}h : ${m}m : ${s}s`;
-  }, 1000);
+  }
+
+  tick();
+  setInterval(tick, 1000);
+}
+
+// ==========================================
+// 📦 ORDER TRACKING & MY ORDERS LOGIC
+// ==========================================
+function openTrackModal() {
+  document.getElementById('trackModalOverlay').classList.add('show');
+  if(currentUser && currentUser.phone) {
+    document.getElementById('trackInput').value = currentUser.phone;
+    performOrderSearch();
+  }
+}
+
+function closeTrackModal() {
+  document.getElementById('trackModalOverlay').classList.remove('show');
+}
+
+// ROBUST ORDER SEARCH BY MOBILE NUMBER OR ORDER ID
+function performOrderSearch() {
+  try { orders = JSON.parse(localStorage.getItem('pag_orders_db')) || []; } catch(e){ orders = []; }
+  
+  const rawInput = document.getElementById('trackInput').value.trim();
+  const cleanedPhone = cleanPhone(rawInput);
+  const rawUpper = rawInput.toUpperCase();
+  const container = document.getElementById('trackResultContainer');
+
+  if(!rawInput) {
+    container.innerHTML = '<div style="color:#d32f2f;font-size:13px;margin-top:10px;">Please enter your mobile number or Order ID.</div>';
+    return;
+  }
+
+  // Search by cleaned mobile or direct ID
+  const matchedList = orders.filter(o => {
+    const oPhone = cleanPhone(o.customerPhone);
+    const oId = (o.id || '').toUpperCase();
+    return (cleanedPhone && oPhone === cleanedPhone) || oId === rawUpper;
+  });
+
+  if(!matchedList.length) {
+    container.innerHTML = `
+      <div class="tracker-status-box" style="text-align:center;">
+        <div style="font-size:32px;">🔍</div>
+        <b>No Order Found for "${rawInput}"</b>
+        <p style="font-size:12px;color:#878787;margin:4px 0 0;">Make sure you entered the correct 10-digit number used during ordering.</p>
+        <a style="display:inline-block;margin-top:8px;font-size:12px;color:var(--fk-blue);font-weight:700;" href="https://wa.me/918766641866?text=Track%20Order%20for%20${rawInput}" target="_blank">Contact Helpline on WhatsApp</a>
+      </div>`;
+    return;
+  }
+
+  container.innerHTML = matchedList.map(matched => buildOrderCardHTML(matched)).join('');
+}
+
+// RENDER SINGLE ORDER CARD WITH 4-STEP TRACKER
+function buildOrderCardHTML(matched) {
+  return `
+    <div class="tracker-status-box">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <b>Order ID: ${matched.id}</b>
+        <span style="font-size:12px;color:var(--muted)">${matched.date}</span>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-step completed">
+          <div class="timeline-dot">✓</div>
+          <span>Ordered</span>
+        </div>
+        <div class="timeline-step ${matched.statusStep >= 2 ? 'completed' : 'current'}">
+          <div class="timeline-dot">${matched.statusStep >= 2 ? '✓' : '2'}</div>
+          <span>Packed</span>
+        </div>
+        <div class="timeline-step ${matched.statusStep >= 3 ? 'completed' : (matched.statusStep === 2 ? 'current' : '')}">
+          <div class="timeline-dot">${matched.statusStep >= 3 ? '✓' : '3'}</div>
+          <span>On the Way</span>
+        </div>
+        <div class="timeline-step ${matched.statusStep >= 4 ? 'completed' : (matched.statusStep === 3 ? 'current' : '')}">
+          <div class="timeline-dot">${matched.statusStep >= 4 ? '✓' : '4'}</div>
+          <span>Delivered</span>
+        </div>
+      </div>
+
+      <div style="font-size:13px;line-height:1.5;margin-top:14px;border-top:1px solid #e0e0e0;padding-top:10px;">
+        <div><b>Delivery To:</b> ${matched.customerName} (${matched.customerPhone})</div>
+        <div><b>Address:</b> ${matched.address}</div>
+        <div><b>Ordered Items:</b> ${matched.items}</div>
+        <div><b>Total:</b> ₹${matched.totalPayable.toLocaleString('en-IN')} (${matched.paymentMethod})</div>
+      </div>
+
+      <a style="display:block;text-align:center;font-size:13px;color:var(--fk-blue);font-weight:700;margin-top:10px;text-decoration:none;" 
+         target="_blank" href="https://wa.me/918766641866?text=Track%20Order%20Status%20for%20${matched.id}">
+         Need immediate delivery update? Chat on WhatsApp
+      </a>
+    </div>
+  `;
+}
+
+// 📋 MY ORDERS MODAL SYSTEM
+function openMyOrdersModal() {
+  try { orders = JSON.parse(localStorage.getItem('pag_orders_db')) || []; } catch(e){ orders = []; }
+  document.getElementById('myOrdersModalOverlay').classList.add('show');
+  renderMyOrdersList();
+}
+
+function closeMyOrdersModal() {
+  document.getElementById('myOrdersModalOverlay').classList.remove('show');
+}
+
+function renderMyOrdersList() {
+  const content = document.getElementById('myOrdersContent');
+  let customerOrders = [];
+
+  if(currentUser && currentUser.phone) {
+    const userPhone = cleanPhone(currentUser.phone);
+    customerOrders = orders.filter(o => cleanPhone(o.customerPhone) === userPhone);
+  } else {
+    // If not logged in, show orders saved on this device or prompt phone search
+    customerOrders = orders;
+  }
+
+  if(!customerOrders.length) {
+    content.innerHTML = `
+      <div style="text-align:center;padding:40px 10px;color:var(--muted)">
+        <div style="font-size:46px;margin-bottom:10px;">📦</div>
+        <b style="font-size:15px;color:#212121;">No Orders Placed Yet</b>
+        <p style="font-size:13px;margin:6px 0 14px;">Once you place an order, you can view its entire history and live status here.</p>
+        <button class="btn-nav" style="background:var(--fk-blue);color:#fff;margin:auto;padding:8px 16px;" onclick="closeMyOrdersModal()">Start Shopping</button>
+      </div>`;
+    return;
+  }
+
+  content.innerHTML = `
+    <div style="margin-bottom:14px;font-size:13px;color:#555;">
+      Showing <b>${customerOrders.length} Order(s)</b> placed by you:
+    </div>
+    ${customerOrders.map(o => buildOrderCardHTML(o)).join('')}
+  `;
 }
 
 // ==========================================
@@ -815,7 +986,6 @@ function toggleOtherCatInput(val) {
   }
 }
 
-// TOGGLE BETWEEN DEVICE CHOOSE FILE & URL
 function toggleImageInputMode(mode) {
   const fileInput = document.getElementById('newProdFileInput');
   const urlInput = document.getElementById('newProdImgUrl');
@@ -829,7 +999,6 @@ function toggleImageInputMode(mode) {
   }
 }
 
-// READ LOCAL FILE FROM DEVICE AS BASE64
 function handleDeviceImageUpload(e) {
   const file = e.target.files[0];
   if(file) {
@@ -845,7 +1014,6 @@ function handleDeviceImageUpload(e) {
   }
 }
 
-// URL PREVIEW
 function handleUrlImagePreview(url) {
   activeUploadedImageData = url.trim();
   const preview = document.getElementById('adminImagePreview');
@@ -893,7 +1061,6 @@ function adminSaveProduct(e) {
     return;
   }
 
-  // Ensure image exists
   const finalImage = activeUploadedImageData || "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=400";
 
   const newProduct = {
@@ -917,7 +1084,7 @@ function adminSaveProduct(e) {
   toggleOtherCatInput('Helmets');
   toggleImageInputMode('file');
   calculateDiscountPreview();
-  alert(`Product "${name}" (${cat}) has been added successfully with chosen image!`);
+  alert(`Product "${name}" (${cat}) has been added successfully!`);
 }
 
 function renderAdminProductsTable() {
@@ -1312,7 +1479,8 @@ function syncAuthUI() {
         <button class="user-menu-btn">👤 ${currentUser.name.split(' ')[0]} ▾</button>
         <div class="user-dropdown">
           ${currentUser.isAdmin ? '<a onclick="openAdminPortal()" style="color:#d97706;font-weight:700;">⚙️ Owner Portal</a>' : ''}
-          <a onclick="openTrackModal()">My Orders</a>
+          <a onclick="openMyOrdersModal()">📋 My Orders</a>
+          <a onclick="openTrackModal()">📦 Track Order</a>
           <a onclick="openAuthModal('mandatory_security')">Update Security</a>
           <button onclick="handleUserLogout()">Logout</button>
         </div>
@@ -1609,84 +1777,7 @@ function processOrderPlacement(e) {
         Send Order on WhatsApp 💬
       </a>
 
-      <button onclick="toggleCartDrawer(false)" class="btn-add-cart" style="margin-top:12px;">Continue Shopping</button>
-    </div>
-  `;
-}
-
-function openTrackModal() {
-  document.getElementById('trackModalOverlay').classList.add('show');
-  if(currentUser) {
-    document.getElementById('trackInput').value = currentUser.phone;
-    performOrderSearch();
-  } else if(orders.length) {
-    document.getElementById('trackInput').value = orders[0].id;
-    performOrderSearch();
-  }
-}
-
-function closeTrackModal() {
-  document.getElementById('trackModalOverlay').classList.remove('show');
-}
-
-function performOrderSearch() {
-  const query = cleanPhone(document.getElementById('trackInput').value.trim());
-  const rawQuery = document.getElementById('trackInput').value.trim().toUpperCase();
-  const container = document.getElementById('trackResultContainer');
-  if(!rawQuery) {
-    container.innerHTML = '<div style="color:#d32f2f;font-size:13px;margin-top:10px;">Please enter your Order ID or registered Mobile number.</div>';
-    return;
-  }
-
-  const matched = orders.find(o => o.id.toUpperCase() === rawQuery || cleanPhone(o.customerPhone) === query);
-
-  if(!matched) {
-    container.innerHTML = `
-      <div class="tracker-status-box" style="text-align:center;">
-        <div style="font-size:32px;">🔍</div>
-        <b>No Order Found</b>
-        <p style="font-size:12px;color:#878787;margin:4px 0 0;">Check your Order ID or call our helpline: 8766641866.</p>
-      </div>`;
-    return;
-  }
-
-  container.innerHTML = `
-    <div class="tracker-status-box">
-      <div style="display:flex;justify-content:space-between;align-items:center;">
-        <b>Order ID: ${matched.id}</b>
-        <span style="font-size:12px;color:var(--muted)">${matched.date}</span>
-      </div>
-
-      <div class="timeline">
-        <div class="timeline-step completed">
-          <div class="timeline-dot">✓</div>
-          <span>Ordered</span>
-        </div>
-        <div class="timeline-step ${matched.statusStep >= 2 ? 'completed' : 'current'}">
-          <div class="timeline-dot">${matched.statusStep >= 2 ? '✓' : '2'}</div>
-          <span>Packed</span>
-        </div>
-        <div class="timeline-step ${matched.statusStep >= 3 ? 'completed' : ''}">
-          <div class="timeline-dot">${matched.statusStep >= 3 ? '✓' : '3'}</div>
-          <span>On the Way</span>
-        </div>
-        <div class="timeline-step ${matched.statusStep >= 4 ? 'completed' : ''}">
-          <div class="timeline-dot">${matched.statusStep >= 4 ? '✓' : '4'}</div>
-          <span>Delivered</span>
-        </div>
-      </div>
-
-      <div style="font-size:13px;line-height:1.5;margin-top:14px;border-top:1px solid #e0e0e0;padding-top:10px;">
-        <div><b>Delivery To:</b> ${matched.customerName} (${matched.customerPhone})</div>
-        <div><b>Address:</b> ${matched.address}</div>
-        <div><b>Ordered Items:</b> ${matched.items}</div>
-        <div><b>Total:</b> ₹${matched.totalPayable.toLocaleString('en-IN')} (${matched.paymentMethod})</div>
-      </div>
-
-      <a style="display:block;text-align:center;font-size:13px;color:var(--fk-blue);font-weight:700;margin-top:10px;text-decoration:none;" 
-         target="_blank" href="https://wa.me/918766641866?text=Track%20Order%20Status%20for%20${matched.id}">
-         Need immediate delivery update? Chat on WhatsApp
-      </a>
+      <button onclick="toggleCartDrawer(false); openMyOrdersModal();" class="btn-add-cart" style="margin-top:12px;">View in My Orders</button>
     </div>
   `;
 }
