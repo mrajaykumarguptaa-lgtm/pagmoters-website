@@ -3,485 +3,772 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>PAG Moters – EV Spare Parts, Accessories &amp; Service, Mharal Gaon</title>
-<meta name="description" content="PAG Moters – EV Spare Parts, Helmets, Chargers, Mobile Cables, Batteries and Accessories. Shop no 68, MIDC Gate, near Gram Panchayat Office, Mharal Gaon 421001. Call 8766641866 / 7379595655.">
+<title>PAG Moters – EV Spare Parts, Accessories &amp; Service</title>
+<meta name="description" content="PAG Moters – Genuine EV Spare Parts, Fast Chargers, Helmets, Lithium Batteries & Accessories. Hand-to-hand fast delivery.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%232874f0%22/%3E%3Ctext x=%2216%22 y=%2223%22 font-size=%2218%22 text-anchor=%22middle%22 fill=%22%23ffe500%22 font-family=%22Arial%22 font-weight=%22bold%22 font-style=%22italic%22%3EP%3C/text%3E%3C/svg%3E">
 <style>
-:root{box-sizing:border-box;--bg:#f1f3f6;--surface:#fff;--text:#212121;--muted:#6b6f76;--line:#e0e0e0;--brand:#2874f0;--brand-ink:#fff;--accent:#ffe500;--accent-ink:#212121;--cta:#fb641b;--good:#388e3c;--good-ink:#fff}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font:14px/1.45 Roboto,"Segoe UI",Arial,sans-serif}
-header{background:var(--brand);color:var(--brand-ink);position:sticky;top:0;z-index:20;box-shadow:0 2px 8px rgba(0,0,0,.15)}
-.bar{max-width:1200px;margin:auto;display:flex;align-items:center;gap:14px;padding:10px 14px}
-.logo{font-weight:800;font-size:22px;font-style:italic;letter-spacing:-.5px;white-space:nowrap;cursor:pointer}
-.logo small{display:block;font-size:11px;font-weight:500;font-style:italic;color:var(--accent);margin-top:-4px}
-.search{flex:1;display:flex;max-width:560px}
-.search input{flex:1;border:0;padding:10px 12px;font-size:14px;border-radius:2px 0 0 2px;background:#fff;color:#212121;min-width:0}
-.search button{border:0;background:#fff;color:var(--brand);padding:0 14px;border-radius:0 2px 2px 0;font-size:16px;cursor:pointer}
-
-/* COMPACT HEADER CART BOX */
-.cart-box{background:#fff;color:var(--brand);border:2px solid var(--accent);padding:6px 14px;border-radius:6px;cursor:pointer;display:flex;align-items:center;gap:10px;font-weight:700;transition:transform .2s,box-shadow .2s;white-space:nowrap}
-.cart-box:hover{transform:scale(1.03);box-shadow:0 3px 10px rgba(0,0,0,.2)}
-.cart-icon{font-size:20px;position:relative}
-.cart-badge{position:absolute;top:-8px;right:-12px;background:var(--cta);color:#fff;font-size:11px;padding:1px 6px;border-radius:12px;font-weight:800;border:2px solid #fff}
-.cart-info{display:flex;flex-direction:column;align-items:flex-start;line-height:1.2}
-.cart-info small{font-size:11px;color:var(--muted);font-weight:500}
-.cart-bounce{animation:bump .35s ease}
-
-@keyframes bump{
-  0%{transform:scale(1)}
-  50%{transform:scale(1.22)}
-  100%{transform:scale(1)}
+:root{
+  --bg:#f1f3f6;
+  --surface:#ffffff;
+  --text:#212121;
+  --muted:#878787;
+  --line:#e0e0e0;
+  --fk-blue:#2874f0;
+  --fk-yellow:#ffe500;
+  --fk-orange:#fb641b;
+  --fk-green:#388e3c;
 }
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:14px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
 
-/* FLYING BALL ANIMATION */
-.fly-ball{position:fixed;width:24px;height:24px;background:var(--cta);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;pointer-events:none;z-index:9999;box-shadow:0 4px 10px rgba(251,100,27,.6);transition:all .6s cubic-bezier(0.18, 0.89, 0.32, 1.28)}
+/* HEADER */
+header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;box-shadow:0 2px 4px rgba(0,0,0,.15)}
+.top-strip{background:#172337;color:#c2c2c2;font-size:12px;padding:6px 14px}
+.top-strip-inner{max-width:1240px;margin:auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.top-strip a{color:var(--fk-yellow);text-decoration:none;font-weight:700}
 
-nav{background:var(--surface);border-bottom:1px solid var(--line)}
-nav ul{max-width:1200px;margin:auto;display:flex;gap:20px;list-style:none;padding:9px 14px;overflow-x:auto;white-space:nowrap}
-nav li{font-weight:500;cursor:pointer;padding-bottom:2px}
-nav li.on{color:var(--brand);border-bottom:2px solid var(--brand)}
-.hero{max-width:1200px;margin:12px auto 0;padding:0 14px}
-.banner{background:var(--accent);color:var(--accent-ink);border-radius:4px;padding:18px 24px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
-.banner h1{margin:0;font-size:22px;line-height:1.15}
-.banner p{margin:4px 0 0}
-.tag{background:#212121;color:#ffe500;padding:8px 14px;font-weight:700;border-radius:4px}
-main{max-width:1200px;margin:12px auto;padding:0 14px;display:grid;grid-template-columns:220px 1fr;gap:12px}
-aside{background:var(--surface);align-self:start;border-radius:4px;position:sticky;top:66px}
-aside h2{font-size:15px;margin:0;padding:12px 16px;border-bottom:1px solid var(--line)}
-.f{padding:12px 16px;border-bottom:1px solid var(--line)}
-.f label{display:flex;gap:8px;align-items:center;padding:4px 0;cursor:pointer}
-.panel{background:var(--surface);border-radius:4px}
-.top{display:flex;gap:16px;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap}
-.top b{margin-right:auto}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}
-.card{padding:14px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:6px;position:relative}
-.card:hover{box-shadow:0 3px 12px rgba(0,0,0,.1);z-index:1}
-.pic{height:130px;border-radius:4px;display:grid;place-items:center;background:#f8f9fa;overflow:hidden;font-size:42px}
-.card h4{margin:4px 0 0;font-size:14px;font-weight:600}
-.spec{color:var(--muted);font-size:12px;margin:0}
-.pr{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
-.pr strong{font-size:17px}.pr s{color:var(--muted);font-size:12px}.pr em{color:var(--good);font-style:normal;font-weight:600;font-size:12px}
+.main-header{max-width:1240px;margin:auto;display:flex;align-items:center;gap:18px;padding:12px 14px}
+.brand{text-decoration:none;color:#fff;display:flex;flex-direction:column;cursor:pointer}
+.brand .title{font-size:20px;font-weight:800;font-style:italic;line-height:1}
+.brand small{font-size:11px;font-style:italic;color:var(--fk-yellow);display:flex;align-items:center;gap:2px}
+.brand small span{color:#fff;font-weight:700}
 
-/* IN-CARD BUTTONS & QTY SELECTOR */
-.btn-holder{margin-top:auto;padding-top:6px}
-.buy{background:var(--cta);color:#fff;border:0;padding:9px 12px;font-weight:700;border-radius:4px;cursor:pointer;width:100%;font-size:13px;display:flex;align-items:center;justify-content:center;gap:6px}
-.buy:hover{opacity:.94}
-.qty-ctrl{display:flex;align-items:center;justify-content:space-between;background:var(--brand);color:#fff;border-radius:4px;overflow:hidden;font-weight:700}
-.qty-ctrl button{background:none;border:0;color:#fff;padding:8px 14px;font-size:16px;cursor:pointer;font-weight:800}
-.qty-ctrl button:hover{background:rgba(255,255,255,.2)}
-.qty-ctrl span{font-size:14px}
+.search-box{flex:1;max-width:580px;display:flex;background:#fff;border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.2);overflow:hidden}
+.search-box input{flex:1;border:0;padding:10px 14px;font-size:14px;outline:none;color:#212121}
+.search-box button{border:0;background:#fff;color:var(--fk-blue);padding:0 16px;cursor:pointer;font-size:18px}
 
-.perks{max-width:1200px;margin:16px auto;padding:0 14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
-.perks div{background:var(--surface);padding:14px 16px;border-radius:4px}
-.perks b{display:block}
-footer{background:#172337;color:#c8ccd2;padding:22px 14px;text-align:center;font-size:12px;margin-top:24px}
-.strip{background:#172337;color:#fff;font-size:12px}
-.strip div{max-width:1200px;margin:auto;padding:5px 14px;display:flex;gap:14px;flex-wrap:wrap;justify-content:space-between}
-.strip a{color:#ffe500;text-decoration:none;font-weight:700}
-.biz{max-width:1200px;margin:16px auto;padding:0 14px}
-.biz .panel{padding:18px 16px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:20px;align-items:center}
-.biz h2{margin:0 0 2px;font-size:22px}
-.biz .sub{margin:0 0 12px;color:var(--cta);font-weight:700;letter-spacing:.3px;text-transform:uppercase;font-size:12px}
-.biz dl{margin:0;display:grid;gap:10px}
-.biz dt{font-size:12px;color:var(--muted)}
-.biz dd{margin:0;font-weight:500}
-.biz dd a{color:var(--brand);font-weight:700;text-decoration:none;font-size:16px;margin-right:14px}
-.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
-.acts a{background:var(--cta);color:#fff;text-decoration:none;font-weight:700;padding:9px 14px;border-radius:4px}
-.acts a.alt{background:var(--brand)}
-.biz img{width:100%;height:auto;border-radius:6px;display:block}
+.header-actions{display:flex;align-items:center;gap:16px;margin-left:auto}
+.btn-nav{background:none;border:0;color:#fff;font-weight:700;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:6px;padding:6px 10px;border-radius:2px}
+.btn-nav:hover{background:rgba(255,255,255,.1)}
 
-/* DRAWER (Only opens on header cart click) */
-.drawer{position:fixed;inset:0;display:none;z-index:100}
-.drawer.open{display:block}
-.drawer .shade{position:absolute;inset:0;background:rgba(0,0,0,.5)}
-.drawer .box{position:absolute;right:0;top:0;bottom:0;width:min(440px,100%);background:var(--surface);color:var(--text);display:flex;flex-direction:column}
-.drawer .hd{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid var(--line)}
-.drawer .hd h2{margin:0;font-size:18px}
-.x{background:none;border:0;font-size:24px;cursor:pointer;color:var(--text)}
-.cart-body{flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:12px}
-.it{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
-.it div b{display:block;font-size:14px}
-.it div small{color:var(--muted)}
-.it .rem{background:none;border:0;color:#d32f2f;cursor:pointer;font-size:12px;font-weight:700}
-.tot{font-size:16px;font-weight:700;display:flex;justify-content:space-between;padding:12px 0;border-top:2px solid var(--line)}
-.chk-form{display:grid;gap:10px}
-.chk-form input,.chk-form textarea{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:4px;background:var(--bg);font:inherit}
-.pay-opt{display:grid;gap:6px;margin:6px 0}
-.pay-opt label{display:flex;align-items:center;gap:8px;padding:8px;border:1px solid var(--line);border-radius:4px;cursor:pointer}
-.status-card{background:#e8f5e9;border:1px solid #c8e6c9;padding:16px;border-radius:4px;text-align:center}
-.status-card h3{margin:0 0 6px;color:var(--good)}
-.btn-wa{background:#25d366;color:#fff;border:0;padding:12px;width:100%;font-weight:700;border-radius:4px;cursor:pointer;font-size:15px;text-decoration:none;display:block;text-align:center;margin-top:10px}
-@media (max-width:800px){main{grid-template-columns:1fr}aside{display:none}.biz .panel{grid-template-columns:1fr}}
+/* FLIPKART STYLE CART BUTTON */
+.cart-trigger{background:#fff;color:var(--fk-blue);padding:7px 16px;border-radius:2px;font-weight:700;display:flex;align-items:center;gap:8px;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.15);border:0;position:relative}
+.cart-trigger:hover{background:#f8f9fa}
+.cart-count-badge{background:var(--fk-orange);color:#fff;font-size:11px;padding:2px 7px;border-radius:10px;font-weight:800}
+
+/* NAVIGATION TABS */
+.nav-sub{background:var(--surface);box-shadow:0 1px 1px rgba(0,0,0,.1)}
+.nav-sub ul{max-width:1240px;margin:auto;display:flex;gap:26px;list-style:none;padding:12px 14px;overflow-x:auto;white-space:nowrap}
+.nav-sub li{font-size:14px;font-weight:600;cursor:pointer;color:#333;display:flex;flex-direction:column;align-items:center;gap:4px;transition:color .2s}
+.nav-sub li.active{color:var(--fk-blue);border-bottom:2px solid var(--fk-blue);padding-bottom:4px}
+
+/* HERO BANNER */
+.hero-slider{max-width:1240px;margin:12px auto;padding:0 14px}
+.banner-card{background:linear-gradient(90deg, #1c4fa8 0%, #2874f0 100%);color:#fff;padding:20px 28px;border-radius:4px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.banner-card h1{margin:0;font-size:24px;font-weight:800}
+.banner-card p{margin:6px 0 0;font-size:14px;color:#e0e7ff}
+.banner-badge{background:var(--fk-yellow);color:#212121;font-weight:800;padding:8px 16px;border-radius:4px;font-size:13px}
+
+/* MAIN LAYOUT */
+.layout{max-width:1240px;margin:12px auto;padding:0 14px;display:grid;grid-template-columns:230px 1fr;gap:12px}
+.sidebar{background:var(--surface);padding:14px;border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.08);height:fit-content;position:sticky;top:70px}
+.sidebar h3{font-size:16px;margin:0 0 12px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.filter-group{display:flex;flex-direction:column;gap:8px}
+.filter-group label{font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer;color:#444}
+
+/* PRODUCT GRID */
+.product-panel{background:var(--surface);border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.panel-head{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:1px solid var(--line)}
+.panel-head h2{margin:0;font-size:18px;font-weight:700}
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:0}
+
+/* PRODUCT CARD (FLIPKART STYLE) */
+.product-card{padding:18px 16px;background:#fff;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;flex-direction:column;position:relative;transition:box-shadow .2s}
+.product-card:hover{box-shadow:0 3px 16px rgba(0,0,0,.12);z-index:2}
+.prod-img-wrap{height:160px;display:flex;align-items:center;justify-content:center;position:relative}
+.prod-img-wrap img{max-height:140px;max-width:90%;object-fit:contain}
+.assured-tag{position:absolute;bottom:0;right:0;font-size:10px;background:#f7f9fa;border:1px solid #dcdcdc;border-radius:2px;padding:2px 5px;font-weight:800;color:var(--fk-blue)}
+
+.prod-title{margin:12px 0 4px;font-size:14px;font-weight:600;color:#212121;line-height:1.3;height:36px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.rating-pill{background:var(--fk-green);color:#fff;font-size:11px;font-weight:700;padding:2px 6px;border-radius:3px;display:inline-flex;align-items:center;gap:2px;width:fit-content}
+.rating-count{font-size:12px;color:var(--muted);margin-left:6px}
+
+.price-row{display:flex;align-items:baseline;gap:8px;margin:8px 0 2px}
+.final-price{font-size:18px;font-weight:700;color:#212121}
+.orig-price{font-size:13px;color:var(--muted);text-decoration:line-through}
+.disc-percent{font-size:13px;font-weight:700;color:var(--fk-green)}
+
+.delivery-badge{font-size:11px;color:#212121;font-weight:600;margin-bottom:10px}
+.delivery-badge span{color:var(--fk-green);font-weight:700}
+
+/* ADD TO CART & COUNTER BUTTON */
+.card-actions{margin-top:auto}
+.btn-add-cart{background:var(--fk-yellow);color:#212121;border:0;width:100%;padding:9px;font-weight:700;font-size:13px;border-radius:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:background .2s}
+.btn-add-cart:hover{background:#ebd300}
+.qty-stepper{display:flex;align-items:center;justify-content:space-between;background:var(--fk-blue);color:#fff;border-radius:2px;overflow:hidden}
+.qty-stepper button{background:none;border:0;color:#fff;padding:8px 14px;font-size:16px;font-weight:800;cursor:pointer}
+.qty-stepper button:hover{background:rgba(0,0,0,.15)}
+.qty-stepper span{font-size:13px;font-weight:700}
+
+/* FLY-TO-CART BALL */
+.fly-item{position:fixed;width:24px;height:24px;background:var(--fk-orange);border-radius:50%;color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:9999;box-shadow:0 3px 8px rgba(0,0,0,.3);transition:all .55s cubic-bezier(0.18, 0.89, 0.32, 1.28)}
+
+/* MODAL & DRAWER SYSTEM */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:none}
+.overlay.show{display:flex;align-items:center;justify-content:center}
+
+/* CART DRAWER */
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:#fff;z-index:201;display:flex;flex-direction:column;box-shadow:-2px 0 10px rgba(0,0,0,.2);transform:translateX(100%);transition:transform .3s ease}
+.drawer.open{transform:translateX(0)}
+.drawer-head{background:var(--fk-blue);color:#fff;padding:14px 18px;display:flex;justify-content:space-between;align-items:center}
+.drawer-head h2{margin:0;font-size:17px;font-weight:700}
+.btn-close{background:none;border:0;color:#fff;font-size:22px;cursor:pointer}
+.drawer-body{flex:1;overflow-y:auto;padding:16px;background:#f1f3f6}
+
+.cart-item-row{background:#fff;border-radius:2px;padding:12px;margin-bottom:10px;box-shadow:0 1px 2px rgba(0,0,0,.06);display:flex;gap:12px}
+.cart-item-row img{width:60px;height:60px;object-fit:contain}
+.cart-item-details{flex:1}
+.cart-item-details h4{margin:0 0 4px;font-size:13px}
+.cart-item-details .price{font-weight:700;font-size:14px}
+.cart-item-ctrl{display:flex;align-items:center;gap:8px;margin-top:6px}
+.cart-item-ctrl button{border:1px solid #c2c2c2;background:#fff;width:24px;height:24px;border-radius:50%;cursor:pointer;font-weight:700}
+
+.price-summary{background:#fff;border-radius:2px;padding:14px;box-shadow:0 1px 2px rgba(0,0,0,.06);margin-bottom:12px}
+.summary-row{display:flex;justify-content:space-between;margin-bottom:8px;font-size:13px}
+.summary-total{display:flex;justify-content:space-between;border-top:1px dashed var(--line);padding-top:10px;font-weight:800;font-size:16px}
+
+/* CHECKOUT FORM */
+.checkout-box{background:#fff;padding:14px;border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.checkout-box h3{margin:0 0 10px;font-size:14px}
+.checkout-box input,.checkout-box textarea{width:100%;border:1px solid var(--line);padding:9px 10px;font:inherit;border-radius:2px;margin-bottom:8px}
+.payment-choice{display:flex;flex-direction:column;gap:6px;margin:8px 0 12px}
+.payment-choice label{display:flex;align-items:center;gap:8px;font-size:13px;border:1px solid var(--line);padding:8px;border-radius:2px;cursor:pointer}
+.btn-place-order{background:var(--fk-orange);color:#fff;border:0;width:100%;padding:13px;font-weight:700;font-size:15px;border-radius:2px;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.2)}
+
+/* TRACK ORDER MODAL */
+.modal-track{background:#fff;width:min(520px,94%);border-radius:4px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.2)}
+.modal-head{background:var(--fk-blue);color:#fff;padding:14px 18px;display:flex;justify-content:space-between;align-items:center}
+.modal-head h3{margin:0;font-size:16px}
+.modal-body{padding:20px;max-height:80vh;overflow-y:auto}
+.track-input-group{display:flex;gap:8px;margin-bottom:16px}
+.track-input-group input{flex:1;padding:10px 12px;border:1px solid var(--line);border-radius:2px;font:inherit}
+.track-input-group button{background:var(--fk-blue);color:#fff;border:0;padding:10px 18px;font-weight:700;border-radius:2px;cursor:pointer}
+
+/* STATUS PROGRESS BAR */
+.tracker-status-box{background:#f9f9f9;border:1px solid var(--line);border-radius:4px;padding:16px;margin-top:14px}
+.timeline{display:flex;justify-content:space-between;position:relative;margin:24px 0 14px}
+.timeline::before{content:"";position:absolute;top:12px;left:10%;right:10%;height:3px;background:#e0e0e0;z-index:1}
+.timeline-step{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center;width:25%}
+.timeline-dot{width:26px;height:26px;border-radius:50%;background:#e0e0e0;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800}
+.timeline-step.completed .timeline-dot{background:var(--fk-green)}
+.timeline-step.current .timeline-dot{background:var(--fk-blue);box-shadow:0 0 0 4px rgba(40,116,240,.2)}
+.timeline-step span{font-size:11px;font-weight:600;margin-top:6px;color:#555}
+
+/* ORDER COMPLETE SUCCESS CARD */
+.success-screen{background:#fff;border-radius:4px;padding:20px;text-align:center}
+.success-screen .icon{font-size:48px;color:var(--fk-green);margin-bottom:8px}
+.order-pill{background:#f1f3f6;padding:8px;border-radius:4px;font-family:monospace;font-size:15px;font-weight:700;margin:10px 0}
+.btn-wa-order{background:#25d366;color:#fff;padding:12px;border-radius:2px;text-decoration:none;font-weight:700;display:block;margin-top:12px;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+
+/* FOOTER & TRUST BADGES */
+.trust-strip{max-width:1240px;margin:20px auto;padding:0 14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.trust-box{background:#fff;padding:16px;border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.08);display:flex;align-items:center;gap:12px}
+.trust-box .icon{font-size:26px;color:var(--fk-blue)}
+.trust-box div b{display:block;font-size:14px}
+.trust-box div small{color:var(--muted);font-size:12px}
+
+footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;border-top:1px solid #2d3e56;margin-top:30px}
+.footer-inner{max-width:1240px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;line-height:1.6}
+.footer-inner h4{color:#fff;margin:0 0 8px;font-size:13px;text-transform:uppercase}
+.footer-inner a{color:#fff;text-decoration:none}
+.footer-copy{max-width:1240px;margin:20px auto 0;padding-top:16px;border-top:1px solid #28374d;text-align:center;color:#6b7c96}
+
+@media(max-width:860px){
+  .layout{grid-template-columns:1fr}
+  .sidebar{display:none}
+  .search-box{max-width:none}
+  .product-grid{grid-template-columns:repeat(2,1fr)}
+  .brand .title{font-size:17px}
+  .main-header{gap:10px}
+}
 </style>
 </head>
 <body>
-<div class="strip"><div><span>⚡ EV Spare Parts, Accessories &amp; Service · Mharal Gaon 421001</span><span>Call: <a href="tel:+918766641866">8766641866</a> · <a href="tel:+917379595655">7379595655</a></span></div></div>
+
+<!-- TOP STRIP -->
+<div class="top-strip">
+  <div class="top-strip-inner">
+    <span>📍 PAG Moters – MIDC Gate, Near Gram Panchayat Office, Mharal Gaon 421001</span>
+    <span>Helpline: <a href="tel:+918766641866">8766641866</a> / <a href="tel:+917379595655">7379595655</a></span>
+  </div>
+</div>
+
+<!-- FLIPKART STYLE HEADER -->
 <header>
-<div class="bar">
-<div class="logo" onclick="location.reload()">PAG Moters<small>Parts &amp; Accessories</small></div>
-<form class="search" onsubmit="searchProducts(); return false;">
-  <input id="q" type="search" placeholder="Search helmets, chargers, batteries..." oninput="searchProducts()">
-  <button type="button" onclick="searchProducts()">⌕</button>
-</form>
+  <div class="main-header">
+    <div class="brand" onclick="location.reload()">
+      <div class="title">PAG Moters</div>
+      <small>Explore <span>Plus ✦</span></small>
+    </div>
 
-<!-- COMPACT CART BOX WITH BADGE -->
-<div class="cart-box" id="cartBox" onclick="toggleCart()">
-  <div class="cart-icon">
-    🛒
-    <span class="cart-badge" id="cartBadge">0</span>
-  </div>
-  <div class="cart-info">
-    <span id="cartBoxText">Cart</span>
-    <small id="cartBoxTotal">₹0</small>
-  </div>
-</div>
+    <div class="search-box">
+      <input type="search" id="searchQuery" placeholder="Search for genuine spare parts, chargers, helmets & more" oninput="liveSearch()">
+      <button onclick="liveSearch()">🔍</button>
+    </div>
 
-</div>
+    <div class="header-actions">
+      <!-- TRACK ORDER BUTTON -->
+      <button class="btn-nav" onclick="openTrackModal()">
+        <span>📦</span> Track Order
+      </button>
+
+      <!-- CART TRIGGER BUTTON -->
+      <button class="cart-trigger" id="cartTriggerBtn" onclick="toggleCartDrawer(true)">
+        <span>🛒</span>
+        <span id="cartCountBadge" class="cart-count-badge">0</span>
+        <span id="headerCartTotal">₹0</span>
+      </button>
+    </div>
+  </div>
 </header>
-<nav>
-<ul id="navCats">
-  <li class="on" onclick="filterCat('All')">All Products</li>
-  <li onclick="filterCat('Helmets')">Helmets</li>
-  <li onclick="filterCat('Chargers')">Chargers</li>
-  <li onclick="filterCat('Mobile Cables')">Mobile Cables</li>
-  <li onclick="filterCat('Earphones')">Earphones</li>
-  <li onclick="filterCat('Batteries')">Batteries</li>
-  <li onclick="filterCat('Accessories')">Accessories</li>
-  <li onclick="location.hash='shop'">Visit Shop</li>
-</ul>
+
+<!-- CATEGORY NAVIGATION -->
+<nav class="nav-sub">
+  <ul id="catNavList">
+    <li class="active" onclick="filterByCategory('All')">All Products</li>
+    <li onclick="filterByCategory('Helmets')">Helmets &amp; Gear</li>
+    <li onclick="filterByCategory('Chargers')">EV Chargers</li>
+    <li onclick="filterByCategory('Batteries')">Lithium Batteries</li>
+    <li onclick="filterByCategory('Mobile Cables')">Fast Cables</li>
+    <li onclick="filterByCategory('Earphones')">Audio &amp; Neckbands</li>
+    <li onclick="filterByCategory('Accessories')">Bike Covers &amp; Mounts</li>
+  </ul>
 </nav>
 
-<section class="hero"><div class="banner">
-<div><h1>Genuine EV Accessories &amp; Spare Parts</h1><p>Fast local delivery &amp; in-shop service guarantee</p></div>
-<div class="tag">Direct Shop Prices</div>
-</div></section>
+<!-- BANNER -->
+<section class="hero-slider">
+  <div class="banner-card">
+    <div>
+      <h1>Big Savings on Genuine EV Spares</h1>
+      <p>Guaranteed authentic parts with instant hand-to-hand delivery in Mharal Gaon</p>
+    </div>
+    <div class="banner-badge">⚡ Special Local Offers</div>
+  </div>
+</section>
 
-<main>
-<aside>
-<h2>Categories</h2>
-<div class="f">
-  <label><input type="radio" name="rcat" checked onclick="filterCat('All')"> All Items</label>
-  <label><input type="radio" name="rcat" onclick="filterCat('Helmets')"> Helmets</label>
-  <label><input type="radio" name="rcat" onclick="filterCat('Chargers')"> Fast Chargers</label>
-  <label><input type="radio" name="rcat" onclick="filterCat('Mobile Cables')"> Mobile Cables</label>
-  <label><input type="radio" name="rcat" onclick="filterCat('Earphones')"> Earphones / Audio</label>
-  <label><input type="radio" name="rcat" onclick="filterCat('Batteries')"> EV Batteries &amp; Cells</label>
-  <label><input type="radio" name="rcat" onclick="filterCat('Accessories')"> Bike Accessories</label>
-</div>
-</aside>
-<div class="panel">
-<div class="top"><b id="pCount">Showing Products</b></div>
-<div class="grid" id="grid"></div>
-</div>
-</main>
+<!-- MAIN CONTENT -->
+<div class="layout">
+  <!-- SIDEBAR FILTERS -->
+  <aside class="sidebar">
+    <h3>Filters</h3>
+    <div class="filter-group">
+      <b>Categories</b>
+      <label><input type="radio" name="f_cat" checked onclick="filterByCategory('All')"> All Products</label>
+      <label><input type="radio" name="f_cat" onclick="filterByCategory('Helmets')"> Helmets &amp; Safety</label>
+      <label><input type="radio" name="f_cat" onclick="filterByCategory('Chargers')"> Fast Smart Chargers</label>
+      <label><input type="radio" name="f_cat" onclick="filterByCategory('Batteries')"> EV Battery Packs</label>
+      <label><input type="radio" name="f_cat" onclick="filterByCategory('Mobile Cables')"> Fast Data Cables</label>
+      <label><input type="radio" name="f_cat" onclick="filterByCategory('Earphones')"> Earphones &amp; Audio</label>
+      <label><input type="radio" name="f_cat" onclick="filterByCategory('Accessories')"> Vehicle Accessories</label>
+    </div>
+  </aside>
 
-<div class="perks">
-<div><b>Fast Hand-to-Hand Delivery</b>Local doorstep service in Mharal Gaon</div>
-<div><b>100% Genuine Parts</b>Checked and tested by specialists</div>
-<div><b>Instant Support</b>Call / WhatsApp anytime for help</div>
+  <!-- PRODUCTS CONTAINER -->
+  <main class="product-panel">
+    <div class="panel-head">
+      <h2 id="productSectionTitle">All Products</h2>
+      <span style="font-size:13px;color:var(--muted)" id="totalProductsCount">Showing items</span>
+    </div>
+    <div class="product-grid" id="productGrid">
+      <!-- Cards render via JavaScript -->
+    </div>
+  </main>
 </div>
 
-<section class="biz" id="shop"><div class="panel">
-<div>
-<h2>PAG Moters</h2>
-<p class="sub">Spare Parts, EV Accessories &amp; Repair</p>
-<dl>
-<div><dt>Shop Address</dt><dd>Shop no 68, MIDC Gate,<br>Near Gram Panchayat Office,<br>Mharal Gaon 421001</dd></div>
-<div><dt>Contact Numbers</dt><dd><a href="tel:+918766641866">8766641866</a><a href="tel:+917379595655">7379595655</a></dd></div>
-</dl>
-<div class="acts">
-  <a href="tel:+918766641866">Call Now</a>
-  <a class="alt" href="https://wa.me/918766641866" target="_blank">WhatsApp Us</a>
-  <a class="alt" href="https://www.google.com/maps/search/?api=1&amp;query=MIDC+Gate+Gram+Panchayat+Office+Mharal+Gaon+421001" target="_blank">View Map</a>
+<!-- TRUST PERKS (FLIPKART STYLE) -->
+<div class="trust-strip">
+  <div class="trust-box">
+    <div class="icon">⚡</div>
+    <div><b>Hand-to-Hand Delivery</b><small>Direct to your doorstep in Mharal</small></div>
+  </div>
+  <div class="trust-box">
+    <div class="icon">🛡️</div>
+    <div><b>100% Genuine Guarantee</b><small>Tested and verified parts</small></div>
+  </div>
+  <div class="trust-box">
+    <div class="icon">💬</div>
+    <div><b>Instant WhatsApp Support</b><small>Quick replies from our shop team</small></div>
+  </div>
+  <div class="trust-box">
+    <div class="icon">💵</div>
+    <div><b>Cash on Delivery Available</b><small>Pay after inspecting item</small></div>
+  </div>
 </div>
-</div>
-<img src="/pag-moters-card.jpg" alt="PAG Moters Shop visiting card" width="1536" height="1024" loading="lazy">
-</div></section>
 
+<!-- FOOTER -->
 <footer>
-<b style="color:#fff">PAG Moters</b> – EV Spare Parts, Accessories &amp; Service<br>
-Shop no 68, MIDC Gate, Mharal Gaon 421001 · Call 8766641866 / 7379595655<br>
-© 2026 PAG Moters · pagmoters.online
+  <div class="footer-inner">
+    <div>
+      <h4>PAG Moters</h4>
+      <p>Your trusted local destination for Electric Vehicle spare parts, high-speed smart chargers, certified safety helmets, and battery servicing.</p>
+    </div>
+    <div>
+      <h4>Shop Location</h4>
+      <p>Shop no 68, MIDC Gate,<br>Near Gram Panchayat Office,<br>Mharal Gaon, 421001</p>
+    </div>
+    <div>
+      <h4>Quick Contact</h4>
+      <p>Call: <a href="tel:+918766641866">8766641866</a><br>Support: <a href="tel:+917379595655">7379595655</a><br>WhatsApp: <a href="https://wa.me/918766641866" target="_blank">Chat with us</a></p>
+    </div>
+  </div>
+  <div class="footer-copy">
+    © 2026 PAG Moters · pagmoters.online · All Rights Reserved
+  </div>
 </footer>
 
-<!-- DRAWER (Popup opens ONLY when clicking header cart box) -->
+<!-- CART DRAWER OVERLAY -->
+<div class="overlay" id="cartOverlay" onclick="toggleCartDrawer(false)"></div>
 <div class="drawer" id="cartDrawer">
-<div class="shade" onclick="toggleCart()"></div>
-<div class="box">
-  <div class="hd">
-    <h2>Your Cart Items</h2>
-    <button class="x" onclick="toggleCart()">×</button>
+  <div class="drawer-head">
+    <h2>My Cart (<span id="drawerItemCount">0</span>)</h2>
+    <button class="btn-close" onclick="toggleCartDrawer(false)">✕</button>
   </div>
-  
-  <div class="cart-body" id="cartContent">
-    <!-- Rendered dynamically -->
+  <div class="drawer-body" id="cartBody">
+    <!-- Cart Items or Form -->
   </div>
 </div>
+
+<!-- TRACK ORDER MODAL -->
+<div class="overlay" id="trackModalOverlay">
+  <div class="modal-track">
+    <div class="modal-head">
+      <h3>📦 Track Your Order Status</h3>
+      <button class="btn-close" onclick="closeTrackModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:13px;color:#555;margin:0 0 12px;">Enter your <b>Order ID (e.g. PAG-123456)</b> or <b>Registered 10-digit Phone Number</b> to track live delivery:</p>
+      <div class="track-input-group">
+        <input type="text" id="trackInput" placeholder="Enter Order ID or Mobile Number">
+        <button onclick="performOrderSearch()">Track</button>
+      </div>
+
+      <!-- TRACK RESULTS SHOW HERE -->
+      <div id="trackResultContainer"></div>
+    </div>
+  </div>
 </div>
 
 <script>
-const products = [
-  {id: 1, name: "ISI Full Face Safety Helmet", cat: "Helmets", price: 899, orig: 1499, icon: "🪖", spec: "ISI certified, scratch-proof visor"},
-  {id: 2, name: "Open Face City Rider Helmet", cat: "Helmets", price: 650, orig: 999, icon: "🪖", spec: "Lightweight, breathable interior"},
-  {id: 3, name: "60V EV Smart Battery Fast Charger", cat: "Chargers", price: 1850, orig: 2499, icon: "🔌", spec: "Auto cut-off, short circuit protection"},
-  {id: 4, name: "48V High Efficiency EV Charger", cat: "Chargers", price: 1650, orig: 2200, icon: "🔌", spec: "Heavy duty copper cooling fan"},
-  {id: 5, name: "Type-C Fast Braided Cable (65W)", cat: "Mobile Cables", price: 249, orig: 499, icon: "⚡", spec: "Super fast charging, unbreakable nylon"},
-  {id: 6, name: "3-in-1 Multi Fast Charging Cable", cat: "Mobile Cables", price: 349, orig: 699, icon: "🔌", spec: "Lightning + Type-C + Micro USB"},
-  {id: 7, name: "Bass Pro Magnetic Wireless Neckband", cat: "Earphones", price: 499, orig: 999, icon: "🎧", spec: "30 hrs playtime, deep bass sound"},
-  {id: 8, name: "True Wireless Stereo Earbuds", cat: "Earphones", price: 799, orig: 1999, icon: "🎵", spec: "Touch controls, noise cancellation mic"},
-  {id: 9, name: "Heavy Duty All-Weather Scooter Cover", cat: "Accessories", price: 399, orig: 799, icon: "🛡️", spec: "Waterproof, dust and UV protect"},
-  {id: 10, name: "Universal Waterproof Mobile Mount", cat: "Accessories", price: 299, orig: 599, icon: "📱", spec: "360° rotation for handlebar"},
-  {id: 11, name: "48V 24Ah Lithium-Ion Battery Pack", cat: "Batteries", price: 14500, orig: 18000, icon: "🔋", spec: "High grade cells, 3 yr life guarantee"}
+// PRODUCT REPOSITORY
+const catalog = [
+  {id: 1, name: "Vega Cruiser ISI Certified Helmet", cat: "Helmets", price: 899, orig: 1499, rating: 4.4, reviews: 342, img: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=400", desc: "ISI certified outer shell with anti-scratch clear visor"},
+  {id: 2, name: "Steelbird Full Face Matte Black Helmet", cat: "Helmets", price: 1199, orig: 1899, rating: 4.6, reviews: 610, img: "https://images.unsplash.com/photo-1558980664-3a031cf67ea8?w=400", desc: "Quick release chinstrap, high impact resistant"},
+  {id: 3, name: "60V Smart Fast Charger for EV Scooters", cat: "Chargers", price: 1850, orig: 2499, rating: 4.5, reviews: 184, img: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=400", desc: "Auto cut-off technology with heat sink protection"},
+  {id: 4, name: "48V 3A Heavy Duty EV Battery Charger", cat: "Chargers", price: 1650, orig: 2200, rating: 4.3, reviews: 92, img: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400", desc: "Copper cooling fan, stabilized voltage output"},
+  {id: 5, name: "65W Type-C Super Fast Braided Cable", cat: "Mobile Cables", price: 249, orig: 499, rating: 4.4, reviews: 852, img: "https://images.unsplash.com/photo-1588508065123-287b28e013da?w=400", desc: "Heavy nylon braid, 480Mbps high speed data sync"},
+  {id: 6, name: "3-in-1 Fast Nylon Charging Cable (1.2m)", cat: "Mobile Cables", price: 349, orig: 699, rating: 4.2, reviews: 412, img: "https://images.unsplash.com/photo-1608156639585-b3a032ef9689?w=400", desc: "Supports iPhone Lightning, Type-C & Micro USB"},
+  {id: 7, name: "Bass Pro Magnetic Wireless Neckband", cat: "Earphones", price: 499, orig: 999, rating: 4.3, reviews: 960, img: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=400", desc: "30-hour battery life, sweat-resistant silicone neckband"},
+  {id: 8, name: "TWS True Wireless Stereo Earbuds", cat: "Earphones", price: 799, orig: 1999, rating: 4.5, reviews: 1205, img: "https://images.unsplash.com/photo-1572536147248-ac59a8abfa4b?w=400", desc: "Touch sensor controls with digital battery display case"},
+  {id: 9, name: "All-Weather Waterproof Scooter Body Cover", cat: "Accessories", price: 399, orig: 799, rating: 4.2, reviews: 219, img: "https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=400", desc: "Tear-resistant PVC material with mirror pockets"},
+  {id: 10, name: "360° Metal Handlebar Mobile Mount", cat: "Accessories", price: 299, orig: 599, rating: 4.4, reviews: 310, img: "https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?w=400", desc: "Shockproof grip with firm four-corner lock"},
+  {id: 11, name: "48V 24Ah Lithium-Ion Scooter Battery Pack", cat: "Batteries", price: 14500, orig: 18000, rating: 4.7, reviews: 78, img: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=400", desc: "A-grade cells with 3 Years warranty coverage"}
 ];
 
-let cart = JSON.parse(localStorage.getItem('pag_cart') || '[]');
+// CART & ORDERS STORAGE
+let cart = [];
+let orders = [];
 
-function saveCart() {
-  localStorage.setItem('pag_cart', JSON.stringify(cart));
-  updateCartBadge();
-  updateButtonsOnCards();
+try {
+  cart = JSON.parse(localStorage.getItem('pag_cart_items')) || [];
+} catch(e) { cart = []; }
+
+try {
+  orders = JSON.parse(localStorage.getItem('pag_orders_db')) || [];
+} catch(e) { orders = []; }
+
+function persistCart() {
+  localStorage.setItem('pag_cart_items', JSON.stringify(cart));
+  syncCartUI();
 }
 
-function updateCartBadge() {
-  const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
-  const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-  
-  const badge = document.getElementById('cartBadge');
-  badge.innerText = totalCount;
-  document.getElementById('cartBoxTotal').innerText = `₹${totalPrice.toLocaleString('en-IN')}`;
-  
-  const cartBox = document.getElementById('cartBox');
-  cartBox.classList.remove('cart-bounce');
-  void cartBox.offsetWidth; // trigger reflow
-  cartBox.classList.add('cart-bounce');
+function persistOrders() {
+  localStorage.setItem('pag_orders_db', JSON.stringify(orders));
 }
 
-function renderProducts(list) {
-  const grid = document.getElementById('grid');
-  document.getElementById('pCount').innerText = `${list.length} Products Available`;
-  if(!list.length) {
-    grid.innerHTML = '<div style="padding:40px;text-align:center;grid-column:1/-1;">No products found in this category.</div>';
+// SYNC ALL CART BADGES & IN-CARD BUTTONS
+function syncCartUI() {
+  const totalCount = cart.reduce((acc, it) => acc + it.qty, 0);
+  const totalPrice = cart.reduce((acc, it) => acc + (it.price * it.qty), 0);
+
+  const badge = document.getElementById('cartCountBadge');
+  const totalHead = document.getElementById('headerCartTotal');
+  const drawerCount = document.getElementById('drawerItemCount');
+
+  if(badge) badge.innerText = totalCount;
+  if(totalHead) totalHead.innerText = `₹${totalPrice.toLocaleString('en-IN')}`;
+  if(drawerCount) drawerCount.innerText = totalCount;
+
+  // Refresh in-card buttons
+  catalog.forEach(item => {
+    const container = document.getElementById(`btn-area-${item.id}`);
+    if(container) {
+      const exist = cart.find(c => c.id === item.id);
+      container.innerHTML = makeButtonHtml(item.id, exist ? exist.qty : 0);
+    }
+  });
+
+  if(document.getElementById('cartDrawer').classList.contains('open')) {
+    renderCartDrawerContent();
+  }
+}
+
+// BUTTON TEMPLATE
+function makeButtonHtml(id, qty) {
+  if(qty > 0) {
+    return `
+      <div class="qty-stepper">
+        <button onclick="updateItemQuantity(${id}, -1)">−</button>
+        <span>${qty} in Cart</span>
+        <button onclick="handleAddToCartAnimation(${id}, this)">+</button>
+      </div>
+    `;
+  }
+  return `
+    <button class="btn-add-cart" onclick="handleAddToCartAnimation(${id}, this)">
+      <span>🛒</span> Add to Cart
+    </button>
+  `;
+}
+
+// FLYING ANIMATION (To Header Cart)
+function handleAddToCartAnimation(id, btn) {
+  triggerFly(btn);
+
+  const product = catalog.find(p => p.id === id);
+  const exist = cart.find(c => c.id === id);
+
+  if(exist) {
+    exist.qty += 1;
+  } else {
+    cart.push({...product, qty: 1});
+  }
+  persistCart();
+}
+
+function triggerFly(startElem) {
+  const target = document.getElementById('cartTriggerBtn');
+  if(!startElem || !target) return;
+
+  const sRect = startElem.getBoundingClientRect();
+  const tRect = target.getBoundingClientRect();
+
+  const ball = document.createElement('div');
+  ball.className = 'fly-item';
+  ball.innerText = '+1';
+  ball.style.left = `${sRect.left + (sRect.width / 2) - 12}px`;
+  ball.style.top = `${sRect.top}px`;
+  document.body.appendChild(ball);
+
+  requestAnimationFrame(() => {
+    ball.style.left = `${tRect.left + (tRect.width / 2) - 12}px`;
+    ball.style.top = `${tRect.top + (tRect.height / 2) - 12}px`;
+    ball.style.transform = 'scale(1.3)';
+    ball.style.opacity = '0.3';
+  });
+
+  setTimeout(() => ball.remove(), 560);
+}
+
+function updateItemQuantity(id, delta) {
+  const idx = cart.findIndex(c => c.id === id);
+  if(idx > -1) {
+    cart[idx].qty += delta;
+    if(cart[idx].qty <= 0) cart.splice(idx, 1);
+    persistCart();
+  }
+}
+
+// RENDER PRODUCTS
+function displayProducts(items) {
+  const grid = document.getElementById('productGrid');
+  const countLabel = document.getElementById('totalProductsCount');
+  if(!grid) return;
+
+  countLabel.innerText = `${items.length} items found`;
+
+  if(!items.length) {
+    grid.innerHTML = '<div style="padding:50px;text-align:center;grid-column:1/-1;color:#878787;">No matching products found.</div>';
     return;
   }
-  grid.innerHTML = list.map(p => {
-    const cartItem = cart.find(c => c.id === p.id);
-    const qty = cartItem ? cartItem.qty : 0;
-    
+
+  grid.innerHTML = items.map(p => {
+    const exist = cart.find(c => c.id === p.id);
+    const qty = exist ? exist.qty : 0;
+    const discount = Math.round((1 - p.price / p.orig) * 100);
+
     return `
-      <div class="card" id="card-${p.id}">
-        <div class="pic">${p.icon}</div>
-        <h4>${p.name}</h4>
-        <p class="spec">${p.spec}</p>
-        <div class="pr">
-          <strong>₹${p.price.toLocaleString('en-IN')}</strong>
-          <s>₹${p.orig.toLocaleString('en-IN')}</s>
-          <em>${Math.round((1 - p.price/p.orig)*100)}% off</em>
+      <div class="product-card">
+        <div class="prod-img-wrap">
+          <img src="${p.img}" alt="${p.name}" loading="lazy">
+          <span class="assured-tag">PAG Assured</span>
         </div>
-        <div class="btn-holder" id="btn-holder-${p.id}">
-          ${getButtonHTML(p.id, qty)}
+        <div class="prod-title" title="${p.name}">${p.name}</div>
+        <div style="display:flex;align-items:center;margin-bottom:6px;">
+          <span class="rating-pill">${p.rating} ★</span>
+          <span class="rating-count">(${p.reviews.toLocaleString()})</span>
+        </div>
+        <div class="price-row">
+          <span class="final-price">₹${p.price.toLocaleString('en-IN')}</span>
+          <span class="orig-price">₹${p.orig.toLocaleString('en-IN')}</span>
+          <span class="disc-percent">${discount}% off</span>
+        </div>
+        <div class="delivery-badge">Free delivery <span>Tomorrow</span></div>
+        <div class="card-actions" id="btn-area-${p.id}">
+          ${makeButtonHtml(p.id, qty)}
         </div>
       </div>
     `;
   }).join('');
 }
 
-function getButtonHTML(id, qty) {
-  if (qty > 0) {
-    return `
-      <div class="qty-ctrl">
-        <button onclick="changeQty(${id}, -1)">−</button>
-        <span>${qty} in cart</span>
-        <button onclick="addToCartWithFly(${id}, this)">+</button>
-      </div>
-    `;
-  } else {
-    return `
-      <button class="buy" onclick="addToCartWithFly(${id}, this)">
-        <span>+ Add to Cart</span>
-      </button>
-    `;
-  }
-}
-
-function updateButtonsOnCards() {
-  products.forEach(p => {
-    const el = document.getElementById(`btn-holder-${p.id}`);
-    if (el) {
-      const cartItem = cart.find(c => c.id === p.id);
-      const qty = cartItem ? cartItem.qty : 0;
-      el.innerHTML = getButtonHTML(p.id, qty);
-    }
+// FILTER & SEARCH
+function filterByCategory(cat) {
+  document.querySelectorAll('#catNavList li').forEach(li => {
+    li.classList.toggle('active', li.innerText === cat || (cat === 'All' && li.innerText === 'All Products'));
   });
+  document.getElementById('productSectionTitle').innerText = cat === 'All' ? 'All Products' : cat;
+  if(cat === 'All') displayProducts(catalog);
+  else displayProducts(catalog.filter(p => p.cat === cat));
 }
 
-function addToCartWithFly(id, btnElement) {
-  // 1. FLY ANIMATION: Ud kar cart me jana
-  flyToCartAnimation(btnElement);
-
-  // 2. Add to Cart data
-  const item = products.find(p => p.id === id);
-  const existing = cart.find(c => c.id === id);
-  if(existing) {
-    existing.qty += 1;
-  } else {
-    cart.push({...item, qty: 1});
-  }
-  saveCart();
-  // NOTICE: No popup will open! User can keep adding more items freely.
+function liveSearch() {
+  const query = document.getElementById('searchQuery').value.toLowerCase().trim();
+  const res = catalog.filter(p => p.name.toLowerCase().includes(query) || p.cat.toLowerCase().includes(query));
+  displayProducts(res);
 }
 
-function flyToCartAnimation(startElem) {
-  const cartIcon = document.getElementById('cartBox');
-  if(!startElem || !cartIcon) return;
-
-  const startRect = startElem.getBoundingClientRect();
-  const endRect = cartIcon.getBoundingClientRect();
-
-  const ball = document.createElement('div');
-  ball.className = 'fly-ball';
-  ball.innerHTML = '+1';
-  ball.style.left = `${startRect.left + startRect.width / 2 - 12}px`;
-  ball.style.top = `${startRect.top}px`;
-  document.body.appendChild(ball);
-
-  requestAnimationFrame(() => {
-    ball.style.transform = `scale(1.3)`;
-    ball.style.left = `${endRect.left + endRect.width / 2 - 12}px`;
-    ball.style.top = `${endRect.top + endRect.height / 2 - 12}px`;
-    ball.style.opacity = '0.3';
-  });
-
-  setTimeout(() => {
-    ball.remove();
-  }, 620);
-}
-
-function changeQty(id, delta) {
-  const idx = cart.findIndex(c => c.id === id);
-  if(idx > -1) {
-    cart[idx].qty += delta;
-    if(cart[idx].qty <= 0) cart.splice(idx, 1);
-    saveCart();
-    if(document.getElementById('cartDrawer').classList.contains('open')) {
-      renderCartDrawer();
-    }
-  }
-}
-
-function filterCat(catName) {
-  document.querySelectorAll('#navCats li').forEach(li => {
-    li.classList.toggle('on', li.innerText === catName || (catName === 'All' && li.innerText === 'All Products'));
-  });
-  if(catName === 'All') renderProducts(products);
-  else renderProducts(products.filter(p => p.cat === catName));
-}
-
-function searchProducts() {
-  const term = document.getElementById('q').value.toLowerCase();
-  const filtered = products.filter(p => p.name.toLowerCase().includes(term) || p.cat.toLowerCase().includes(term));
-  renderProducts(filtered);
-}
-
-// Side popup opens ONLY when clicking header cart box
-function toggleCart() {
+// DRAWER TOGGLE
+function toggleCartDrawer(open) {
   const drawer = document.getElementById('cartDrawer');
-  drawer.classList.toggle('open');
-  if(drawer.classList.contains('open')) {
-    renderCartDrawer();
+  const overlay = document.getElementById('cartOverlay');
+  if(open) {
+    drawer.classList.add('open');
+    overlay.classList.add('show');
+    renderCartDrawerContent();
+  } else {
+    drawer.classList.remove('open');
+    overlay.classList.remove('show');
   }
 }
 
-function renderCartDrawer() {
-  const c = document.getElementById('cartContent');
+// DRAWER RENDER
+function renderCartDrawerContent() {
+  const body = document.getElementById('cartBody');
   if(!cart.length) {
-    c.innerHTML = `
-      <div style="text-align:center;padding:40px 10px;color:var(--muted)">
-        <div style="font-size:42px;margin-bottom:10px;">🛒</div>
-        <b>Your cart is empty</b><br>
-        <p>Click "+ Add to Cart" on any product to start.</p>
+    body.innerHTML = `
+      <div style="text-align:center;padding:50px 10px;">
+        <div style="font-size:54px;margin-bottom:10px;">🛒</div>
+        <b style="font-size:16px;">Your Cart is Empty!</b>
+        <p style="color:#878787;font-size:13px;margin:6px 0 16px;">Add items to it now to enjoy fast delivery.</p>
+        <button class="btn-place-order" onclick="toggleCartDrawer(false)" style="background:var(--fk-blue)">Shop Now</button>
       </div>`;
     return;
   }
 
-  const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+  const subTotal = cart.reduce((acc, it) => acc + (it.price * it.qty), 0);
+  const origTotal = cart.reduce((acc, it) => acc + (it.orig * it.qty), 0);
+  const totalSavings = origTotal - subTotal;
 
-  c.innerHTML = `
+  body.innerHTML = `
     <div>
-      ${cart.map(item => `
-        <div class="it">
-          <div>
-            <b>${item.name}</b>
-            <small>₹${item.price} × ${item.qty} = ₹${(item.price * item.qty).toLocaleString('en-IN')}</small>
-          </div>
-          <div style="display:flex;gap:6px;align-items:center;">
-            <button onclick="changeQty(${item.id}, -1)" style="padding:3px 9px;cursor:pointer;font-weight:700;">−</button>
-            <span style="font-weight:700;">${item.qty}</span>
-            <button onclick="changeQty(${item.id}, 1)" style="padding:3px 9px;cursor:pointer;font-weight:700;">+</button>
-            <button class="rem" onclick="changeQty(${item.id}, -${item.qty})">✕</button>
+      ${cart.map(it => `
+        <div class="cart-item-row">
+          <img src="${it.img}" alt="${it.name}">
+          <div class="cart-item-details">
+            <h4>${it.name}</h4>
+            <div class="price">₹${(it.price * it.qty).toLocaleString('en-IN')} <span style="font-size:11px;color:#878787;font-weight:normal">(₹${it.price} each)</span></div>
+            <div class="cart-item-ctrl">
+              <button onclick="updateItemQuantity(${it.id}, -1)">−</button>
+              <span style="font-weight:700;font-size:13px;">${it.qty}</span>
+              <button onclick="updateItemQuantity(${it.id}, 1)">+</button>
+              <span style="margin-left:auto;font-size:12px;color:#d32f2f;cursor:pointer;font-weight:700;" onclick="updateItemQuantity(${it.id}, -${it.qty})">REMOVE</span>
+            </div>
           </div>
         </div>
       `).join('')}
     </div>
-    
-    <div class="tot">
-      <span>Grand Total</span>
-      <span>₹${total.toLocaleString('en-IN')}</span>
-    </div>
 
-    <form class="chk-form" onsubmit="handlePlaceOrder(event)">
-      <h3 style="margin:4px 0;">Delivery Details</h3>
-      <input type="text" id="custName" placeholder="Full Name" required>
-      <input type="tel" id="custPhone" placeholder="Mobile Number (10 digits)" required pattern="[0-9]{10}">
-      <textarea id="custAddr" placeholder="Delivery Address / Landmark" rows="2" required></textarea>
-      
-      <div class="pay-opt">
-        <b>Payment Option:</b>
-        <label><input type="radio" name="payMethod" value="Cash on Delivery" checked> Cash on Delivery (COD)</label>
-        <label><input type="radio" name="payMethod" value="UPI / Online Payment"> UPI / Online Payment</label>
+    <div class="price-summary">
+      <div style="font-weight:700;font-size:13px;color:#878787;margin-bottom:10px;text-transform:uppercase;">Price Details</div>
+      <div class="summary-row">
+        <span>Price (${cart.reduce((a,b)=>a+b.qty,0)} items)</span>
+        <span>₹${origTotal.toLocaleString('en-IN')}</span>
       </div>
-      <button class="buy" type="submit" style="padding:12px;font-size:15px;">Confirm &amp; Place Order</button>
-    </form>
+      <div class="summary-row" style="color:var(--fk-green)">
+        <span>Discount</span>
+        <span>− ₹${totalSavings.toLocaleString('en-IN')}</span>
+      </div>
+      <div class="summary-row">
+        <span>Delivery Charges</span>
+        <span style="color:var(--fk-green)">FREE</span>
+      </div>
+      <div class="summary-total">
+        <span>Total Amount</span>
+        <span>₹${subTotal.toLocaleString('en-IN')}</span>
+      </div>
+      <div style="font-size:12px;color:var(--fk-green);font-weight:700;margin-top:8px;">You will save ₹${totalSavings.toLocaleString('en-IN')} on this order</div>
+    </div>
+
+    <div class="checkout-box">
+      <h3>Delivery Address</h3>
+      <form onsubmit="processOrderPlacement(event)">
+        <input type="text" id="orderCustName" placeholder="Customer Full Name" required>
+        <input type="tel" id="orderCustPhone" placeholder="Mobile Number (10 digits)" required pattern="[0-9]{10}">
+        <textarea id="orderCustAddr" placeholder="Delivery Address, Shop/Flat No, Landmark" rows="2" required></textarea>
+        
+        <div class="payment-choice">
+          <b>Payment Method:</b>
+          <label><input type="radio" name="payOption" value="Cash on Delivery (COD)" checked> 💵 Cash on Delivery (Pay at Doorstep)</label>
+          <label><input type="radio" name="payOption" value="UPI / Online Payment"> ⚡ Pay via UPI / QR / Google Pay</label>
+        </div>
+        
+        <button type="submit" class="btn-place-order">CONFIRM ORDER</button>
+      </form>
+    </div>
   `;
 }
 
-function handlePlaceOrder(e) {
+// HANDLE ORDER SUBMISSION
+function processOrderPlacement(e) {
   e.preventDefault();
-  const name = document.getElementById('custName').value;
-  const phone = document.getElementById('custPhone').value;
-  const addr = document.getElementById('custAddr').value;
-  const pay = document.querySelector('input[name="payMethod"]:checked').value;
-  
+
+  const name = document.getElementById('orderCustName').value.trim();
+  const phone = document.getElementById('orderCustPhone').value.trim();
+  const addr = document.getElementById('orderCustAddr').value.trim();
+  const payment = document.querySelector('input[name="payOption"]:checked').value;
+
   const orderId = 'PAG-' + Math.floor(100000 + Math.random() * 900000);
-  const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-  const itemList = cart.map(i => `${i.name} (Qty: ${i.qty})`).join(', ');
+  const total = cart.reduce((acc, it) => acc + (it.price * it.qty), 0);
+  const itemsText = cart.map(i => `${i.name} (Qty: ${i.qty})`).join(', ');
 
-  const c = document.getElementById('cartContent');
-  c.innerHTML = `
-    <div class="status-card">
-      <h3>🎉 Order Placed Successfully!</h3>
-      <p style="margin:4px 0;">Status: <b>Confirmed &amp; Under Processing</b></p>
-      <p style="font-size:13px;color:var(--muted);">Order ID: <b>${orderId}</b></p>
+  const newOrder = {
+    id: orderId,
+    customerName: name,
+    customerPhone: phone,
+    address: addr,
+    items: itemsText,
+    totalPayable: total,
+    paymentMethod: payment,
+    date: new Date().toLocaleDateString('en-IN', {day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit'}),
+    statusStep: 1 // 1: Placed, 2: Packed, 3: Out for Delivery, 4: Delivered
+  };
+
+  orders.unshift(newOrder);
+  persistOrders();
+
+  // Clear current cart
+  cart = [];
+  persistCart();
+
+  // Render Confirmation inside drawer
+  const body = document.getElementById('cartBody');
+  body.innerHTML = `
+    <div class="success-screen">
+      <div class="icon">✅</div>
+      <h2 style="margin:0 0 6px;color:#212121;">Order Placed Successfully!</h2>
+      <p style="color:#555;font-size:13px;margin:0 0 10px;">Thank you for shopping with PAG Moters.</p>
+      
+      <div class="order-pill">ORDER ID: ${orderId}</div>
+
+      <div style="text-align:left;background:#f9f9f9;border:1px solid #e0e0e0;padding:12px;border-radius:4px;font-size:13px;line-height:1.6;margin:12px 0;">
+        <div><b>Name:</b> ${name} (${phone})</div>
+        <div><b>Address:</b> ${addr}</div>
+        <div><b>Items:</b> ${itemsText}</div>
+        <div><b>Total Amount:</b> ₹${total.toLocaleString('en-IN')} (${payment})</div>
+      </div>
+
+      <a class="btn-wa-order" target="_blank" href="https://wa.me/918766641866?text=${encodeURIComponent(
+        `Hello PAG Moters! I have placed an order.\n\n*Order ID:* ${orderId}\n*Name:* ${name}\n*Phone:* ${phone}\n*Address:* ${addr}\n*Items:* ${itemsText}\n*Total:* ₹${total}\n*Payment:* ${payment}`
+      )}">
+        Send Order on WhatsApp 💬
+      </a>
+
+      <button onclick="toggleCartDrawer(false)" class="btn-add-cart" style="margin-top:12px;">Continue Shopping</button>
     </div>
-
-    <div style="background:var(--bg);padding:12px;border-radius:4px;font-size:13px;display:grid;gap:4px;">
-      <div><b>Customer:</b> ${name} (${phone})</div>
-      <div><b>Address:</b> ${addr}</div>
-      <div><b>Items:</b> ${itemList}</div>
-      <div><b>Total Payable:</b> ₹${total.toLocaleString('en-IN')} (${pay})</div>
-    </div>
-
-    <a class="btn-wa" target="_blank" href="https://wa.me/918766641866?text=${encodeURIComponent(
-      `Hello PAG Moters, I placed an order!\n\nOrder ID: ${orderId}\nName: ${name}\nPhone: ${phone}\nAddress: ${addr}\nItems: ${itemList}\nTotal: ₹${total}\nPayment: ${pay}`
-    )}">Send Order Details to WhatsApp 💬</a>
-    
-    <button class="buy" onclick="cart=[];saveCart();toggleCart();" style="background:#212121;margin-top:8px;">Back to Shopping</button>
   `;
 }
 
-// Initial Run
-renderProducts(products);
-updateCartBadge();
+// TRACK ORDER MODAL SYSTEM
+function openTrackModal() {
+  document.getElementById('trackModalOverlay').classList.add('show');
+  // Auto-fill recent order if available
+  if(orders.length) {
+    document.getElementById('trackInput').value = orders[0].id;
+    performOrderSearch();
+  }
+}
+
+function closeTrackModal() {
+  document.getElementById('trackModalOverlay').classList.remove('show');
+}
+
+function performOrderSearch() {
+  const query = document.getElementById('trackInput').value.trim().toUpperCase();
+  const container = document.getElementById('trackResultContainer');
+  if(!query) {
+    container.innerHTML = '<div style="color:#d32f2f;font-size:13px;margin-top:10px;">Please enter your Order ID or registered Mobile number.</div>';
+    return;
+  }
+
+  const matched = orders.find(o => o.id.toUpperCase() === query || o.customerPhone === query);
+
+  if(!matched) {
+    container.innerHTML = `
+      <div class="tracker-status-box" style="text-align:center;">
+        <div style="font-size:32px;">🔍</div>
+        <b>No Order Found</b>
+        <p style="font-size:12px;color:#878787;margin:4px 0 0;">Check your Order ID or call our helpline: 8766641866.</p>
+      </div>`;
+    return;
+  }
+
+  container.innerHTML = `
+    <div class="tracker-status-box">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <b>Order ID: ${matched.id}</b>
+        <span style="font-size:12px;color:var(--muted)">${matched.date}</span>
+      </div>
+
+      <!-- 4 STAGE PROGRESS TRACKER -->
+      <div class="timeline">
+        <div class="timeline-step completed">
+          <div class="timeline-dot">✓</div>
+          <span>Ordered</span>
+        </div>
+        <div class="timeline-step ${matched.statusStep >= 2 ? 'completed' : 'current'}">
+          <div class="timeline-dot">${matched.statusStep >= 2 ? '✓' : '2'}</div>
+          <span>Packed</span>
+        </div>
+        <div class="timeline-step ${matched.statusStep >= 3 ? 'completed' : ''}">
+          <div class="timeline-dot">${matched.statusStep >= 3 ? '✓' : '3'}</div>
+          <span>On the Way</span>
+        </div>
+        <div class="timeline-step ${matched.statusStep >= 4 ? 'completed' : ''}">
+          <div class="timeline-dot">${matched.statusStep >= 4 ? '✓' : '4'}</div>
+          <span>Delivered</span>
+        </div>
+      </div>
+
+      <div style="font-size:13px;line-height:1.5;margin-top:14px;border-top:1px solid #e0e0e0;padding-top:10px;">
+        <div><b>Delivery To:</b> ${matched.customerName} (${matched.customerPhone})</div>
+        <div><b>Address:</b> ${matched.address}</div>
+        <div><b>Ordered Items:</b> ${matched.items}</div>
+        <div><b>Total:</b> ₹${matched.totalPayable.toLocaleString('en-IN')} (${matched.paymentMethod})</div>
+      </div>
+
+      <a style="display:block;text-align:center;font-size:13px;color:var(--fk-blue);font-weight:700;margin-top:10px;text-decoration:none;" 
+         target="_blank" href="https://wa.me/918766641866?text=Track%20Order%20Status%20for%20${matched.id}">
+         Need immediate delivery update? Chat on WhatsApp
+      </a>
+    </div>
+  `;
+}
+
+// INITIAL STARTUP
+window.addEventListener('DOMContentLoaded', () => {
+  displayProducts(catalog);
+  syncCartUI();
+});
 </script>
 </body>
 </html>
