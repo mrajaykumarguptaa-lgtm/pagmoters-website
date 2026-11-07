@@ -214,11 +214,12 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 .admin-badge{background:var(--fk-orange);color:#fff;font-size:11px;padding:3px 8px;border-radius:4px;font-weight:800}
 .admin-logout{background:#ef4444;color:#fff;border:0;padding:6px 14px;border-radius:4px;font-weight:700;cursor:pointer}
 .admin-container{max-width:1200px;margin:20px auto;padding:0 16px;display:grid;gap:20px}
-.admin-tabs{display:flex;gap:12px;border-bottom:2px solid var(--line);padding-bottom:10px}
-.admin-tab-btn{background:#fff;border:1px solid var(--line);padding:10px 20px;border-radius:4px;font-weight:700;cursor:pointer}
+.admin-tabs{display:flex;gap:12px;border-bottom:2px solid var(--line);padding-bottom:10px;flex-wrap:wrap}
+.admin-tab-btn{background:#fff;border:1px solid var(--line);padding:10px 18px;border-radius:4px;font-weight:700;cursor:pointer}
 .admin-tab-btn.active{background:var(--fk-blue);color:#fff;border-color:var(--fk-blue)}
+
 .mailbox-card{background:#fff;border-radius:4px;box-shadow:0 1px 3px rgba(0,0,0,.1);overflow:hidden}
-.mailbox-header{background:#f8fafc;padding:12px 18px;font-weight:700;border-bottom:1px solid var(--line);display:flex;justify-content:space-between}
+.mailbox-header{background:#f8fafc;padding:12px 18px;font-weight:700;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
 .mail-row{display:grid;grid-template-columns:120px 180px 1fr 120px 100px;align-items:center;padding:14px 18px;border-bottom:1px solid var(--line);cursor:pointer;transition:background .2s}
 .mail-row:hover{background:#f1f5f9}
 .mail-orderid{color:var(--fk-blue);font-weight:800}
@@ -227,11 +228,19 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 .st-2{background:#e0f2fe;color:#0369a1}
 .st-3{background:#ede9fe;color:#6d28d9}
 .st-4{background:#dcfce7;color:#15803d}
+
+/* PRODUCT MANAGEMENT ADMIN FORMS & TABLES */
+.admin-prod-form{background:#f8fafc;border:1px solid var(--line);padding:16px;border-radius:4px;margin-bottom:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.admin-prod-form input, .admin-prod-form select{border:1px solid var(--line);border-radius:3px;padding:9px 10px;font:inherit;background:#fff}
+.admin-prod-form button{background:var(--fk-green);color:#fff;border:0;padding:10px;font-weight:700;border-radius:3px;cursor:pointer}
+
 .users-table-wrap{background:#fff;border-radius:4px;box-shadow:0 1px 3px rgba(0,0,0,.1);overflow-x:auto}
 .users-table{width:100%;border-collapse:collapse;text-align:left;font-size:13px}
 .users-table th{background:#f8fafc;padding:12px 16px;border-bottom:2px solid var(--line);font-weight:700}
 .users-table td{padding:12px 16px;border-bottom:1px solid var(--line)}
 .btn-override-pass{background:var(--fk-orange);color:#fff;border:0;padding:6px 12px;border-radius:2px;font-weight:700;cursor:pointer}
+.btn-del-prod{background:#ef4444;color:#fff;border:0;padding:6px 12px;border-radius:2px;font-weight:700;cursor:pointer}
+.btn-edit-prod{background:var(--fk-blue);color:#fff;border:0;padding:6px 12px;border-radius:2px;font-weight:700;cursor:pointer;margin-right:4px}
 
 /* TRUST FOOTER */
 .trust-strip{max-width:1240px;margin:20px auto;padding:0 14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
@@ -266,7 +275,6 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
   <div class="top-strip-inner">
     <span>📍 PAG Moters – MIDC Gate, Near Gram Panchayat Office, Mharal Gaon 421001</span>
     
-    <!-- REAL-TIME DIGITAL CLOCK -->
     <div class="realtime-clock-badge">
       <span>🕒</span> <span id="realTimeClock">--:--:-- --</span>
     </div>
@@ -560,7 +568,9 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
   </div>
 </div>
 
-<!-- OWNER ADMIN PANEL (OPENS ONLY ON 6306211265 LOGIN) -->
+<!-- ======================================================== -->
+<!-- 🛡️ OWNER ADMIN PANEL (ORDERS, USERS & PRODUCT MANAGEMENT) -->
+<!-- ======================================================== -->
 <div id="adminPanelModal">
   <div class="admin-navbar">
     <h2><span>⚙️</span> PAG Moters Owner Portal <span class="admin-badge">Super Admin</span></h2>
@@ -570,9 +580,11 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
   <div class="admin-container">
     <div class="admin-tabs">
       <button class="admin-tab-btn active" id="btnTabOrders" onclick="switchAdminTab('orders')">📦 Customer Orders (Mailbox)</button>
+      <button class="admin-tab-btn" id="btnTabProducts" onclick="switchAdminTab('products')">🏷️ Product Management (Add/Edit/Remove)</button>
       <button class="admin-tab-btn" id="btnTabUsers" onclick="switchAdminTab('users')">👥 Customer Accounts &amp; Password Reset</button>
     </div>
 
+    <!-- 1. ORDERS MAILBOX -->
     <div id="adminOrdersSection" class="mailbox-card">
       <div class="mailbox-header">
         <span>Incoming Customer Orders Inbox</span>
@@ -581,6 +593,56 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
       <div id="adminMailboxContainer"></div>
     </div>
 
+    <!-- 2. PRODUCT MANAGEMENT (ADD / REMOVE / PRICE / DISCOUNT) -->
+    <div id="adminProductsSection" class="mailbox-card" style="display:none;padding:16px;">
+      <div class="mailbox-header" style="background:#fff;padding:0 0 12px 0;">
+        <span><b>Add New Product to Storefront</b></span>
+      </div>
+      
+      <!-- ADD PRODUCT FORM -->
+      <form class="admin-prod-form" onsubmit="adminSaveProduct(event)">
+        <input type="text" id="newProdName" placeholder="Product Name (e.g. Smart EV Charger)" required>
+        <select id="newProdCat" required>
+          <option value="Helmets">Helmets</option>
+          <option value="Chargers">Chargers</option>
+          <option value="Batteries">Batteries</option>
+          <option value="Mobile Cables">Mobile Cables</option>
+          <option value="Earphones">Earphones</option>
+          <option value="Accessories">Accessories</option>
+        </select>
+        <input type="number" id="newProdOrig" placeholder="Original MRP Price (₹)" required min="1" oninput="calculateDiscountPreview()">
+        <input type="number" id="newProdPrice" placeholder="Selling Offer Price (₹)" required min="1" oninput="calculateDiscountPreview()">
+        <input type="url" id="newProdImg" placeholder="Image Direct URL (https://...)" required>
+        <div style="grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;background:#e2e8f0;padding:8px 12px;border-radius:3px;">
+          <span id="discountPreviewText" style="font-weight:700;color:var(--fk-green)">Discount: 0% OFF</span>
+          <button type="submit">+ Publish Product to Website</button>
+        </div>
+      </form>
+
+      <div class="mailbox-header" style="background:#fff;padding:12px 0 8px 0;">
+        <span><b>Current Active Products in Catalog</b></span>
+        <span id="adminCatalogCountBadge">0 Products</span>
+      </div>
+
+      <div class="users-table-wrap">
+        <table class="users-table">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Product Name</th>
+              <th>Category</th>
+              <th>Selling Price</th>
+              <th>MRP (Original)</th>
+              <th>Discount</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="adminProductsTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 3. CUSTOMER ACCOUNTS -->
     <div id="adminUsersSection" class="users-table-wrap" style="display:none;">
       <div class="mailbox-header">
         <span>Registered Customers (Instant Password Override)</span>
@@ -599,6 +661,7 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
         <tbody id="adminUsersTableBody"></tbody>
       </table>
     </div>
+
   </div>
 </div>
 
@@ -607,7 +670,8 @@ const ADMIN_PHONE = "6306211265";
 const ADMIN_PASS = "Rushtom@1927";
 const ADMIN_MASTER_SEC = "ajay";
 
-const catalog = [
+// DEFAULT PRODUCTS (Can be modified/removed dynamically by Admin)
+const defaultCatalog = [
   {id: 1, name: "Vega Cruiser ISI Certified Safety Helmet", cat: "Helmets", price: 899, orig: 1499, rating: 4.4, reviews: 342, img: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=400"},
   {id: 2, name: "Steelbird Full Face Matte Black Aerodynamic Helmet", cat: "Helmets", price: 1199, orig: 1899, rating: 4.6, reviews: 610, img: "https://images.unsplash.com/photo-1558980664-3a031cf67ea8?w=400"},
   {id: 3, name: "60V Smart Auto Cut-Off Fast Charger for EV Scooters", cat: "Chargers", price: 1850, orig: 2499, rating: 4.5, reviews: 184, img: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=400"},
@@ -621,16 +685,19 @@ const catalog = [
   {id: 11, name: "48V 24Ah Lithium-Ion Scooter Battery Pack (3 Yr Warranty)", cat: "Batteries", price: 14500, orig: 18000, rating: 4.7, reviews: 78, img: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=400"}
 ];
 
+let catalog = [];
 let cart = [];
 let orders = [];
 let users = [];
 let currentUser = null;
 
+try { catalog = JSON.parse(localStorage.getItem('pag_catalog_db')) || defaultCatalog; } catch(e){ catalog = defaultCatalog; }
 try { cart = JSON.parse(localStorage.getItem('pag_cart_items')) || []; } catch(e){ cart = []; }
 try { orders = JSON.parse(localStorage.getItem('pag_orders_db')) || []; } catch(e){ orders = []; }
 try { users = JSON.parse(localStorage.getItem('pag_users_db')) || []; } catch(e){ users = []; }
 try { currentUser = JSON.parse(localStorage.getItem('pag_active_user')) || null; } catch(e){ currentUser = null; }
 
+function persistCatalog() { localStorage.setItem('pag_catalog_db', JSON.stringify(catalog)); displayProducts(catalog); renderAdminProductsTable(); }
 function persistCart() { localStorage.setItem('pag_cart_items', JSON.stringify(cart)); syncCartUI(); }
 function persistOrders() { localStorage.setItem('pag_orders_db', JSON.stringify(orders)); }
 function persistUsers() { localStorage.setItem('pag_users_db', JSON.stringify(users)); }
@@ -644,7 +711,7 @@ function cleanPhone(val) {
   return num;
 }
 
-// 🕒 REAL-TIME CLOCK (LIVE GHADI FUNCTION)
+// 🕒 REAL-TIME CLOCK
 function startRealTimeClock() {
   function updateClock() {
     const now = new Date();
@@ -652,18 +719,14 @@ function startRealTimeClock() {
     const minutes = String(now.getMinutes()).padStart(2, '0');
     const seconds = String(now.getSeconds()).padStart(2, '0');
     const ampm = hours >= 12 ? 'PM' : 'AM';
-    
     hours = hours % 12;
-    hours = hours ? hours : 12; // 0 ko 12 banana
+    hours = hours ? hours : 12;
     const formattedHours = String(hours).padStart(2, '0');
-
     const clockElem = document.getElementById('realTimeClock');
-    if (clockElem) {
-      clockElem.innerText = `${formattedHours}:${minutes}:${seconds} ${ampm}`;
-    }
+    if (clockElem) clockElem.innerText = `${formattedHours}:${minutes}:${seconds} ${ampm}`;
   }
   updateClock();
-  setInterval(updateClock, 1000); // Har 1 second mein tick karega
+  setInterval(updateClock, 1000);
 }
 
 // SALE BANNER TIMER
@@ -680,11 +743,14 @@ function startSaleTimer() {
   }, 1000);
 }
 
-// ADMIN PORTAL
+// ==========================================
+// 🛡️ ADMIN PORTAL LOGIC & PRODUCT ENGINE
+// ==========================================
 function openAdminPortal() {
   closeAuthModal();
   document.getElementById('adminPanelModal').style.display = 'flex';
   renderAdminMailbox();
+  renderAdminProductsTable();
   renderAdminUsersTable();
 }
 
@@ -694,16 +760,101 @@ function closeAdminPortal() {
 }
 
 function switchAdminTab(tab) {
-  if(tab === 'orders') {
-    document.getElementById('adminOrdersSection').style.display = 'block';
-    document.getElementById('adminUsersSection').style.display = 'none';
-    document.getElementById('btnTabOrders').classList.add('active');
-    document.getElementById('btnTabUsers').classList.remove('active');
+  document.getElementById('adminOrdersSection').style.display = tab === 'orders' ? 'block' : 'none';
+  document.getElementById('adminProductsSection').style.display = tab === 'products' ? 'block' : 'none';
+  document.getElementById('adminUsersSection').style.display = tab === 'users' ? 'block' : 'none';
+
+  document.getElementById('btnTabOrders').classList.toggle('active', tab === 'orders');
+  document.getElementById('btnTabProducts').classList.toggle('active', tab === 'products');
+  document.getElementById('btnTabUsers').classList.toggle('active', tab === 'users');
+}
+
+function calculateDiscountPreview() {
+  const orig = Number(document.getElementById('newProdOrig').value) || 0;
+  const price = Number(document.getElementById('newProdPrice').value) || 0;
+  const prev = document.getElementById('discountPreviewText');
+  if(orig > 0 && price > 0 && orig > price) {
+    const disc = Math.round((1 - price / orig) * 100);
+    prev.innerText = `Discount: ${disc}% OFF (Savings: ₹${orig - price})`;
   } else {
-    document.getElementById('adminOrdersSection').style.display = 'none';
-    document.getElementById('adminUsersSection').style.display = 'block';
-    document.getElementById('btnTabOrders').classList.remove('active');
-    document.getElementById('btnTabUsers').classList.add('active');
+    prev.innerText = `Discount: 0% OFF`;
+  }
+}
+
+function adminSaveProduct(e) {
+  e.preventDefault();
+  const name = document.getElementById('newProdName').value.trim();
+  const cat = document.getElementById('newProdCat').value;
+  const orig = Number(document.getElementById('newProdOrig').value);
+  const price = Number(document.getElementById('newProdPrice').value);
+  const img = document.getElementById('newProdImg').value.trim();
+
+  if(price > orig) {
+    alert("Selling price cannot be greater than original MRP price!");
+    return;
+  }
+
+  const newProduct = {
+    id: Date.now(),
+    name,
+    cat,
+    price,
+    orig,
+    rating: 4.5,
+    reviews: 1,
+    img: img || "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=400"
+  };
+
+  catalog.unshift(newProduct);
+  persistCatalog();
+
+  e.target.reset();
+  calculateDiscountPreview();
+  alert(`Product "${name}" has been published to storefront successfully!`);
+}
+
+function renderAdminProductsTable() {
+  const tbody = document.getElementById('adminProductsTableBody');
+  const countBadge = document.getElementById('adminCatalogCountBadge');
+  if(!tbody) return;
+  countBadge.innerText = `${catalog.length} Products`;
+
+  tbody.innerHTML = catalog.map((p, idx) => {
+    const discount = Math.round((1 - p.price / p.orig) * 100);
+    return `
+      <tr>
+        <td><img src="${p.img}" style="width:40px;height:40px;object-fit:contain;border:1px solid #ddd;border-radius:2px;"></td>
+        <td><b>${p.name}</b></td>
+        <td><span style="background:#e0f2fe;color:#0369a1;padding:2px 8px;border-radius:10px;font-weight:700;">${p.cat}</span></td>
+        <td><b>₹${p.price.toLocaleString('en-IN')}</b></td>
+        <td><s>₹${p.orig.toLocaleString('en-IN')}</s></td>
+        <td><span style="color:var(--fk-green);font-weight:700;">${discount}% OFF</span></td>
+        <td style="white-space:nowrap;">
+          <button class="btn-edit-prod" onclick="adminEditProductPrice(${idx})">Edit Price</button>
+          <button class="btn-del-prod" onclick="adminDeleteProduct(${idx})">Remove</button>
+        </td>
+      </tr>
+    `;
+  }).join('');
+}
+
+function adminEditProductPrice(idx) {
+  const p = catalog[idx];
+  const newPrice = prompt(`Enter new Selling Price for "${p.name}":`, p.price);
+  if(newPrice && Number(newPrice) > 0) {
+    const newOrig = prompt(`Enter new Original MRP:`, p.orig);
+    catalog[idx].price = Number(newPrice);
+    if(newOrig && Number(newOrig) > 0) catalog[idx].orig = Number(newOrig);
+    persistCatalog();
+    alert("Product pricing updated successfully!");
+  }
+}
+
+function adminDeleteProduct(idx) {
+  const p = catalog[idx];
+  if(confirm(`Are you sure you want to remove "${p.name}" from website?`)) {
+    catalog.splice(idx, 1);
+    persistCatalog();
   }
 }
 
@@ -788,7 +939,7 @@ function overrideCustomerPassword(idx) {
   }
 }
 
-// AUTH MODAL
+// AUTH MODAL SYSTEM
 function openAuthModal(view) {
   document.getElementById('authOverlay').classList.add('show');
   document.getElementById('loginSection').style.display = 'none';
@@ -1416,7 +1567,7 @@ window.addEventListener('DOMContentLoaded', () => {
   syncCartUI();
   syncAuthUI();
   startSaleTimer();
-  startRealTimeClock(); // Live Real-Time Ghadi shuru
+  startRealTimeClock();
 });
 </script>
 </body>
