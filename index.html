@@ -200,7 +200,7 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 .timeline-step span{font-size:10px;font-weight:600;margin-top:4px;color:#555}
 
 /* ======================================================== */
-/* 🛡️ OWNER ADMIN PANEL (WITH STRICT ROLE-BASED ACCESS) */
+/* 🛡️ OWNER ADMIN PANEL (WITH BLOCK/UNBLOCK CAPABILITIES) */
 /* ======================================================== */
 #adminPanelModal{position:fixed;inset:0;background:var(--bg);z-index:300;display:none;flex-direction:column;overflow-y:auto}
 .admin-navbar{background:var(--admin-dark);color:#fff;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
@@ -236,6 +236,8 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 .users-table th{background:#f8fafc;padding:10px 12px;border-bottom:2px solid var(--line);font-weight:700}
 .users-table td{padding:10px 12px;border-bottom:1px solid var(--line)}
 .btn-override-pass{background:var(--fk-orange);color:#fff;border:0;padding:5px 10px;border-radius:2px;font-weight:700;cursor:pointer;font-size:11px}
+.btn-block-user{background:#dc2626;color:#fff;border:0;padding:5px 10px;border-radius:2px;font-weight:700;cursor:pointer;font-size:11px;margin-left:4px}
+.btn-unblock-user{background:#16a34a;color:#fff;border:0;padding:5px 10px;border-radius:2px;font-weight:700;cursor:pointer;font-size:11px;margin-left:4px}
 .btn-del-prod{background:#ef4444;color:#fff;border:0;padding:5px 10px;border-radius:2px;font-weight:700;cursor:pointer;font-size:11px}
 .btn-edit-prod{background:var(--fk-blue);color:#fff;border:0;padding:5px 10px;border-radius:2px;font-weight:700;cursor:pointer;font-size:11px;margin-right:2px}
 
@@ -297,12 +299,10 @@ footer a{color:#fff;text-decoration:none}
     </div>
 
     <div class="header-actions">
-      <!-- 📋 MY ORDERS (DIRECT HEADER ACCESS) -->
       <button class="btn-nav" onclick="openMyOrdersModal()">
         <span>📋</span> My Orders
       </button>
 
-      <!-- 📦 TRACK ORDER BUTTON -->
       <button class="btn-nav" onclick="openTrackModal()">
         <span>📦</span> Track
       </button>
@@ -567,7 +567,7 @@ footer a{color:#fff;text-decoration:none}
 </div>
 
 <!-- ======================================================== -->
-<!-- 🛡️ OWNER ADMIN PANEL (WITH STRICT ROLE-BASED ACCESS) -->
+<!-- 🛡️ OWNER ADMIN PANEL (WITH SUB-ADMIN, STAFF & BLOCK USERS) -->
 <!-- ======================================================== -->
 <div id="adminPanelModal">
   <div class="admin-navbar">
@@ -580,7 +580,7 @@ footer a{color:#fff;text-decoration:none}
       <button class="admin-tab-btn" id="btnTabOrders" onclick="switchAdminTab('orders')">📦 Orders (Mailbox)</button>
       <button class="admin-tab-btn" id="btnTabProducts" onclick="switchAdminTab('products')">🏷️ Product Management</button>
       <button class="admin-tab-btn" id="btnTabTeam" onclick="switchAdminTab('team')">👔 Staff Management</button>
-      <button class="admin-tab-btn" id="btnTabUsers" onclick="switchAdminTab('users')">👥 Customer Accounts</button>
+      <button class="admin-tab-btn" id="btnTabUsers" onclick="switchAdminTab('users')">👥 Customer Accounts &amp; Block</button>
     </div>
 
     <!-- 1. ORDERS MAILBOX -->
@@ -670,7 +670,6 @@ footer a{color:#fff;text-decoration:none}
         <input type="password" id="newTeamPass" placeholder="Login Password" minlength="4" required>
         
         <select id="newTeamRole" required>
-          <!-- Options populated based on logged-in role -->
         </select>
 
         <button type="submit" style="grid-column:1/-1;background:var(--fk-blue);">+ Add Member</button>
@@ -697,10 +696,10 @@ footer a{color:#fff;text-decoration:none}
       </div>
     </div>
 
-    <!-- 4. CUSTOMER ACCOUNTS -->
+    <!-- 4. CUSTOMER ACCOUNTS WITH BLOCK / UNBLOCK -->
     <div id="adminUsersSection" class="users-table-wrap" style="display:none;">
       <div class="mailbox-header">
-        <span>Registered Customers (Instant Password Override)</span>
+        <span>Registered Customers (Password Override &amp; Block Control)</span>
         <span id="adminUsersCountBadge">0 Customers</span>
       </div>
       <table class="users-table">
@@ -709,6 +708,7 @@ footer a{color:#fff;text-decoration:none}
             <th>Customer Name</th>
             <th>Phone / Login</th>
             <th>Current Password</th>
+            <th>Status</th>
             <th>Security Status</th>
             <th>Action</th>
           </tr>
@@ -763,7 +763,7 @@ function persistCatalog() {
 }
 function persistCart() { localStorage.setItem('pag_cart_items', JSON.stringify(cart)); syncCartUI(); }
 function persistOrders() { localStorage.setItem('pag_orders_db', JSON.stringify(orders)); }
-function persistUsers() { localStorage.setItem('pag_users_db', JSON.stringify(users)); }
+function persistUsers() { localStorage.setItem('pag_users_db', JSON.stringify(users)); renderAdminUsersTable(); }
 function persistTeam() { localStorage.setItem('pag_team_db', JSON.stringify(teamMembers)); renderAdminTeamTable(); }
 function persistCurrentUser() { localStorage.setItem('pag_active_user', JSON.stringify(currentUser)); syncAuthUI(); }
 
@@ -969,16 +969,12 @@ function openAdminPortal(role = "Super Admin") {
   document.getElementById('adminPanelModal').style.display = 'flex';
   document.getElementById('adminRoleDisplay').innerText = role;
 
-  // TAB BUTTON REFERENCES
   const btnOrders = document.getElementById('btnTabOrders');
   const btnProducts = document.getElementById('btnTabProducts');
   const btnTeam = document.getElementById('btnTabTeam');
   const btnUsers = document.getElementById('btnTabUsers');
-
-  // FORM ROLE OPTIONS
   const roleSelect = document.getElementById('newTeamRole');
 
-  // 1. SUPER ADMIN ACCESS: Full Access to all modules
   if(role === "Super Admin") {
     btnOrders.style.display = 'inline-block';
     btnProducts.style.display = 'inline-block';
@@ -994,7 +990,6 @@ function openAdminPortal(role = "Super Admin") {
     `;
     switchAdminTab('orders');
   } 
-  // 2. SUB-ADMIN ACCESS: Can manage Staff and Orders, but CANNOT create Sub-Admins or access Super Admin
   else if(role === "Sub-Admin") {
     btnOrders.style.display = 'inline-block';
     btnProducts.style.display = 'inline-block';
@@ -1009,10 +1004,9 @@ function openAdminPortal(role = "Super Admin") {
     `;
     switchAdminTab('orders');
   } 
-  // 3. STAFF ROLE: ISOLATED TO THEIR SPECIFIC TASK
   else {
-    btnTeam.style.display = 'none'; // Staff cannot add staff
-    btnUsers.style.display = 'none'; // Staff cannot access user reset
+    btnTeam.style.display = 'none';
+    btnUsers.style.display = 'none';
 
     if(role.includes("Product Manager")) {
       btnOrders.style.display = 'none';
@@ -1024,7 +1018,6 @@ function openAdminPortal(role = "Super Admin") {
       btnUsers.style.display = 'inline-block';
       switchAdminTab('orders');
     } else {
-      // Order Manager / Delivery Partner
       btnOrders.style.display = 'inline-block';
       btnProducts.style.display = 'none';
       switchAdminTab('orders');
@@ -1067,7 +1060,6 @@ function adminSaveTeamMember(e) {
     return;
   }
 
-  // Sub-Admin cannot add another Sub-Admin
   if(currentUser && currentUser.role === "Sub-Admin" && role === "Sub-Admin") {
     alert("Access Denied: Only Super Admin can create Sub-Admins!");
     return;
@@ -1096,7 +1088,6 @@ function renderAdminTeamTable() {
   const countBadge = document.getElementById('adminTeamCountBadge');
   if(!tbody) return;
 
-  // Filter out Sub-Admins from view if logged in as Sub-Admin
   let visibleMembers = teamMembers;
   if(currentUser && currentUser.role === "Sub-Admin") {
     visibleMembers = teamMembers.filter(m => m.role !== "Sub-Admin");
@@ -1371,27 +1362,59 @@ function viewOrderDetailsInAdmin(idx) {
   }
 }
 
+// CUSTOMER ACCOUNTS TABLE WITH BLOCK / UNBLOCK
 function renderAdminUsersTable() {
   const tbody = document.getElementById('adminUsersTableBody');
   const badge = document.getElementById('adminUsersCountBadge');
+  if(!tbody) return;
   badge.innerText = `${users.length} Customers`;
 
   if(!users.length) {
-    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:16px;color:#64748b;">No registered customers found.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:16px;color:#64748b;">No registered customers found.</td></tr>';
     return;
   }
 
-  tbody.innerHTML = users.map((u, idx) => `
-    <tr>
-      <td><b>${u.name}</b></td>
-      <td>${u.phone}</td>
-      <td><code style="background:#f1f5f9;padding:2px 4px;border-radius:2px;">${u.pass}</code></td>
-      <td>${u.secQuestion ? '✅ Secured' : '⚠️ Missing Question'}</td>
-      <td>
-        <button class="btn-override-pass" onclick="overrideCustomerPassword(${idx})">Change Password</button>
-      </td>
-    </tr>
-  `).join('');
+  tbody.innerHTML = users.map((u, idx) => {
+    const isBlocked = !!u.isBlocked;
+    return `
+      <tr style="${isBlocked ? 'background:#fee2e2;' : ''}">
+        <td><b>${u.name}</b></td>
+        <td>${u.phone}</td>
+        <td><code style="background:#f1f5f9;padding:2px 4px;border-radius:2px;">${u.pass}</code></td>
+        <td>
+          <span style="background:${isBlocked ? '#ef4444' : '#22c55e'};color:#fff;padding:2px 6px;border-radius:8px;font-weight:700;font-size:10px;">
+            ${isBlocked ? 'BLOCKED' : 'ACTIVE'}
+          </span>
+        </td>
+        <td>${u.secQuestion ? '✅ Secured' : '⚠️ Missing'}</td>
+        <td style="white-space:nowrap;">
+          <button class="btn-override-pass" onclick="overrideCustomerPassword(${idx})">Change Pass</button>
+          <button class="${isBlocked ? 'btn-unblock-user' : 'btn-block-user'}" onclick="toggleBlockCustomer(${idx})">
+            ${isBlocked ? 'Unblock' : 'Block User'}
+          </button>
+        </td>
+      </tr>
+    `;
+  }).join('');
+}
+
+// TOGGLE BLOCK / UNBLOCK HANDLER
+function toggleBlockCustomer(idx) {
+  const u = users[idx];
+  const newStatus = !u.isBlocked;
+  const actionName = newStatus ? "BLOCK" : "UNBLOCK";
+
+  if(confirm(`Are you sure you want to ${actionName} customer "${u.name}" (${u.phone})?`)) {
+    users[idx].isBlocked = newStatus;
+    persistUsers();
+
+    // If currently logged in user gets blocked, log them out
+    if(currentUser && cleanPhone(currentUser.phone) === cleanPhone(u.phone) && newStatus) {
+      handleUserLogout();
+    }
+
+    alert(`Customer ${u.name} is now ${newStatus ? 'BLOCKED' : 'UNBLOCKED'}!`);
+  }
 }
 
 function overrideCustomerPassword(idx) {
@@ -1400,7 +1423,6 @@ function overrideCustomerPassword(idx) {
   if(newPass && newPass.trim().length >= 4) {
     users[idx].pass = newPass.trim();
     persistUsers();
-    renderAdminUsersTable();
     alert(`Password for ${u.name} updated to: ${newPass.trim()}`);
   }
 }
@@ -1513,7 +1535,7 @@ function handleLoginSubmit(e) {
     return;
   }
 
-  // 3. REGULAR CUSTOMER CHECK
+  // 3. REGULAR CUSTOMER CHECK (WITH BLOCK CHECK)
   try { users = JSON.parse(localStorage.getItem('pag_users_db')) || []; } catch(err){ users = []; }
 
   const user = users.find(u => {
@@ -1522,19 +1544,28 @@ function handleLoginSubmit(e) {
            (u.email && u.email.toLowerCase() === rawId.toLowerCase());
   });
 
-  if(user && user.pass === pass) {
-    currentUser = user;
-    persistCurrentUser();
-    msg.className = "auth-msg ok";
-    msg.innerText = "Login successful!";
-    setTimeout(() => {
-      closeAuthModal();
-      checkUserSecurityStatus();
-    }, 600);
-  } else {
-    msg.className = "auth-msg err";
-    msg.innerText = "Invalid Mobile or Password. Please try again.";
+  if(user) {
+    if(user.isBlocked) {
+      msg.className = "auth-msg err";
+      msg.innerHTML = "🚫 <b>Account Suspended:</b> Your account has been blocked by Shop Admin. Please contact helpline: 8766641866.";
+      return;
+    }
+
+    if(user.pass === pass) {
+      currentUser = user;
+      persistCurrentUser();
+      msg.className = "auth-msg ok";
+      msg.innerText = "Login successful!";
+      setTimeout(() => {
+        closeAuthModal();
+        checkUserSecurityStatus();
+      }, 600);
+      return;
+    }
   }
+
+  msg.className = "auth-msg err";
+  msg.innerText = "Invalid Mobile or Password. Please try again.";
 }
 
 function handleSignupSubmit(e) {
@@ -1561,7 +1592,7 @@ function handleSignupSubmit(e) {
     return;
   }
 
-  const newUser = { name, phone, pass, secQuestion, secAnswer };
+  const newUser = { name, phone, pass, secQuestion, secAnswer, isBlocked: false };
   users.push(newUser);
   persistUsers();
 
@@ -1602,6 +1633,12 @@ function handleForgotStep1(e) {
   if(!user) {
     msg.className = "auth-msg err";
     msg.innerHTML = `No account found for <b>${rawId}</b>! <br><small>Please Sign Up or <a target="_blank" href="https://wa.me/918766641866?text=Help%20recovering%20account%20for%20${rawId}" style="color:var(--fk-blue);font-weight:700;">WhatsApp Support</a>.</small>`;
+    return;
+  }
+
+  if(user.isBlocked) {
+    msg.className = "auth-msg err";
+    msg.innerHTML = "🚫 <b>Account Suspended:</b> This account is blocked by Admin.";
     return;
   }
 
@@ -1915,9 +1952,18 @@ function renderCartDrawerContent() {
 function processOrderPlacement(e) {
   e.preventDefault();
   const name = document.getElementById('orderCustName').value.trim();
-  const phone = document.getElementById('orderCustPhone').value.trim();
+  const rawPhone = document.getElementById('orderCustPhone').value.trim();
+  const phone = cleanPhone(rawPhone);
   const addr = document.getElementById('orderCustAddr').value.trim();
   const payment = document.querySelector('input[name="payOption"]:checked').value;
+
+  // BLOCK VERIFICATION BEFORE PLACING ORDER
+  try { users = JSON.parse(localStorage.getItem('pag_users_db')) || []; } catch(err){ users = []; }
+  const matchedUser = users.find(u => cleanPhone(u.phone) === phone);
+  if(matchedUser && matchedUser.isBlocked) {
+    alert("Order Declined: Your account is blocked by Shop Admin. Contact 8766641866.");
+    return;
+  }
 
   const orderId = 'PAG-' + Math.floor(100000 + Math.random() * 900000);
   const total = cart.reduce((acc, it) => acc + (it.price * it.qty), 0);
@@ -1926,7 +1972,7 @@ function processOrderPlacement(e) {
   const newOrder = {
     id: orderId,
     customerName: name,
-    customerPhone: phone,
+    customerPhone: rawPhone,
     address: addr,
     items: itemsText,
     totalPayable: total,
@@ -1951,14 +1997,14 @@ function processOrderPlacement(e) {
       <div class="order-pill">ORDER ID: ${orderId}</div>
 
       <div style="text-align:left;background:#f9f9f9;border:1px solid #e0e0e0;padding:10px;border-radius:4px;font-size:12px;line-height:1.5;margin:10px 0;">
-        <div><b>Name:</b> ${name} (${phone})</div>
+        <div><b>Name:</b> ${name} (${rawPhone})</div>
         <div><b>Address:</b> ${addr}</div>
         <div><b>Items:</b> ${itemsText}</div>
         <div><b>Total Amount:</b> ₹${total.toLocaleString('en-IN')} (${payment})</div>
       </div>
 
       <a class="btn-wa-order" target="_blank" href="https://wa.me/918766641866?text=${encodeURIComponent(
-        `Hello PAG Moters! I placed an order.\n\n*Order ID:* ${orderId}\n*Name:* ${name}\n*Phone:* ${phone}\n*Address:* ${addr}\n*Items:* ${itemsText}\n*Total:* ₹${total}\n*Payment:* ${payment}`
+        `Hello PAG Moters! I placed an order.\n\n*Order ID:* ${orderId}\n*Name:* ${name}\n*Phone:* ${rawPhone}\n*Address:* ${addr}\n*Items:* ${itemsText}\n*Total:* ₹${total}\n*Payment:* ${payment}`
       )}">
         Send Order on WhatsApp 💬
       </a>
@@ -1977,6 +2023,16 @@ window.addEventListener('DOMContentLoaded', () => {
   startSaleTimer();
   startRealTimeClock();
 
+  // If customer is blocked in background, kick out
+  if(currentUser && !currentUser.isAdmin) {
+    try { users = JSON.parse(localStorage.getItem('pag_users_db')) || []; } catch(e){ users = []; }
+    const me = users.find(u => cleanPhone(u.phone) === cleanPhone(currentUser.phone));
+    if(me && me.isBlocked) {
+      handleUserLogout();
+    }
+  }
+
+  // Restore Admin Session
   if(currentUser && currentUser.isAdmin) {
     openAdminPortal(currentUser.role || "Super Admin");
   }
