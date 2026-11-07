@@ -65,7 +65,7 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 /* USER PROFILE DROPDOWN */
 .user-menu{position:relative;display:inline-block}
 .user-menu-btn{background:none;border:0;color:#fff;font-weight:700;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:4px;padding:5px}
-.user-dropdown{position:absolute;top:100%;right:0;background:#fff;color:#212121;box-shadow:0 4px 12px rgba(0,0,0,.15);border-radius:2px;display:none;min-width:150px;z-index:150}
+.user-dropdown{position:absolute;top:100%;right:0;background:#fff;color:#212121;box-shadow:0 4px 12px rgba(0,0,0,.15);border-radius:2px;display:none;min-width:160px;z-index:150}
 .user-dropdown a,.user-dropdown button{display:block;width:100%;padding:10px 14px;text-align:left;border:0;background:none;font:inherit;font-size:13px;cursor:pointer;text-decoration:none;color:#212121}
 .user-dropdown a:hover,.user-dropdown button:hover{background:#f1f3f6}
 .user-menu:hover .user-dropdown{display:block}
@@ -199,7 +199,7 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 .timeline-step.current .timeline-dot{background:var(--fk-blue);box-shadow:0 0 0 3px rgba(40,116,240,.2)}
 .timeline-step span{font-size:10px;font-weight:600;margin-top:4px;color:#555}
 
-/* OWNER ADMIN PANEL */
+/* OWNER ADMIN PANEL WITH SUB-ADMIN & STAFF SUITE */
 #adminPanelModal{position:fixed;inset:0;background:var(--bg);z-index:300;display:none;flex-direction:column;overflow-y:auto}
 .admin-navbar{background:var(--admin-dark);color:#fff;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
 .admin-navbar h2{margin:0;font-size:16px;display:flex;align-items:center;gap:6px}
@@ -209,6 +209,7 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 .admin-tabs{display:flex;gap:8px;border-bottom:2px solid var(--line);padding-bottom:8px;flex-wrap:wrap}
 .admin-tab-btn{background:#fff;border:1px solid var(--line);padding:8px 12px;border-radius:3px;font-weight:700;cursor:pointer;font-size:12px}
 .admin-tab-btn.active{background:var(--fk-blue);color:#fff;border-color:var(--fk-blue)}
+
 .mailbox-card{background:#fff;border-radius:4px;box-shadow:0 1px 3px rgba(0,0,0,.1);overflow:hidden}
 .mailbox-header{background:#f8fafc;padding:10px 14px;font-weight:700;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;font-size:13px}
 .mail-row{display:grid;grid-template-columns:100px 160px 1fr 100px 90px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line);cursor:pointer;font-size:12px}
@@ -245,9 +246,7 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 footer{background:#172337;color:#878787;padding:20px 10px 16px;font-size:11px;border-top:1px solid #2d3e56;margin-top:20px;text-align:center}
 footer a{color:#fff;text-decoration:none}
 
-/* ======================================================== */
-/* 📱 AUTOMATIC MOBILE-RESPONSIVE FIX (NO DESKTOP MODE NEEDED) */
-/* ======================================================== */
+/* 📱 AUTOMATIC MOBILE RESPONSIVENESS */
 @media (max-width: 768px) {
   .top-strip-inner{justify-content:center;text-align:center;gap:4px}
   .main-header{padding:8px 10px;gap:8px}
@@ -255,8 +254,8 @@ footer a{color:#fff;text-decoration:none}
   .header-actions{order:2;gap:6px}
   .btn-nav span:not(.cart-count-badge){font-size:14px}
   .layout{grid-template-columns:1fr;padding:0 6px}
-  .sidebar{display:none} /* Clean mobile view */
-  .product-grid{grid-template-columns:repeat(2, 1fr)} /* 2 items per row Flipkart mobile layout */
+  .sidebar{display:none}
+  .product-grid{grid-template-columns:repeat(2, 1fr)}
   .product-card{padding:8px}
   .prod-img-wrap{height:120px}
   .prod-img-wrap img{max-height:100px}
@@ -317,7 +316,6 @@ footer a{color:#fff;text-decoration:none}
       </button>
     </div>
 
-    <!-- RESPONSIVE FULL WIDTH ON MOBILE SEARCH BAR -->
     <div class="search-box">
       <input type="search" id="searchQuery" placeholder="Search helmets, chargers, batteries..." oninput="liveSearch()">
       <button onclick="liveSearch()">🔍</button>
@@ -566,10 +564,12 @@ footer a{color:#fff;text-decoration:none}
   </div>
 </div>
 
-<!-- OWNER ADMIN PANEL -->
+<!-- ======================================================== -->
+<!-- 🛡️ OWNER ADMIN PANEL (WITH SUB-ADMIN & STAFF SUITE) -->
+<!-- ======================================================== -->
 <div id="adminPanelModal">
   <div class="admin-navbar">
-    <h2><span>⚙️</span> PAG Moters Owner Portal <span class="admin-badge">Super Admin</span></h2>
+    <h2><span>⚙️</span> PAG Moters Owner Portal <span class="admin-badge" id="adminRoleDisplay">Super Admin</span></h2>
     <button class="admin-logout" onclick="closeAdminPortal()">Exit Admin</button>
   </div>
 
@@ -577,10 +577,11 @@ footer a{color:#fff;text-decoration:none}
     <div class="admin-tabs">
       <button class="admin-tab-btn active" id="btnTabOrders" onclick="switchAdminTab('orders')">📦 Orders (Mailbox)</button>
       <button class="admin-tab-btn" id="btnTabProducts" onclick="switchAdminTab('products')">🏷️ Product Management</button>
+      <button class="admin-tab-btn" id="btnTabTeam" onclick="switchAdminTab('team')">👔 Sub-Admin &amp; Staff (Team)</button>
       <button class="admin-tab-btn" id="btnTabUsers" onclick="switchAdminTab('users')">👥 Customer Accounts</button>
     </div>
 
-    <!-- ORDERS MAILBOX -->
+    <!-- 1. ORDERS MAILBOX -->
     <div id="adminOrdersSection" class="mailbox-card">
       <div class="mailbox-header">
         <span>Incoming Customer Orders Inbox</span>
@@ -589,7 +590,7 @@ footer a{color:#fff;text-decoration:none}
       <div id="adminMailboxContainer"></div>
     </div>
 
-    <!-- PRODUCT MANAGEMENT -->
+    <!-- 2. PRODUCT MANAGEMENT -->
     <div id="adminProductsSection" class="mailbox-card" style="display:none;padding:14px;">
       <div class="mailbox-header" style="background:#fff;padding:0 0 10px 0;">
         <span><b>Add New Product to Storefront</b></span>
@@ -655,7 +656,50 @@ footer a{color:#fff;text-decoration:none}
       </div>
     </div>
 
-    <!-- CUSTOMER ACCOUNTS -->
+    <!-- 3. SUB-ADMIN & STAFF TEAM MANAGEMENT -->
+    <div id="adminTeamSection" class="mailbox-card" style="display:none;padding:14px;">
+      <div class="mailbox-header" style="background:#fff;padding:0 0 10px 0;">
+        <span><b>Add Sub-Admin or Staff Member</b></span>
+      </div>
+
+      <form class="admin-prod-form" onsubmit="adminSaveTeamMember(event)">
+        <input type="text" id="newTeamName" placeholder="Full Name (e.g. Ramesh Kumar)" required>
+        <input type="tel" id="newTeamPhone" placeholder="Mobile Number (10 digits)" pattern="[0-9]{10}" required>
+        <input type="password" id="newTeamPass" placeholder="Login Password" minlength="4" required>
+        
+        <select id="newTeamRole" required>
+          <option value="Sub-Admin">🛡️ Sub-Admin (Manager)</option>
+          <option value="Staff - Order Manager">📦 Staff: Order Manager</option>
+          <option value="Staff - Product Manager">🏷️ Staff: Product Manager</option>
+          <option value="Staff - Delivery Partner">🚚 Staff: Delivery Partner</option>
+          <option value="Staff - Support">💬 Staff: Customer Support</option>
+        </select>
+
+        <button type="submit" style="grid-column:1/-1;background:var(--fk-blue);">+ Add Team Member</button>
+      </form>
+
+      <div class="mailbox-header" style="background:#fff;padding:10px 0 6px 0;">
+        <span><b>Registered Sub-Admins &amp; Staff Members</b></span>
+        <span id="adminTeamCountBadge">0 Members</span>
+      </div>
+
+      <div class="users-table-wrap">
+        <table class="users-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Mobile (Login)</th>
+              <th>Password</th>
+              <th>Designation / Role</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="adminTeamTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 4. CUSTOMER ACCOUNTS -->
     <div id="adminUsersSection" class="users-table-wrap" style="display:none;">
       <div class="mailbox-header">
         <span>Registered Customers (Instant Password Override)</span>
@@ -679,6 +723,7 @@ footer a{color:#fff;text-decoration:none}
 </div>
 
 <script>
+// SUPER ADMIN CREDENTIALS
 const ADMIN_PHONE = "6306211265";
 const ADMIN_PASS = "Rushtom@1927";
 const ADMIN_MASTER_SEC = "ajay";
@@ -701,6 +746,7 @@ let catalog = [];
 let cart = [];
 let orders = [];
 let users = [];
+let teamMembers = []; // Sub-Admins & Staff Members
 let currentUser = null;
 let activeUploadedImageData = "";
 
@@ -708,6 +754,7 @@ try { catalog = JSON.parse(localStorage.getItem('pag_catalog_db')) || defaultCat
 try { cart = JSON.parse(localStorage.getItem('pag_cart_items')) || []; } catch(e){ cart = []; }
 try { orders = JSON.parse(localStorage.getItem('pag_orders_db')) || []; } catch(e){ orders = []; }
 try { users = JSON.parse(localStorage.getItem('pag_users_db')) || []; } catch(e){ users = []; }
+try { teamMembers = JSON.parse(localStorage.getItem('pag_team_db')) || []; } catch(e){ teamMembers = []; }
 try { currentUser = JSON.parse(localStorage.getItem('pag_active_user')) || null; } catch(e){ currentUser = null; }
 
 function persistCatalog() { 
@@ -719,6 +766,7 @@ function persistCatalog() {
 function persistCart() { localStorage.setItem('pag_cart_items', JSON.stringify(cart)); syncCartUI(); }
 function persistOrders() { localStorage.setItem('pag_orders_db', JSON.stringify(orders)); }
 function persistUsers() { localStorage.setItem('pag_users_db', JSON.stringify(users)); }
+function persistTeam() { localStorage.setItem('pag_team_db', JSON.stringify(teamMembers)); renderAdminTeamTable(); }
 function persistCurrentUser() { localStorage.setItem('pag_active_user', JSON.stringify(currentUser)); syncAuthUI(); }
 
 function cleanPhone(val) {
@@ -729,7 +777,7 @@ function cleanPhone(val) {
   return num;
 }
 
-// 🕒 REAL-TIME DIGITAL CLOCK
+// 🕒 LIVE REAL-TIME CLOCK
 function startRealTimeClock() {
   function updateClock() {
     const now = new Date();
@@ -747,7 +795,7 @@ function startRealTimeClock() {
   setInterval(updateClock, 1000);
 }
 
-// ⏳ 12-HOURS EXACT TIMER (REFRESH PAR RESTART NAHI HOGA)
+// ⏳ 12-HOURS EXACT COUNTDOWN
 function startSaleTimer() {
   const STORAGE_KEY = 'pag_sale_fixed_end_time';
   let endTime = localStorage.getItem(STORAGE_KEY);
@@ -786,7 +834,7 @@ function startSaleTimer() {
 }
 
 // ==========================================
-// 📦 ORDER TRACKING & MY ORDERS
+// 📦 ORDER TRACKING & MY ORDERS LOGIC
 // ==========================================
 function openTrackModal() {
   document.getElementById('trackModalOverlay').classList.add('show');
@@ -916,13 +964,15 @@ function renderMyOrdersList() {
 }
 
 // ==========================================
-// 🛡️ ADMIN PORTAL & IMAGE UPLOAD
+// 🛡️ ADMIN PORTAL & SUB-ADMIN/STAFF SUITE
 // ==========================================
-function openAdminPortal() {
+function openAdminPortal(role = "Super Admin") {
   closeAuthModal();
   document.getElementById('adminPanelModal').style.display = 'flex';
+  document.getElementById('adminRoleDisplay').innerText = role;
   renderAdminMailbox();
   renderAdminProductsTable();
+  renderAdminTeamTable();
   renderAdminUsersTable();
 }
 
@@ -934,11 +984,88 @@ function closeAdminPortal() {
 function switchAdminTab(tab) {
   document.getElementById('adminOrdersSection').style.display = tab === 'orders' ? 'block' : 'none';
   document.getElementById('adminProductsSection').style.display = tab === 'products' ? 'block' : 'none';
+  document.getElementById('adminTeamSection').style.display = tab === 'team' ? 'block' : 'none';
   document.getElementById('adminUsersSection').style.display = tab === 'users' ? 'block' : 'none';
 
   document.getElementById('btnTabOrders').classList.toggle('active', tab === 'orders');
   document.getElementById('btnTabProducts').classList.toggle('active', tab === 'products');
+  document.getElementById('btnTabTeam').classList.toggle('active', tab === 'team');
   document.getElementById('btnTabUsers').classList.toggle('active', tab === 'users');
+}
+
+// SUB-ADMIN & STAFF SAVE HANDLER
+function adminSaveTeamMember(e) {
+  e.preventDefault();
+  const name = document.getElementById('newTeamName').value.trim();
+  const rawPhone = document.getElementById('newTeamPhone').value.trim();
+  const phone = cleanPhone(rawPhone);
+  const pass = document.getElementById('newTeamPass').value.trim();
+  const role = document.getElementById('newTeamRole').value;
+
+  if(phone === ADMIN_PHONE) {
+    alert("This number is reserved for Super Admin!");
+    return;
+  }
+
+  if(teamMembers.some(t => cleanPhone(t.phone) === phone)) {
+    alert("A team member with this mobile number already exists!");
+    return;
+  }
+
+  teamMembers.push({
+    id: Date.now(),
+    name,
+    phone,
+    pass,
+    role
+  });
+
+  persistTeam();
+  e.target.reset();
+  alert(`${role} "${name}" added successfully! They can now log in.`);
+}
+
+function renderAdminTeamTable() {
+  const tbody = document.getElementById('adminTeamTableBody');
+  const countBadge = document.getElementById('adminTeamCountBadge');
+  if(!tbody) return;
+  countBadge.innerText = `${teamMembers.length} Members`;
+
+  if(!teamMembers.length) {
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:16px;color:#64748b;">No Sub-Admins or Staff added yet. Use form above to add.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = teamMembers.map((m, idx) => `
+    <tr>
+      <td><b>${m.name}</b></td>
+      <td>${m.phone}</td>
+      <td><code style="background:#f1f5f9;padding:2px 4px;border-radius:2px;">${m.pass}</code></td>
+      <td><span style="background:${m.role === 'Sub-Admin' ? '#e0f2fe' : '#fef3c7'};color:${m.role === 'Sub-Admin' ? '#0369a1' : '#92400e'};padding:2px 8px;border-radius:10px;font-weight:700;">${m.role}</span></td>
+      <td>
+        <button class="btn-override-pass" onclick="adminEditTeamMemberPass(${idx})">Change Pass</button>
+        <button class="btn-del-prod" onclick="adminDeleteTeamMember(${idx})">Remove</button>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function adminEditTeamMemberPass(idx) {
+  const m = teamMembers[idx];
+  const newPass = prompt(`Enter new password for ${m.name} (${m.role}):`, m.pass);
+  if(newPass && newPass.trim().length >= 4) {
+    teamMembers[idx].pass = newPass.trim();
+    persistTeam();
+    alert(`Password updated for ${m.name}`);
+  }
+}
+
+function adminDeleteTeamMember(idx) {
+  const m = teamMembers[idx];
+  if(confirm(`Are you sure you want to remove ${m.role}: "${m.name}"?`)) {
+    teamMembers.splice(idx, 1);
+    persistTeam();
+  }
 }
 
 function toggleOtherCatInput(val) {
@@ -1202,7 +1329,9 @@ function overrideCustomerPassword(idx) {
   }
 }
 
-// AUTH & FORGOT PASSWORD SYSTEM
+// ==========================================
+// 🔐 AUTHENTICATION & ROLE-BASED DISPATCHER
+// ==========================================
 function openAuthModal(view) {
   document.getElementById('authOverlay').classList.add('show');
   document.getElementById('loginSection').style.display = 'none';
@@ -1284,17 +1413,33 @@ function handleLoginSubmit(e) {
   const pass = document.getElementById('loginPass').value.trim();
   const msg = document.getElementById('loginMsg');
 
+  // 1. SUPER ADMIN CHECK
   if(cleanedId === ADMIN_PHONE && pass === ADMIN_PASS) {
-    currentUser = { name: "Shop Owner (Admin)", phone: ADMIN_PHONE, isAdmin: true };
+    currentUser = { name: "Shop Owner (Super Admin)", phone: ADMIN_PHONE, isAdmin: true, role: "Super Admin" };
     persistCurrentUser();
     msg.className = "auth-msg ok";
-    msg.innerText = "Welcome Boss! Opening Owner Portal...";
+    msg.innerText = "Welcome Boss! Opening Super Admin Portal...";
     setTimeout(() => {
-      openAdminPortal();
+      openAdminPortal("Super Admin");
     }, 600);
     return;
   }
 
+  // 2. SUB-ADMIN & STAFF CHECK
+  try { teamMembers = JSON.parse(localStorage.getItem('pag_team_db')) || []; } catch(err){ teamMembers = []; }
+  const teamUser = teamMembers.find(t => cleanPhone(t.phone) === cleanedId && t.pass === pass);
+  if(teamUser) {
+    currentUser = { name: teamUser.name, phone: teamUser.phone, isAdmin: true, role: teamUser.role };
+    persistCurrentUser();
+    msg.className = "auth-msg ok";
+    msg.innerText = `Welcome ${teamUser.name}! Opening ${teamUser.role} Console...`;
+    setTimeout(() => {
+      openAdminPortal(teamUser.role);
+    }, 600);
+    return;
+  }
+
+  // 3. REGULAR CUSTOMER CHECK
   try { users = JSON.parse(localStorage.getItem('pag_users_db')) || []; } catch(err){ users = []; }
 
   const user = users.find(u => {
@@ -1328,9 +1473,9 @@ function handleSignupSubmit(e) {
   const secAnswer = document.getElementById('regSecA').value.trim().toLowerCase();
   const msg = document.getElementById('signupMsg');
 
-  if(phone === ADMIN_PHONE) {
+  if(phone === ADMIN_PHONE || teamMembers.some(t => cleanPhone(t.phone) === phone)) {
     msg.className = "auth-msg err";
-    msg.innerText = "This number is reserved for Shop Admin!";
+    msg.innerText = "This number is reserved for Shop Management Team!";
     return;
   }
 
@@ -1445,7 +1590,7 @@ function syncAuthUI() {
       <div class="user-menu">
         <button class="user-menu-btn">👤 ${currentUser.name.split(' ')[0]} ▾</button>
         <div class="user-dropdown">
-          ${currentUser.isAdmin ? '<a onclick="openAdminPortal()" style="color:#d97706;font-weight:700;">⚙️ Owner Portal</a>' : ''}
+          ${currentUser.isAdmin ? `<a onclick="openAdminPortal('${currentUser.role || 'Super Admin'}')" style="color:#d97706;font-weight:700;">⚙️ Admin Portal</a>` : ''}
           <a onclick="openMyOrdersModal()">📋 My Orders</a>
           <a onclick="openTrackModal()">📦 Track Order</a>
           <a onclick="openAuthModal('mandatory_security')">Update Security</a>
