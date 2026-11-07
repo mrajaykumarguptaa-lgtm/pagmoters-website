@@ -1741,9 +1741,7 @@ function markMessageStatus(idx, status) {
   }
 }
 
-// ==========================================
-// 👔 TEAM MANAGEMENT WITH COMPLETE BLOCK/UNBLOCK
-// ==========================================
+// TEAM MANAGEMENT
 function adminSaveTeamMember(e) {
   e.preventDefault();
   const name = document.getElementById('newTeamName').value.trim();
@@ -2014,7 +2012,7 @@ function quickUpdateStockPrompt(productId) {
   }
 }
 
-// 🛠️ EDIT PRODUCT MODAL ENGINE (DIRECT ID BASED LOOKUP)
+// EDIT PRODUCT MODAL ENGINE
 function openEditProductModal(productId) {
   const p = catalog.find(item => item.id == productId);
   if(!p) {
@@ -2119,7 +2117,7 @@ function syncCategoryMenus() {
   }
 }
 
-// 📦 ORDER DETAILS MODAL (WITH PHOTO + EXACT FORMAT NUMBERED LIST: 1. Name 2 Pes)
+// 📦 ORDER DETAILS MODAL (PIN VISIBLE ONLY TO SUPER ADMIN, HIDDEN FOR STAFF/SUB-ADMIN)
 function renderAdminMailbox() {
   const container = document.getElementById('adminMailboxContainer');
   const badge = document.getElementById('adminOrdersCountBadge');
@@ -2143,17 +2141,16 @@ function renderAdminMailbox() {
   `).join('');
 }
 
-// INTELLIGENT ORDER PARSER: PARSES BOTH NEW & OLD ORDERS INTO NUMBERED LIST WITH HD IMAGES
 function openOrderDetailsModal(idx) {
   const o = orders[idx];
   if(!o) return;
   const statusNames = ["", "Order Placed", "Packed", "Out for Delivery", "Delivered"];
+  const isSuperAdmin = currentUser && currentUser.role === "Super Admin";
 
   document.getElementById('orderDetailModalTitle').innerText = `📦 Order Invoice: ${o.id}`;
 
   let parsedItems = [];
 
-  // Case 1: Order has saved itemList with images
   if (o.itemList && Array.isArray(o.itemList) && o.itemList.length > 0) {
     parsedItems = o.itemList.map(item => {
       const match = catalog.find(p => p.id === item.id || p.name.toLowerCase() === item.name.toLowerCase());
@@ -2165,7 +2162,6 @@ function openOrderDetailsModal(idx) {
       };
     });
   } 
-  // Case 2: Older orders stored as text string (e.g. "Vega Cruiser (Qty: 1), Fast Charger (Qty: 2)")
   else if (o.items && typeof o.items === 'string') {
     const rawParts = o.items.split(',');
     parsedItems = rawParts.map(part => {
@@ -2173,14 +2169,12 @@ function openOrderDetailsModal(idx) {
       let itemName = trimmed;
       let qty = 1;
 
-      // Extract Qty if exists
       const qtyMatch = trimmed.match(/(.+)\(Qty:\s*(\d+)\)/i);
       if (qtyMatch) {
         itemName = qtyMatch[1].trim();
         qty = parseInt(qtyMatch[2], 10) || 1;
       }
 
-      // Match with active catalog for HD Image & Pricing
       const match = catalog.find(p => itemName.toLowerCase().includes(p.name.toLowerCase()) || p.name.toLowerCase().includes(itemName.toLowerCase()));
 
       return {
@@ -2192,7 +2186,7 @@ function openOrderDetailsModal(idx) {
     });
   }
 
-  // BUILD NUMBERED LIST WITH PRODUCT PICTURES AND "X Pes" FORMAT
+  // EXACT FORMAT: 1. Name 2 Pes
   let itemsHtml = '';
   if (parsedItems.length > 0) {
     itemsHtml = parsedItems.map((item, index) => `
@@ -2213,6 +2207,24 @@ function openOrderDetailsModal(idx) {
     `;
   }
 
+  // PIN VISIBILITY LOGIC: ONLY SUPER ADMIN SEES THE PIN
+  let pinBoxHtml = '';
+  if (isSuperAdmin) {
+    pinBoxHtml = `
+      <div style="background:#fef3c7;border:1px dashed #d97706;padding:10px;border-radius:4px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-size:13px;font-weight:700;color:#92400e;">Customer Delivery Secret PIN (Main Admin Only):</span>
+        <span style="font-size:18px;font-weight:900;letter-spacing:2px;background:#fff;padding:2px 8px;border-radius:3px;border:1px solid #fcd34d;color:#b45309;">${o.deliveryPin || 'N/A'}</span>
+      </div>
+    `;
+  } else {
+    pinBoxHtml = `
+      <div style="background:#f1f5f9;border:1px solid #cbd5e1;padding:10px;border-radius:4px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-size:12px;font-weight:700;color:#475569;">Delivery Verification PIN:</span>
+        <span style="font-size:12px;font-weight:800;color:#dc2626;">🔒 Hidden (Customer se lekar verify karein)</span>
+      </div>
+    `;
+  }
+
   const modalBody = document.getElementById('orderDetailsModalBody');
   modalBody.innerHTML = `
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;border-bottom:1px dashed #cbd5e1;padding-bottom:8px;">
@@ -2225,10 +2237,7 @@ function openOrderDetailsModal(idx) {
       </div>
     </div>
 
-    <div style="background:#fef3c7;border:1px dashed #d97706;padding:10px;border-radius:4px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;">
-      <span style="font-size:13px;font-weight:700;color:#92400e;">Customer Delivery Secret PIN:</span>
-      <span style="font-size:18px;font-weight:900;letter-spacing:2px;background:#fff;padding:2px 8px;border-radius:3px;border:1px solid #fcd34d;color:#b45309;">${o.deliveryPin || 'N/A'}</span>
-    </div>
+    ${pinBoxHtml}
 
     <h4 style="margin:0 0 4px;font-size:13px;color:#334155;">Ordered Items Breakdown:</h4>
     ${itemsHtml}
@@ -2961,7 +2970,7 @@ function renderCartDrawerContent() {
   `;
 }
 
-// ORDER SUBMISSION WITH COMPLETE CART ITEMS + IMAGES STORED
+// ORDER SUBMISSION WITH REAL-TIME INVENTORY DEDUCTION & RICH ITEM PICTURE STORAGE
 function processOrderPlacement(e) {
   e.preventDefault();
   const name = document.getElementById('orderCustName').value.trim();
@@ -2978,7 +2987,6 @@ function processOrderPlacement(e) {
     return;
   }
 
-  // BLOCK VERIFICATION BEFORE ORDER
   try { users = JSON.parse(localStorage.getItem('pag_users_db')) || []; } catch(err){ users = []; }
   const matchedUser = users.find(u => cleanPhone(u.phone) === phone);
   if(matchedUser && matchedUser.isBlocked) {
@@ -2995,7 +3003,6 @@ function processOrderPlacement(e) {
     }
   }
 
-  // Deduct inventory
   for (let c of cart) {
     const prod = catalog.find(p => p.id === c.id);
     if (prod) {
@@ -3009,7 +3016,7 @@ function processOrderPlacement(e) {
   const total = cart.reduce((acc, it) => acc + (it.price * it.qty), 0);
   const itemsText = cart.map(i => `${i.name} (Qty: ${i.qty})`).join(', ');
 
-  // Store rich items array with exact images for invoice modal
+  // STORE EXACT RICH ITEM LIST WITH HD IMAGES & QUANTITIES
   const richItemList = cart.map(i => ({
     id: i.id,
     name: i.name,
