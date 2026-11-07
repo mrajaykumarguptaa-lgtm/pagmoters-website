@@ -313,8 +313,18 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 .chat-send-bar input{flex:1;border:1px solid var(--line);padding:8px 10px;font:inherit;font-size:12px;border-radius:3px}
 .chat-send-bar button{background:var(--fk-blue);color:#fff;border:0;padding:8px 16px;font-weight:700;border-radius:3px;cursor:pointer}
 
-/* EDIT PRODUCT MODAL */
-.edit-modal-box{background:#fff;width:min(600px,94%);border-radius:4px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.3)}
+/* ULTRA POPUP EDIT MODAL */
+#editProductModalOverlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.75);
+  z-index:99999;
+  display:none;
+  align-items:center;
+  justify-content:center;
+}
+.edit-modal-box{background:#fff;width:min(620px,95%);border-radius:6px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.5);animation:popupIn .2s ease}
+@keyframes popupIn{from{transform:scale(0.95);opacity:0}to{transform:scale(1);opacity:1}}
 
 /* FOOTER */
 .trust-strip{max-width:1240px;margin:16px auto;padding:0 10px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
@@ -628,65 +638,6 @@ footer a{color:#fff;text-decoration:none}
   </div>
 </div>
 
-<!-- EDIT PRODUCT MODAL (COMPLETE FULL ATTRIBUTE EDIT) -->
-<div class="overlay" id="editProductModalOverlay">
-  <div class="edit-modal-box">
-    <div class="modal-head" style="background:var(--fk-blue);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;">
-      <h3 style="margin:0;font-size:15px;">✏️ Edit Product Details</h3>
-      <button class="btn-close" onclick="closeEditProductModal()">✕</button>
-    </div>
-    <div class="modal-body" style="padding:16px;">
-      <form class="auth-form" onsubmit="handleSaveEditedProduct(event)">
-        <input type="hidden" id="editProdIndex">
-        
-        <div>
-          <label>Product Name</label>
-          <input type="text" id="editProdName" required>
-        </div>
-
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-          <div>
-            <label>Category</label>
-            <input type="text" id="editProdCat" required>
-          </div>
-          <div>
-            <label>Stock / Rating</label>
-            <input type="number" step="0.1" id="editProdRating" placeholder="4.5">
-          </div>
-        </div>
-
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-          <div>
-            <label>MRP (Original ₹)</label>
-            <input type="number" id="editProdOrig" required min="1">
-          </div>
-          <div>
-            <label>Selling Offer Price (₹)</label>
-            <input type="number" id="editProdPrice" required min="1">
-          </div>
-        </div>
-
-        <div>
-          <label>Primary Image URL or Base64</label>
-          <input type="text" id="editProdImg" placeholder="Image URL / Base64" required oninput="document.getElementById('editImgPreview').src=this.value">
-        </div>
-
-        <div>
-          <label>Replace Primary Image via Device</label>
-          <input type="file" accept="image/*" onchange="handleEditFileChange(event)">
-        </div>
-
-        <div style="display:flex;align-items:center;gap:10px;margin-top:6px;">
-          <img id="editImgPreview" src="" style="width:60px;height:60px;object-fit:contain;border:1px solid #ddd;border-radius:3px;">
-          <span style="font-size:11px;color:var(--muted)">Instant image preview</span>
-        </div>
-
-        <button type="submit" class="auth-btn-primary" style="background:var(--fk-green);margin-top:10px;">Save &amp; Update Product</button>
-      </form>
-    </div>
-  </div>
-</div>
-
 <!-- ======================================================== -->
 <!-- 🛡️ OWNER & STAFF WORKSPACE (ROLE LOCKED) -->
 <!-- ======================================================== -->
@@ -805,7 +756,7 @@ footer a{color:#fff;text-decoration:none}
       </div>
     </div>
 
-    <!-- 3. STAFF TASK & CHAT BOX (DIRECT MSG & SEEN/ACCEPT RECEIPT) -->
+    <!-- 3. STAFF TASK & CHAT BOX -->
     <div id="adminChatSection" class="mailbox-card" style="display:none;padding:14px;">
       <div class="mailbox-header" style="background:#fff;padding:0 0 10px 0;">
         <span><b>Staff Communication &amp; Live Task Delegation</b></span>
@@ -830,7 +781,7 @@ footer a{color:#fff;text-decoration:none}
       </div>
     </div>
 
-    <!-- 4. COMPANY NOTICE BOARD PUBLISHER (WITH THUMBNAIL) -->
+    <!-- 4. COMPANY NOTICE BOARD PUBLISHER -->
     <div id="adminNoticeSection" class="mailbox-card" style="display:none;padding:14px;">
       <div class="mailbox-header" style="background:#fff;padding:0 0 10px 0;">
         <span><b>Publish New Company Notice / Thumbnail Announcement</b></span>
@@ -914,6 +865,65 @@ footer a{color:#fff;text-decoration:none}
     </div>
 
   </div>
+
+  <!-- EDIT PRODUCT MODAL DIRECTLY INSIDE ADMIN WORKSPACE -->
+  <div id="editProductModalOverlay">
+    <div class="edit-modal-box">
+      <div class="modal-head" style="background:var(--fk-blue);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;">
+        <h3 style="margin:0;font-size:15px;">✏️ Edit Product Details</h3>
+        <button class="btn-close" type="button" onclick="closeEditProductModal()">✕</button>
+      </div>
+      <div class="modal-body" style="padding:16px;">
+        <form class="auth-form" onsubmit="handleSaveEditedProduct(event)">
+          <input type="hidden" id="editProdIndex">
+          
+          <div>
+            <label>Product Name</label>
+            <input type="text" id="editProdName" required>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div>
+              <label>Category</label>
+              <input type="text" id="editProdCat" required>
+            </div>
+            <div>
+              <label>Stock / Rating</label>
+              <input type="number" step="0.1" id="editProdRating" placeholder="4.5">
+            </div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div>
+              <label>MRP (Original ₹)</label>
+              <input type="number" id="editProdOrig" required min="1">
+            </div>
+            <div>
+              <label>Selling Offer Price (₹)</label>
+              <input type="number" id="editProdPrice" required min="1">
+            </div>
+          </div>
+
+          <div>
+            <label>Primary Image URL or Base64</label>
+            <input type="text" id="editProdImg" placeholder="Image URL / Base64" required oninput="document.getElementById('editImgPreview').src=this.value">
+          </div>
+
+          <div>
+            <label>Replace Primary Image via Device</label>
+            <input type="file" accept="image/*" onchange="handleEditFileChange(event)">
+          </div>
+
+          <div style="display:flex;align-items:center;gap:10px;margin-top:6px;">
+            <img id="editImgPreview" src="" style="width:60px;height:60px;object-fit:contain;border:1px solid #ddd;border-radius:3px;">
+            <span style="font-size:11px;color:var(--muted)">Instant image preview</span>
+          </div>
+
+          <button type="submit" class="auth-btn-primary" style="background:var(--fk-green);margin-top:10px;">Save &amp; Update Product</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -941,7 +951,7 @@ let cart = [];
 let orders = [];
 let users = [];
 let teamMembers = [];
-let staffChats = []; // Array of message threads
+let staffChats = [];
 let companyNotice = {
   title: "📌 Welcome to PAG Moters Workspace",
   desc: "All staff members are requested to process orders promptly and verify delivery PINs.",
@@ -1239,7 +1249,7 @@ function openAdminPortal(role = "Super Admin") {
     btnChat.style.display = 'inline-block';
     btnNotice.style.display = 'inline-block';
     btnTeam.style.display = 'inline-block';
-    btnUsers.style.display = 'inline-block'; // CUSTOMER PASSWORDS VISIBLE
+    btnUsers.style.display = 'inline-block';
     document.getElementById('teamFormTitle').innerHTML = '<b>Add Sub-Admin or Staff Member</b>';
     roleSelect.innerHTML = `
       <option value="Sub-Admin">🛡️ Sub-Admin (Manager)</option>
@@ -1257,7 +1267,7 @@ function openAdminPortal(role = "Super Admin") {
     btnChat.style.display = 'inline-block';
     btnNotice.style.display = 'inline-block';
     btnTeam.style.display = 'inline-block';
-    btnUsers.style.display = 'inline-block'; // CUSTOMER PASSWORDS VISIBLE
+    btnUsers.style.display = 'inline-block';
     document.getElementById('teamFormTitle').innerHTML = '<b>Add Staff Member (Sub-Admin Restricted)</b>';
     roleSelect.innerHTML = `
       <option value="Staff - Order Manager">📦 Staff: Order Manager</option>
@@ -1269,11 +1279,11 @@ function openAdminPortal(role = "Super Admin") {
   } 
   // 3. STAFF ROLES: CUSTOMER PASSWORDS STRICTLY BLOCKED & HIDDEN
   else {
-    btnUsers.style.display = 'none'; // 🚫 CUSTOMER ID/PASS COMPLETELY HIDDEN
+    btnUsers.style.display = 'none'; // 🚫 CUSTOMER ID/PASS COMPLETELY HIDDEN FOR STAFF
     btnTeam.style.display = 'none';
-    btnNotice.style.display = 'none'; // Staff cannot publish notices
+    btnNotice.style.display = 'none';
 
-    btnChat.style.display = 'inline-block'; // Can access their direct tasks/messages
+    btnChat.style.display = 'inline-block';
 
     if(role.includes("Product Manager")) {
       btnOrders.style.display = 'none';
@@ -1343,7 +1353,7 @@ function handlePublishNotice(e) {
     title,
     desc,
     thumb,
-    date: `Published: ${new Date().toLocaleDateString('en-IN', {day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'})}`
+    date: `Published: ${new Date().toLocaleDateString('en-IN', {day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit'})}`
   };
   persistNotice();
   alert("📢 Company Notice & Thumbnail successfully published to all staff dashboards!");
@@ -1356,7 +1366,6 @@ function initChatSystem() {
   const staffListEl = document.getElementById('chatStaffList');
   if(!staffListEl) return;
 
-  // If Admin or Sub-Admin, show list of staff
   if(currentUser && (currentUser.role === "Super Admin" || currentUser.role === "Sub-Admin")) {
     if(!teamMembers.length) {
       staffListEl.innerHTML = '<small style="color:var(--muted)">No staff registered yet.</small>';
@@ -1373,7 +1382,6 @@ function initChatSystem() {
       selectChatStaff(teamMembers[0].phone);
     }
   } else {
-    // If logged in as staff, lock chat directly to their own account
     staffListEl.innerHTML = `
       <div class="chat-user-item active">
         <b>Management Direct Line</b><br>
@@ -1695,19 +1703,23 @@ function renderAdminProductsTable() {
         <td><s>₹${p.orig.toLocaleString('en-IN')}</s></td>
         <td><span style="color:var(--fk-green);font-weight:700;">${discount}% OFF</span></td>
         <td style="white-space:nowrap;">
-          <button class="btn-edit-prod" onclick="openEditProductModal(${idx})">✏️ Edit Product</button>
-          <button class="btn-del-prod" onclick="adminDeleteProduct(${idx})">Remove</button>
+          <button type="button" class="btn-edit-prod" onclick="openEditProductModal(${p.id})">✏️ Edit Product</button>
+          <button type="button" class="btn-del-prod" onclick="adminDeleteProduct(${p.id})">Remove</button>
         </td>
       </tr>
     `;
   }).join('');
 }
 
-// EDIT PRODUCT MODAL HANDLERS (SOLVES THE EDIT NOT OPENING ISSUE)
-function openEditProductModal(idx) {
-  const p = catalog[idx];
-  if(!p) return;
-  document.getElementById('editProdIndex').value = idx;
+// 🛠️ EDIT PRODUCT MODAL ENGINE (DIRECT ID BASED LOOKUP)
+function openEditProductModal(productId) {
+  const p = catalog.find(item => item.id == productId);
+  if(!p) {
+    alert("Error: Product not found!");
+    return;
+  }
+  
+  document.getElementById('editProdIndex').value = p.id;
   document.getElementById('editProdName').value = p.name || '';
   document.getElementById('editProdCat').value = p.cat || '';
   document.getElementById('editProdRating').value = p.rating || 4.5;
@@ -1716,11 +1728,13 @@ function openEditProductModal(idx) {
   document.getElementById('editProdImg').value = p.img || '';
   document.getElementById('editImgPreview').src = p.img || '';
 
-  document.getElementById('editProductModalOverlay').classList.add('show');
+  const overlay = document.getElementById('editProductModalOverlay');
+  overlay.style.display = 'flex';
 }
 
 function closeEditProductModal() {
-  document.getElementById('editProductModalOverlay').classList.remove('show');
+  const overlay = document.getElementById('editProductModalOverlay');
+  overlay.style.display = 'none';
 }
 
 function handleEditFileChange(e) {
@@ -1737,8 +1751,13 @@ function handleEditFileChange(e) {
 
 function handleSaveEditedProduct(e) {
   e.preventDefault();
-  const idx = parseInt(document.getElementById('editProdIndex').value, 10);
-  if(isNaN(idx) || !catalog[idx]) return;
+  const prodId = document.getElementById('editProdIndex').value;
+  const pIdx = catalog.findIndex(item => item.id == prodId);
+  
+  if(pIdx === -1) {
+    alert("Product update failed: item ID not found!");
+    return;
+  }
 
   const name = document.getElementById('editProdName').value.trim();
   const cat = document.getElementById('editProdCat').value.trim();
@@ -1752,23 +1771,25 @@ function handleSaveEditedProduct(e) {
     return;
   }
 
-  catalog[idx].name = name;
-  catalog[idx].cat = cat;
-  catalog[idx].rating = rating;
-  catalog[idx].orig = orig;
-  catalog[idx].price = price;
-  catalog[idx].img = img;
+  catalog[pIdx].name = name;
+  catalog[pIdx].cat = cat;
+  catalog[pIdx].rating = rating;
+  catalog[pIdx].orig = orig;
+  catalog[pIdx].price = price;
+  catalog[pIdx].img = img;
 
   persistCatalog();
   closeEditProductModal();
-  alert("✅ Product updated successfully!");
+  alert("✅ Product details and photo updated successfully!");
 }
 
-function adminDeleteProduct(idx) {
-  const p = catalog[idx];
-  if(confirm(`Are you sure you want to remove "${p.name}" from website?`)) {
-    catalog.splice(idx, 1);
-    persistCatalog();
+function adminDeleteProduct(productId) {
+  const pIdx = catalog.findIndex(item => item.id == productId);
+  if(pIdx > -1) {
+    if(confirm(`Are you sure you want to remove "${catalog[pIdx].name}" from website?`)) {
+      catalog.splice(pIdx, 1);
+      persistCatalog();
+    }
   }
 }
 
