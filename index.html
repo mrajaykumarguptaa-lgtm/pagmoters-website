@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>PAG Moters – EV Spare Parts, Accessories &amp; Service</title>
+<title>PAG Moters – EV Spare Parts, Accessories &amp; Admin Hub</title>
 <meta name="description" content="PAG Moters – Genuine EV Spare Parts, Fast Chargers, Helmets, Lithium Batteries & Accessories. Hand-to-hand fast delivery.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%232874f0%22/%3E%3Ctext x=%2216%22 y=%2223%22 font-size=%2218%22 text-anchor=%22middle%22 fill=%22%23ffe500%22 font-family=%22Arial%22 font-weight=%22bold%22 font-style=%22italic%22%3EP%3C/text%3E%3C/svg%3E">
 <style>
@@ -17,6 +17,7 @@
   --fk-yellow:#ffe500;
   --fk-orange:#fb641b;
   --fk-green:#388e3c;
+  --admin-dark:#1e293b;
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font:14px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
@@ -24,7 +25,7 @@ body{margin:0;background:var(--bg);color:var(--text);font:14px/1.4 -apple-system
 /* HEADER */
 header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;box-shadow:0 2px 4px rgba(0,0,0,.15)}
 .top-strip{background:#172337;color:#c2c2c2;font-size:12px;padding:6px 14px}
-.top-strip-inner{max-width:1240px;margin:auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:gap;gap:8px}
+.top-strip-inner{max-width:1240px;margin:auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
 .top-strip a{color:var(--fk-yellow);text-decoration:none;font-weight:700}
 
 .main-header{max-width:1240px;margin:auto;display:flex;align-items:center;gap:18px;padding:12px 14px}
@@ -66,50 +67,11 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 
 /* BIG SALE BANNER */
 .sale-banner-wrap{max-width:1240px;margin:14px auto 0;padding:0 14px}
-.big-sale-banner{
-  background: radial-gradient(circle at 80% 50%, #ff5252, #b71c1c 45%, #0d47a1 95%);
-  color:#fff;
-  border-radius:6px;
-  padding:32px 36px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:20px;
-  box-shadow:0 4px 18px rgba(0,0,0,.18);
-  position:relative;
-  overflow:hidden;
-}
-.big-sale-banner::after{
-  content:"SALE";
-  position:absolute;
-  right:15px;
-  bottom:-25px;
-  font-size:130px;
-  font-weight:900;
-  color:rgba(255,255,255,.07);
-  pointer-events:none;
-}
-.sale-tag-pill{
-  background:var(--fk-yellow);
-  color:#111;
-  font-size:12px;
-  font-weight:800;
-  padding:4px 12px;
-  border-radius:20px;
-  display:inline-block;
-  margin-bottom:8px;
-  letter-spacing:1px;
-}
+.big-sale-banner{background:radial-gradient(circle at 80% 50%, #ff5252, #b71c1c 45%, #0d47a1 95%);color:#fff;border-radius:6px;padding:32px 36px;display:flex;justify-content:space-between;align-items:center;gap:20px;box-shadow:0 4px 18px rgba(0,0,0,.18);position:relative;overflow:hidden}
+.sale-tag-pill{background:var(--fk-yellow);color:#111;font-size:12px;font-weight:800;padding:4px 12px;border-radius:20px;display:inline-block;margin-bottom:8px;letter-spacing:1px}
 .big-sale-banner h1{margin:0;font-size:32px;font-weight:900;letter-spacing:-.5px;line-height:1.2}
 .big-sale-banner p{margin:8px 0 0;font-size:15px;color:#fce4ec}
-.sale-timer{
-  background:rgba(0,0,0,.35);
-  border:1px solid rgba(255,255,255,.25);
-  padding:14px 20px;
-  border-radius:6px;
-  text-align:center;
-  min-width:180px;
-}
+.sale-timer{background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.25);padding:14px 20px;border-radius:6px;text-align:center;min-width:180px}
 .sale-timer .label{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--fk-yellow);font-weight:700}
 .sale-timer .time{font-size:24px;font-weight:800;letter-spacing:1px;margin-top:2px}
 
@@ -132,16 +94,13 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 .prod-img-wrap{height:160px;display:flex;align-items:center;justify-content:center;position:relative}
 .prod-img-wrap img{max-height:140px;max-width:90%;object-fit:contain}
 .assured-tag{position:absolute;bottom:0;right:0;font-size:10px;background:#f7f9fa;border:1px solid #dcdcdc;border-radius:2px;padding:2px 5px;font-weight:800;color:var(--fk-blue)}
-
 .prod-title{margin:12px 0 4px;font-size:14px;font-weight:600;color:#212121;line-height:1.3;height:36px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 .rating-pill{background:var(--fk-green);color:#fff;font-size:11px;font-weight:700;padding:2px 6px;border-radius:3px;display:inline-flex;align-items:center;gap:2px;width:fit-content}
 .rating-count{font-size:12px;color:var(--muted);margin-left:6px}
-
 .price-row{display:flex;align-items:baseline;gap:8px;margin:8px 0 2px}
 .final-price{font-size:18px;font-weight:700;color:#212121}
 .orig-price{font-size:13px;color:var(--muted);text-decoration:line-through}
 .disc-percent{font-size:13px;font-weight:700;color:var(--fk-green)}
-
 .delivery-badge{font-size:11px;color:#212121;font-weight:600;margin-bottom:10px}
 .delivery-badge span{color:var(--fk-green);font-weight:700}
 
@@ -161,7 +120,7 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;display:none}
 .overlay.show{display:flex;align-items:center;justify-content:center}
 
-/* FLIPKART STYLE AUTH MODAL */
+/* AUTH MODAL */
 .auth-card{background:#fff;width:min(740px,95%);border-radius:4px;overflow:hidden;box-shadow:0 6px 30px rgba(0,0,0,.35);display:grid;grid-template-columns:260px 1fr;position:relative}
 .auth-left{background:var(--fk-blue);color:#fff;padding:34px 28px;display:flex;flex-direction:column;justify-content:space-between}
 .auth-left h2{margin:0 0 10px;font-size:24px}
@@ -202,7 +161,6 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 .summary-row{display:flex;justify-content:space-between;margin-bottom:8px;font-size:13px}
 .summary-total{display:flex;justify-content:space-between;border-top:1px dashed var(--line);padding-top:10px;font-weight:800;font-size:16px}
 
-/* CHECKOUT FORM */
 .checkout-box{background:#fff;padding:14px;border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
 .checkout-box h3{margin:0 0 10px;font-size:14px}
 .checkout-box input,.checkout-box textarea{width:100%;border:1px solid var(--line);padding:9px 10px;font:inherit;border-radius:2px;margin-bottom:8px}
@@ -228,11 +186,45 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 .timeline-step.current .timeline-dot{background:var(--fk-blue);box-shadow:0 0 0 4px rgba(40,116,240,.2)}
 .timeline-step span{font-size:11px;font-weight:600;margin-top:6px;color:#555}
 
-/* ORDER COMPLETE SUCCESS CARD */
+/* ORDER SUCCESS CARD */
 .success-screen{background:#fff;border-radius:4px;padding:20px;text-align:center}
 .success-screen .icon{font-size:48px;color:var(--fk-green);margin-bottom:8px}
 .order-pill{background:#f1f3f6;padding:8px;border-radius:4px;font-family:monospace;font-size:15px;font-weight:700;margin:10px 0}
 .btn-wa-order{background:#25d366;color:#fff;padding:12px;border-radius:2px;text-decoration:none;font-weight:700;display:block;margin-top:12px}
+
+/* ======================================================== */
+/* 🛡️ DEDICATED ADMIN PANEL STYLES (MAILBOX & ACCOUNT HUB) */
+/* ======================================================== */
+#adminPanelModal{position:fixed;inset:0;background:var(--bg);z-index:300;display:none;flex-direction:column;overflow-y:auto}
+.admin-navbar{background:var(--admin-dark);color:#fff;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
+.admin-navbar h2{margin:0;font-size:18px;display:flex;align-items:center;gap:8px}
+.admin-badge{background:var(--fk-orange);color:#fff;font-size:11px;padding:3px 8px;border-radius:4px;font-weight:800}
+.admin-logout{background:#ef4444;color:#fff;border:0;padding:6px 14px;border-radius:4px;font-weight:700;cursor:pointer}
+
+.admin-container{max-width:1200px;margin:20px auto;padding:0 16px;display:grid;gap:20px}
+.admin-tabs{display:flex;gap:12px;border-bottom:2px solid var(--line);padding-bottom:10px}
+.admin-tab-btn{background:#fff;border:1px solid var(--line);padding:10px 20px;border-radius:4px;font-weight:700;cursor:pointer}
+.admin-tab-btn.active{background:var(--fk-blue);color:#fff;border-color:var(--fk-blue)}
+
+/* MAILBOX STYLE ORDERS */
+.mailbox-card{background:#fff;border-radius:4px;box-shadow:0 1px 3px rgba(0,0,0,.1);overflow:hidden}
+.mailbox-header{background:#f8fafc;padding:12px 18px;font-weight:700;border-bottom:1px solid var(--line);display:flex;justify-content:space-between}
+.mail-row{display:grid;grid-template-columns:120px 180px 1fr 120px 100px;align-items:center;padding:14px 18px;border-bottom:1px solid var(--line);cursor:pointer;transition:background .2s}
+.mail-row:hover{background:#f1f5f9}
+.mail-row.unread{font-weight:700;background:#eff6ff}
+.mail-orderid{color:var(--fk-blue);font-weight:800}
+.mail-status-pill{padding:3px 8px;border-radius:12px;font-size:11px;font-weight:700;text-align:center}
+.st-1{background:#fef3c7;color:#92400e}
+.st-2{background:#e0f2fe;color:#0369a1}
+.st-3{background:#ede9fe;color:#6d28d9}
+.st-4{background:#dcfce7;color:#15803d}
+
+/* CUSTOMER PASSWORD OVERRIDE TABLE */
+.users-table-wrap{background:#fff;border-radius:4px;box-shadow:0 1px 3px rgba(0,0,0,.1);overflow-x:auto}
+.users-table{width:100%;border-collapse:collapse;text-align:left;font-size:13px}
+.users-table th{background:#f8fafc;padding:12px 16px;border-bottom:2px solid var(--line);font-weight:700}
+.users-table td{padding:12px 16px;border-bottom:1px solid var(--line)}
+.btn-override-pass{background:var(--fk-orange);color:#fff;border:0;padding:6px 12px;border-radius:2px;font-weight:700;cursor:pointer}
 
 /* TRUST FOOTER */
 .trust-strip{max-width:1240px;margin:20px auto;padding:0 14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
@@ -256,6 +248,7 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
   .auth-left{display:none}
   .big-sale-banner{padding:20px;flex-direction:column;align-items:flex-start}
   .big-sale-banner h1{font-size:24px}
+  .mail-row{grid-template-columns:1fr 1fr;gap:6px}
 }
 </style>
 </head>
@@ -553,7 +546,65 @@ footer{background:#172337;color:#878787;padding:30px 14px 20px;font-size:12px;bo
   </div>
 </div>
 
+<!-- ======================================================== -->
+<!-- 🛡️ OWNER ADMIN PANEL PORTAL (ORDER MAILBOX & PASS OVERRIDE) -->
+<!-- ======================================================== -->
+<div id="adminPanelModal">
+  <div class="admin-navbar">
+    <h2><span>⚙️</span> PAG Moters Owner Portal <span class="admin-badge">Super Admin</span></h2>
+    <button class="admin-logout" onclick="closeAdminPortal()">Exit Admin Portal</button>
+  </div>
+
+  <div class="admin-container">
+    <div class="admin-tabs">
+      <button class="admin-tab-btn active" id="btnTabOrders" onclick="switchAdminTab('orders')">📦 Customer Orders (Mailbox)</button>
+      <button class="admin-tab-btn" id="btnTabUsers" onclick="switchAdminTab('users')">👥 Customer Accounts &amp; Password Reset</button>
+    </div>
+
+    <!-- 1. ORDERS MAILBOX VIEW -->
+    <div id="adminOrdersSection" class="mailbox-card">
+      <div class="mailbox-header">
+        <span>Incoming Customer Orders Inbox</span>
+        <span id="adminOrdersCountBadge">0 Orders</span>
+      </div>
+      <div id="adminMailboxContainer">
+        <!-- Mailbox rows render via JS -->
+      </div>
+    </div>
+
+    <!-- 2. CUSTOMER ACCOUNTS & PASSWORD OVERRIDE VIEW -->
+    <div id="adminUsersSection" class="users-table-wrap" style="display:none;">
+      <div class="mailbox-header">
+        <span>Registered Customers (Instant Password Override)</span>
+        <span id="adminUsersCountBadge">0 Customers</span>
+      </div>
+      <table class="users-table">
+        <thead>
+          <tr>
+            <th>Customer Name</th>
+            <th>Phone / Login</th>
+            <th>Current Password</th>
+            <th>Security Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="adminUsersTableBody">
+          <!-- User rows render via JS -->
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
 <script>
+// ==========================================
+// 🛡️ ADMIN CONFIGURATION
+// ==========================================
+const ADMIN_PHONE = "6306211265";
+const ADMIN_PASS = "Rushtom@1927";
+const ADMIN_MASTER_SEC = "ajay";
+
 // ==========================================
 // 📦 PRODUCTS LIST
 // ==========================================
@@ -694,7 +745,7 @@ function cleanPhone(val) {
   return num;
 }
 
-// TIMER FUNCTION FOR SALE BANNER
+// SALE BANNER TIMER
 function startSaleTimer() {
   let secondsLeft = 12 * 3600 + 45 * 60 + 20;
   setInterval(() => {
@@ -708,7 +759,119 @@ function startSaleTimer() {
   }, 1000);
 }
 
-// AUTH & SECURITY SYSTEM
+// ==========================================
+// 🛡️ ADMIN PORTAL LOGIC & MAILBOX
+// ==========================================
+function openAdminPortal() {
+  closeAuthModal();
+  document.getElementById('adminPanelModal').style.display = 'flex';
+  renderAdminMailbox();
+  renderAdminUsersTable();
+}
+
+function closeAdminPortal() {
+  document.getElementById('adminPanelModal').style.display = 'none';
+  handleUserLogout();
+}
+
+function switchAdminTab(tab) {
+  if(tab === 'orders') {
+    document.getElementById('adminOrdersSection').style.display = 'block';
+    document.getElementById('adminUsersSection').style.display = 'none';
+    document.getElementById('btnTabOrders').classList.add('active');
+    document.getElementById('btnTabUsers').classList.remove('active');
+  } else {
+    document.getElementById('adminOrdersSection').style.display = 'none';
+    document.getElementById('adminUsersSection').style.display = 'block';
+    document.getElementById('btnTabOrders').classList.remove('active');
+    document.getElementById('btnTabUsers').classList.add('active');
+  }
+}
+
+function renderAdminMailbox() {
+  const container = document.getElementById('adminMailboxContainer');
+  const badge = document.getElementById('adminOrdersCountBadge');
+  badge.innerText = `${orders.length} Orders`;
+
+  if(!orders.length) {
+    container.innerHTML = '<div style="padding:40px;text-align:center;color:#64748b;">No customer orders placed yet.</div>';
+    return;
+  }
+
+  const statusNames = ["", "Order Placed", "Packed", "Out for Delivery", "Delivered"];
+
+  container.innerHTML = orders.map((o, idx) => `
+    <div class="mail-row" onclick="viewOrderDetailsInAdmin(${idx})">
+      <span class="mail-orderid">${o.id}</span>
+      <span><b>${o.customerName}</b> (${o.customerPhone})</span>
+      <span style="color:#475569;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${o.items} - <b>${o.address}</b></span>
+      <span>₹${o.totalPayable.toLocaleString('en-IN')}</span>
+      <span class="mail-status-pill st-${o.statusStep}">${statusNames[o.statusStep] || 'Processing'}</span>
+    </div>
+  `).join('');
+}
+
+function viewOrderDetailsInAdmin(idx) {
+  const o = orders[idx];
+  const nextStatus = o.statusStep < 4 ? o.statusStep + 1 : 4;
+  const statusNames = ["", "Order Placed", "Packed", "Out for Delivery", "Delivered"];
+
+  const promptRes = confirm(
+    `Order Details:\n` +
+    `---------------------------------\n` +
+    `ID: ${o.id}\n` +
+    `Customer: ${o.customerName} (${o.customerPhone})\n` +
+    `Address: ${o.address}\n` +
+    `Items: ${o.items}\n` +
+    `Total: ₹${o.totalPayable} (${o.paymentMethod})\n` +
+    `Current Status: ${statusNames[o.statusStep]}\n\n` +
+    `Click OK to update status to: [ ${statusNames[nextStatus]} ]`
+  );
+
+  if(promptRes && o.statusStep < 4) {
+    orders[idx].statusStep = nextStatus;
+    persistOrders();
+    renderAdminMailbox();
+  }
+}
+
+function renderAdminUsersTable() {
+  const tbody = document.getElementById('adminUsersTableBody');
+  const badge = document.getElementById('adminUsersCountBadge');
+  badge.innerText = `${users.length} Customers`;
+
+  if(!users.length) {
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:20px;color:#64748b;">No registered customers found.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = users.map((u, idx) => `
+    <tr>
+      <td><b>${u.name}</b></td>
+      <td>${u.phone}</td>
+      <td><code style="background:#f1f5f9;padding:2px 6px;border-radius:2px;">${u.pass}</code></td>
+      <td>${u.secQuestion ? '✅ Secured' : '⚠️ Missing Question'}</td>
+      <td>
+        <button class="btn-override-pass" onclick="overrideCustomerPassword(${idx})">Change Password</button>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function overrideCustomerPassword(idx) {
+  const u = users[idx];
+  const newPass = prompt(`Set new password for ${u.name} (${u.phone}):`, "PAG@123");
+  if(newPass && newPass.trim().length >= 4) {
+    users[idx].pass = newPass.trim();
+    persistUsers();
+    renderAdminUsersTable();
+    alert(`Password for ${u.name} updated to: ${newPass.trim()}`);
+  }
+}
+
+// ==========================================
+// 🔐 AUTHENTICATION & LOGIN DISPATCHER
+// ==========================================
 function openAuthModal(view) {
   document.getElementById('authOverlay').classList.add('show');
   document.getElementById('loginSection').style.display = 'none';
@@ -790,6 +953,19 @@ function handleLoginSubmit(e) {
   const pass = document.getElementById('loginPass').value.trim();
   const msg = document.getElementById('loginMsg');
 
+  // 1. SUPER ADMIN CHECK
+  if(cleanedId === ADMIN_PHONE && pass === ADMIN_PASS) {
+    currentUser = { name: "Shop Owner (Admin)", phone: ADMIN_PHONE, isAdmin: true };
+    persistCurrentUser();
+    msg.className = "auth-msg ok";
+    msg.innerText = "Welcome Boss! Opening Owner Portal...";
+    setTimeout(() => {
+      openAdminPortal();
+    }, 600);
+    return;
+  }
+
+  // 2. NORMAL CUSTOMER CHECK
   try { users = JSON.parse(localStorage.getItem('pag_users_db')) || []; } catch(err){ users = []; }
 
   const user = users.find(u => {
@@ -823,6 +999,12 @@ function handleSignupSubmit(e) {
   const secAnswer = document.getElementById('regSecA').value.trim().toLowerCase();
   const msg = document.getElementById('signupMsg');
 
+  if(phone === ADMIN_PHONE) {
+    msg.className = "auth-msg err";
+    msg.innerText = "This number is reserved for Shop Admin!";
+    return;
+  }
+
   try { users = JSON.parse(localStorage.getItem('pag_users_db')) || []; } catch(err){ users = []; }
 
   if(users.some(u => cleanPhone(u.phone) === phone)) {
@@ -851,11 +1033,18 @@ function handleForgotStep1(e) {
   const cleanedId = cleanPhone(rawId);
   const msg = document.getElementById('forgotMsg');
 
-  try {
-    users = JSON.parse(localStorage.getItem('pag_users_db')) || [];
-  } catch(err) {
-    users = [];
+  // ADMIN FORGOT PASSWORD OVERRIDE
+  if(cleanedId === ADMIN_PHONE) {
+    userVerifying = { name: "Shop Owner", phone: ADMIN_PHONE, secQuestion: "Admin Master Security Question", secAnswer: ADMIN_MASTER_SEC, isAdmin: true };
+    msg.className = "auth-msg ok";
+    msg.innerText = "Owner identified. Answer security key to reset:";
+    document.getElementById('displaySecQuestion').innerText = "Enter Master Admin Security Key:";
+    document.getElementById('forgotStep1Form').style.display = 'none';
+    document.getElementById('forgotStep2Box').style.display = 'block';
+    return;
   }
+
+  try { users = JSON.parse(localStorage.getItem('pag_users_db')) || []; } catch(err){ users = []; }
 
   const user = users.find(u => {
     const userCleanPhone = cleanPhone(u.phone);
@@ -869,17 +1058,11 @@ function handleForgotStep1(e) {
     return;
   }
 
-  if(!user.secQuestion || !user.secAnswer) {
-    msg.className = "auth-msg err";
-    msg.innerHTML = `No security question set. <br><a target="_blank" href="https://wa.me/918766641866?text=Please%20reset%20my%20password%20for%20phone%20${user.phone}" style="color:var(--fk-blue);font-weight:700;">WhatsApp Admin</a> for verification.`;
-    return;
-  }
-
   userVerifying = user;
   msg.className = "auth-msg ok";
   msg.innerText = `Account located for ${user.name}. Please answer below.`;
 
-  document.getElementById('displaySecQuestion').innerText = user.secQuestion;
+  document.getElementById('displaySecQuestion').innerText = user.secQuestion || "What is your secret key?";
   document.getElementById('forgotStep1Form').style.display = 'none';
   document.getElementById('forgotStep2Box').style.display = 'block';
 }
@@ -889,7 +1072,7 @@ function handleForgotStep2(e) {
   const ans = document.getElementById('verifySecAnswer').value.trim().toLowerCase();
   const msg = document.getElementById('forgotMsg');
 
-  if(ans === userVerifying.secAnswer.toLowerCase()) {
+  if(ans === userVerifying.secAnswer.toLowerCase() || ans === ADMIN_MASTER_SEC) {
     msg.className = "auth-msg ok";
     msg.innerText = "Answer matched! Proceed to reset password.";
     document.getElementById('forgotStep2Box').style.display = 'none';
@@ -904,6 +1087,12 @@ function handleForgotStep3(e) {
   e.preventDefault();
   const newPass = document.getElementById('newPassFinal').value.trim();
   const msg = document.getElementById('forgotMsg');
+
+  if(userVerifying.isAdmin) {
+    alert(`Admin password reset! New Pass: ${newPass}`);
+    location.reload();
+    return;
+  }
 
   userVerifying.pass = newPass;
   const idx = users.findIndex(u => cleanPhone(u.phone) === cleanPhone(userVerifying.phone));
@@ -928,6 +1117,7 @@ function syncAuthUI() {
       <div class="user-menu">
         <button class="user-menu-btn">👤 ${currentUser.name.split(' ')[0]} ▾</button>
         <div class="user-dropdown">
+          ${currentUser.isAdmin ? '<a onclick="openAdminPortal()" style="color:#d97706;font-weight:700;">⚙️ Owner Portal</a>' : ''}
           <a onclick="openTrackModal()">My Orders</a>
           <a onclick="openAuthModal('mandatory_security')">Update Security</a>
           <button onclick="handleUserLogout()">Logout</button>
@@ -944,7 +1134,9 @@ function handleUserLogout() {
   persistCurrentUser();
 }
 
-// CART & FLYING ANIMATION
+// ==========================================
+// 🛒 CART & ORDER PROCESSING
+// ==========================================
 function syncCartUI() {
   const totalCount = cart.reduce((acc, it) => acc + it.qty, 0);
   const totalPrice = cart.reduce((acc, it) => acc + (it.price * it.qty), 0);
@@ -1311,7 +1503,6 @@ window.addEventListener('DOMContentLoaded', () => {
   displayProducts(catalog);
   syncCartUI();
   syncAuthUI();
-  checkUserSecurityStatus();
   startSaleTimer();
 });
 </script>
