@@ -174,3 +174,314 @@ footer{background:#172337;color:#c8ccd2;padding:22px 14px;text-align:center;font
 <div class="top"><b id="pCount">Showing Products</b></div>
 <div class="grid" id="grid"></div>
 </div>
+</main>
+
+<div class="perks">
+<div><b>Fast Hand-to-Hand Delivery</b>Local doorstep service in Mharal Gaon</div>
+<div><b>100% Genuine Parts</b>Checked and tested by specialists</div>
+<div><b>Instant Support</b>Call / WhatsApp anytime for help</div>
+</div>
+
+<section class="biz" id="shop"><div class="panel">
+<div>
+<h2>PAG Moters</h2>
+<p class="sub">Spare Parts, EV Accessories &amp; Repair</p>
+<dl>
+<div><dt>Shop Address</dt><dd>Shop no 68, MIDC Gate,<br>Near Gram Panchayat Office,<br>Mharal Gaon 421001</dd></div>
+<div><dt>Contact Numbers</dt><dd><a href="tel:+918766641866">8766641866</a><a href="tel:+917379595655">7379595655</a></dd></div>
+</dl>
+<div class="acts">
+  <a href="tel:+918766641866">Call Now</a>
+  <a class="alt" href="https://wa.me/918766641866" target="_blank">WhatsApp Us</a>
+  <a class="alt" href="https://www.google.com/maps/search/?api=1&amp;query=MIDC+Gate+Gram+Panchayat+Office+Mharal+Gaon+421001" target="_blank">View Map</a>
+</div>
+</div>
+<img src="/pag-moters-card.jpg" alt="PAG Moters Shop visiting card" width="1536" height="1024" loading="lazy">
+</div></section>
+
+<footer>
+<b style="color:#fff">PAG Moters</b> – EV Spare Parts, Accessories &amp; Service<br>
+Shop no 68, MIDC Gate, Mharal Gaon 421001 · Call 8766641866 / 7379595655<br>
+© 2026 PAG Moters · pagmoters.online
+</footer>
+
+<!-- DRAWER (Popup opens ONLY when clicking header cart box) -->
+<div class="drawer" id="cartDrawer">
+<div class="shade" onclick="toggleCart()"></div>
+<div class="box">
+  <div class="hd">
+    <h2>Your Cart Items</h2>
+    <button class="x" onclick="toggleCart()">×</button>
+  </div>
+  
+  <div class="cart-body" id="cartContent">
+    <!-- Rendered dynamically -->
+  </div>
+</div>
+</div>
+
+<script>
+const products = [
+  {id: 1, name: "ISI Full Face Safety Helmet", cat: "Helmets", price: 899, orig: 1499, icon: "🪖", spec: "ISI certified, scratch-proof visor"},
+  {id: 2, name: "Open Face City Rider Helmet", cat: "Helmets", price: 650, orig: 999, icon: "🪖", spec: "Lightweight, breathable interior"},
+  {id: 3, name: "60V EV Smart Battery Fast Charger", cat: "Chargers", price: 1850, orig: 2499, icon: "🔌", spec: "Auto cut-off, short circuit protection"},
+  {id: 4, name: "48V High Efficiency EV Charger", cat: "Chargers", price: 1650, orig: 2200, icon: "🔌", spec: "Heavy duty copper cooling fan"},
+  {id: 5, name: "Type-C Fast Braided Cable (65W)", cat: "Mobile Cables", price: 249, orig: 499, icon: "⚡", spec: "Super fast charging, unbreakable nylon"},
+  {id: 6, name: "3-in-1 Multi Fast Charging Cable", cat: "Mobile Cables", price: 349, orig: 699, icon: "🔌", spec: "Lightning + Type-C + Micro USB"},
+  {id: 7, name: "Bass Pro Magnetic Wireless Neckband", cat: "Earphones", price: 499, orig: 999, icon: "🎧", spec: "30 hrs playtime, deep bass sound"},
+  {id: 8, name: "True Wireless Stereo Earbuds", cat: "Earphones", price: 799, orig: 1999, icon: "🎵", spec: "Touch controls, noise cancellation mic"},
+  {id: 9, name: "Heavy Duty All-Weather Scooter Cover", cat: "Accessories", price: 399, orig: 799, icon: "🛡️", spec: "Waterproof, dust and UV protect"},
+  {id: 10, name: "Universal Waterproof Mobile Mount", cat: "Accessories", price: 299, orig: 599, icon: "📱", spec: "360° rotation for handlebar"},
+  {id: 11, name: "48V 24Ah Lithium-Ion Battery Pack", cat: "Batteries", price: 14500, orig: 18000, icon: "🔋", spec: "High grade cells, 3 yr life guarantee"}
+];
+
+let cart = JSON.parse(localStorage.getItem('pag_cart') || '[]');
+
+function saveCart() {
+  localStorage.setItem('pag_cart', JSON.stringify(cart));
+  updateCartBadge();
+  updateButtonsOnCards();
+}
+
+function updateCartBadge() {
+  const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+  const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+  
+  const badge = document.getElementById('cartBadge');
+  badge.innerText = totalCount;
+  document.getElementById('cartBoxTotal').innerText = `₹${totalPrice.toLocaleString('en-IN')}`;
+  
+  const cartBox = document.getElementById('cartBox');
+  cartBox.classList.remove('cart-bounce');
+  void cartBox.offsetWidth; // trigger reflow
+  cartBox.classList.add('cart-bounce');
+}
+
+function renderProducts(list) {
+  const grid = document.getElementById('grid');
+  document.getElementById('pCount').innerText = `${list.length} Products Available`;
+  if(!list.length) {
+    grid.innerHTML = '<div style="padding:40px;text-align:center;grid-column:1/-1;">No products found in this category.</div>';
+    return;
+  }
+  grid.innerHTML = list.map(p => {
+    const cartItem = cart.find(c => c.id === p.id);
+    const qty = cartItem ? cartItem.qty : 0;
+    
+    return `
+      <div class="card" id="card-${p.id}">
+        <div class="pic">${p.icon}</div>
+        <h4>${p.name}</h4>
+        <p class="spec">${p.spec}</p>
+        <div class="pr">
+          <strong>₹${p.price.toLocaleString('en-IN')}</strong>
+          <s>₹${p.orig.toLocaleString('en-IN')}</s>
+          <em>${Math.round((1 - p.price/p.orig)*100)}% off</em>
+        </div>
+        <div class="btn-holder" id="btn-holder-${p.id}">
+          ${getButtonHTML(p.id, qty)}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function getButtonHTML(id, qty) {
+  if (qty > 0) {
+    return `
+      <div class="qty-ctrl">
+        <button onclick="changeQty(${id}, -1)">−</button>
+        <span>${qty} in cart</span>
+        <button onclick="addToCartWithFly(${id}, this)">+</button>
+      </div>
+    `;
+  } else {
+    return `
+      <button class="buy" onclick="addToCartWithFly(${id}, this)">
+        <span>+ Add to Cart</span>
+      </button>
+    `;
+  }
+}
+
+function updateButtonsOnCards() {
+  products.forEach(p => {
+    const el = document.getElementById(`btn-holder-${p.id}`);
+    if (el) {
+      const cartItem = cart.find(c => c.id === p.id);
+      const qty = cartItem ? cartItem.qty : 0;
+      el.innerHTML = getButtonHTML(p.id, qty);
+    }
+  });
+}
+
+function addToCartWithFly(id, btnElement) {
+  // 1. FLY ANIMATION: Ud kar cart me jana
+  flyToCartAnimation(btnElement);
+
+  // 2. Add to Cart data
+  const item = products.find(p => p.id === id);
+  const existing = cart.find(c => c.id === id);
+  if(existing) {
+    existing.qty += 1;
+  } else {
+    cart.push({...item, qty: 1});
+  }
+  saveCart();
+  // NOTICE: No popup will open! User can keep adding more items freely.
+}
+
+function flyToCartAnimation(startElem) {
+  const cartIcon = document.getElementById('cartBox');
+  if(!startElem || !cartIcon) return;
+
+  const startRect = startElem.getBoundingClientRect();
+  const endRect = cartIcon.getBoundingClientRect();
+
+  const ball = document.createElement('div');
+  ball.className = 'fly-ball';
+  ball.innerHTML = '+1';
+  ball.style.left = `${startRect.left + startRect.width / 2 - 12}px`;
+  ball.style.top = `${startRect.top}px`;
+  document.body.appendChild(ball);
+
+  requestAnimationFrame(() => {
+    ball.style.transform = `scale(1.3)`;
+    ball.style.left = `${endRect.left + endRect.width / 2 - 12}px`;
+    ball.style.top = `${endRect.top + endRect.height / 2 - 12}px`;
+    ball.style.opacity = '0.3';
+  });
+
+  setTimeout(() => {
+    ball.remove();
+  }, 620);
+}
+
+function changeQty(id, delta) {
+  const idx = cart.findIndex(c => c.id === id);
+  if(idx > -1) {
+    cart[idx].qty += delta;
+    if(cart[idx].qty <= 0) cart.splice(idx, 1);
+    saveCart();
+    if(document.getElementById('cartDrawer').classList.contains('open')) {
+      renderCartDrawer();
+    }
+  }
+}
+
+function filterCat(catName) {
+  document.querySelectorAll('#navCats li').forEach(li => {
+    li.classList.toggle('on', li.innerText === catName || (catName === 'All' && li.innerText === 'All Products'));
+  });
+  if(catName === 'All') renderProducts(products);
+  else renderProducts(products.filter(p => p.cat === catName));
+}
+
+function searchProducts() {
+  const term = document.getElementById('q').value.toLowerCase();
+  const filtered = products.filter(p => p.name.toLowerCase().includes(term) || p.cat.toLowerCase().includes(term));
+  renderProducts(filtered);
+}
+
+// Side popup opens ONLY when clicking header cart box
+function toggleCart() {
+  const drawer = document.getElementById('cartDrawer');
+  drawer.classList.toggle('open');
+  if(drawer.classList.contains('open')) {
+    renderCartDrawer();
+  }
+}
+
+function renderCartDrawer() {
+  const c = document.getElementById('cartContent');
+  if(!cart.length) {
+    c.innerHTML = `
+      <div style="text-align:center;padding:40px 10px;color:var(--muted)">
+        <div style="font-size:42px;margin-bottom:10px;">🛒</div>
+        <b>Your cart is empty</b><br>
+        <p>Click "+ Add to Cart" on any product to start.</p>
+      </div>`;
+    return;
+  }
+
+  const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+  c.innerHTML = `
+    <div>
+      ${cart.map(item => `
+        <div class="it">
+          <div>
+            <b>${item.name}</b>
+            <small>₹${item.price} × ${item.qty} = ₹${(item.price * item.qty).toLocaleString('en-IN')}</small>
+          </div>
+          <div style="display:flex;gap:6px;align-items:center;">
+            <button onclick="changeQty(${item.id}, -1)" style="padding:3px 9px;cursor:pointer;font-weight:700;">−</button>
+            <span style="font-weight:700;">${item.qty}</span>
+            <button onclick="changeQty(${item.id}, 1)" style="padding:3px 9px;cursor:pointer;font-weight:700;">+</button>
+            <button class="rem" onclick="changeQty(${item.id}, -${item.qty})">✕</button>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+    
+    <div class="tot">
+      <span>Grand Total</span>
+      <span>₹${total.toLocaleString('en-IN')}</span>
+    </div>
+
+    <form class="chk-form" onsubmit="handlePlaceOrder(event)">
+      <h3 style="margin:4px 0;">Delivery Details</h3>
+      <input type="text" id="custName" placeholder="Full Name" required>
+      <input type="tel" id="custPhone" placeholder="Mobile Number (10 digits)" required pattern="[0-9]{10}">
+      <textarea id="custAddr" placeholder="Delivery Address / Landmark" rows="2" required></textarea>
+      
+      <div class="pay-opt">
+        <b>Payment Option:</b>
+        <label><input type="radio" name="payMethod" value="Cash on Delivery" checked> Cash on Delivery (COD)</label>
+        <label><input type="radio" name="payMethod" value="UPI / Online Payment"> UPI / Online Payment</label>
+      </div>
+      <button class="buy" type="submit" style="padding:12px;font-size:15px;">Confirm &amp; Place Order</button>
+    </form>
+  `;
+}
+
+function handlePlaceOrder(e) {
+  e.preventDefault();
+  const name = document.getElementById('custName').value;
+  const phone = document.getElementById('custPhone').value;
+  const addr = document.getElementById('custAddr').value;
+  const pay = document.querySelector('input[name="payMethod"]:checked').value;
+  
+  const orderId = 'PAG-' + Math.floor(100000 + Math.random() * 900000);
+  const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+  const itemList = cart.map(i => `${i.name} (Qty: ${i.qty})`).join(', ');
+
+  const c = document.getElementById('cartContent');
+  c.innerHTML = `
+    <div class="status-card">
+      <h3>🎉 Order Placed Successfully!</h3>
+      <p style="margin:4px 0;">Status: <b>Confirmed &amp; Under Processing</b></p>
+      <p style="font-size:13px;color:var(--muted);">Order ID: <b>${orderId}</b></p>
+    </div>
+
+    <div style="background:var(--bg);padding:12px;border-radius:4px;font-size:13px;display:grid;gap:4px;">
+      <div><b>Customer:</b> ${name} (${phone})</div>
+      <div><b>Address:</b> ${addr}</div>
+      <div><b>Items:</b> ${itemList}</div>
+      <div><b>Total Payable:</b> ₹${total.toLocaleString('en-IN')} (${pay})</div>
+    </div>
+
+    <a class="btn-wa" target="_blank" href="https://wa.me/918766641866?text=${encodeURIComponent(
+      `Hello PAG Moters, I placed an order!\n\nOrder ID: ${orderId}\nName: ${name}\nPhone: ${phone}\nAddress: ${addr}\nItems: ${itemList}\nTotal: ₹${total}\nPayment: ${pay}`
+    )}">Send Order Details to WhatsApp 💬</a>
+    
+    <button class="buy" onclick="cart=[];saveCart();toggleCart();" style="background:#212121;margin-top:8px;">Back to Shopping</button>
+  `;
+}
+
+// Initial Run
+renderProducts(products);
+updateCartBadge();
+</script>
+</body>
+</html>
