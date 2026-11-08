@@ -1,90 +1,326 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PAG Moters – EV Spare Parts, Accessories & Service</title>
-<meta name="description" content="PAG Moters – EV Spare Parts, Chargers, Helmets, Batteries and Accessories.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%232874f0%22/%3E%3Ctext x=%2216%22 y=%2223%22 font-size=%2218%22 text-anchor=%22middle%22 fill=%22%23ffe500%22 font-family=%22Arial%22 font-weight=%22bold%22%3EP%3C/text%3E%3C/svg%3E">
-<style>
-:root{--bg:#f1f3f6;--surface:#fff;--text:#212121;--muted:#878787;--line:#e0e0e0;--blue:#2874f0;--yellow:#ffe500;--orange:#fb641b;--green:#388e3c;--dark:#0f172a}
-*{box-sizing:border-box}html,body{margin:0;width:100%;min-height:100%;font:14px/1.45 Arial,Helvetica,sans-serif;color:var(--text);background:var(--bg)}button,input,select,textarea{font:inherit}button{cursor:pointer}
-.top-strip{background:#172337;color:#ddd;padding:6px 14px;font-size:11px}.top-inner{max-width:1400px;margin:auto;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
-header{background:var(--blue);color:#fff;position:sticky;top:0;z-index:20;box-shadow:0 2px 5px #0002}.main-header{max-width:1400px;margin:auto;padding:10px 14px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}.brand{color:#fff;text-decoration:none;font-size:21px;font-weight:900;font-style:italic}.brand small{display:block;color:var(--yellow);font-size:10px}.search{display:flex;flex:1;min-width:190px;background:#fff;border-radius:3px;overflow:hidden}.search input{border:0;padding:10px;min-width:0;flex:1;outline:0}.search button{border:0;background:#fff;color:var(--blue);padding:0 14px}.head-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.navbtn{border:0;background:transparent;color:#fff;font-weight:bold;padding:8px}.whitebtn{border:0;background:#fff;color:var(--blue);font-weight:bold;padding:8px 13px;border-radius:3px}
-nav{background:#fff;overflow:auto;white-space:nowrap;padding:11px max(14px,calc((100% - 1372px)/2));box-shadow:0 1px 2px #0001}nav button{border:0;background:none;margin-right:20px;font-weight:bold;color:#333}nav button.active{color:var(--blue);border-bottom:2px solid var(--blue);padding-bottom:5px}
-.sale{max-width:1372px;margin:14px auto 0;padding:20px 24px;border-radius:5px;color:#fff;background:radial-gradient(circle at 80%,#ff5252,#b71c1c 45%,#0d47a1);display:flex;justify-content:space-between;align-items:center;gap:15px}.sale h1{font-size:24px;margin:0}.sale p{margin:5px 0 0}.sale-tag{color:#111;background:var(--yellow);padding:3px 9px;border-radius:15px;font-size:11px;font-weight:bold}
-.layout{max-width:1400px;margin:14px auto;padding:0 14px;display:grid;grid-template-columns:210px minmax(0,1fr) 250px;gap:14px;align-items:start}.panel,.sidebar,.widget{background:#fff;border-radius:4px;box-shadow:0 1px 3px #0001}.sidebar,.widget{padding:14px}.sidebar{position:sticky;top:105px}.sidebar h3,.widget h3{font-size:14px;margin:0 0 12px;border-bottom:1px solid var(--line);padding-bottom:8px}.filters label{display:block;margin:9px 0;color:#444}.widget{margin-bottom:12px}.widget p{font-size:12px;color:#555}.wa{display:block;text-align:center;background:#25d366;color:#fff;text-decoration:none;padding:9px;font-weight:bold;border-radius:3px}
-.panel-head{padding:13px 16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:10px}.panel-head h2{font-size:16px;margin:0}.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr))}.product{background:#fff;padding:13px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;flex-direction:column;min-height:270px}.product-image{height:120px;display:grid;place-items:center;font-size:58px;background:#f8fafc;border-radius:3px}.product h3{font-size:13px;min-height:34px;margin:10px 0 4px}.price{font-size:16px;font-weight:bold}.old{font-size:11px;color:#888;text-decoration:line-through;margin-left:6px}.stock{font-size:11px;color:var(--green);font-weight:bold;margin:6px 0}.add{margin-top:auto;border:0;background:var(--yellow);padding:9px;font-weight:bold;border-radius:3px}.muted{color:var(--muted);font-size:12px}
-.drawer{position:fixed;right:0;top:0;bottom:0;width:min(420px,100%);background:#fff;z-index:60;box-shadow:-5px 0 20px #0003;transform:translateX(105%);transition:.25s;display:flex;flex-direction:column}.drawer.open{transform:none}.drawer-head{background:var(--blue);color:#fff;padding:14px;display:flex;justify-content:space-between}.drawer-body{padding:14px;overflow:auto;flex:1}.cart-row{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid var(--line);padding:10px 0}.cart-row button{border:0;background:#eee;padding:4px 8px}.checkout input,.checkout textarea{width:100%;padding:9px;border:1px solid var(--line);margin:5px 0}.primary{background:var(--orange);color:#fff;border:0;padding:11px;font-weight:bold;border-radius:3px;width:100%;margin-top:8px}
-.overlay{position:fixed;inset:0;background:#0009;z-index:80;display:none;align-items:center;justify-content:center;padding:14px}.overlay.show{display:flex}.modal{background:#fff;border-radius:5px;width:min(480px,100%);max-height:90vh;overflow:auto;padding:20px;position:relative}.close{position:absolute;right:12px;top:8px;border:0;background:none;font-size:24px;color:#777}.modal h2{margin:0 0 12px}.formstack{display:grid;gap:9px}.formstack label{font-size:12px;color:#555;font-weight:bold}.formstack input,.formstack select,.formstack textarea{width:100%;padding:10px;border:1px solid var(--line);border-radius:3px}.message{font-size:12px;min-height:16px;color:#b91c1c}.admin{position:fixed;inset:0;z-index:100;background:#f1f3f6;display:none;overflow:auto}.admin.show{display:block}.adminbar{background:var(--dark);color:#fff;padding:13px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0}.adminbar h2{font-size:16px;margin:0}.role{background:var(--orange);padding:4px 8px;border-radius:3px;font-size:11px;font-weight:bold}.admin-content{max-width:1200px;margin:18px auto;padding:0 14px}.admin-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.admin-tabs button{border:0;background:#fff;padding:9px 12px;border-radius:3px;font-weight:bold}.admin-tabs button.active{background:var(--blue);color:#fff}.admin-card{background:#fff;padding:16px;border-radius:4px;margin-bottom:14px;box-shadow:0 1px 3px #0001}.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}.stat{background:#f8fafc;border:1px solid var(--line);padding:14px;border-radius:4px}.stat b{display:block;font-size:22px}.admin-table{width:100%;border-collapse:collapse;font-size:12px}.admin-table th,.admin-table td{border-bottom:1px solid var(--line);padding:9px;text-align:left}.admin-table input{width:100%;min-width:70px;padding:6px;border:1px solid var(--line)}.danger{background:#dc2626;color:#fff;border:0;padding:7px 10px;border-radius:3px}.smallbtn{background:var(--blue);color:#fff;border:0;padding:7px 10px;border-radius:3px}.notice{background:#fff7ed;border-left:4px solid #f59e0b;padding:10px;font-size:12px;margin-bottom:12px}
-footer{text-align:center;padding:25px 12px;color:#777;font-size:12px}
-@media(max-width:950px){.layout{grid-template-columns:1fr}.sidebar,.right{display:none}.sale{margin:10px 14px}.main-header{gap:9px}.head-actions{margin-left:auto}}
-@media(max-width:520px){.sale{padding:16px}.sale h1{font-size:19px}.sale-timer{display:none}.product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.product{padding:9px}.product-image{height:100px}.main-header{padding:8px}.brand{font-size:18px}}
-</style>
-</head>
-<body>
-<div class="top-strip"><div class="top-inner"><span>Welcome to PAG Moters | Genuine EV Parts & Accessories</span><span id="clock">Loading time…</span></div></div>
-<header><div class="main-header">
-<a class="brand" href="#">PAG MOTERS<small>EV SPARE PARTS • ACCESSORIES • SERVICE</small></a>
-<div class="search"><input id="searchInput" placeholder="Search products, chargers, batteries…" oninput="renderProducts()"><button onclick="renderProducts()">⌕</button></div>
-<div class="head-actions"><button class="navbtn" onclick="openLogin()">Login</button><button class="whitebtn" onclick="openCart()">🛒 Cart <span id="cartCount">0</span></button></div>
-</div></header>
-<nav id="categoryNav"><button class="active" onclick="setCategory('All',this)">All Products</button><button onclick="setCategory('Battery',this)">Batteries</button><button onclick="setCategory('Charger',this)">Chargers</button><button onclick="setCategory('Accessories',this)">Accessories</button><button onclick="setCategory('Helmet',this)">Helmets</button></nav>
-<section class="sale"><div><span class="sale-tag">PAG MOTERS DEALS</span><h1>EV SPARE PARTS & ACCESSORIES</h1><p>Quality products. Reliable service. Fast delivery.</p></div><div class="sale-timer">⚡ POWER YOUR RIDE</div></section>
-<main class="layout">
-<aside class="sidebar"><h3>Shop by category</h3><div class="filters"><label><input type="checkbox" onchange="setCategory('Battery')"> Batteries</label><label><input type="checkbox" onchange="setCategory('Charger')"> Chargers</label><label><input type="checkbox" onchange="setCategory('Accessories')"> Accessories</label><label><input type="checkbox" onchange="setCategory('Helmet')"> Helmets</label></div><p class="muted">Product availability and prices are managed from the admin panel.</p></aside>
-<section class="panel"><div class="panel-head"><h2 id="productHeading">All Products</h2><span class="muted" id="productCount"></span></div><div class="product-grid" id="productGrid"></div></section>
-<aside class="right"><div class="widget"><h3>Need help?</h3><p>Contact PAG Moters for product availability, fitment and service enquiries.</p><a class="wa" href="https://wa.me/" target="_blank" rel="noopener">WhatsApp us</a></div><div class="widget"><h3>Order support</h3><p>Use the cart to prepare your order enquiry. Final order confirmation is handled by the store.</p></div></aside>
-</main>
-<footer>© <span id="year"></span> PAG Moters. All rights reserved.</footer>
+<!DOCTYPE html>  <html lang="en">  
+<head>  
+<meta charset="utf-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">  
+<title>PAG Moters – EV Spare Parts, Accessories &amp; Service</title>  
+<meta name="description" content="PAG Moters – Genuine EV Spare Parts, Fast Chargers, Helmets, Lithium Batteries & Accessories. Hand-to-hand fast delivery.">  
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%232874f0%22/%3E%3Ctext x=%2216%22 y=%2223%22 font-size=%2218%22 text-anchor=%22middle%22 fill=%22%23ffe500%22 font-family=%22Arial%22 font-weight=%22bold%22 font-style=%22italic%22%3EP%3C/text%3E%3C/svg%3E">  
+<style>  
+:root{  
+  --bg:#f1f3f6;  
+  --surface:#ffffff;  
+  --text:#212121;  
+  --muted:#878787;  
+  --line:#e0e0e0;  
+  --fk-blue:#2874f0;  
+  --fk-yellow:#ffe500;  
+  --fk-orange:#fb641b;  
+  --fk-green:#388e3c;  
+  --admin-dark:#0f172a;  
+}  
+*{box-sizing:border-box}  
+html, body{width:100%;overflow-x:hidden;-webkit-text-size-adjust:100%}  
+body{margin:0;background:var(--bg);color:var(--text);font:14px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}  /* IN-APP TOAST NOTIFICATIONS */
+#toastContainer{
+position:fixed;
+top:20px;
+right:20px;
+z-index:999999;
+display:flex;
+flex-direction:column;
+gap:10px;
+pointer-events:none;
+}
+.toast-msg{
+background:#1e293b;
+color:#fff;
+padding:12px 18px;
+border-radius:4px;
+box-shadow:0 6px 20px rgba(0,0,0,.25);
+font-size:13px;
+font-weight:600;
+display:flex;
+align-items:center;
+gap:8px;
+animation:toastSlide .3s ease;
+pointer-events:auto;
+}
+.toast-msg.success{background:#15803d;border-left:4px solid var(--fk-yellow)}
+.toast-msg.error{background:#b91c1c;border-left:4px solid #fca5a5}
+@keyframes toastSlide{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
 
-<div class="drawer" id="cartDrawer"><div class="drawer-head"><b>Your Cart</b><button class="navbtn" onclick="closeCart()">✕</button></div><div class="drawer-body"><div id="cartItems"></div><h3 id="cartTotal">Total: ₹0</h3><div class="checkout"><h3>Order enquiry</h3><input id="custName" placeholder="Your name"><input id="custPhone" placeholder="Mobile number" inputmode="numeric"><textarea id="custAddress" placeholder="Delivery address"></textarea><button class="primary" onclick="placeOrder()">Prepare WhatsApp Order</button></div></div></div>
+/* TOP STRIP & REAL TIME CLOCK */
+.top-strip{background:#172337;color:#c2c2c2;font-size:11px;padding:6px 14px}
+.top-strip-inner{max-width:1480px;margin:auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
+.top-strip a{color:var(--fk-yellow);text-decoration:none;font-weight:700}
+.realtime-clock-badge{
+background:rgba(255,255,255,.08);
+border:1px solid rgba(255,229,0,.4);
+color:var(--fk-yellow);
+padding:2px 8px;
+border-radius:15px;
+font-family:monospace;
+font-size:11px;
+font-weight:700;
+letter-spacing:1px;
+display:inline-flex;
+align-items:center;
+gap:4px;
+}
 
-<div class="overlay" id="loginOverlay" onclick="if(event.target===this)closeLogin()"><div class="modal"><button class="close" onclick="closeLogin()">×</button><h2>Login</h2><div class="formstack"><label>Login type<select id="loginRole"><option value="customer">Customer</option><option value="admin">Admin</option><option value="master">Master</option></select></label><label>Login ID<input id="loginId" autocomplete="username" placeholder="Enter login ID"></label><label>Password<input id="loginPassword" type="password" autocomplete="current-password" placeholder="Enter password"></label><button class="primary" onclick="doLogin()">Login</button><div class="message" id="loginMessage"></div><p class="muted">Customer account registration is not connected in this standalone demo.</p></div></div></div>
+/* FLIPKART STYLE HEADER */
+header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;box-shadow:0 2px 4px rgba(0,0,0,.15)}
+.main-header{max-width:1480px;margin:auto;display:flex;align-items:center;gap:14px;padding:10px 14px;flex-wrap:wrap}
+.brand{text-decoration:none;color:#fff;display:flex;flex-direction:column;cursor:pointer}
+.brand .title{font-size:20px;font-weight:800;font-style:italic;line-height:1}
+.brand small{font-size:10px;font-style:italic;color:var(--fk-yellow);display:flex;align-items:center;gap:2px}
+.brand small span{color:#fff;font-weight:700}
 
-<section class="admin" id="adminPanel"><div class="adminbar"><h2>🛡️ PAG Moters Management Console <span class="role" id="roleBadge">ADMIN</span></h2><div><span id="signedInAs"></span> <button class="whitebtn" onclick="logout()">Logout</button></div></div><div class="admin-content">
-<div class="notice"><b>Important security note:</b> This is a standalone front-end demo. Login credentials and data stored in this browser are not secure authentication. Do not publish this as a real admin system until server-side authentication, role checks and database storage are implemented.</div>
-<div class="admin-tabs"><button class="active" onclick="showAdminTab('overview',this)">Overview</button><button onclick="showAdminTab('products',this)">Products & Stock</button><button id="settingsTab" onclick="showAdminTab('settings',this)">Store Settings</button><button id="usersTab" onclick="showAdminTab('users',this)">Staff Access</button></div>
-<div id="adminOverview" class="admin-card"><h3>Dashboard overview</h3><div class="stats"><div class="stat">Products<b id="statProducts">0</b></div><div class="stat">In stock<b id="statStock">0</b></div><div class="stat">Cart items<b id="statCart">0</b></div></div><p class="muted">Use Products & Stock to add, edit or remove catalogue items.</p></div>
-<div id="adminProducts" class="admin-card" hidden><h3>Products & Stock</h3><div class="formstack" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr));align-items:end"><label>Product name<input id="newName" placeholder="e.g. 12V EV Charger"></label><label>Category<select id="newCategory"><option>Battery</option><option>Charger</option><option>Accessories</option><option>Helmet</option></select></label><label>Price (₹)<input id="newPrice" type="number" min="0"></label><label>Stock quantity<input id="newStock" type="number" min="0" value="1"></label><label>Icon<input id="newIcon" value="🔋" maxlength="4"></label><button class="smallbtn" onclick="addProduct()">Add product</button></div><hr><div style="overflow:auto"><table class="admin-table"><thead><tr><th>Name</th><th>Category</th><th>Price</th><th>Stock</th><th>Action</th></tr></thead><tbody id="productAdminRows"></tbody></table></div></div>
-<div id="adminSettings" class="admin-card" hidden><h3>Store settings</h3><div class="formstack"><label>Store display name<input id="storeName" value="PAG Moters"></label><label>Support WhatsApp number (country code + number)<input id="storeWhatsapp" placeholder="91XXXXXXXXXX"></label><button class="smallbtn" onclick="saveSettings()">Save settings</button><p class="muted">These settings are saved only in this browser.</p></div></div>
-<div id="adminUsers" class="admin-card" hidden><h3>Staff access</h3><p class="muted">Master role can set the local demo Admin password. For production, staff accounts must be created and validated on a server.</p><div class="formstack"><label>New Admin Login ID<input id="staffId" placeholder="Admin ID"></label><label>New Admin Password<input id="staffPassword" type="password" placeholder="Admin password"></label><button class="smallbtn" onclick="saveStaff()">Save Admin credentials</button><div class="message" id="staffMessage"></div></div></div>
-</div></section>
-<script>
-const DEFAULT_PRODUCTS=[
-{id:1,name:'EV Lithium Battery Pack',category:'Battery',price:12500,stock:8,icon:'🔋'},
-{id:2,name:'Fast EV Charger',category:'Charger',price:2499,stock:15,icon:'⚡'},
-{id:3,name:'Electric Scooter Helmet',category:'Helmet',price:899,stock:12,icon:'🪖'},
-{id:4,name:'EV Rear View Mirror Set',category:'Accessories',price:450,stock:20,icon:'🛵'},
-{id:5,name:'12V DC Converter',category:'Accessories',price:650,stock:0,icon:'🔌'},
-{id:6,name:'Portable Battery Charger',category:'Charger',price:1899,stock:6,icon:'🔌'}
-];
-const MASTER_ID='pag', MASTER_PASSWORD='842963';
-let products=load('pag_products',DEFAULT_PRODUCTS),cart=load('pag_cart',[]),category='All',currentRole=null;
-function load(key,fallback){try{const v=localStorage.getItem(key);return v?JSON.parse(v):JSON.parse(JSON.stringify(fallback))}catch(e){return JSON.parse(JSON.stringify(fallback))}}
-function save(key,value){localStorage.setItem(key,JSON.stringify(value))}
-function money(n){return '₹'+Number(n||0).toLocaleString('en-IN')}
-function renderProducts(){const q=(document.getElementById('searchInput').value||'').toLowerCase();const list=products.filter(p=>(category==='All'||p.category===category)&&p.name.toLowerCase().includes(q));document.getElementById('productHeading').textContent=category==='All'?'All Products':category;document.getElementById('productCount').textContent=list.length+' items';document.getElementById('productGrid').innerHTML=list.map(p=>`<article class="product"><div class="product-image">${escapeHtml(p.icon||'📦')}</div><h3>${escapeHtml(p.name)}</h3><div><span class="price">${money(p.price)}</span></div><div class="stock">${p.stock>0?'● In stock ('+p.stock+')':'● Out of stock'}</div><button class="add" ${p.stock<1?'disabled':''} onclick="addToCart(${p.id})">${p.stock<1?'Out of stock':'Add to cart'}</button></article>`).join('')||'<p style="padding:20px">No matching products found.</p>'}
-function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function setCategory(c,btn){category=c;document.querySelectorAll('#categoryNav button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');renderProducts()}
-function addToCart(id){const p=products.find(x=>x.id===id);if(!p||p.stock<1)return;const item=cart.find(x=>x.id===id);if(item){if(item.qty>=p.stock)return;item.qty++}else cart.push({id,qty:1});save('pag_cart',cart);renderCart()}
-function changeQty(id,delta){const p=products.find(x=>x.id===id),it=cart.find(x=>x.id===id);if(!it)return;it.qty+=delta;if(it.qty<1)cart=cart.filter(x=>x.id!==id);if(p&&it.qty>p.stock)it.qty=p.stock;save('pag_cart',cart);renderCart()}
-function renderCart(){let count=cart.reduce((s,x)=>s+x.qty,0),total=0;document.getElementById('cartCount').textContent=count;document.getElementById('statCart').textContent=count;document.getElementById('cartItems').innerHTML=cart.map(it=>{const p=products.find(x=>x.id===it.id);if(!p)return '';total+=p.price*it.qty;return `<div class="cart-row"><div><b>${escapeHtml(p.name)}</b><div>${money(p.price)} × ${it.qty}</div></div><div><button onclick="changeQty(${p.id},-1)">−</button> <button onclick="changeQty(${p.id},1)">+</button></div></div>`}).join('')||'<p class="muted">Your cart is empty.</p>';document.getElementById('cartTotal').textContent='Total: '+money(total)}
-function openCart(){document.getElementById('cartDrawer').classList.add('open')}function closeCart(){document.getElementById('cartDrawer').classList.remove('open')}
-function placeOrder(){if(!cart.length){alert('Your cart is empty.');return}const name=document.getElementById('custName').value.trim(),phone=document.getElementById('custPhone').value.trim(),address=document.getElementById('custAddress').value.trim();if(!name||!phone||!address){alert('Please enter name, mobile number and address.');return}let lines=cart.map(it=>{const p=products.find(x=>x.id===it.id);return p?`${p.name} x ${it.qty} = ${money(p.price*it.qty)}`:''}).join('\n');let total=cart.reduce((s,it)=>{const p=products.find(x=>x.id===it.id);return s+(p?p.price*it.qty:0)},0);let wa=load('pag_settings',{whatsapp:''}).whatsapp;let msg=`PAG Moters order enquiry\nName: ${name}\nMobile: ${phone}\nAddress: ${address}\n\n${lines}\nTotal: ${money(total)}`;if(!wa){alert('Store WhatsApp number is not set yet. Please contact the store directly.');return}window.open('https://wa.me/'+wa.replace(/\D/g,'')+'?text='+encodeURIComponent(msg),'_blank')}
-function openLogin(){document.getElementById('loginOverlay').classList.add('show')}function closeLogin(){document.getElementById('loginOverlay').classList.remove('show')}
-function doLogin(){const role=document.getElementById('loginRole').value,id=document.getElementById('loginId').value.trim(),pw=document.getElementById('loginPassword').value;let ok=false;if(role==='master')ok=id===MASTER_ID&&pw===MASTER_PASSWORD;else if(role==='admin'){const staff=load('pag_staff',{id:'admin',password:'admin123'});ok=id===staff.id&&pw===staff.password}else{document.getElementById('loginMessage').textContent='Customer login is not configured in this standalone file.';return}if(!ok){document.getElementById('loginMessage').textContent='Invalid login ID or password.';return}currentRole=role;closeLogin();document.getElementById('loginMessage').textContent='';openAdmin()}
-function openAdmin(){document.getElementById('adminPanel').classList.add('show');document.getElementById('roleBadge').textContent=currentRole.toUpperCase();document.getElementById('signedInAs').textContent='Signed in: '+currentRole;document.getElementById('settingsTab').style.display=currentRole==='master'?'':'none';document.getElementById('usersTab').style.display=currentRole==='master'?'':'none';showAdminTab('overview',document.querySelector('.admin-tabs button'));refreshAdmin()}
-function logout(){currentRole=null;document.getElementById('adminPanel').classList.remove('show')}
-function showAdminTab(tab,btn){if((tab==='settings'||tab==='users')&&currentRole!=='master')return;['overview','products','settings','users'].forEach(t=>document.getElementById('admin'+t[0].toUpperCase()+t.slice(1)).hidden=t!==tab);document.querySelectorAll('.admin-tabs button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');refreshAdmin()}
-function refreshAdmin(){document.getElementById('statProducts').textContent=products.length;document.getElementById('statStock').textContent=products.filter(p=>p.stock>0).length;document.getElementById('productAdminRows').innerHTML=products.map(p=>`<tr><td><input value="${escapeHtml(p.name)}" onchange="editProduct(${p.id},'name',this.value)"></td><td>${escapeHtml(p.category)}</td><td><input type="number" min="0" value="${p.price}" onchange="editProduct(${p.id},'price',this.value)"></td><td><input type="number" min="0" value="${p.stock}" onchange="editProduct(${p.id},'stock',this.value)"></td><td><button class="danger" onclick="deleteProduct(${p.id})">Delete</button></td></tr>`).join('');renderProducts();renderCart()}
-function addProduct(){const name=document.getElementById('newName').value.trim(),price=Number(document.getElementById('newPrice').value),stock=Number(document.getElementById('newStock').value),cat=document.getElementById('newCategory').value,icon=document.getElementById('newIcon').value.trim()||'📦';if(!name||!Number.isFinite(price)||price<0||!Number.isFinite(stock)||stock<0){alert('Enter valid product name, price and stock.');return}products.push({id:Date.now(),name,category:cat,price,stock,icon});save('pag_products',products);document.getElementById('newName').value='';document.getElementById('newPrice').value='';refreshAdmin()}
-function editProduct(id,key,value){const p=products.find(x=>x.id===id);if(!p)return;p[key]=key==='name'?value:Number(value);save('pag_products',products);refreshAdmin()}
-function deleteProduct(id){if(!confirm('Delete this product?'))return;products=products.filter(p=>p.id!==id);cart=cart.filter(x=>x.id!==id);save('pag_products',products);save('pag_cart',cart);refreshAdmin()}
-function saveSettings(){if(currentRole!=='master')return;save('pag_settings',{name:document.getElementById('storeName').value.trim(),whatsapp:document.getElementById('storeWhatsapp').value.trim()});alert('Settings saved in this browser.')}
-function saveStaff(){if(currentRole!=='master')return;const id=document.getElementById('staffId').value.trim(),password=document.getElementById('staffPassword').value;if(!id||!password){document.getElementById('staffMessage').textContent='Enter both Admin ID and password.';return}save('pag_staff',{id,password});document.getElementById('staffMessage').textContent='Admin demo credentials saved in this browser.'}
-function tick(){document.getElementById('clock').textContent=new Date().toLocaleString('en-IN');document.getElementById('year').textContent=new Date().getFullYear()}
-tick();setInterval(tick,1000);renderProducts();renderCart();
-</script>
-</body>
-</html>
+.search-box{flex:1;min-width:240px;display:flex;background:#fff;border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.2);overflow:hidden}
+.search-box input{flex:1;border:0;padding:9px 12px;font-size:13px;outline:none;color:#212121;min-width:0}
+.search-box button{border:0;background:#fff;color:var(--fk-blue);padding:0 14px;cursor:pointer;font-size:16px}
+
+.header-actions{display:flex;align-items:center;gap:10px;margin-left:auto}
+.btn-nav{background:none;border:0;color:#fff;font-weight:700;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:4px;padding:6px 10px;border-radius:2px;white-space:nowrap}
+.btn-nav:hover{background:rgba(255,255,255,.1)}
+
+/* LOGIN BUTTON */
+.btn-login-main{background:#fff;color:var(--fk-blue);border:0;padding:6px 16px;font-weight:700;border-radius:2px;cursor:pointer;font-size:13px;white-space:nowrap}
+.btn-login-main:hover{background:#f0f0f0}
+
+/* USER PROFILE DROPDOWN */
+.user-menu{position:relative;display:inline-block}
+.user-menu-btn{background:none;border:0;color:#fff;font-weight:700;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:4px;padding:5px}
+.user-dropdown{position:absolute;top:100%;right:0;background:#fff;color:#212121;box-shadow:0 4px 12px rgba(0,0,0,.15);border-radius:2px;display:none;min-width:160px;z-index:150}
+.user-dropdown a,.user-dropdown button{display:block;width:100%;padding:10px 14px;text-align:left;border:0;background:none;font:inherit;font-size:13px;cursor:pointer;text-decoration:none;color:#212121}
+.user-dropdown a:hover,.user-dropdown button:hover{background:#f1f3f6}
+.user-menu:hover .user-dropdown{display:block}
+
+/* FLIPKART STYLE CART BUTTON */
+.cart-trigger{background:#fff;color:var(--fk-blue);padding:6px 14px;border-radius:2px;font-weight:700;display:flex;align-items:center;gap:6px;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.15);border:0;position:relative;white-space:nowrap;font-size:13px}
+.cart-trigger:hover{background:#f8f9fa}
+.cart-count-badge{background:var(--fk-orange);color:#fff;font-size:10px;padding:2px 6px;border-radius:10px;font-weight:800}
+
+/* NAVIGATION TABS */
+.nav-sub{background:var(--surface);box-shadow:0 1px 1px rgba(0,0,0,.1);width:100%;overflow:hidden}
+.nav-sub ul{max-width:1480px;margin:auto;display:flex;gap:22px;list-style:none;padding:10px 14px;overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch}
+.nav-sub ul::-webkit-scrollbar{display:none}
+.nav-sub li{font-size:13px;font-weight:600;cursor:pointer;color:#333;display:inline-block;padding-bottom:3px}
+.nav-sub li.active{color:var(--fk-blue);border-bottom:2px solid var(--fk-blue);font-weight:700}
+
+/* SALE BANNER */
+.sale-banner-wrap{max-width:1480px;margin:12px auto 0;padding:0 14px}
+.big-sale-banner{background:radial-gradient(circle at 80% 50%, #ff5252, #b71c1c 45%, #0d47a1 95%);color:#fff;border-radius:4px;padding:22px 28px;display:flex;justify-content:space-between;align-items:center;gap:14px;box-shadow:0 2px 8px rgba(0,0,0,.12);position:relative;overflow:hidden}
+.sale-tag-pill{background:var(--fk-yellow);color:#111;font-size:11px;font-weight:800;padding:3px 10px;border-radius:20px;display:inline-block;margin-bottom:6px;letter-spacing:1px}
+.big-sale-banner h1{margin:0;font-size:24px;font-weight:900;letter-spacing:-.5px;line-height:1.2}
+.big-sale-banner p{margin:6px 0 0;font-size:13px;color:#fce4ec}
+.sale-timer{background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.25);padding:10px 16px;border-radius:4px;text-align:center;min-width:150px;white-space:nowrap}
+.sale-timer .label{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--fk-yellow);font-weight:700}
+.sale-timer .time{font-size:19px;font-weight:800;letter-spacing:1px;margin-top:2px}
+
+/* MAIN 3-COLUMN LAYOUT */
+.layout{
+max-width:1480px;
+margin:14px auto;
+padding:0 14px;
+display:grid;
+grid-template-columns:220px 1fr 280px;
+gap:14px;
+align-items:start;
+}
+.sidebar{background:var(--surface);padding:14px;border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.08);height:fit-content;position:sticky;top:70px}
+.sidebar h3{font-size:15px;margin:0 0 10px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.filter-group{display:flex;flex-direction:column;gap:6px}
+.filter-group label{font-size:13px;display:flex;align-items:center;gap:6px;cursor:pointer;color:#444}
+
+/* RIGHT SIDEBAR WIDGETS */
+.right-sidebar{display:flex;flex-direction:column;gap:12px;position:sticky;top:70px}
+.widget-box{background:var(--surface);padding:14px;border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.widget-box h4{margin:0 0 10px;font-size:13px;font-weight:700;display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.widget-box p{margin:0 0 10px;font-size:12px;color:#475569;line-height:1.4}
+.btn-widget-wa{background:#25d366;color:#fff;border:0;width:100%;padding:8px 10px;font-weight:700;font-size:12px;border-radius:3px;cursor:pointer;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px}
+.btn-widget-call{background:var(--fk-blue);color:#fff;border:0;width:100%;padding:8px 10px;font-weight:700;font-size:12px;border-radius:3px;cursor:pointer;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px;margin-top:6px}
+.hot-deal-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line)}
+.hot-deal-item:last-child{border-bottom:none;padding-bottom:0}
+.hot-deal-item img{width:46px;height:46px;object-fit:contain;border:1px solid #e2e8f0;border-radius:2px}
+.hot-deal-info b{font-size:12px;display:block;line-height:1.2;color:#1e293b}
+.hot-deal-info span{font-size:11px;color:var(--fk-green);font-weight:700}
+
+/* PRODUCT GRID */
+.product-panel{background:var(--surface);border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.08);overflow:hidden}
+.panel-head{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line)}
+.panel-head h2{margin:0;font-size:16px;font-weight:700}
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:0}
+
+/* PRODUCT CARD & STOCK BADGE */
+.product-card{padding:14px;background:#fff;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;flex-direction:column;position:relative}
+.prod-img-wrap{height:140px;display:flex;align-items:center;justify-content:center;position:relative}
+.prod-img-wrap img{max-height:120px;max-width:90%;object-fit:contain}
+.assured-tag{position:absolute;bottom:0;right:0;font-size:9px;background:#f7f9fa;border:1px solid #dcdcdc;border-radius:2px;padding:2px 4px;font-weight:800;color:var(--fk-blue)}
+.stock-status-pill{position:absolute;top:6px;left:6px;font-size:10px;padding:2px 6px;border-radius:10px;font-weight:800}
+.stock-instock{background:#dcfce7;color:#166534}
+.stock-out{background:#fee2e2;color:#991b1b}
+.prod-title{margin:8px 0 4px;font-size:13px;font-weight:600;color:#212121;line-height:1.3;height:34px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.rating-pill{background:var(--fk-green);color:#fff;font-size:10px;font-weight:700;padding:2px 5px;border-radius:3px;display:inline-flex;align-items:center;gap:2px;width:fit-content}
+.rating-count{font-size:11px;color:var(--muted);margin-left:4px}
+.price-row{display:flex;align-items:baseline;gap:6px;margin:6px 0 2px}
+.final-price{font-size:16px;font-weight:700;color:#212121}
+.orig-price{font-size:12px;color:var(--muted);text-decoration:line-through}
+.disc-percent{font-size:12px;font-weight:700;color:var(--fk-green)}
+.delivery-badge{font-size:10px;color:#212121;font-weight:600;margin-bottom:8px}
+.delivery-badge span{color:var(--fk-green);font-weight:700}
+
+/* CARD CONTROLS */
+.card-actions{margin-top:auto}
+.btn-add-cart{background:var(--fk-yellow);color:#212121;border:0;width:100%;padding:8px;font-weight:700;font-size:12px;border-radius:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px}
+.btn-add-cart:disabled{background:#e2e8f0;color:#94a3b8;cursor:not-allowed}
+.qty-stepper{display:flex;align-items:center;justify-content:space-between;background:var(--fk-blue);color:#fff;border-radius:2px;overflow:hidden}
+.qty-stepper button{background:none;border:0;color:#fff;padding:6px 12px;font-size:15px;font-weight:800;cursor:pointer}
+.qty-stepper span{font-size:12px;font-weight:700}
+
+/* FLY BALL */
+.fly-item{position:fixed;width:20px;height:20px;background:var(--fk-orange);border-radius:50%;color:#fff;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:9999;transition:all .55s cubic-bezier(0.18, 0.89, 0.32, 1.28)}
+
+/* OVERLAYS & MODALS */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;display:none}
+.overlay.show{display:flex;align-items:center;justify-content:center}
+
+.auth-card{background:#fff;width:min(740px,94%);border-radius:4px;overflow:hidden;box-shadow:0 6px 30px rgba(0,0,0,.35);display:grid;grid-template-columns:240px 1fr;position:relative}
+.auth-left{background:var(--fk-blue);color:#fff;padding:26px 20px;display:flex;flex-direction:column;justify-content:space-between}
+.auth-left h2{margin:0 0 8px;font-size:20px}
+.auth-left p{margin:0;font-size:13px;line-height:1.4;color:#dbeafe}
+.auth-left .shield-icon{font-size:42px;margin-top:16px}
+.auth-right{padding:20px;position:relative;max-height:85vh;overflow-y:auto}
+.auth-close{position:absolute;top:8px;right:12px;background:none;border:0;font-size:20px;color:var(--muted);cursor:pointer}
+
+.auth-form{display:flex;flex-direction:column;gap:8px}
+.auth-form label{font-size:11px;color:var(--muted);font-weight:600}
+.auth-form input,.auth-form select,.auth-form textarea{border:1px solid var(--line);border-radius:2px;padding:8px 10px;font:inherit;font-size:13px;outline:none;background:#fff;width:100%}
+.auth-form input:focus,.auth-form select:focus,.auth-form textarea:focus{border-color:var(--fk-blue)}
+.auth-btn-primary{background:var(--fk-orange);color:#fff;border:0;padding:10px;font-size:13px;font-weight:700;border-radius:2px;cursor:pointer;margin-top:4px}
+.auth-switch{font-size:12px;color:var(--muted);text-align:center;margin-top:10px}
+.auth-switch a{color:var(--fk-blue);font-weight:700;text-decoration:none;cursor:pointer}
+.auth-msg{font-size:12px;padding:8px;border-radius:2px;display:none;line-height:1.4}
+.auth-msg.err{background:#ffebee;color:#c62828;display:block}
+.auth-msg.ok{background:#e8f5e9;color:#2e7d32;display:block}
+.sec-badge{background:#fff3e0;border-left:4px solid var(--fk-orange);padding:8px;font-size:11px;color:#d84315;border-radius:2px;margin-bottom:8px;line-height:1.4}
+
+/* CART DRAWER & CHECKOUT */
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:#fff;z-index:201;display:flex;flex-direction:column;box-shadow:-2px 0 10px rgba(0,0,0,.2);transform:translateX(100%);transition:transform .3s ease}
+.drawer.open{transform:translateX(0)}
+.drawer-head{background:var(--fk-blue);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
+.drawer-head h2{margin:0;font-size:16px;font-weight:700}
+.btn-close{background:none;border:0;color:#fff;font-size:20px;cursor:pointer}
+.drawer-body{flex:1;overflow-y:auto;padding:14px;background:#f1f3f6}
+
+.cart-item-row{background:#fff;border-radius:2px;padding:10px;margin-bottom:8px;box-shadow:0 1px 2px rgba(0,0,0,.06);display:flex;gap:10px}
+.cart-item-row img{width:50px;height:50px;object-fit:contain}
+.cart-item-details{flex:1}
+.cart-item-details h4{margin:0 0 3px;font-size:12px}
+.cart-item-details .price{font-weight:700;font-size:13px}
+.cart-item-ctrl{display:flex;align-items:center;gap:6px;margin-top:6px}
+.cart-item-ctrl button{border:1px solid #c2c2c2;background:#fff;width:22px;height:22px;border-radius:50%;cursor:pointer;font-weight:700}
+
+.price-summary{background:#fff;border-radius:2px;padding:12px;box-shadow:0 1px 2px rgba(0,0,0,.06);margin-bottom:10px}
+.summary-row{display:flex;justify-content:space-between;margin-bottom:6px;font-size:12px}
+.summary-total{display:flex;justify-content:space-between;border-top:1px dashed var(--line);padding-top:8px;font-weight:800;font-size:15px}
+
+.checkout-box{background:#fff;padding:12px;border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.checkout-box h3{margin:0 0 8px;font-size:13px}
+.checkout-box input,.checkout-box textarea{width:100%;border:1px solid var(--line);padding:8px;font:inherit;border-radius:2px;margin-bottom:6px;font-size:12px}
+
+.btn-detect-loc{
+background:#f0fdf4;
+border:1px solid #86efac;
+color:#15803d;
+padding:6px 10px;
+border-radius:3px;
+font-weight:700;
+font-size:11px;
+cursor:pointer;
+display:inline-flex;
+align-items:center;
+gap:6px;
+margin-bottom:8px;
+width:100%;
+justify-content:center;
+}
+.btn-detect-loc:hover{background:#dcfce7}
+
+.payment-choice{display:flex;flex-direction:column;gap:6px;margin:8px 0 12px}
+.payment-choice label{display:flex;align-items:center;gap:8px;font-size:12px;border:1px solid var(--line);padding:8px;border-radius:3px;cursor:pointer}
+.payment-choice label:hover{background:#f8fafc;border-color:var(--fk-blue)}
+.upi-badge{background:#e0f2fe;color:#0369a1;padding:2px 6px;border-radius:3px;font-weight:700;font-size:10px;margin-left:auto}
+.btn-place-order{background:var(--fk-orange);color:#fff;border:0;width:100%;padding:11px;font-weight:700;font-size:14px;border-radius:2px;cursor:pointer}
+
+/* MODALS */
+.modal-track{background:#fff;width:min(560px,94%);border-radius:4px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.2)}
+.modal-head{background:var(--fk-blue);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
+.modal-head h3{margin:0;font-size:15px}
+.modal-body{padding:16px;max-height:80vh;overflow-y:auto}
+.track-input-group{display:flex;gap:6px;margin-bottom:12px}
+.track-input-group input{flex:1;padding:8px 10px;border:1px solid var(--line);border-radius:2px;font:inherit;font-size:13px}
+.track-input-group button{background:var(--fk-blue);color:#fff;border:0;padding:8px 14px;font-weight:700;border-radius:2px;cursor:pointer;font-size:13px;white-space:nowrap}
+
+.tracker-status-box{background:#f9f9f9;border:1px solid var(--line);border-radius:4px;padding:12px;margin-bottom:12px}
+.timeline{display:flex;justify-content:space-between;position:relative;margin:18px 0 12px}
+.timeline::before{content:"";position:absolute;top:10px;left:10%;right:10%;height:3px;background:#e0e0e0;z-index:1}
+.timeline-step{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center;width:25%}
+.timeline-dot{width:22px;height:22px;border-radius:50%;background:#e0e0e0;color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800}
+.timeline-step.completed .timeline-dot{background:var(--fk-green)}
+.timeline-step.current .timeline-dot{background:var(--fk-blue);box-shadow:0 0 0 3px rgba(40,116,240,.2)}
+.timeline-step span{font-size:10px;font-weight:600;margin-top:4px;color:#555}
+
+/* UNIQUE DELIVERY CODE BADGE */
+.delivery-code-pill{
+background:#fef3c7;
+border:1px dashed #d97706;
+color:#92400e;
+padding:8px 12px;
+border-radius:4px;
+font-weight:800;
+font-size:14px;
+text-align:center;
+margin:10px 0;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+.delivery-code-pill span.code-num{
+font-size:18px;
+letter-spacing:3px;
+color:#b45309;
+background:#fff;
+padding:2px 8px;
+border-radius:3px;
+border:1px solid #fcd34d;
+}
+
+/* ======================================================== /
+/ 🛡️ OWNER & STAFF ENTERPRISE CONSOLE /
+/ ======================================================== */
+#adminPanelModal{position:fixed;inset:0;background:var(--bg);z-index:300;display:none;flex-direction:column;overflow-y:auto}
+.admin-navbar{background:var(--admin-dark);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10;flex-wrap:wrap;gap:8px}
+.admin-navbar-left{display:flex;align-items:center;gap:10px}
+.admin-navbar h2{margin:0;font-size:16px;display:flex;align-items:center;gap:6px}
+.admin-badge{background:var(--fk-orange);color:#fff;font-size:10px;padding:3px 7px;border-radius:3px;font-weight:800}
+.admin-actions-wrap{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+
+.admin-giant-clock{
+background:rgba(255,255,255,.1);
+border:1.5px solid var(--fk-yellow);
+color:var(--fk-yellow);
+padding:4px 14px;
+border-radius:24px;
+font-family:monospace;
+font-size:15px;
+font-weight:900;
+letter-spacing:1.5px;
+display:inline-flex;
+align-items:center;
+gap:6px;
+box-shadow:0 0 10px rgba(255,229,0,.2);
+}
+
+.admin-export-btn{background:#10b981;color:#fff;border:0;padding:6px 12px;border-radius:3px;font-weight:700;cursor:pointer;font-size:12px}
+.admin-logout{b
