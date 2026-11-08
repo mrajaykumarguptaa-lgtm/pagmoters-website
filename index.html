@@ -430,6 +430,46 @@ footer a{color:#fff;text-decoration:none}
   .admin-giant-clock{font-size:13px;padding:3px 10px}
   .mail-row{grid-template-columns:1fr;gap:4px;padding:10px}
 }
+/* ======================================================== */
+/* 🤖 CHATBOT + ✉️ MAIL SUPPORT (NEW) */
+/* ======================================================== */
+.bot-fab{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:150;background:linear-gradient(135deg,#2874f0,#6d28d9);color:#fff;border:0;border-radius:30px;padding:12px 18px;font-weight:800;font-size:13px;box-shadow:0 4px 14px rgba(0,0,0,.35);cursor:pointer;display:flex;align-items:center;gap:6px}
+.bot-window{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));width:min(370px,calc(100% - 32px));height:min(520px,75vh);background:#fff;border-radius:8px;box-shadow:0 10px 36px rgba(0,0,0,.4);z-index:150;display:none;flex-direction:column;overflow:hidden}
+.bot-window.open{display:flex}
+.bot-head{background:var(--fk-blue);color:#fff;padding:10px 14px;display:flex;justify-content:space-between;align-items:center}
+.bot-head b{font-size:14px}
+.bot-head small{display:block;font-size:10px;color:#dbeafe}
+.bot-body{flex:1;overflow-y:auto;padding:10px;background:#f1f3f6;display:flex;flex-direction:column;gap:8px}
+.bot-msg{max-width:90%;padding:8px 11px;border-radius:8px;font-size:12px;line-height:1.5;word-wrap:break-word}
+.bot-msg.bot{align-self:flex-start;background:#fff;border:1px solid #e2e8f0;color:#1e293b}
+.bot-msg.user{align-self:flex-end;background:var(--fk-blue);color:#fff}
+.bot-chips{display:flex;flex-wrap:wrap;gap:6px;padding:6px 10px;background:#fff;border-top:1px solid var(--line);max-height:84px;overflow-y:auto}
+.bot-chip{background:#fff;border:1px solid var(--fk-blue);color:var(--fk-blue);border-radius:14px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer}
+.bot-chip:hover{background:#eff6ff}
+.bot-input-bar{display:flex;gap:6px;padding:8px;border-top:1px solid var(--line);background:#fff}
+.bot-input-bar input{flex:1;border:1px solid var(--line);border-radius:20px;padding:8px 12px;font:inherit;font-size:12px;outline:none;min-width:0}
+.bot-input-bar button{background:var(--fk-blue);color:#fff;border:0;border-radius:20px;padding:0 14px;font-weight:700;cursor:pointer}
+.bot-link{display:inline-block;margin:4px 4px 0 0;background:#eff6ff;border:1px solid #bfdbfe;color:var(--fk-blue);padding:4px 9px;border-radius:12px;font-size:11px;font-weight:700;cursor:pointer;text-decoration:none}
+.bot-prod{border-top:1px dashed #e2e8f0;padding:6px 0}
+.bot-prod:first-of-type{border-top:0}
+
+.mail-subtabs{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+.mail-subtabs button{background:#fff;border:1px solid var(--line);padding:7px 12px;border-radius:3px;font-weight:700;font-size:12px;cursor:pointer}
+.mail-subtabs button.active{background:var(--fk-blue);color:#fff;border-color:var(--fk-blue)}
+.mail-unread-badge{background:var(--fk-orange);color:#fff;font-size:10px;padding:1px 6px;border-radius:10px;font-weight:800;margin-left:4px}
+.mail-empty{padding:26px 10px;text-align:center;color:var(--muted);font-size:12px}
+.mail-card{background:#fff;border:1px solid var(--line);border-radius:4px;padding:10px;margin-bottom:10px;font-size:12px;line-height:1.5}
+.mail-card .mc-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:4px}
+.mail-bubble{border-radius:6px;padding:8px 10px;margin:6px 0;font-size:12px;line-height:1.5}
+.mail-bubble.in{background:#f1f5f9;border:1px solid #e2e8f0}
+.mail-bubble.out{background:#dbeafe;border:1px solid #bfdbfe}
+.mail-bubble small{display:block;color:var(--muted);font-size:10px;margin-bottom:2px}
+#mailViewModalOverlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:99999;display:none;align-items:center;justify-content:center}
+.mail-view-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.mail-view-actions button{border:0;padding:9px 14px;font-weight:700;border-radius:4px;cursor:pointer;font-size:12px;color:#fff}
+@media (max-width: 768px) {
+  .header-actions{flex-wrap:wrap;justify-content:flex-end}
+}
 </style>
 </head>
 <body>
@@ -462,6 +502,10 @@ footer a{color:#fff;text-decoration:none}
 
       <button class="btn-nav" onclick="openTrackModal()">
         <span>📦</span> Track
+      </button>
+
+      <button class="btn-nav" onclick="openMailSupportModal()">
+        <span>✉️</span> Support
       </button>
 
       <div id="authHeaderContainer">
@@ -546,6 +590,12 @@ footer a{color:#fff;text-decoration:none}
       <a class="btn-widget-call" href="tel:+918766641866">
         📞 Call: 8766641866
       </a>
+      <button type="button" class="btn-widget-call" style="background:#6d28d9;" onclick="openMailSupportModal()">
+        ✉️ Mail Support
+      </button>
+      <button type="button" class="btn-widget-call" style="background:#0f172a;" onclick="toggleBot(true)">
+        🤖 Chat with PAG Bot
+      </button>
     </div>
 
     <div class="widget-box">
@@ -756,6 +806,71 @@ footer a{color:#fff;text-decoration:none}
   </div>
 </div>
 
+<!-- 🤖 CHATBOT -->
+<button class="bot-fab" id="botFab" onclick="toggleBot(true)"><span>🤖</span> Chat with us</button>
+<div class="bot-window" id="botWindow">
+  <div class="bot-head">
+    <div><b>🤖 PAG Bot</b><small>Instant help for orders, parts &amp; delivery</small></div>
+    <button class="btn-close" type="button" onclick="toggleBot(false)">✕</button>
+  </div>
+  <div class="bot-body" id="botBody"></div>
+  <div class="bot-chips" id="botChips"></div>
+  <form class="bot-input-bar" onsubmit="handleBotSubmit(event)">
+    <input type="text" id="botInput" placeholder="Apna sawal likhein..." autocomplete="off">
+    <button type="submit">Send</button>
+  </form>
+</div>
+
+<!-- ✉️ CUSTOMER MAIL SUPPORT MODAL -->
+<div class="overlay" id="mailSupportOverlay">
+  <div class="modal-track">
+    <div class="modal-head">
+      <h3>✉️ Mail Support</h3>
+      <button class="btn-close" onclick="closeMailSupportModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="mail-subtabs">
+        <button type="button" id="mstSend" class="active" onclick="switchMailSupportTab('send')">✍️ Send Mail</button>
+        <button type="button" id="mstInbox" onclick="switchMailSupportTab('inbox')">📬 My Mails &amp; Replies</button>
+      </div>
+
+      <div id="mailSendPane">
+        <form class="auth-form" onsubmit="handleSendSupportMail(event)">
+          <div>
+            <label>Full Name</label>
+            <input type="text" id="msName" placeholder="Your name" required>
+          </div>
+          <div>
+            <label>Email Address</label>
+            <input type="email" id="msEmail" placeholder="name@example.com" required>
+          </div>
+          <div>
+            <label>Mobile Number (optional)</label>
+            <input type="tel" id="msPhone" placeholder="10-digit mobile" pattern="[0-9]{10}">
+          </div>
+          <div>
+            <label>Subject</label>
+            <input type="text" id="msSubject" placeholder="e.g. Order delay / Product enquiry / Complaint" required>
+          </div>
+          <div>
+            <label>Message</label>
+            <textarea id="msBody" rows="4" placeholder="Apni problem ya sawal detail me likhein (Order ID ho to zaroor likhein)" required></textarea>
+          </div>
+          <button type="submit" class="auth-btn-primary">Send Mail to PAG Moters</button>
+        </form>
+      </div>
+
+      <div id="mailInboxPane" style="display:none;">
+        <div class="track-input-group">
+          <input type="text" id="mailLookup" placeholder="Your Email ya Mobile Number">
+          <button type="button" onclick="renderMyMails()">Show</button>
+        </div>
+        <div id="myMailsList"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- MY ORDERS MODAL -->
 <div class="overlay" id="myOrdersModalOverlay">
   <div class="modal-track">
@@ -806,6 +921,7 @@ footer a{color:#fff;text-decoration:none}
       <button class="admin-tab-btn" id="btnTabNotice" onclick="switchAdminTab('notice')">📢 Company Notice Board</button>
       <button class="admin-tab-btn" id="btnTabTeam" onclick="switchAdminTab('team')">👔 Staff Management &amp; Block</button>
       <button class="admin-tab-btn" id="btnTabUsers" onclick="switchAdminTab('users')">👥 Customer Accounts &amp; Block</button>
+      <button class="admin-tab-btn" id="btnTabMail" onclick="switchAdminTab('mail')">📧 Mail (Inbox / Send)</button>
     </div>
 
     <!-- 1. ORDERS MAILBOX -->
@@ -815,6 +931,37 @@ footer a{color:#fff;text-decoration:none}
         <span id="adminOrdersCountBadge">0 Orders</span>
       </div>
       <div id="adminMailboxContainer"></div>
+    </div>
+
+    <!-- 7. MAIL RECEIVE & SEND -->
+    <div id="adminMailSection" class="mailbox-card" style="display:none;padding:14px;">
+      <div class="mailbox-header" style="background:#fff;padding:0 0 10px 0;">
+        <span><b>📧 Mail Centre — Receive, Reply &amp; Send</b></span>
+        <span id="adminMailCountBadge">0 received · 0 sent</span>
+      </div>
+
+      <div class="mail-subtabs">
+        <button type="button" id="mailView_inbox" class="active" onclick="setAdminMailView('inbox')">📥 Inbox (Received)</button>
+        <button type="button" id="mailView_sent" onclick="setAdminMailView('sent')">📤 Sent</button>
+        <button type="button" id="mailView_compose" onclick="setAdminMailView('compose')">✍️ Compose / Send Mail</button>
+      </div>
+
+      <div id="adminMailList" style="border:1px solid var(--line);border-radius:4px;overflow:hidden;"></div>
+
+      <form class="admin-prod-form" id="adminMailComposeForm" style="display:none;" onsubmit="adminSendMail(event)">
+        <input type="email" id="mailToEmail" list="mailToList" placeholder="To: Customer Email" required>
+        <datalist id="mailToList"></datalist>
+        <input type="text" id="mailToName" placeholder="Customer Name (optional)">
+        <input type="text" id="mailSubject" placeholder="Subject" required style="grid-column:1/-1;">
+        <textarea id="mailBody" rows="5" placeholder="Mail message likhein..." required style="grid-column:1/-1;"></textarea>
+        <label style="grid-column:1/-1;font-size:12px;display:flex;align-items:center;gap:6px;">
+          <input type="checkbox" id="mailAlsoMailto" style="width:auto;"> Send hone ke baad apne Email App (Gmail/Outlook) me bhi kholo
+        </label>
+        <button type="submit" style="grid-column:1/-1;background:var(--fk-blue);">📤 Send Mail</button>
+        <div style="grid-column:1/-1;font-size:11px;color:var(--muted);line-height:1.5;">
+          ℹ️ Ye mail customer ke <b>Support → My Mails</b> me dikhega. Customer ke real Gmail/Outlook inbox me bhejne ke liye "Email App me bhi kholo" tick karein.
+        </div>
+      </form>
     </div>
 
     <!-- 2. PRODUCT MANAGEMENT & INVENTORY -->
@@ -1005,6 +1152,17 @@ footer a{color:#fff;text-decoration:none}
 
   </div>
 
+  <!-- ✉️ MAIL VIEW / REPLY MODAL -->
+  <div id="mailViewModalOverlay">
+    <div class="edit-modal-box">
+      <div class="modal-head" style="background:var(--fk-blue);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;">
+        <h3 style="margin:0;font-size:15px;" id="mailViewTitle">📧 Mail</h3>
+        <button class="btn-close" type="button" onclick="closeMailView()">✕</button>
+      </div>
+      <div class="modal-body-scrollable" id="mailViewBody"></div>
+    </div>
+  </div>
+
   <!-- 📸 ULTRA ORDER DETAILS MODAL -->
   <div id="orderDetailsModalOverlay">
     <div class="edit-modal-box">
@@ -1121,6 +1279,9 @@ try { teamMembers = JSON.parse(localStorage.getItem('pag_team_db')) || []; } cat
 try { staffChats = JSON.parse(localStorage.getItem('pag_staff_chats_db')) || []; } catch(e){ staffChats = []; }
 try { companyNotice = JSON.parse(localStorage.getItem('pag_company_notice_db')) || companyNotice; } catch(e){}
 try { currentUser = JSON.parse(localStorage.getItem('pag_active_user')) || null; } catch(e){ currentUser = null; }
+let mails = [];
+try { mails = JSON.parse(localStorage.getItem('pag_mail_db')) || []; } catch(e){ mails = []; }
+let adminMailView = 'inbox';
 
 function persistCatalog() { 
   localStorage.setItem('pag_catalog_db', JSON.stringify(catalog)); 
@@ -1455,6 +1616,7 @@ function openAdminPortal(role = "Super Admin") {
   const btnNotice = document.getElementById('btnTabNotice');
   const btnTeam = document.getElementById('btnTabTeam');
   const btnUsers = document.getElementById('btnTabUsers');
+  const btnMail = document.getElementById('btnTabMail');
   const roleSelect = document.getElementById('newTeamRole');
 
   renderNoticeDisplay();
@@ -1467,6 +1629,7 @@ function openAdminPortal(role = "Super Admin") {
     btnNotice.style.display = 'inline-block';
     btnTeam.style.display = 'inline-block';
     btnUsers.style.display = 'inline-block';
+    btnMail.style.display = 'inline-block';
     document.getElementById('teamFormTitle').innerHTML = '<b>Add Sub-Admin or Staff Member</b>';
     roleSelect.innerHTML = `
       <option value="Sub-Admin">🛡️ Sub-Admin (Manager)</option>
@@ -1485,6 +1648,7 @@ function openAdminPortal(role = "Super Admin") {
     btnNotice.style.display = 'inline-block';
     btnTeam.style.display = 'inline-block';
     btnUsers.style.display = 'inline-block';
+    btnMail.style.display = 'inline-block';
     document.getElementById('teamFormTitle').innerHTML = '<b>Add Staff Member (Sub-Admin Restricted)</b>';
     roleSelect.innerHTML = `
       <option value="Staff - Order Manager">📦 Staff: Order Manager</option>
@@ -1497,6 +1661,7 @@ function openAdminPortal(role = "Super Admin") {
   // 3. STAFF ROLES: CUSTOMER PASSWORDS STRICTLY BLOCKED & HIDDEN
   else {
     btnUsers.style.display = 'none';
+    btnMail.style.display = role.includes('Support') ? 'inline-block' : 'none';
     btnTeam.style.display = 'none';
     btnNotice.style.display = 'none';
     btnChat.style.display = 'inline-block';
@@ -1517,6 +1682,7 @@ function openAdminPortal(role = "Super Admin") {
   renderAdminTeamTable();
   renderAdminUsersTable();
   initChatSystem();
+  renderMailAdmin();
 }
 
 function closeAdminPortal() {
@@ -1531,12 +1697,14 @@ function switchAdminTab(tab) {
   document.getElementById('adminNoticeSection').style.display = tab === 'notice' ? 'block' : 'none';
   document.getElementById('adminTeamSection').style.display = tab === 'team' ? 'block' : 'none';
   document.getElementById('adminUsersSection').style.display = tab === 'users' ? 'block' : 'none';
+  document.getElementById('adminMailSection').style.display = tab === 'mail' ? 'block' : 'none';
 
   document.querySelectorAll('.admin-tab-btn').forEach(btn => btn.classList.remove('active'));
   const activeBtn = document.getElementById(`btnTab${tab.charAt(0).toUpperCase() + tab.slice(1)}`);
   if(activeBtn) activeBtn.classList.add('active');
 
   if(tab === 'chat') renderChatView();
+  if(tab === 'mail') renderMailAdmin();
 }
 
 // NOTICE BOARD ENGINE
@@ -3102,6 +3270,528 @@ function processOrderPlacement(e) {
     </div>
   `;
 }
+
+// ==========================================
+// 🛠️ NEW: SHARED HELPERS
+// ==========================================
+function esc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function nl2br(s) { return esc(s).replace(/\n/g, '<br>'); }
+function mailNowText() {
+  return new Date().toLocaleDateString('en-IN', {day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'});
+}
+function newMailId() { return 'MAIL-' + Math.floor(100000 + Math.random() * 900000); }
+function persistMails() {
+  localStorage.setItem('pag_mail_db', JSON.stringify(mails));
+  renderMailAdmin();
+}
+
+// ==========================================
+// ✉️ NEW: CUSTOMER MAIL SUPPORT
+// ==========================================
+function openMailSupportModal() {
+  document.getElementById('mailSupportOverlay').classList.add('show');
+  if(currentUser && !currentUser.isAdmin) {
+    const setIfEmpty = (id, val) => { const el = document.getElementById(id); if(el && !el.value) el.value = val || ''; };
+    setIfEmpty('msName', currentUser.name);
+    setIfEmpty('msEmail', currentUser.email);
+    setIfEmpty('msPhone', currentUser.phone);
+    setIfEmpty('mailLookup', currentUser.email || currentUser.phone);
+  }
+  switchMailSupportTab('send');
+}
+
+function closeMailSupportModal() {
+  document.getElementById('mailSupportOverlay').classList.remove('show');
+}
+
+function switchMailSupportTab(tab) {
+  document.getElementById('mailSendPane').style.display = tab === 'send' ? 'block' : 'none';
+  document.getElementById('mailInboxPane').style.display = tab === 'inbox' ? 'block' : 'none';
+  document.getElementById('mstSend').classList.toggle('active', tab === 'send');
+  document.getElementById('mstInbox').classList.toggle('active', tab === 'inbox');
+  if(tab === 'inbox') renderMyMails();
+}
+
+function handleSendSupportMail(e) {
+  e.preventDefault();
+  const name = document.getElementById('msName').value.trim();
+  const email = document.getElementById('msEmail').value.trim().toLowerCase();
+  const phone = cleanPhone(document.getElementById('msPhone').value.trim());
+  const subject = document.getElementById('msSubject').value.trim();
+  const body = document.getElementById('msBody').value.trim();
+  if(!name || !email || !subject || !body) {
+    showToast("Please fill all required fields.", "error");
+    return;
+  }
+  try { mails = JSON.parse(localStorage.getItem('pag_mail_db')) || []; } catch(err){ mails = []; }
+  mails.push({
+    id: newMailId(),
+    direction: 'in',
+    fromName: name,
+    fromEmail: email,
+    fromPhone: phone,
+    subject: subject,
+    body: body,
+    date: mailNowText(),
+    ts: Date.now(),
+    read: false,
+    replied: false
+  });
+  persistMails();
+  document.getElementById('msSubject').value = '';
+  document.getElementById('msBody').value = '';
+  document.getElementById('mailLookup').value = email;
+  showToast("Mail sent to PAG Moters! Reply 'My Mails' me milega.", "success");
+  switchMailSupportTab('inbox');
+}
+
+function renderMyMails() {
+  const box = document.getElementById('myMailsList');
+  try { mails = JSON.parse(localStorage.getItem('pag_mail_db')) || []; } catch(err){ mails = []; }
+  const key = (document.getElementById('mailLookup').value || '').trim().toLowerCase();
+  if(!key) {
+    box.innerHTML = '<div class="mail-empty">Apna Email ya Mobile Number daal kar "Show" dabayein.</div>';
+    return;
+  }
+  const isEmail = key.includes('@');
+  const ph = cleanPhone(key);
+  const match = (email, phone) => isEmail ? (email || '').toLowerCase() === key : (ph && cleanPhone(phone) === ph);
+
+  const ins = mails.filter(m => m.direction === 'in' && match(m.fromEmail, m.fromPhone)).sort((a, b) => b.ts - a.ts);
+  const outs = mails.filter(m => m.direction === 'out' && match(m.toEmail, m.toPhone));
+  const inIds = new Set(ins.map(i => i.id));
+  const standalone = outs.filter(o => !inIds.has(o.threadId)).sort((a, b) => b.ts - a.ts);
+
+  if(!ins.length && !standalone.length) {
+    box.innerHTML = '<div class="mail-empty">📭 Is email/mobile par koi mail nahi mila.</div>';
+    return;
+  }
+
+  const sentCards = ins.map(m => {
+    const replies = outs.filter(o => o.threadId === m.id).sort((a, b) => a.ts - b.ts);
+    return `
+      <div class="mail-card">
+        <div class="mc-head">
+          <b>${esc(m.subject)}</b>
+          <span class="mail-status-pill ${replies.length ? 'st-4' : 'st-1'}">${replies.length ? 'Replied' : 'Awaiting reply'}</span>
+        </div>
+        <div class="mail-bubble in"><small>You · ${esc(m.date)} · ${esc(m.id)}</small>${nl2br(m.body)}</div>
+        ${replies.map(r => `<div class="mail-bubble out"><small>PAG Moters Team · ${esc(r.date)}</small>${nl2br(r.body)}</div>`).join('')}
+      </div>`;
+  }).join('');
+
+  const directCards = standalone.map(o => `
+    <div class="mail-card">
+      <div class="mc-head">
+        <b>${esc(o.subject)}</b>
+        <span class="mail-status-pill st-3">From PAG Moters</span>
+      </div>
+      <div class="mail-bubble out"><small>PAG Moters Team · ${esc(o.date)}</small>${nl2br(o.body)}</div>
+    </div>`).join('');
+
+  box.innerHTML = directCards + sentCards;
+}
+
+// ==========================================
+// 🤖 NEW: CHATBOT (RULE-BASED FAQ + PRODUCT FINDER)
+// ==========================================
+const botState = { opened: false };
+const BOT_DEFAULT_CHIPS = [
+  ['📦 Order track', 'track my order'],
+  ['🚚 Delivery', 'delivery kab milegi'],
+  ['💳 Payment', 'payment options'],
+  ['🕒 Shop timing', 'shop timing and address'],
+  ['🔥 Best deals', 'sasta deals dikhao'],
+  ['✉️ Mail support', 'mail support'],
+  ['🎧 Human se baat', 'human agent']
+];
+const BOT_STOP = ['price','rate','kitna','kitne','kya','hai','hain','the','and','for','stock','available','show','dikhao','dikha','batao','bata','mujhe','chahiye','need','want','best','with','mein','main','aap','you','your','please','pls','plz','kaise','how','much','cost','kahan','mere','mera','meri','hamare','koi','kuch','cheap','sasta','offer','deal','deals','discount','sale','aur','sabse','have','any','get','buy','lena','dena','kar','karo','karna','karu'];
+
+function toggleBot(open) {
+  const w = document.getElementById('botWindow');
+  const fab = document.getElementById('botFab');
+  const show = open === undefined ? !w.classList.contains('open') : open;
+  w.classList.toggle('open', show);
+  fab.style.display = show ? 'none' : 'flex';
+  if(show && !botState.opened) {
+    botState.opened = true;
+    const nm = (currentUser && !currentUser.isAdmin) ? ' ' + esc(currentUser.name.split(' ')[0]) : '';
+    botAppend('bot', `Namaste${nm}! 👋 Main <b>PAG Bot</b> hoon.<br>Aap mujhse order track, delivery, payment, product price/stock ya shop ki jaankari pooch sakte hain. Product ka naam likhein (jaise <i>helmet</i>, <i>charger</i>, <i>battery</i>) ya neeche se option chunein.`);
+    setBotChips();
+  }
+  if(show) setTimeout(() => { const i = document.getElementById('botInput'); if(i) i.focus(); }, 100);
+}
+
+function botAppend(cls, html) {
+  const body = document.getElementById('botBody');
+  const d = document.createElement('div');
+  d.className = 'bot-msg ' + cls;
+  d.innerHTML = html;
+  body.appendChild(d);
+  body.scrollTop = body.scrollHeight;
+  return d;
+}
+
+function setBotChips(list) {
+  const c = document.getElementById('botChips');
+  c.innerHTML = (list || BOT_DEFAULT_CHIPS).map(ch => `<button type="button" class="bot-chip" onclick="botSend('${ch[1]}')">${ch[0]}</button>`).join('');
+}
+
+function botSend(text) {
+  text = (text || '').trim();
+  if(!text) return;
+  botAppend('user', esc(text));
+  const typing = botAppend('bot', '<i>typing...</i>');
+  setTimeout(() => {
+    typing.remove();
+    const r = botAnswer(text);
+    botAppend('bot', r.html);
+    setBotChips(r.chips);
+  }, 450);
+}
+
+function handleBotSubmit(e) {
+  e.preventDefault();
+  const i = document.getElementById('botInput');
+  const v = i.value;
+  i.value = '';
+  botSend(v);
+}
+
+function botAddCart(id, el) { handleAddToCartAnimation(id, el); }
+
+function botProductLines(list) {
+  return list.map(p => {
+    const disc = Math.round((1 - p.price / p.orig) * 100);
+    return `<div class="bot-prod"><b>${esc(p.name)}</b><br>₹${p.price.toLocaleString('en-IN')} <s style="color:#878787">₹${p.orig.toLocaleString('en-IN')}</s> · <span style="color:#388e3c;font-weight:700">${disc}% off</span> · ${p.stock > 0 ? p.stock + ' in stock' : '<span style="color:#dc2626;font-weight:700">Out of stock</span>'}${p.stock > 0 ? `<br><a class="bot-link" onclick="botAddCart(${p.id}, this)">🛒 Add to Cart</a>` : ''}</div>`;
+  }).join('');
+}
+
+function botStem(w) {
+  const map = { battery:'batter', batteries:'batter', chargers:'charger', helmets:'helmet', cables:'cable', earphones:'earphone', earbuds:'earbud', covers:'cover' };
+  if(map[w]) return map[w];
+  return w.length > 4 ? w.replace(/s$/, '') : w;
+}
+
+function botAnswer(raw) {
+  const t = raw.toLowerCase().trim();
+  const words = t.split(/[^a-z0-9]+/).filter(Boolean);
+  const hasS = (...w) => w.some(x => t.includes(x));
+  const hasW = (...w) => w.some(x => words.includes(x));
+  const wa = `<a class="bot-link" target="_blank" href="https://wa.me/918766641866?text=Hello%20PAG%20Moters!%20I%20need%20help.">💬 WhatsApp</a><a class="bot-link" href="tel:+918766641866">📞 Call 8766641866</a>`;
+
+  if(hasS('thanks', 'thank you', 'shukriya', 'dhanyavad', 'thnx')) {
+    return { html: 'Aapka swagat hai! 😊 Aur kuch madad chahiye to bataiye.', chips: null };
+  }
+
+  if(hasW('hi', 'hello', 'hey', 'hii', 'namaste', 'namaskar') && words.length <= 3) {
+    return { html: 'Namaste! 👋 Bataiye, main aapki kya madad kar sakta hoon?', chips: null };
+  }
+
+  if(hasS('human', 'agent', 'insaan', 'representative', 'customer care', 'whatsapp', 'baat karni', 'baat karna', 'contact', 'phone number') || hasW('call')) {
+    return { html: `Hamari team se seedha baat karein 👇<br>${wa}<br><small>Shop: 9:00 AM – 9:00 PM (daily)</small>`, chips: null };
+  }
+
+  if(hasS('mail', 'email', 'complaint', 'shikayat', 'feedback')) {
+    return { html: `Aap hamein mail bhej sakte hain, reply aapko <b>My Mails</b> me milega.<br><a class="bot-link" onclick="closeBotAnd(openMailSupportModal)">✉️ Mail Support kholo</a>`, chips: null };
+  }
+
+  if(hasS('track', 'parcel', 'status') || (hasS('order') && hasS('kahan', 'kab', 'where', 'mera', 'my', 'meri'))) {
+    const statusNames = ['', 'Order Placed', 'Packed', 'Out for Delivery', 'Delivered'];
+    if(currentUser && !currentUser.isAdmin) {
+      let mine = [];
+      try {
+        const all = JSON.parse(localStorage.getItem('pag_orders_db')) || [];
+        const ph = cleanPhone(currentUser.phone);
+        mine = all.filter(o => cleanPhone(o.customerPhone) === ph);
+      } catch(err) {}
+      if(mine.length) {
+        const o = mine[0];
+        return { html: `Aapka latest order:<br><b>${esc(o.id)}</b> · ${esc(o.date)}<br>Status: <b>${esc(statusNames[o.statusStep] || 'Processing')}</b><br>Total: ₹${Number(o.totalPayable).toLocaleString('en-IN')}<br><a class="bot-link" onclick="closeBotAnd(openTrackModal)">📦 Poori tracking dekhein</a>`, chips: null };
+      }
+      return { html: `Aapke number par abhi koi order nahi mila. Naya order karne ke liye products me se cart me add karein.<br><a class="bot-link" onclick="closeBotAnd(openTrackModal)">📦 Order ID se track karein</a>`, chips: null };
+    }
+    return { html: `Order track karne ke liye apna <b>Mobile Number</b> ya <b>Order ID</b> chahiye.<br><a class="bot-link" onclick="closeBotAnd(openTrackModal)">📦 Track Order kholo</a><a class="bot-link" onclick="closeBotAnd(function(){openAuthModal('login')})">🔐 Login</a>`, chips: null };
+  }
+
+  if(hasS('order') && hasS('kaise', 'how', 'place', 'karna', 'karu', 'kare')) {
+    return { html: `Order karna bahut aasaan hai:<br>1️⃣ Login / Signup karein<br>2️⃣ Product par <b>Add to Cart</b> dabayein<br>3️⃣ Cart me address + 6-digit pincode bharein (GPS se auto-fill bhi hota hai)<br>4️⃣ Payment option chunkar <b>CONFIRM ORDER</b> dabayein<br>Order ke baad aapko ek <b>secret delivery PIN</b> milega.`, chips: null };
+  }
+
+  if(hasS('deliver', 'shipping', 'kab milega', 'kab milegi', 'courier')) {
+    return { html: `🚚 Mharal Gaon me <b>2-hour hand-to-hand delivery</b> milti hai aur delivery charges <b>FREE</b> hain.<br>Delivery ke time aapko apna <b>4-digit secret PIN</b> delivery person ko dena hoga.<br>Bahar ke area ke liye pehle humse confirm karein.<br>${wa}`, chips: null };
+  }
+
+  if(hasS('payment', 'pay', 'upi', 'cod', 'cash', 'card', 'paytm', 'phonepe', 'gpay', 'google pay')) {
+    return { html: `💳 Payment options:<br>• UPI / QR / Google Pay<br>• Credit / Debit Card<br>• Wallets (Paytm / PhonePe / Amazon Pay)<br>• 💵 Cash on Delivery (doorstep par)`, chips: null };
+  }
+
+  if(hasS('address', 'location', 'timing', 'open', 'shop', 'dukan', 'store', 'kidhar', 'khula', 'band')) {
+    return { html: `📍 <b>PAG Moters</b><br>Shop no 68, MIDC Gate, Mharal Gaon 421001<br>⏱️ Daily 9:00 AM – 9:00 PM<br><a class="bot-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=MIDC+Gate+Mharal+Gaon+421001">🗺️ Map me dekhein</a><a class="bot-link" href="tel:+918766641866">📞 Call</a>`, chips: null };
+  }
+
+  if(hasS('warranty', 'guarantee', 'return', 'refund', 'exchange', 'replace', 'wapas')) {
+    return { html: `Warranty / return product ke hisaab se alag hoti hai (jaise battery pack par 3 saal warranty listed hai). Kisi specific product ya order ke liye hamari team se confirm karein 👇<br>${wa}<a class="bot-link" onclick="closeBotAnd(openMailSupportModal)">✉️ Mail Support</a>`, chips: null };
+  }
+
+  if(hasS('password', 'login', 'forgot', 'signup', 'sign up', 'register', 'account')) {
+    return { html: `Account help:<br><a class="bot-link" onclick="closeBotAnd(function(){openAuthModal('login')})">🔐 Login</a><a class="bot-link" onclick="closeBotAnd(function(){openAuthModal('signup')})">🆕 Create Account</a><a class="bot-link" onclick="closeBotAnd(function(){openAuthModal('forgot')})">🔑 Forgot Password</a>`, chips: null };
+  }
+
+  // PRODUCT FINDER
+  const dealIntent = hasS('sasta', 'cheap', 'offer', 'deal', 'discount', 'sale', 'sabse');
+  const tokens = t.replace(/[^a-z0-9 ]/g, ' ').split(/\s+/).filter(w => w.length >= 3 && !BOT_STOP.includes(w)).map(botStem);
+  let found = [];
+  if(tokens.length) {
+    found = catalog.map(p => {
+      const hay = (p.name + ' ' + p.cat).toLowerCase();
+      return { p, score: tokens.filter(tk => hay.includes(tk)).length };
+    }).filter(x => x.score > 0).sort((a, b) => b.score - a.score).map(x => x.p);
+  }
+  if(found.length) {
+    if(dealIntent) found.sort((a, b) => (1 - b.price / b.orig) - (1 - a.price / a.orig));
+    const top = found.slice(0, 4);
+    return { html: `Ye products mile 👇${botProductLines(top)}${found.length > 4 ? `<small>...aur ${found.length - 4} products site par hain.</small>` : ''}`, chips: null };
+  }
+  if(dealIntent || hasS('price', 'rate', 'kitna', 'stock', 'available', 'products', 'product')) {
+    const top = catalog.filter(p => p.stock > 0).sort((a, b) => (1 - b.price / b.orig) - (1 - a.price / a.orig)).slice(0, 3);
+    if(top.length) return { html: `🔥 Abhi ke sabse zyada discount wale products:${botProductLines(top)}`, chips: null };
+  }
+
+  return { html: `Maaf kijiye, ye mujhe poori tarah samajh nahi aaya 😅<br>Aap product ka naam likhein (jaise <i>helmet</i>, <i>charger</i>, <i>battery</i>) ya neeche ke options chunein, ya team se baat karein:<br>${wa}<a class="bot-link" onclick="closeBotAnd(openMailSupportModal)">✉️ Mail Support</a>`, chips: null };
+}
+
+function closeBotAnd(fn) {
+  toggleBot(false);
+  if(typeof fn === 'function') fn();
+}
+
+// ==========================================
+// 📧 NEW: ADMIN MAIL CENTRE (RECEIVE / REPLY / SEND)
+// ==========================================
+function mailStatusPill(m) {
+  if(m.direction === 'out') return '<span class="mail-status-pill st-3">Sent</span>';
+  if(!m.read) return '<span class="mail-status-pill st-1">New</span>';
+  if(m.replied) return '<span class="mail-status-pill st-4">Replied</span>';
+  return '<span class="mail-status-pill st-2">Read</span>';
+}
+
+function setAdminMailView(v) {
+  adminMailView = v;
+  renderMailAdmin();
+}
+
+function renderMailAdmin() {
+  const list = document.getElementById('adminMailList');
+  const form = document.getElementById('adminMailComposeForm');
+  if(!list || !form) return;
+
+  const inboxAll = mails.filter(m => m.direction === 'in');
+  const sentAll = mails.filter(m => m.direction === 'out');
+  const unread = inboxAll.filter(m => !m.read).length;
+
+  const tabBtn = document.getElementById('btnTabMail');
+  if(tabBtn) tabBtn.innerHTML = '📧 Mail (Inbox / Send)' + (unread ? ` <span class="mail-unread-badge">${unread}</span>` : '');
+
+  const badge = document.getElementById('adminMailCountBadge');
+  if(badge) badge.innerText = `${inboxAll.length} received · ${sentAll.length} sent`;
+
+  ['inbox', 'sent', 'compose'].forEach(v => {
+    const b = document.getElementById('mailView_' + v);
+    if(b) b.classList.toggle('active', v === adminMailView);
+  });
+  const inboxBtn = document.getElementById('mailView_inbox');
+  if(inboxBtn) inboxBtn.innerHTML = '📥 Inbox (Received)' + (unread ? ` <span class="mail-unread-badge">${unread}</span>` : '');
+
+  if(adminMailView === 'compose') {
+    list.style.display = 'none';
+    form.style.display = 'grid';
+    const dl = document.getElementById('mailToList');
+    if(dl) {
+      const seen = new Set();
+      let opts = '';
+      users.forEach(u => {
+        if(u.email && !seen.has(u.email)) { seen.add(u.email); opts += `<option value="${esc(u.email)}">${esc(u.name)}</option>`; }
+      });
+      inboxAll.forEach(m => {
+        if(m.fromEmail && !seen.has(m.fromEmail)) { seen.add(m.fromEmail); opts += `<option value="${esc(m.fromEmail)}">${esc(m.fromName)}</option>`; }
+      });
+      dl.innerHTML = opts;
+    }
+    return;
+  }
+
+  form.style.display = 'none';
+  list.style.display = 'block';
+
+  const rows = (adminMailView === 'sent' ? sentAll : inboxAll).slice().sort((a, b) => b.ts - a.ts);
+  if(!rows.length) {
+    list.innerHTML = `<div class="mail-empty">${adminMailView === 'sent' ? '📤 Abhi koi mail send nahi hua.' : '📭 Inbox khali hai. Customer mails yaha aayenge.'}</div>`;
+    return;
+  }
+
+  list.innerHTML = rows.map(m => {
+    const unreadRow = m.direction === 'in' && !m.read;
+    const who = m.direction === 'in' ? esc(m.fromName) : esc(m.toName || m.toEmail);
+    const snippet = esc((m.body || '').replace(/\s+/g, ' ').slice(0, 70));
+    return `
+      <div class="mail-row" style="${unreadRow ? 'font-weight:800;background:#f0f9ff;' : ''}" onclick="openMailView('${m.id}')">
+        <span class="mail-orderid">${esc(m.id)}</span>
+        <span>${m.direction === 'in' ? '' : 'To: '}${who}</span>
+        <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"><b>${esc(m.subject)}</b> — <span style="color:#64748b;font-weight:400;">${snippet}</span></span>
+        <span style="font-size:11px;color:#64748b;font-weight:400;">${esc(m.date)}</span>
+        ${mailStatusPill(m)}
+      </div>`;
+  }).join('');
+}
+
+function openMailView(id) {
+  const m = mails.find(x => x.id === id);
+  if(!m) return;
+  if(m.direction === 'in' && !m.read) { m.read = true; persistMails(); }
+
+  const root = mails.find(x => x.id === (m.threadId || m.id)) || m;
+  const thread = mails.filter(x => x.id === root.id || x.threadId === root.id).sort((a, b) => a.ts - b.ts);
+  const cust = root.direction === 'in'
+    ? { name: root.fromName, email: root.fromEmail, phone: root.fromPhone }
+    : { name: root.toName, email: root.toEmail, phone: root.toPhone };
+  const canDelete = currentUser && ['Super Admin', 'Sub-Admin'].includes(currentUser.role);
+
+  document.getElementById('mailViewTitle').innerText = '📧 ' + (root.subject || 'Mail');
+  document.getElementById('mailViewBody').innerHTML = `
+    <div style="background:#f8fafc;padding:8px 10px;border-radius:4px;font-size:12px;line-height:1.6;margin-bottom:8px;">
+      <div><b>Customer:</b> ${esc(cust.name || '—')}</div>
+      <div><b>Email:</b> ${esc(cust.email || '—')}</div>
+      <div><b>Phone:</b> ${cust.phone ? `<a href="tel:${esc(cust.phone)}" style="color:var(--fk-blue);font-weight:700;">${esc(cust.phone)}</a>` : '—'}</div>
+    </div>
+
+    ${thread.map(x => `
+      <div class="mail-bubble ${x.direction}">
+        <small>${x.direction === 'in' ? esc(x.fromName) + ' (Customer)' : esc(x.fromName || 'PAG Team') + ' (PAG Moters)'} · ${esc(x.date)} · ${esc(x.id)}</small>
+        <b>${esc(x.subject)}</b><br>${nl2br(x.body)}
+      </div>`).join('')}
+
+    <div style="margin-top:10px;">
+      <label style="font-size:11px;font-weight:700;color:#475569;">✍️ Reply:</label>
+      <textarea id="mailReplyText" rows="4" style="width:100%;border:1px solid var(--line);border-radius:3px;padding:8px;font:inherit;font-size:12px;" placeholder="Customer ko reply likhein..."></textarea>
+    </div>
+
+    <div class="mail-view-actions">
+      <button type="button" style="background:var(--fk-blue);" onclick="adminReplyMail('${root.id}')">📤 Send Reply</button>
+      <button type="button" style="background:#16a34a;" onclick="adminMailtoReply('${root.id}')">📨 Email App me kholo</button>
+      ${root.direction === 'in' ? `<button type="button" style="background:#d97706;" onclick="markMailUnread('${root.id}')">Mark Unread</button>` : ''}
+      ${canDelete ? `<button type="button" style="background:#dc2626;" onclick="deleteMailThread('${root.id}')">🗑️ Delete</button>` : ''}
+      <button type="button" style="background:#e2e8f0;color:#334155;" onclick="closeMailView()">Close</button>
+    </div>
+  `;
+  document.getElementById('mailViewModalOverlay').style.display = 'flex';
+}
+
+function closeMailView() {
+  document.getElementById('mailViewModalOverlay').style.display = 'none';
+}
+
+function adminReplyMail(rootId) {
+  const root = mails.find(x => x.id === rootId);
+  const txt = document.getElementById('mailReplyText').value.trim();
+  if(!root) return;
+  if(!txt) { showToast("Reply message likhein.", "error"); return; }
+  const to = root.direction === 'in'
+    ? { name: root.fromName, email: root.fromEmail, phone: root.fromPhone }
+    : { name: root.toName, email: root.toEmail, phone: root.toPhone };
+  mails.push({
+    id: newMailId(),
+    direction: 'out',
+    threadId: root.id,
+    toName: to.name,
+    toEmail: to.email,
+    toPhone: to.phone,
+    fromName: currentUser ? currentUser.name : 'PAG Moters',
+    subject: 'Re: ' + String(root.subject || '').replace(/^Re:\s*/i, ''),
+    body: txt,
+    date: mailNowText(),
+    ts: Date.now(),
+    read: true
+  });
+  if(root.direction === 'in') root.replied = true;
+  persistMails();
+  openMailView(root.id);
+  showToast("Reply sent to customer!", "success");
+}
+
+function adminMailtoReply(rootId) {
+  const root = mails.find(x => x.id === rootId);
+  if(!root) return;
+  const email = root.direction === 'in' ? root.fromEmail : root.toEmail;
+  const txt = (document.getElementById('mailReplyText').value || '').trim();
+  const subj = 'Re: ' + String(root.subject || '').replace(/^Re:\s*/i, '');
+  window.location.href = `mailto:${encodeURIComponent(email)}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(txt)}`;
+}
+
+function markMailUnread(rootId) {
+  const root = mails.find(x => x.id === rootId);
+  if(!root) return;
+  root.read = false;
+  persistMails();
+  closeMailView();
+  showToast("Marked as unread.", "info");
+}
+
+function deleteMailThread(rootId) {
+  if(!confirm("Is mail aur uske saare replies delete karne hain?")) return;
+  mails = mails.filter(x => x.id !== rootId && x.threadId !== rootId);
+  persistMails();
+  closeMailView();
+  showToast("Mail deleted.", "info");
+}
+
+function adminSendMail(e) {
+  e.preventDefault();
+  const email = document.getElementById('mailToEmail').value.trim().toLowerCase();
+  let name = document.getElementById('mailToName').value.trim();
+  const subject = document.getElementById('mailSubject').value.trim();
+  const body = document.getElementById('mailBody').value.trim();
+  const alsoMailto = document.getElementById('mailAlsoMailto').checked;
+  if(!email || !subject || !body) { showToast("To, Subject aur Message zaroori hain.", "error"); return; }
+
+  const u = users.find(x => (x.email || '').toLowerCase() === email);
+  if(u && !name) name = u.name;
+  mails.push({
+    id: newMailId(),
+    direction: 'out',
+    toName: name,
+    toEmail: email,
+    toPhone: u ? u.phone : '',
+    fromName: currentUser ? currentUser.name : 'PAG Moters',
+    subject: subject,
+    body: body,
+    date: mailNowText(),
+    ts: Date.now(),
+    read: true
+  });
+  persistMails();
+  e.target.reset();
+  adminMailView = 'sent';
+  renderMailAdmin();
+  showToast("Mail sent successfully!", "success");
+  if(alsoMailto) {
+    window.location.href = `mailto:${encodeURIComponent(email)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  }
+}
+
+// Refresh mail inbox if another tab on this browser sends a mail
+window.addEventListener('storage', (ev) => {
+  if(ev.key === 'pag_mail_db') {
+    const before = mails.filter(m => m.direction === 'in').length;
+    try { mails = JSON.parse(ev.newValue) || []; } catch(err){ mails = []; }
+    renderMailAdmin();
+    const after = mails.filter(m => m.direction === 'in').length;
+    const panel = document.getElementById('adminPanelModal');
+    if(after > before && panel && panel.style.display === 'flex') showToast("📧 Naya customer mail aaya!", "info");
+  }
+});
 
 // SESSION RESTORE ON REFRESH
 window.addEventListener('DOMContentLoaded', () => {
