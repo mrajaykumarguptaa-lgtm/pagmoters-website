@@ -1,49 +1,52 @@
-<!DOCTYPE html>  <html lang="en">  
-<head>  
-<meta charset="utf-8">  
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">  
-<title>PAG Moters – EV Spare Parts, Accessories &amp; Service</title>  
-<meta name="description" content="PAG Moters – Genuine EV Spare Parts, Fast Chargers, Helmets, Lithium Batteries & Accessories. Hand-to-hand fast delivery.">  
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%232874f0%22/%3E%3Ctext x=%2216%22 y=%2223%22 font-size=%2218%22 text-anchor=%22middle%22 fill=%22%23ffe500%22 font-family=%22Arial%22 font-weight=%22bold%22 font-style=%22italic%22%3EP%3C/text%3E%3C/svg%3E">  
-<style>  
-:root{  
-  --bg:#f1f3f6;  
-  --surface:#ffffff;  
-  --text:#212121;  
-  --muted:#878787;  
-  --line:#e0e0e0;  
-  --fk-blue:#2874f0;  
-  --fk-yellow:#ffe500;  
-  --fk-orange:#fb641b;  
-  --fk-green:#388e3c;  
-  --admin-dark:#0f172a;  
-}  
-*{box-sizing:border-box}  
-html, body{width:100%;overflow-x:hidden;-webkit-text-size-adjust:100%}  
-body{margin:0;background:var(--bg);color:var(--text);font:14px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}  /* IN-APP TOAST NOTIFICATIONS */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>PAG Moters – EV Spare Parts, Accessories &amp; Service</title>
+<meta name="description" content="PAG Moters – Genuine EV Spare Parts, Fast Chargers, Helmets, Lithium Batteries & Accessories. Hand-to-hand fast delivery.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%232874f0%22/%3E%3Ctext x=%2216%22 y=%2223%22 font-size=%2218%22 text-anchor=%22middle%22 fill=%22%23ffe500%22 font-family=%22Arial%22 font-weight=%22bold%22 font-style=%22italic%22%3EP%3C/text%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#f1f3f6;
+  --surface:#ffffff;
+  --text:#212121;
+  --muted:#878787;
+  --line:#e0e0e0;
+  --fk-blue:#2874f0;
+  --fk-yellow:#ffe500;
+  --fk-orange:#fb641b;
+  --fk-green:#388e3c;
+  --admin-dark:#0f172a;
+}
+*{box-sizing:border-box}
+html, body{width:100%;overflow-x:hidden;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:14px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+
+/* IN-APP TOAST NOTIFICATIONS */
 #toastContainer{
-position:fixed;
-top:20px;
-right:20px;
-z-index:999999;
-display:flex;
-flex-direction:column;
-gap:10px;
-pointer-events:none;
+  position:fixed;
+  top:20px;
+  right:20px;
+  z-index:999999;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  pointer-events:none;
 }
 .toast-msg{
-background:#1e293b;
-color:#fff;
-padding:12px 18px;
-border-radius:4px;
-box-shadow:0 6px 20px rgba(0,0,0,.25);
-font-size:13px;
-font-weight:600;
-display:flex;
-align-items:center;
-gap:8px;
-animation:toastSlide .3s ease;
-pointer-events:auto;
+  background:#1e293b;
+  color:#fff;
+  padding:12px 18px;
+  border-radius:4px;
+  box-shadow:0 6px 20px rgba(0,0,0,.25);
+  font-size:13px;
+  font-weight:600;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  animation:toastSlide .3s ease;
+  pointer-events:auto;
 }
 .toast-msg.success{background:#15803d;border-left:4px solid var(--fk-yellow)}
 .toast-msg.error{background:#b91c1c;border-left:4px solid #fca5a5}
@@ -54,18 +57,18 @@ pointer-events:auto;
 .top-strip-inner{max-width:1480px;margin:auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
 .top-strip a{color:var(--fk-yellow);text-decoration:none;font-weight:700}
 .realtime-clock-badge{
-background:rgba(255,255,255,.08);
-border:1px solid rgba(255,229,0,.4);
-color:var(--fk-yellow);
-padding:2px 8px;
-border-radius:15px;
-font-family:monospace;
-font-size:11px;
-font-weight:700;
-letter-spacing:1px;
-display:inline-flex;
-align-items:center;
-gap:4px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,229,0,.4);
+  color:var(--fk-yellow);
+  padding:2px 8px;
+  border-radius:15px;
+  font-family:monospace;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:1px;
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
 }
 
 /* FLIPKART STYLE HEADER */
@@ -120,13 +123,13 @@ header{background:var(--fk-blue);color:#fff;position:sticky;top:0;z-index:100;bo
 
 /* MAIN 3-COLUMN LAYOUT */
 .layout{
-max-width:1480px;
-margin:14px auto;
-padding:0 14px;
-display:grid;
-grid-template-columns:220px 1fr 280px;
-gap:14px;
-align-items:start;
+  max-width:1480px;
+  margin:14px auto;
+  padding:0 14px;
+  display:grid;
+  grid-template-columns:220px 1fr 280px;
+  gap:14px;
+  align-items:start;
 }
 .sidebar{background:var(--surface);padding:14px;border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.08);height:fit-content;position:sticky;top:70px}
 .sidebar h3{font-size:15px;margin:0 0 10px;padding-bottom:8px;border-bottom:1px solid var(--line)}
@@ -230,20 +233,20 @@ align-items:start;
 .checkout-box input,.checkout-box textarea{width:100%;border:1px solid var(--line);padding:8px;font:inherit;border-radius:2px;margin-bottom:6px;font-size:12px}
 
 .btn-detect-loc{
-background:#f0fdf4;
-border:1px solid #86efac;
-color:#15803d;
-padding:6px 10px;
-border-radius:3px;
-font-weight:700;
-font-size:11px;
-cursor:pointer;
-display:inline-flex;
-align-items:center;
-gap:6px;
-margin-bottom:8px;
-width:100%;
-justify-content:center;
+  background:#f0fdf4;
+  border:1px solid #86efac;
+  color:#15803d;
+  padding:6px 10px;
+  border-radius:3px;
+  font-weight:700;
+  font-size:11px;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  margin-bottom:8px;
+  width:100%;
+  justify-content:center;
 }
 .btn-detect-loc:hover{background:#dcfce7}
 
@@ -273,32 +276,32 @@ justify-content:center;
 
 /* UNIQUE DELIVERY CODE BADGE */
 .delivery-code-pill{
-background:#fef3c7;
-border:1px dashed #d97706;
-color:#92400e;
-padding:8px 12px;
-border-radius:4px;
-font-weight:800;
-font-size:14px;
-text-align:center;
-margin:10px 0;
-display:flex;
-justify-content:space-between;
-align-items:center;
+  background:#fef3c7;
+  border:1px dashed #d97706;
+  color:#92400e;
+  padding:8px 12px;
+  border-radius:4px;
+  font-weight:800;
+  font-size:14px;
+  text-align:center;
+  margin:10px 0;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 .delivery-code-pill span.code-num{
-font-size:18px;
-letter-spacing:3px;
-color:#b45309;
-background:#fff;
-padding:2px 8px;
-border-radius:3px;
-border:1px solid #fcd34d;
+  font-size:18px;
+  letter-spacing:3px;
+  color:#b45309;
+  background:#fff;
+  padding:2px 8px;
+  border-radius:3px;
+  border:1px solid #fcd34d;
 }
 
-/* ======================================================== /
-/ 🛡️ OWNER & STAFF ENTERPRISE CONSOLE /
-/ ======================================================== */
+/* ======================================================== */
+/* 🛡️ OWNER & STAFF ENTERPRISE CONSOLE */
+/* ======================================================== */
 #adminPanelModal{position:fixed;inset:0;background:var(--bg);z-index:300;display:none;flex-direction:column;overflow-y:auto}
 .admin-navbar{background:var(--admin-dark);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10;flex-wrap:wrap;gap:8px}
 .admin-navbar-left{display:flex;align-items:center;gap:10px}
@@ -307,20 +310,3510 @@ border:1px solid #fcd34d;
 .admin-actions-wrap{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 
 .admin-giant-clock{
-background:rgba(255,255,255,.1);
-border:1.5px solid var(--fk-yellow);
-color:var(--fk-yellow);
-padding:4px 14px;
-border-radius:24px;
-font-family:monospace;
-font-size:15px;
-font-weight:900;
-letter-spacing:1.5px;
-display:inline-flex;
-align-items:center;
-gap:6px;
-box-shadow:0 0 10px rgba(255,229,0,.2);
+  background:rgba(255,255,255,.1);
+  border:1.5px solid var(--fk-yellow);
+  color:var(--fk-yellow);
+  padding:4px 14px;
+  border-radius:24px;
+  font-family:monospace;
+  font-size:15px;
+  font-weight:900;
+  letter-spacing:1.5px;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  box-shadow:0 0 10px rgba(255,229,0,.2);
 }
 
 .admin-export-btn{background:#10b981;color:#fff;border:0;padding:6px 12px;border-radius:3px;font-weight:700;cursor:pointer;font-size:12px}
-.admin-logout{b
+.admin-logout{background:#ef4444;color:#fff;border:0;padding:6px 14px;border-radius:3px;font-weight:700;cursor:pointer;font-size:12px}
+.admin-container{max-width:1480px;margin:14px auto;padding:0 10px;display:grid;gap:14px}
+.admin-tabs{display:flex;gap:8px;border-bottom:2px solid var(--line);padding-bottom:8px;flex-wrap:wrap}
+.admin-tab-btn{background:#fff;border:1px solid var(--line);padding:8px 12px;border-radius:3px;font-weight:700;cursor:pointer;font-size:12px}
+.admin-tab-btn.active{background:var(--fk-blue);color:#fff;border-color:var(--fk-blue)}
+
+/* COMPANY NOTICE BOARD CARD */
+.company-bulletin-card{background:#fff;border:1px solid #bfdbfe;border-radius:4px;padding:12px;box-shadow:0 1px 3px rgba(0,0,0,.08);display:flex;gap:14px;align-items:center}
+.company-bulletin-card img{width:70px;height:70px;object-fit:cover;border-radius:4px;border:1px solid #cbd5e1}
+.bulletin-content{flex:1}
+.bulletin-content h4{margin:0 0 4px;color:#1e3a8a;font-size:14px}
+.bulletin-content p{margin:0;font-size:12px;color:#334155}
+.bulletin-date{font-size:10px;color:var(--muted);margin-top:4px}
+
+.mailbox-card{background:#fff;border-radius:4px;box-shadow:0 1px 3px rgba(0,0,0,.1);overflow:hidden}
+.mailbox-header{background:#f8fafc;padding:10px 14px;font-weight:700;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;font-size:13px}
+.mail-row{display:grid;grid-template-columns:110px 170px 1fr 110px 100px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line);cursor:pointer;font-size:12px}
+.mail-row:hover{background:#f1f5f9}
+.mail-orderid{color:var(--fk-blue);font-weight:800;text-decoration:underline}
+.mail-status-pill{padding:2px 6px;border-radius:10px;font-size:10px;font-weight:700;text-align:center}
+.st-1{background:#fef3c7;color:#92400e}
+.st-2{background:#e0f2fe;color:#0369a1}
+.st-3{background:#ede9fe;color:#6d28d9}
+.st-4{background:#dcfce7;color:#15803d}
+
+.admin-prod-form{background:#f8fafc;border:1px solid var(--line);padding:14px;border-radius:4px;margin-bottom:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+.admin-prod-form input, .admin-prod-form select, .admin-prod-form textarea{border:1px solid var(--line);border-radius:3px;padding:8px;font:inherit;font-size:12px;background:#fff;width:100%}
+.admin-prod-form button{background:var(--fk-green);color:#fff;border:0;padding:9px;font-weight:700;border-radius:3px;cursor:pointer;font-size:12px}
+
+.multi-preview-strip{grid-column:1/-1;display:flex;gap:8px;flex-wrap:wrap;background:#fff;padding:8px;border:1px dashed var(--line);border-radius:4px}
+.multi-preview-strip img{width:50px;height:50px;object-fit:contain;border:1px solid #cbd5e1;border-radius:3px;background:#fafafa}
+
+.users-table-wrap{background:#fff;border-radius:4px;box-shadow:0 1px 3px rgba(0,0,0,.1);overflow-x:auto}
+.users-table{width:100%;border-collapse:collapse;text-align:left;font-size:12px}
+.users-table th{background:#f8fafc;padding:10px 12px;border-bottom:2px solid var(--line);font-weight:700}
+.users-table td{padding:10px 12px;border-bottom:1px solid var(--line)}
+.btn-override-pass{background:var(--fk-orange);color:#fff;border:0;padding:5px 10px;border-radius:2px;font-weight:700;cursor:pointer;font-size:11px}
+.btn-block-user{background:#dc2626;color:#fff;border:0;padding:5px 10px;border-radius:2px;font-weight:700;cursor:pointer;font-size:11px;margin-left:4px}
+.btn-unblock-user{background:#16a34a;color:#fff;border:0;padding:5px 10px;border-radius:2px;font-weight:700;cursor:pointer;font-size:11px;margin-left:4px}
+.btn-del-prod{background:#ef4444;color:#fff;border:0;padding:5px 10px;border-radius:2px;font-weight:700;cursor:pointer;font-size:11px}
+.btn-edit-prod{background:var(--fk-blue);color:#fff;border:0;padding:5px 10px;border-radius:2px;font-weight:700;cursor:pointer;font-size:11px;margin-right:2px}
+.btn-stock-quick{background:#3b82f6;color:#fff;border:0;padding:3px 8px;border-radius:2px;font-weight:700;font-size:10px;cursor:pointer;margin-top:2px}
+
+/* CHAT BOX / TASK SYSTEM STYLES */
+.chat-container{display:grid;grid-template-columns:300px 1fr;gap:12px;background:#fff;border-radius:4px;border:1px solid var(--line);min-height:380px}
+.chat-list-panel{border-right:1px solid var(--line);padding:10px;background:#f8fafc}
+.chat-user-item{padding:8px 10px;border-radius:4px;cursor:pointer;margin-bottom:6px;background:#fff;border:1px solid var(--line)}
+.chat-user-item.active{background:#e0f2fe;border-color:var(--fk-blue)}
+.chat-main-panel{display:flex;flex-direction:column;padding:12px}
+.chat-messages-stream{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding-bottom:10px;max-height:300px}
+.chat-bubble{max-width:85%;padding:8px 12px;border-radius:6px;font-size:12px;line-height:1.4;position:relative}
+.bubble-admin{align-self:flex-end;background:#dbeafe;border:1px solid #bfdbfe;color:#1e3a8a}
+.bubble-staff{align-self:flex-start;background:#f1f5f9;border:1px solid #e2e8f0;color:#334155}
+.msg-status-receipt{font-size:10px;font-weight:800;display:inline-block;margin-top:4px}
+.receipt-pending{color:#d97706}
+.receipt-seen{color:#0284c7}
+.receipt-accepted{color:#16a34a}
+.chat-send-bar{display:flex;gap:6px;margin-top:auto}
+.chat-send-bar input{flex:1;border:1px solid var(--line);padding:8px 10px;font:inherit;font-size:12px;border-radius:3px}
+.chat-send-bar button{background:var(--fk-blue);color:#fff;border:0;padding:8px 16px;font-weight:700;border-radius:3px;cursor:pointer}
+
+/* ULTRA POPUP EDIT & ORDER MODALS */
+#editProductModalOverlay, #orderDetailsModalOverlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.75);
+  z-index:99999;
+  display:none;
+  align-items:center;
+  justify-content:center;
+}
+.edit-modal-box{background:#fff;width:min(680px,95%);border-radius:6px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.5);animation:popupIn .2s ease;max-height:90vh;display:flex;flex-direction:column}
+.modal-body-scrollable{padding:16px;overflow-y:auto;flex:1}
+@keyframes popupIn{from{transform:scale(0.95);opacity:0}to{transform:scale(1);opacity:1}}
+
+/* FOOTER */
+.trust-strip{max-width:1480px;margin:16px auto;padding:0 14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.trust-box{background:#fff;padding:12px;border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.08);display:flex;align-items:center;gap:10px}
+.trust-box .icon{font-size:22px;color:var(--fk-blue)}
+.trust-box div b{display:block;font-size:13px}
+.trust-box div small{color:var(--muted);font-size:11px}
+footer{background:#172337;color:#878787;padding:20px 14px 16px;font-size:11px;border-top:1px solid #2d3e56;margin-top:20px;text-align:center}
+footer a{color:#fff;text-decoration:none}
+
+/* 📱 AUTOMATIC MOBILE RESPONSIVENESS */
+@media (max-width: 1024px) {
+  .layout{grid-template-columns:200px 1fr}
+  .right-sidebar{display:none}
+}
+
+@media (max-width: 768px) {
+  .top-strip-inner{justify-content:center;text-align:center;gap:4px}
+  .main-header{padding:8px 10px;gap:8px}
+  .search-box{order:3;width:100%;min-width:100%;margin-top:2px}
+  .header-actions{order:2;gap:6px}
+  .layout{grid-template-columns:1fr;padding:0 6px}
+  .sidebar{display:none}
+  .right-sidebar{display:none}
+  .product-grid{grid-template-columns:repeat(2, 1fr)}
+  .chat-container{grid-template-columns:1fr}
+  .big-sale-banner{flex-direction:column;align-items:flex-start;padding:14px}
+  .admin-giant-clock{font-size:13px;padding:3px 10px}
+  .mail-row{grid-template-columns:1fr;gap:4px;padding:10px}
+}
+/* ======================================================== */
+/* 🤖 CHATBOT + ✉️ MAIL SUPPORT (NEW) */
+/* ======================================================== */
+.bot-fab{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:150;background:linear-gradient(135deg,#2874f0,#6d28d9);color:#fff;border:0;border-radius:30px;padding:12px 18px;font-weight:800;font-size:13px;box-shadow:0 4px 14px rgba(0,0,0,.35);cursor:pointer;display:flex;align-items:center;gap:6px}
+.bot-window{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));width:min(370px,calc(100% - 32px));height:min(520px,75vh);background:#fff;border-radius:8px;box-shadow:0 10px 36px rgba(0,0,0,.4);z-index:150;display:none;flex-direction:column;overflow:hidden}
+.bot-window.open{display:flex}
+.bot-head{background:var(--fk-blue);color:#fff;padding:10px 14px;display:flex;justify-content:space-between;align-items:center}
+.bot-head b{font-size:14px}
+.bot-head small{display:block;font-size:10px;color:#dbeafe}
+.bot-body{flex:1;overflow-y:auto;padding:10px;background:#f1f3f6;display:flex;flex-direction:column;gap:8px}
+.bot-msg{max-width:90%;padding:8px 11px;border-radius:8px;font-size:12px;line-height:1.5;word-wrap:break-word}
+.bot-msg.bot{align-self:flex-start;background:#fff;border:1px solid #e2e8f0;color:#1e293b}
+.bot-msg.user{align-self:flex-end;background:var(--fk-blue);color:#fff}
+.bot-chips{display:flex;flex-wrap:wrap;gap:6px;padding:6px 10px;background:#fff;border-top:1px solid var(--line);max-height:84px;overflow-y:auto}
+.bot-chip{background:#fff;border:1px solid var(--fk-blue);color:var(--fk-blue);border-radius:14px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer}
+.bot-chip:hover{background:#eff6ff}
+.bot-input-bar{display:flex;gap:6px;padding:8px;border-top:1px solid var(--line);background:#fff}
+.bot-input-bar input{flex:1;border:1px solid var(--line);border-radius:20px;padding:8px 12px;font:inherit;font-size:12px;outline:none;min-width:0}
+.bot-input-bar button{background:var(--fk-blue);color:#fff;border:0;border-radius:20px;padding:0 14px;font-weight:700;cursor:pointer}
+.bot-link{display:inline-block;margin:4px 4px 0 0;background:#eff6ff;border:1px solid #bfdbfe;color:var(--fk-blue);padding:4px 9px;border-radius:12px;font-size:11px;font-weight:700;cursor:pointer;text-decoration:none}
+.bot-prod{border-top:1px dashed #e2e8f0;padding:6px 0}
+.bot-prod:first-of-type{border-top:0}
+
+.mail-subtabs{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+.mail-subtabs button{background:#fff;border:1px solid var(--line);padding:7px 12px;border-radius:3px;font-weight:700;font-size:12px;cursor:pointer}
+.mail-subtabs button.active{background:var(--fk-blue);color:#fff;border-color:var(--fk-blue)}
+.mail-unread-badge{background:var(--fk-orange);color:#fff;font-size:10px;padding:1px 6px;border-radius:10px;font-weight:800;margin-left:4px}
+.mail-empty{padding:26px 10px;text-align:center;color:var(--muted);font-size:12px}
+.mail-card{background:#fff;border:1px solid var(--line);border-radius:4px;padding:10px;margin-bottom:10px;font-size:12px;line-height:1.5}
+.mail-card .mc-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:4px}
+.mail-bubble{border-radius:6px;padding:8px 10px;margin:6px 0;font-size:12px;line-height:1.5}
+.mail-bubble.in{background:#f1f5f9;border:1px solid #e2e8f0}
+.mail-bubble.out{background:#dbeafe;border:1px solid #bfdbfe}
+.mail-bubble small{display:block;color:var(--muted);font-size:10px;margin-bottom:2px}
+#mailViewModalOverlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:99999;display:none;align-items:center;justify-content:center}
+.mail-view-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.mail-view-actions button{border:0;padding:9px 14px;font-weight:700;border-radius:4px;cursor:pointer;font-size:12px;color:#fff}
+@media (max-width: 768px) {
+  .header-actions{flex-wrap:wrap;justify-content:flex-end}
+}
+</style>
+</head>
+<body>
+
+<!-- TOAST NOTIFICATION CONTAINER -->
+<div id="toastContainer"></div>
+
+<!-- TOP STRIP WITH REAL-TIME CLOCK -->
+<div class="top-strip">
+  <div class="top-strip-inner">
+    <span>📍 PAG Moters – MIDC Gate, Mharal Gaon 421001</span>
+    <div class="realtime-clock-badge">
+      <span>🕒</span> <span id="realTimeClock">--:--:-- --</span>
+    </div>
+    <span>Call: <a href="tel:+918766641866">8766641866</a></span>
+  </div>
+</div>
+
+<header>
+  <div class="main-header">
+    <div class="brand" onclick="location.reload()">
+      <div class="title">PAG Moters</div>
+      <small>Explore <span>Plus ✦</span></small>
+    </div>
+
+    <div class="header-actions">
+      <button class="btn-nav" onclick="openMyOrdersModal()">
+        <span>📋</span> My Orders
+      </button>
+
+      <button class="btn-nav" onclick="openTrackModal()">
+        <span>📦</span> Track
+      </button>
+
+      <button class="btn-nav" onclick="openMailSupportModal()">
+        <span>✉️</span> Support
+      </button>
+
+      <div id="authHeaderContainer">
+        <button class="btn-login-main" onclick="openAuthModal('login')">Login</button>
+      </div>
+
+      <button class="cart-trigger" id="cartTriggerBtn" onclick="toggleCartDrawer(true)">
+        <span>🛒</span>
+        <span id="cartCountBadge" class="cart-count-badge">0</span>
+        <span id="headerCartTotal">₹0</span>
+      </button>
+    </div>
+
+    <div class="search-box">
+      <input type="search" id="searchQuery" placeholder="Search helmets, chargers, batteries..." oninput="liveSearch()">
+      <button onclick="liveSearch()">🔍</button>
+    </div>
+  </div>
+</header>
+
+<nav class="nav-sub">
+  <ul id="catNavList">
+    <li class="active" onclick="filterByCategory('All')">All Products</li>
+    <li onclick="filterByCategory('Helmets')">Helmets &amp; Gear</li>
+    <li onclick="filterByCategory('Chargers')">EV Chargers</li>
+    <li onclick="filterByCategory('Batteries')">Lithium Batteries</li>
+    <li onclick="filterByCategory('Mobile Cables')">Fast Cables</li>
+    <li onclick="filterByCategory('Earphones')">Audio &amp; Neckbands</li>
+    <li onclick="filterByCategory('Accessories')">Bike Covers &amp; Mounts</li>
+  </ul>
+</nav>
+
+<!-- 12-HOUR SALE BANNER -->
+<section class="sale-banner-wrap" id="saleBannerSection">
+  <div class="big-sale-banner">
+    <div>
+      <span class="sale-tag-pill">🔥 MEGA FESTIVAL SALE</span>
+      <h1>BIGGEST DEALS ON EV ACCESSORIES</h1>
+      <p>Up to 60% Off on Fast Chargers, ISI Helmets &amp; Battery Packs. Limited Time Local Deals!</p>
+    </div>
+    <div class="sale-timer">
+      <div class="label" id="saleClockLabel">Offer Ends In</div>
+      <div class="time" id="saleClock">12h : 00m : 00s</div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN 3-COLUMN LAYOUT -->
+<div class="layout">
+  <!-- 1. LEFT SIDEBAR -->
+  <aside class="sidebar">
+    <h3>Filters</h3>
+    <div class="filter-group" id="sidebarFilterGroup">
+      <b>Categories</b>
+      <label><input type="radio" name="f_cat" checked onclick="filterByCategory('All')"> All Products</label>
+      <label><input type="radio" name="f_cat" onclick="filterByCategory('Helmets')"> Helmets &amp; Safety</label>
+      <label><input type="radio" name="f_cat" onclick="filterByCategory('Chargers')"> Fast Smart Chargers</label>
+      <label><input type="radio" name="f_cat" onclick="filterByCategory('Batteries')"> EV Battery Packs</label>
+      <label><input type="radio" name="f_cat" onclick="filterByCategory('Mobile Cables')"> Fast Data Cables</label>
+      <label><input type="radio" name="f_cat" onclick="filterByCategory('Earphones')"> Earphones &amp; Audio</label>
+      <label><input type="radio" name="f_cat" onclick="filterByCategory('Accessories')"> Vehicle Accessories</label>
+    </div>
+  </aside>
+
+  <!-- 2. CENTER PANEL (PRODUCT GRID) -->
+  <main class="product-panel">
+    <div class="panel-head">
+      <h2 id="productSectionTitle">Deals of the Day</h2>
+      <span style="font-size:12px;color:var(--muted)" id="totalProductsCount">Showing items</span>
+    </div>
+    <div class="product-grid" id="productGrid"></div>
+  </main>
+
+  <!-- 3. RIGHT SIDEBAR WIDGETS -->
+  <aside class="right-sidebar">
+    <div class="widget-box">
+      <h4><span>💬</span> Need Urgent EV Part?</h4>
+      <p>Direct chat with shopkeeper at Mharal Gaon. Fast local doorstep delivery assistance.</p>
+      <a class="btn-widget-wa" target="_blank" href="https://wa.me/918766641866?text=Hello%20PAG%20Moters!%20I%20need%20assistance%20with%20EV%20spare%20parts.">
+        Chat on WhatsApp
+      </a>
+      <a class="btn-widget-call" href="tel:+918766641866">
+        📞 Call: 8766641866
+      </a>
+      <button type="button" class="btn-widget-call" style="background:#6d28d9;" onclick="openMailSupportModal()">
+        ✉️ Mail Support
+      </button>
+      <button type="button" class="btn-widget-call" style="background:#0f172a;" onclick="toggleBot(true)">
+        🤖 Chat with PAG Bot
+      </button>
+    </div>
+
+    <div class="widget-box">
+      <h4><span>🔥</span> Hot Selling Parts</h4>
+      <div class="hot-deal-item">
+        <img src="https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=100" alt="Charger">
+        <div class="hot-deal-info">
+          <b>60V Fast Auto Cut Charger</b>
+          <span>₹1,850 · 26% off</span>
+        </div>
+      </div>
+      <div class="hot-deal-item">
+        <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=100" alt="Battery">
+        <div class="hot-deal-info">
+          <b>48V Lithium Battery Pack</b>
+          <span>₹14,500 · 3 Yr Warranty</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="widget-box">
+      <h4><span>🛡️</span> Store Assurance</h4>
+      <p style="margin-bottom:6px;">⚡ <b>2-Hour Hand Delivery:</b> In Mharal Gaon.</p>
+      <p style="margin-bottom:6px;">⏱️ <b>Open Daily:</b> 9:00 AM – 9:00 PM</p>
+      <p style="margin-bottom:0;">📍 <b>Shop 68, MIDC Gate</b>, Mharal Gaon.</p>
+    </div>
+  </aside>
+</div>
+
+<div class="trust-strip">
+  <div class="trust-box">
+    <div class="icon">⚡</div>
+    <div><b>Hand-to-Hand Delivery</b><small>Doorstep in Mharal Gaon</small></div>
+  </div>
+  <div class="trust-box">
+    <div class="icon">🛡️</div>
+    <div><b>100% Genuine Guarantee</b><small>Tested parts</small></div>
+  </div>
+  <div class="trust-box">
+    <div class="icon">💬</div>
+    <div><b>WhatsApp Support</b><small>Quick replies</small></div>
+  </div>
+  <div class="trust-box">
+    <div class="icon">💵</div>
+    <div><b>Cash on Delivery</b><small>Pay at doorstep</small></div>
+  </div>
+</div>
+
+<footer>
+  <p><b>PAG Moters</b> – EV Spare Parts, Accessories &amp; Service<br>Shop no 68, MIDC Gate, Mharal Gaon 421001 · Call <a href="tel:+918766641866">8766641866</a><br>© 2026 PAG Moters · pagmoters.online</p>
+</footer>
+
+<!-- AUTH MODAL -->
+<div class="overlay" id="authOverlay">
+  <div class="auth-card">
+    <div class="auth-left">
+      <div>
+        <h2 id="authLeftTitle">Login Required</h2>
+        <p id="authLeftDesc">Please log in to your account to add items to cart and place orders.</p>
+      </div>
+      <div class="shield-icon">🛡️</div>
+    </div>
+    <div class="auth-right">
+      <button class="auth-close" id="authCloseBtn" onclick="closeAuthModal()">✕</button>
+
+      <div id="loginSection">
+        <form class="auth-form" method="post" action="javascript:void(0);" onsubmit="handleLoginSubmit(event)">
+          <div id="loginMsg" class="auth-msg"></div>
+          <div>
+            <label>Mobile Number or Email ID</label>
+            <input type="text" id="loginId" name="username" autocomplete="username" placeholder="Enter Mobile Number or Email ID" required>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <label>Password</label>
+              <a onclick="openAuthModal('forgot')" style="font-size:11px;color:var(--fk-blue);cursor:pointer;font-weight:600;">Forgot Password?</a>
+            </div>
+            <input type="password" id="loginPass" name="password" autocomplete="current-password" placeholder="Enter Password" required>
+          </div>
+          <button type="submit" class="auth-btn-primary">Login to Continue</button>
+        </form>
+        <div class="auth-switch">
+          New to PAG Moters? <a onclick="openAuthModal('signup')">Create an account</a>
+        </div>
+      </div>
+
+      <div id="signupSection" style="display:none;">
+        <div class="sec-badge">🔒 <b>Security Check:</b> Password will be auto-prompted to save on your device.</div>
+        <form class="auth-form" method="post" action="javascript:void(0);" onsubmit="handleSignupSubmit(event)">
+          <div id="signupMsg" class="auth-msg"></div>
+          <div>
+            <label>Full Name</label>
+            <input type="text" id="regName" autocomplete="name" placeholder="Enter full name" required>
+          </div>
+          <div>
+            <label>Email Address</label>
+            <input type="email" id="regEmail" autocomplete="email" placeholder="name@example.com" required>
+          </div>
+          <div>
+            <label>Mobile Number (Username)</label>
+            <input type="tel" id="regPhone" name="username" autocomplete="username tel" placeholder="Enter 10-digit mobile" pattern="[0-9]{10}" required>
+          </div>
+          <div>
+            <label>Set Password</label>
+            <input type="password" id="regPass" name="password" autocomplete="new-password" placeholder="Create password (min 6 chars)" minlength="6" required>
+          </div>
+          <div>
+            <label>Select Security Question</label>
+            <select id="regSecQ" required>
+              <option value="" disabled selected>-- Select a Question --</option>
+              <option value="What is your first bike/scooter model?">What is your first bike/scooter model?</option>
+              <option value="What is your birthplace / hometown?">What is your birthplace / hometown?</option>
+              <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
+            </select>
+          </div>
+          <div>
+            <label>Secret Security Answer</label>
+            <input type="text" id="regSecA" placeholder="Type answer" required>
+          </div>
+          <button type="submit" class="auth-btn-primary">Create Secure Account</button>
+        </form>
+        <div class="auth-switch">
+          Existing user? <a onclick="openAuthModal('login')">Log in</a>
+        </div>
+      </div>
+
+      <div id="mandatorySecuritySection" style="display:none;">
+        <div class="sec-badge">⚠️ <b>Action Required:</b> Set a security question to secure account.</div>
+        <form class="auth-form" onsubmit="handleSaveMandatorySecurity(event)">
+          <div id="mandSecMsg" class="auth-msg"></div>
+          <div>
+            <label>Choose Security Question</label>
+            <select id="mandSecQ" required>
+              <option value="" disabled selected>-- Select a Question --</option>
+              <option value="What is your first bike/scooter model?">What is your first bike/scooter model?</option>
+              <option value="What is your birthplace / hometown?">What is your birthplace / hometown?</option>
+              <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
+            </select>
+          </div>
+          <div>
+            <label>Your Secret Answer</label>
+            <input type="text" id="mandSecA" placeholder="Enter secret answer" required>
+          </div>
+          <button type="submit" class="auth-btn-primary" style="background:var(--fk-green);">Save Security Question</button>
+        </form>
+      </div>
+
+      <div id="forgotSection" style="display:none;">
+        <div id="forgotMsg" class="auth-msg"></div>
+        <form id="forgotStep1Form" class="auth-form" onsubmit="handleForgotStep1(event)">
+          <p style="font-size:12px;color:#555;margin:0 0 4px;">Enter registered Mobile or Email:</p>
+          <div>
+            <input type="text" id="forgotId" placeholder="Enter mobile or email" required>
+          </div>
+          <button type="submit" class="auth-btn-primary">Verify Account</button>
+        </form>
+
+        <div id="forgotStep2Box" style="display:none;margin-top:10px;border-top:1px dashed var(--line);padding-top:8px;">
+          <form class="auth-form" onsubmit="handleForgotStep2(event)">
+            <div class="sec-badge">🔒 <b>Identity Verification:</b> Please answer your secret question.</div>
+            <div id="displaySecQuestion" style="font-weight:700;padding:6px;background:#f1f3f6;border-radius:2px;font-size:12px;"></div>
+            <input type="text" id="verifySecAnswer" placeholder="Type your secret answer" required>
+            <button type="submit" class="auth-btn-primary">Verify Answer</button>
+          </form>
+        </div>
+
+        <div id="forgotStep3Box" style="display:none;margin-top:10px;border-top:1px dashed var(--line);padding-top:8px;">
+          <form class="auth-form" onsubmit="handleForgotStep3(event)">
+            <div class="auth-msg ok" style="display:block;margin-bottom:6px;">✅ Verified! Set a new password.</div>
+            <input type="password" id="newPassFinal" placeholder="Enter new strong password" minlength="6" required>
+            <button type="submit" class="auth-btn-primary" style="background:var(--fk-green)">Update Password &amp; Login</button>
+          </form>
+        </div>
+
+        <div class="auth-switch">
+          Remember password? <a onclick="openAuthModal('login')">Back to Login</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CART DRAWER WITH GPS AUTO-FILL & PINCODE VALIDATION -->
+<div class="overlay" id="cartOverlay" onclick="toggleCartDrawer(false)"></div>
+<div class="drawer" id="cartDrawer">
+  <div class="drawer-head">
+    <h2>My Cart (<span id="drawerItemCount">0</span>)</h2>
+    <button class="btn-close" onclick="toggleCartDrawer(false)">✕</button>
+  </div>
+  <div class="drawer-body" id="cartBody"></div>
+</div>
+
+<!-- TRACK ORDER MODAL -->
+<div class="overlay" id="trackModalOverlay">
+  <div class="modal-track">
+    <div class="modal-head">
+      <h3>📦 Track Order Live Status</h3>
+      <button class="btn-close" onclick="closeTrackModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:12px;color:#555;margin:0 0 10px;">Enter your <b>10-digit Mobile Number</b> or <b>Order ID</b>:</p>
+      <div class="track-input-group">
+        <input type="text" id="trackInput" placeholder="Mobile Number or Order ID">
+        <button onclick="performOrderSearch()">Track</button>
+      </div>
+      <div id="trackResultContainer"></div>
+    </div>
+  </div>
+</div>
+
+<!-- 🤖 CHATBOT -->
+<button class="bot-fab" id="botFab" onclick="toggleBot(true)"><span>🤖</span> Chat with us</button>
+<div class="bot-window" id="botWindow">
+  <div class="bot-head">
+    <div><b>🤖 PAG Bot</b><small>Instant help for orders, parts &amp; delivery</small></div>
+    <button class="btn-close" type="button" onclick="toggleBot(false)">✕</button>
+  </div>
+  <div class="bot-body" id="botBody"></div>
+  <div class="bot-chips" id="botChips"></div>
+  <form class="bot-input-bar" onsubmit="handleBotSubmit(event)">
+    <input type="text" id="botInput" placeholder="Apna sawal likhein..." autocomplete="off">
+    <button type="submit">Send</button>
+  </form>
+</div>
+
+<!-- ✉️ CUSTOMER MAIL SUPPORT MODAL -->
+<div class="overlay" id="mailSupportOverlay">
+  <div class="modal-track">
+    <div class="modal-head">
+      <h3>✉️ Mail Support</h3>
+      <button class="btn-close" onclick="closeMailSupportModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="mail-subtabs">
+        <button type="button" id="mstSend" class="active" onclick="switchMailSupportTab('send')">✍️ Send Mail</button>
+        <button type="button" id="mstInbox" onclick="switchMailSupportTab('inbox')">📬 My Mails &amp; Replies</button>
+      </div>
+
+      <div id="mailSendPane">
+        <form class="auth-form" onsubmit="handleSendSupportMail(event)">
+          <div>
+            <label>Full Name</label>
+            <input type="text" id="msName" placeholder="Your name" required>
+          </div>
+          <div>
+            <label>Email Address</label>
+            <input type="email" id="msEmail" placeholder="name@example.com" required>
+          </div>
+          <div>
+            <label>Mobile Number (optional)</label>
+            <input type="tel" id="msPhone" placeholder="10-digit mobile" pattern="[0-9]{10}">
+          </div>
+          <div>
+            <label>Subject</label>
+            <input type="text" id="msSubject" placeholder="e.g. Order delay / Product enquiry / Complaint" required>
+          </div>
+          <div>
+            <label>Message</label>
+            <textarea id="msBody" rows="4" placeholder="Apni problem ya sawal detail me likhein (Order ID ho to zaroor likhein)" required></textarea>
+          </div>
+          <button type="submit" class="auth-btn-primary">Send Mail to PAG Moters</button>
+        </form>
+      </div>
+
+      <div id="mailInboxPane" style="display:none;">
+        <div class="track-input-group">
+          <input type="text" id="mailLookup" placeholder="Your Email ya Mobile Number">
+          <button type="button" onclick="renderMyMails()">Show</button>
+        </div>
+        <div id="myMailsList"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MY ORDERS MODAL -->
+<div class="overlay" id="myOrdersModalOverlay">
+  <div class="modal-track">
+    <div class="modal-head">
+      <h3>📋 My Orders History</h3>
+      <button class="btn-close" onclick="closeMyOrdersModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div id="myOrdersContent"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================================================== -->
+<!-- 🛡️ OWNER & STAFF WORKSPACE (ROLE LOCKED) -->
+<!-- ======================================================== -->
+<div id="adminPanelModal">
+  <div class="admin-navbar">
+    <div class="admin-navbar-left">
+      <h2><span>⚙️</span> PAG Moters Workspace <span class="admin-badge" id="adminRoleDisplay">Super Admin</span></h2>
+    </div>
+
+    <div class="admin-actions-wrap">
+      <div class="admin-giant-clock">
+        <span>🕒</span> <span id="adminLiveWatch">--:--:-- --</span>
+      </div>
+
+      <button class="admin-export-btn" id="btnAdminExport" onclick="exportOrdersToExcel()">📊 Export Sales Report</button>
+      <button class="admin-logout" onclick="closeAdminPortal()">Exit Workspace</button>
+    </div>
+  </div>
+
+  <div class="admin-container">
+    <!-- COMPANY LIVE BULLETIN / THUMBNAIL NOTICE BOARD -->
+    <div id="companyBulletinView" class="company-bulletin-card">
+      <img id="bulletinThumb" src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=200" alt="Notice">
+      <div class="bulletin-content">
+        <h4 id="bulletinHeadline">📌 Company Announcement Board</h4>
+        <p id="bulletinDetails">Welcome to PAG Moters Workspace. Check active tasks and orders below.</p>
+        <div class="bulletin-date" id="bulletinTimestamp">Live Operational Notice</div>
+      </div>
+    </div>
+
+    <div class="admin-tabs" id="adminTabsContainer">
+      <button class="admin-tab-btn" id="btnTabOrders" onclick="switchAdminTab('orders')">📦 Orders (Mailbox)</button>
+      <button class="admin-tab-btn" id="btnTabProducts" onclick="switchAdminTab('products')">🏷️ Product Management &amp; Inventory</button>
+      <button class="admin-tab-btn" id="btnTabChat" onclick="switchAdminTab('chat')">💬 Staff Task &amp; Chat Box</button>
+      <button class="admin-tab-btn" id="btnTabNotice" onclick="switchAdminTab('notice')">📢 Company Notice Board</button>
+      <button class="admin-tab-btn" id="btnTabTeam" onclick="switchAdminTab('team')">👔 Staff Management &amp; Block</button>
+      <button class="admin-tab-btn" id="btnTabUsers" onclick="switchAdminTab('users')">👥 Customer Accounts &amp; Block</button>
+      <button class="admin-tab-btn" id="btnTabMail" onclick="switchAdminTab('mail')">📧 Mail (Inbox / Send)</button>
+    </div>
+
+    <!-- 1. ORDERS MAILBOX -->
+    <div id="adminOrdersSection" class="mailbox-card">
+      <div class="mailbox-header">
+        <span>Incoming Customer Orders Inbox (Click Order ID to view Items with Photos)</span>
+        <span id="adminOrdersCountBadge">0 Orders</span>
+      </div>
+      <div id="adminMailboxContainer"></div>
+    </div>
+
+    <!-- 7. MAIL RECEIVE & SEND -->
+    <div id="adminMailSection" class="mailbox-card" style="display:none;padding:14px;">
+      <div class="mailbox-header" style="background:#fff;padding:0 0 10px 0;">
+        <span><b>📧 Mail Centre — Receive, Reply &amp; Send</b></span>
+        <span id="adminMailCountBadge">0 received · 0 sent</span>
+      </div>
+
+      <div class="mail-subtabs">
+        <button type="button" id="mailView_inbox" class="active" onclick="setAdminMailView('inbox')">📥 Inbox (Received)</button>
+        <button type="button" id="mailView_sent" onclick="setAdminMailView('sent')">📤 Sent</button>
+        <button type="button" id="mailView_compose" onclick="setAdminMailView('compose')">✍️ Compose / Send Mail</button>
+      </div>
+
+      <div id="adminMailList" style="border:1px solid var(--line);border-radius:4px;overflow:hidden;"></div>
+
+      <form class="admin-prod-form" id="adminMailComposeForm" style="display:none;" onsubmit="adminSendMail(event)">
+        <input type="email" id="mailToEmail" list="mailToList" placeholder="To: Customer Email" required>
+        <datalist id="mailToList"></datalist>
+        <input type="text" id="mailToName" placeholder="Customer Name (optional)">
+        <input type="text" id="mailSubject" placeholder="Subject" required style="grid-column:1/-1;">
+        <textarea id="mailBody" rows="5" placeholder="Mail message likhein..." required style="grid-column:1/-1;"></textarea>
+        <label style="grid-column:1/-1;font-size:12px;display:flex;align-items:center;gap:6px;">
+          <input type="checkbox" id="mailAlsoMailto" style="width:auto;"> Send hone ke baad apne Email App (Gmail/Outlook) me bhi kholo
+        </label>
+        <button type="submit" style="grid-column:1/-1;background:var(--fk-blue);">📤 Send Mail</button>
+        <div style="grid-column:1/-1;font-size:11px;color:var(--muted);line-height:1.5;">
+          ℹ️ Ye mail customer ke <b>Support → My Mails</b> me dikhega. Customer ke real Gmail/Outlook inbox me bhejne ke liye "Email App me bhi kholo" tick karein.
+        </div>
+      </form>
+    </div>
+
+    <!-- 2. PRODUCT MANAGEMENT & INVENTORY -->
+    <div id="adminProductsSection" class="mailbox-card" style="display:none;padding:14px;">
+      <div class="mailbox-header" style="background:#fff;padding:0 0 10px 0;">
+        <span><b>Add New Product with Stock Inventory &amp; Multi-Photo Support</b></span>
+      </div>
+      
+      <form class="admin-prod-form" onsubmit="adminSaveProduct(event)">
+        <input type="text" id="newProdName" placeholder="Product Name (e.g. Smart Helmet)" required>
+        
+        <select id="newProdCat" onchange="toggleOtherCatInput(this.value)" required>
+          <option value="Helmets">Helmets</option>
+          <option value="Chargers">Chargers</option>
+          <option value="Batteries">Batteries</option>
+          <option value="Mobile Cables">Mobile Cables</option>
+          <option value="Earphones">Earphones</option>
+          <option value="Accessories">Accessories</option>
+          <option value="Other">➕ Other (Type Custom Category)</option>
+        </select>
+
+        <input type="text" id="newProdCustomCat" placeholder="Type Custom Category Name" style="display:none;border-color:var(--fk-blue);background:#eff6ff;">
+        <input type="number" id="newProdOrig" placeholder="Original MRP Price (₹)" required min="1" oninput="calculateDiscountPreview()">
+        <input type="number" id="newProdPrice" placeholder="Selling Offer Price (₹)" required min="1" oninput="calculateDiscountPreview()">
+        <input type="number" id="newProdStock" placeholder="Inventory Units in Stock (e.g. 50)" required min="0" value="20">
+        
+        <div style="grid-column:1/-1;border:1px solid #cbd5e1;background:#f8fafc;padding:10px;border-radius:4px;">
+          <b style="font-size:12px;color:#334155;display:block;margin-bottom:4px;">📸 Product Images (Primary + 4 Optional Photos)</b>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div>
+              <label style="font-size:11px;font-weight:700;">📁 Upload Files (Select Multiple):</label>
+              <input type="file" id="newProdMultiFiles" accept="image/*" multiple onchange="handleMultipleImagesUpload(event)">
+            </div>
+            <div>
+              <label style="font-size:11px;font-weight:700;">🔗 Or Primary Image URL Link:</label>
+              <input type="url" id="newProdImgUrl" placeholder="https://..." oninput="handleUrlImagePreview(this.value)">
+            </div>
+          </div>
+          <div class="multi-preview-strip" id="multiPreviewStrip">
+            <span style="font-size:11px;color:var(--muted);padding:8px;">No images uploaded yet. Selected photos will appear here.</span>
+          </div>
+        </div>
+
+        <div style="grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;background:#e2e8f0;padding:6px 10px;border-radius:3px;">
+          <span id="discountPreviewText" style="font-weight:700;color:var(--fk-green);font-size:12px;">Discount: 0% OFF</span>
+          <button type="submit">+ Publish Product &amp; Add Stock</button>
+        </div>
+      </form>
+
+      <div class="mailbox-header" style="background:#fff;padding:10px 0 6px 0;">
+        <span><b>Catalog &amp; Live Inventory Stock Level</b></span>
+        <span id="adminCatalogCountBadge">0 Products</span>
+      </div>
+
+      <div class="users-table-wrap">
+        <table class="users-table">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Product Name</th>
+              <th>Category</th>
+              <th>Stock / Units</th>
+              <th>Selling Price</th>
+              <th>MRP</th>
+              <th>Discount</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="adminProductsTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 3. STAFF TASK & CHAT BOX -->
+    <div id="adminChatSection" class="mailbox-card" style="display:none;padding:14px;">
+      <div class="mailbox-header" style="background:#fff;padding:0 0 10px 0;">
+        <span><b>Staff Communication &amp; Live Task Delegation</b></span>
+        <button id="btnToggleStaffChatBlock" style="background:#dc2626;color:#fff;border:0;padding:4px 10px;border-radius:3px;font-size:11px;font-weight:700;cursor:pointer;" onclick="toggleSelectedStaffChatBlock()">
+          🚫 Block Staff Chat
+        </button>
+      </div>
+      <div class="chat-container">
+        <div class="chat-list-panel">
+          <b style="font-size:12px;display:block;margin-bottom:8px;color:#475569;">Select Staff Member:</b>
+          <div id="chatStaffList"></div>
+        </div>
+        <div class="chat-main-panel">
+          <div style="padding-bottom:8px;border-bottom:1px solid var(--line);font-weight:700;font-size:13px;display:flex;justify-content:space-between;align-items:center;" id="chatActiveHeader">
+            <span>Select a staff member on the left</span>
+            <span id="chatLockBadge" style="font-size:11px;color:#dc2626;font-weight:800;display:none;">🔒 Chat Blocked</span>
+          </div>
+          <div class="chat-messages-stream" id="chatMessagesStream">
+            <div style="color:var(--muted);text-align:center;margin:auto;">No message history loaded.</div>
+          </div>
+          <form class="chat-send-bar" id="chatSendForm" onsubmit="handleSendStaffMessage(event)">
+            <input type="text" id="chatMsgInput" placeholder="Type instruction, delivery task, or notice..." required>
+            <button type="submit" id="btnSendChat">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. COMPANY NOTICE BOARD PUBLISHER -->
+    <div id="adminNoticeSection" class="mailbox-card" style="display:none;padding:14px;">
+      <div class="mailbox-header" style="background:#fff;padding:0 0 10px 0;">
+        <span><b>Publish New Company Notice / Thumbnail Announcement</b></span>
+      </div>
+      <form class="admin-prod-form" onsubmit="handlePublishNotice(event)">
+        <input type="text" id="noticeHeadlineInput" placeholder="Headline / Title (e.g. Festival Shift Timings)" required style="grid-column:1/-1;">
+        <textarea id="noticeDescInput" rows="3" placeholder="Full notice description for all staff..." required style="grid-column:1/-1;"></textarea>
+        <div>
+          <label style="font-size:11px;font-weight:700;">Notice Thumbnail Image URL:</label>
+          <input type="url" id="noticeThumbUrl" placeholder="https://..." oninput="document.getElementById('noticePreviewImg').src=this.value">
+        </div>
+        <div>
+          <label style="font-size:11px;font-weight:700;">Or Upload Device Photo:</label>
+          <input type="file" accept="image/*" onchange="handleNoticeFileUpload(event)">
+        </div>
+        <div style="grid-column:1/-1;display:flex;align-items:center;gap:12px;background:#f8fafc;padding:8px;border-radius:4px;border:1px dashed var(--line);">
+          <img id="noticePreviewImg" src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=200" style="width:60px;height:60px;object-fit:cover;border-radius:4px;">
+          <span style="font-size:11px;color:var(--muted);">Thumbnail Preview. This banner will be visible to all staff on their dashboard.</span>
+        </div>
+        <button type="submit" style="grid-column:1/-1;background:var(--fk-blue);">📢 Publish Company Notice</button>
+      </form>
+    </div>
+
+    <!-- 5. TEAM MANAGEMENT WITH BLOCK / UNBLOCK -->
+    <div id="adminTeamSection" class="mailbox-card" style="display:none;padding:14px;">
+      <div class="mailbox-header" style="background:#fff;padding:0 0 10px 0;">
+        <span id="teamFormTitle"><b>Add Team Member</b></span>
+      </div>
+
+      <form class="admin-prod-form" onsubmit="adminSaveTeamMember(event)">
+        <input type="text" id="newTeamName" placeholder="Full Name (e.g. Ramesh Kumar)" required>
+        <input type="tel" id="newTeamPhone" placeholder="Mobile Number (10 digits)" pattern="[0-9]{10}" required>
+        <input type="password" id="newTeamPass" placeholder="Login Password" minlength="4" required>
+        
+        <select id="newTeamRole" required>
+        </select>
+
+        <button type="submit" style="grid-column:1/-1;background:var(--fk-blue);">+ Add Member</button>
+      </form>
+
+      <div class="mailbox-header" style="background:#fff;padding:10px 0 6px 0;">
+        <span><b>Staff &amp; Sub-Admin Directory (With Access Control)</b></span>
+        <span id="adminTeamCountBadge">0 Members</span>
+      </div>
+
+      <div class="users-table-wrap">
+        <table class="users-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Mobile (Login)</th>
+              <th>Password</th>
+              <th>Role</th>
+              <th>Account Status</th>
+              <th>Chat Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="adminTeamTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 6. CUSTOMER ACCOUNTS (CONFIDENTIAL FOR SUPER ADMIN & SUB-ADMIN ONLY) -->
+    <div id="adminUsersSection" class="users-table-wrap" style="display:none;">
+      <div class="mailbox-header">
+        <span>Registered Customers (Super Admin &amp; Sub-Admin Confidential Directory)</span>
+        <span id="adminUsersCountBadge">0 Customers</span>
+      </div>
+      <table class="users-table">
+        <thead>
+          <tr>
+            <th>Customer Name</th>
+            <th>Email</th>
+            <th>Phone / Login</th>
+            <th>Password</th>
+            <th>Status</th>
+            <th>Security Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="adminUsersTableBody"></tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <!-- ✉️ MAIL VIEW / REPLY MODAL -->
+  <div id="mailViewModalOverlay">
+    <div class="edit-modal-box">
+      <div class="modal-head" style="background:var(--fk-blue);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;">
+        <h3 style="margin:0;font-size:15px;" id="mailViewTitle">📧 Mail</h3>
+        <button class="btn-close" type="button" onclick="closeMailView()">✕</button>
+      </div>
+      <div class="modal-body-scrollable" id="mailViewBody"></div>
+    </div>
+  </div>
+
+  <!-- 📸 ULTRA ORDER DETAILS MODAL -->
+  <div id="orderDetailsModalOverlay">
+    <div class="edit-modal-box">
+      <div class="modal-head" style="background:var(--fk-blue);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;">
+        <h3 style="margin:0;font-size:15px;" id="orderDetailModalTitle">📦 Order Information</h3>
+        <button class="btn-close" type="button" onclick="closeOrderDetailsModal()">✕</button>
+      </div>
+      <div class="modal-body-scrollable" id="orderDetailsModalBody">
+      </div>
+    </div>
+  </div>
+
+  <!-- EDIT PRODUCT MODAL DIRECTLY INSIDE ADMIN WORKSPACE -->
+  <div id="editProductModalOverlay">
+    <div class="edit-modal-box">
+      <div class="modal-head" style="background:var(--fk-blue);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;">
+        <h3 style="margin:0;font-size:15px;">✏️ Edit Product &amp; Inventory Details</h3>
+        <button class="btn-close" type="button" onclick="closeEditProductModal()">✕</button>
+      </div>
+      <div class="modal-body-scrollable">
+        <form class="auth-form" onsubmit="handleSaveEditedProduct(event)">
+          <input type="hidden" id="editProdIndex">
+          
+          <div>
+            <label>Product Name</label>
+            <input type="text" id="editProdName" required>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div>
+              <label>Category</label>
+              <input type="text" id="editProdCat" required>
+            </div>
+            <div>
+              <label>Inventory Stock Units</label>
+              <input type="number" id="editProdStock" required min="0">
+            </div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div>
+              <label>MRP (Original ₹)</label>
+              <input type="number" id="editProdOrig" required min="1">
+            </div>
+            <div>
+              <label>Selling Offer Price (₹)</label>
+              <input type="number" id="editProdPrice" required min="1">
+            </div>
+          </div>
+
+          <div>
+            <label>Primary Image URL or Base64</label>
+            <input type="text" id="editProdImg" placeholder="Image URL / Base64" required oninput="document.getElementById('editImgPreview').src=this.value">
+          </div>
+
+          <div>
+            <label>Replace Primary Image via Device</label>
+            <input type="file" accept="image/*" onchange="handleEditFileChange(event)">
+          </div>
+
+          <div style="display:flex;align-items:center;gap:10px;margin-top:6px;">
+            <img id="editImgPreview" src="" style="width:60px;height:60px;object-fit:contain;border:1px solid #ddd;border-radius:3px;">
+            <span style="font-size:11px;color:var(--muted)">Instant image preview</span>
+          </div>
+
+          <button type="submit" class="auth-btn-primary" style="background:var(--fk-green);margin-top:10px;">Save &amp; Update Product</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// SUPER ADMIN MASTER CREDENTIALS
+const ADMIN_PHONE = "6306211265";
+const ADMIN_PASS = "Rushtom@1927";
+const ADMIN_MASTER_SEC = "ajay";
+
+const defaultCatalog = [
+  {id: 1, name: "Vega Cruiser ISI Certified Safety Helmet", cat: "Helmets", price: 899, orig: 1499, stock: 25, rating: 4.4, reviews: 342, img: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=400", gallery: []},
+  {id: 2, name: "Steelbird Full Face Matte Black Aerodynamic Helmet", cat: "Helmets", price: 1199, orig: 1899, stock: 15, rating: 4.6, reviews: 610, img: "https://images.unsplash.com/photo-1558980664-3a031cf67ea8?w=400", gallery: []},
+  {id: 3, name: "60V Smart Auto Cut-Off Fast Charger for EV Scooters", cat: "Chargers", price: 1850, orig: 2499, stock: 30, rating: 4.5, reviews: 184, img: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=400", gallery: []},
+  {id: 4, name: "48V 3A Heavy Duty Copper Heat Sink EV Charger", cat: "Chargers", price: 1650, orig: 2200, stock: 18, rating: 4.3, reviews: 92, img: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400", gallery: []},
+  {id: 5, name: "65W Type-C Super Fast Braided Charging Cable", cat: "Mobile Cables", price: 249, orig: 499, stock: 50, rating: 4.4, reviews: 852, img: "https://images.unsplash.com/photo-1588508065123-287b28e013da?w=400", gallery: []},
+  {id: 6, name: "3-in-1 Fast Nylon Braided Cable (Type-C, iPhone, Micro)", cat: "Mobile Cables", price: 349, orig: 699, stock: 40, rating: 4.2, reviews: 412, img: "https://images.unsplash.com/photo-1608156639585-b3a032ef9689?w=400", gallery: []},
+  {id: 7, name: "Bass Pro Magnetic Wireless Neckband (30H Playtime)", cat: "Earphones", price: 499, orig: 999, stock: 35, rating: 4.3, reviews: 960, img: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=400", gallery: []},
+  {id: 8, name: "TWS True Wireless Stereo Earbuds with Digital Display", cat: "Earphones", price: 799, orig: 1999, stock: 20, rating: 4.5, reviews: 1205, img: "https://images.unsplash.com/photo-1572536147248-ac59a8abfa4b?w=400", gallery: []},
+  {id: 9, name: "Heavy-Duty All-Weather Waterproof Scooter Cover", cat: "Accessories", price: 399, orig: 799, stock: 12, rating: 4.2, reviews: 219, img: "https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=400", gallery: []},
+  {id: 10, name: "Universal 360° Metal Handlebar Mobile Mount Holder", cat: "Accessories", price: 299, orig: 599, stock: 25, rating: 4.4, reviews: 310, img: "https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?w=400", gallery: []},
+  {id: 11, name: "48V 24Ah Lithium-Ion Scooter Battery Pack (3 Yr Warranty)", cat: "Batteries", price: 14500, orig: 18000, stock: 8, rating: 4.7, reviews: 78, img: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=400", gallery: []}
+];
+
+let catalog = [];
+let cart = [];
+let orders = [];
+let users = [];
+let teamMembers = [];
+let staffChats = [];
+let companyNotice = {
+  title: "📌 Welcome to PAG Moters Workspace",
+  desc: "All staff members are requested to process orders promptly and verify delivery PINs.",
+  thumb: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=200",
+  date: "Live Operational Notice"
+};
+let currentUser = null;
+let currentMultiUploadedImages = [];
+let activeChatStaffPhone = "";
+
+try { catalog = JSON.parse(localStorage.getItem('pag_catalog_db')) || defaultCatalog; } catch(e){ catalog = defaultCatalog; }
+try { cart = JSON.parse(localStorage.getItem('pag_cart_items')) || []; } catch(e){ cart = []; }
+try { orders = JSON.parse(localStorage.getItem('pag_orders_db')) || []; } catch(e){ orders = []; }
+try { users = JSON.parse(localStorage.getItem('pag_users_db')) || []; } catch(e){ users = []; }
+try { teamMembers = JSON.parse(localStorage.getItem('pag_team_db')) || []; } catch(e){ teamMembers = []; }
+try { staffChats = JSON.parse(localStorage.getItem('pag_staff_chats_db')) || []; } catch(e){ staffChats = []; }
+try { companyNotice = JSON.parse(localStorage.getItem('pag_company_notice_db')) || companyNotice; } catch(e){}
+try { currentUser = JSON.parse(localStorage.getItem('pag_active_user')) || null; } catch(e){ currentUser = null; }
+let mails = [];
+try { mails = JSON.parse(localStorage.getItem('pag_mail_db')) || []; } catch(e){ mails = []; }
+let adminMailView = 'inbox';
+
+function persistCatalog() { 
+  localStorage.setItem('pag_catalog_db', JSON.stringify(catalog)); 
+  displayProducts(catalog); 
+  renderAdminProductsTable(); 
+  syncCategoryMenus();
+}
+function persistCart() { localStorage.setItem('pag_cart_items', JSON.stringify(cart)); syncCartUI(); }
+function persistOrders() { localStorage.setItem('pag_orders_db', JSON.stringify(orders)); renderAdminMailbox(); }
+function persistUsers() { localStorage.setItem('pag_users_db', JSON.stringify(users)); renderAdminUsersTable(); }
+function persistTeam() { localStorage.setItem('pag_team_db', JSON.stringify(teamMembers)); renderAdminTeamTable(); }
+function persistChats() { localStorage.setItem('pag_staff_chats_db', JSON.stringify(staffChats)); }
+function persistNotice() { localStorage.setItem('pag_company_notice_db', JSON.stringify(companyNotice)); renderNoticeDisplay(); }
+function persistCurrentUser() { localStorage.setItem('pag_active_user', JSON.stringify(currentUser)); syncAuthUI(); }
+
+function cleanPhone(val) {
+  if(!val) return '';
+  let num = val.toString().replace(/\D/g, '');
+  if(num.length > 10 && num.startsWith('91')) num = num.slice(2);
+  if(num.length > 10 && num.startsWith('0')) num = num.slice(1);
+  return num;
+}
+
+// 🔔 IN-APP TOAST NOTIFICATION ENGINE
+function showToast(text, type = "info") {
+  const container = document.getElementById('toastContainer');
+  if(!container) return;
+  const toast = document.createElement('div');
+  toast.className = `toast-msg ${type}`;
+  toast.innerHTML = `<span>${type === 'success' ? '✅' : type === 'error' ? '❌' : 'ℹ️'}</span> ${text}`;
+  container.appendChild(toast);
+  setTimeout(() => {
+    toast.style.transition = 'opacity .4s ease';
+    toast.style.opacity = '0';
+    setTimeout(() => toast.remove(), 400);
+  }, 3200);
+}
+
+// 🕒 LIVE REAL-TIME CLOCK
+function startRealTimeClock() {
+  function updateClock() {
+    const now = new Date();
+    let hours = now.getHours();
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+    const formattedHours = String(hours).padStart(2, '0');
+    const formattedTime = `${formattedHours}:${minutes}:${seconds} ${ampm}`;
+
+    const customerClock = document.getElementById('realTimeClock');
+    const adminWatch = document.getElementById('adminLiveWatch');
+    if (customerClock) customerClock.innerText = formattedTime;
+    if (adminWatch) adminWatch.innerText = formattedTime;
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
+}
+
+// ⏳ 12-HOURS EXACT COUNTDOWN
+function startSaleTimer() {
+  const STORAGE_KEY = 'pag_sale_fixed_end_time';
+  let endTime = localStorage.getItem(STORAGE_KEY);
+  
+  if(!endTime) {
+    endTime = Date.now() + (12 * 60 * 60 * 1000);
+    localStorage.setItem(STORAGE_KEY, endTime.toString());
+  } else {
+    endTime = parseInt(endTime, 10);
+  }
+
+  function tick() {
+    const now = Date.now();
+    const remaining = Math.max(0, Math.floor((endTime - now) / 1000));
+    const clockEl = document.getElementById('saleClock');
+    const labelEl = document.getElementById('saleClockLabel');
+
+    if(remaining <= 0) {
+      if(clockEl) {
+        clockEl.innerText = "OFFER ENDED";
+        clockEl.style.color = "#ffdddd";
+        clockEl.style.fontSize = "16px";
+      }
+      if(labelEl) labelEl.innerText = "Sale Status";
+      return;
+    }
+
+    const h = String(Math.floor(remaining / 3600)).padStart(2, '0');
+    const m = String(Math.floor((remaining % 3600) / 60)).padStart(2, '0');
+    const s = String(remaining % 60).padStart(2, '0');
+    if(clockEl) clockEl.innerText = `${h}h : ${m}m : ${s}s`;
+  }
+
+  tick();
+  setInterval(tick, 1000);
+}
+
+// 📍 GPS CURRENT LOCATION DETECTION
+function detectCustomerGpsLocation() {
+  const btn = document.getElementById('btnDetectGps');
+  if (!navigator.geolocation) {
+    showToast("Geolocation is not supported by your browser.", "error");
+    return;
+  }
+
+  btn.innerHTML = '⌛ Fetching Location...';
+  btn.disabled = true;
+
+  navigator.geolocation.getCurrentPosition(
+    async (position) => {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+      try {
+        const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`);
+        const data = await response.json();
+        
+        if (data && data.address) {
+          const addr = data.display_name;
+          const postcode = data.address.postcode || '';
+          
+          document.getElementById('orderCustAddr').value = addr;
+          if (postcode) {
+            const cleanPost = postcode.replace(/\D/g, '').slice(0, 6);
+            if (cleanPost.length === 6) {
+              document.getElementById('orderCustPin').value = cleanPost;
+            }
+          }
+          showToast("Location & Pincode auto-filled successfully!", "success");
+        } else {
+          showToast("Could not determine street address. Please type manually.", "error");
+        }
+      } catch (err) {
+        showToast("Error retrieving address details from GPS.", "error");
+      } finally {
+        btn.innerHTML = '📍 Use My Current Location';
+        btn.disabled = false;
+      }
+    },
+    () => {
+      btn.innerHTML = '📍 Use My Current Location';
+      btn.disabled = false;
+      showToast("GPS Permission Denied. Please enter address manually.", "error");
+    },
+    { enableHighAccuracy: true, timeout: 10000 }
+  );
+}
+
+// 📊 EXCEL REPORT EXPORT
+function exportOrdersToExcel() {
+  try { orders = JSON.parse(localStorage.getItem('pag_orders_db')) || []; } catch(e){ orders = []; }
+  
+  if(!orders.length) {
+    alert("Export Failed: No orders placed yet.");
+    return;
+  }
+
+  const statusNames = ["", "Order Placed", "Packed", "Out for Delivery", "Delivered"];
+
+  let csvContent = "data:text/csv;charset=utf-8,";
+  csvContent += "Order ID,Date,Customer Name,Phone Number,Delivery Address,Pincode,Items,Total Amount (INR),Payment Method,Secret Delivery PIN,Status\n";
+
+  orders.forEach(o => {
+    const safeItems = `"${(o.items || '').replace(/"/g, '""')}"`;
+    const safeAddr = `"${(o.address || '').replace(/"/g, '""')}"`;
+    const safeName = `"${(o.customerName || '').replace(/"/g, '""')}"`;
+    const statusText = statusNames[o.statusStep] || 'Processing';
+
+    csvContent += `${o.id},"${o.date}",${safeName},${o.customerPhone},${safeAddr},${o.pincode || 'N/A'},${safeItems},${o.totalPayable},${o.paymentMethod},${o.deliveryPin || 'N/A'},${statusText}\n`;
+  });
+
+  const encodedUri = encodeURI(csvContent);
+  const link = document.createElement("a");
+  link.setAttribute("href", encodedUri);
+  link.setAttribute("download", `PAG_Moters_Sales_Report_${new Date().toISOString().slice(0,10)}.csv`);
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  showToast("Sales & Orders Excel report downloaded!", "success");
+}
+
+// 📦 ORDER TRACKING & MY ORDERS LOGIC
+function openTrackModal() {
+  document.getElementById('trackModalOverlay').classList.add('show');
+  if(currentUser && currentUser.phone) {
+    document.getElementById('trackInput').value = currentUser.phone;
+    performOrderSearch();
+  }
+}
+
+function closeTrackModal() {
+  document.getElementById('trackModalOverlay').classList.remove('show');
+}
+
+function performOrderSearch() {
+  try { orders = JSON.parse(localStorage.getItem('pag_orders_db')) || []; } catch(e){ orders = []; }
+  
+  const rawInput = document.getElementById('trackInput').value.trim();
+  const cleanedPhone = cleanPhone(rawInput);
+  const rawUpper = rawInput.toUpperCase();
+  const container = document.getElementById('trackResultContainer');
+
+  if(!rawInput) {
+    container.innerHTML = '<div style="color:#d32f2f;font-size:12px;margin-top:8px;">Please enter your mobile number or Order ID.</div>';
+    return;
+  }
+
+  const matchedList = orders.filter(o => {
+    const oPhone = cleanPhone(o.customerPhone);
+    const oId = (o.id || '').toUpperCase();
+    return (cleanedPhone && oPhone === cleanedPhone) || oId === rawUpper;
+  });
+
+  if(!matchedList.length) {
+    container.innerHTML = `
+      <div class="tracker-status-box" style="text-align:center;">
+        <div style="font-size:30px;">🔍</div>
+        <b>No Order Found for "${rawInput}"</b>
+        <p style="font-size:12px;color:#878787;margin:4px 0 0;">Check your 10-digit number used during ordering.</p>
+        <a style="display:inline-block;margin-top:6px;font-size:12px;color:var(--fk-blue);font-weight:700;" href="https://wa.me/918766641866?text=Track%20Order%20for%20${rawInput}" target="_blank">Contact WhatsApp Support</a>
+      </div>`;
+    return;
+  }
+
+  container.innerHTML = matchedList.map(matched => buildOrderCardHTML(matched)).join('');
+}
+
+function buildOrderCardHTML(matched) {
+  return `
+    <div class="tracker-status-box">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <b>Order ID: ${matched.id}</b>
+        <span style="font-size:11px;color:var(--muted)">${matched.date}</span>
+      </div>
+
+      <div class="delivery-code-pill">
+        <span>🔐 Secret Delivery Code:</span>
+        <span class="code-num">${matched.deliveryPin || '9999'}</span>
+      </div>
+      <small style="color:#d97706;display:block;margin-bottom:6px;font-size:11px;">⚠️ Share this code with delivery person ONLY when you physically receive the item.</small>
+
+      <div class="timeline">
+        <div class="timeline-step completed">
+          <div class="timeline-dot">✓</div>
+          <span>Ordered</span>
+        </div>
+        <div class="timeline-step ${matched.statusStep >= 2 ? 'completed' : 'current'}">
+          <div class="timeline-dot">${matched.statusStep >= 2 ? '✓' : '2'}</div>
+          <span>Packed</span>
+        </div>
+        <div class="timeline-step ${matched.statusStep >= 3 ? 'completed' : (matched.statusStep === 2 ? 'current' : '')}">
+          <div class="timeline-dot">${matched.statusStep >= 3 ? '✓' : '3'}</div>
+          <span>On the Way</span>
+        </div>
+        <div class="timeline-step ${matched.statusStep >= 4 ? 'completed' : (matched.statusStep === 3 ? 'current' : '')}">
+          <div class="timeline-dot">${matched.statusStep >= 4 ? '✓' : '4'}</div>
+          <span>Delivered</span>
+        </div>
+      </div>
+
+      <div style="font-size:12px;line-height:1.5;margin-top:10px;border-top:1px solid #e0e0e0;padding-top:8px;">
+        <div><b>Delivery To:</b> ${matched.customerName} (${matched.customerPhone})</div>
+        <div><b>Address:</b> ${matched.address} - <b>PIN: ${matched.pincode || 'N/A'}</b></div>
+        <div><b>Ordered Items:</b> ${matched.items}</div>
+        <div><b>Total:</b> ₹${matched.totalPayable.toLocaleString('en-IN')} (${matched.paymentMethod})</div>
+      </div>
+
+      <a style="display:block;text-align:center;font-size:12px;color:var(--fk-blue);font-weight:700;margin-top:8px;text-decoration:none;" 
+         target="_blank" href="https://wa.me/918766641866?text=Track%20Order%20Status%20for%20${matched.id}">
+         Need immediate delivery update? Chat on WhatsApp
+      </a>
+    </div>
+  `;
+}
+
+function openMyOrdersModal() {
+  if (!currentUser) {
+    showToast("Kripya pehle Login karein apne orders dekhne ke liye!", "error");
+    openAuthModal('login');
+    return;
+  }
+  try { orders = JSON.parse(localStorage.getItem('pag_orders_db')) || []; } catch(e){ orders = []; }
+  document.getElementById('myOrdersModalOverlay').classList.add('show');
+  renderMyOrdersList();
+}
+
+function closeMyOrdersModal() {
+  document.getElementById('myOrdersModalOverlay').classList.remove('show');
+}
+
+function renderMyOrdersList() {
+  const content = document.getElementById('myOrdersContent');
+  let customerOrders = [];
+
+  if(currentUser && currentUser.phone) {
+    const userPhone = cleanPhone(currentUser.phone);
+    customerOrders = orders.filter(o => cleanPhone(o.customerPhone) === userPhone);
+  } else {
+    customerOrders = orders;
+  }
+
+  if(!customerOrders.length) {
+    content.innerHTML = `
+      <div style="text-align:center;padding:30px 10px;color:var(--muted)">
+        <div style="font-size:42px;margin-bottom:8px;">📦</div>
+        <b style="font-size:14px;color:#212121;">No Orders Placed Yet</b>
+        <p style="font-size:12px;margin:4px 0 12px;">Place your first order to view delivery status and secret PIN here.</p>
+        <button class="btn-nav" style="background:var(--fk-blue);color:#fff;margin:auto;padding:6px 14px;" onclick="closeMyOrdersModal()">Start Shopping</button>
+      </div>`;
+    return;
+  }
+
+  content.innerHTML = `
+    <div style="margin-bottom:10px;font-size:12px;color:#555;">
+      Showing <b>${customerOrders.length} Order(s)</b> placed:
+    </div>
+    ${customerOrders.map(o => buildOrderCardHTML(o)).join('')}
+  `;
+}
+
+// ==========================================
+// 🛡️ WORKSPACE & STRICT PERMISSION LOGIC
+// ==========================================
+function openAdminPortal(role = "Super Admin") {
+  closeAuthModal();
+  document.getElementById('adminPanelModal').style.display = 'flex';
+  document.getElementById('adminRoleDisplay').innerText = role;
+
+  const btnOrders = document.getElementById('btnTabOrders');
+  const btnProducts = document.getElementById('btnTabProducts');
+  const btnChat = document.getElementById('btnTabChat');
+  const btnNotice = document.getElementById('btnTabNotice');
+  const btnTeam = document.getElementById('btnTabTeam');
+  const btnUsers = document.getElementById('btnTabUsers');
+  const btnMail = document.getElementById('btnTabMail');
+  const roleSelect = document.getElementById('newTeamRole');
+
+  renderNoticeDisplay();
+
+  // 1. SUPER ADMIN: Full Access
+  if(role === "Super Admin") {
+    btnOrders.style.display = 'inline-block';
+    btnProducts.style.display = 'inline-block';
+    btnChat.style.display = 'inline-block';
+    btnNotice.style.display = 'inline-block';
+    btnTeam.style.display = 'inline-block';
+    btnUsers.style.display = 'inline-block';
+    btnMail.style.display = 'inline-block';
+    document.getElementById('teamFormTitle').innerHTML = '<b>Add Sub-Admin or Staff Member</b>';
+    roleSelect.innerHTML = `
+      <option value="Sub-Admin">🛡️ Sub-Admin (Manager)</option>
+      <option value="Staff - Order Manager">📦 Staff: Order Manager</option>
+      <option value="Staff - Product Manager">🏷️ Staff: Product Manager</option>
+      <option value="Staff - Delivery Partner">🚚 Staff: Delivery Partner</option>
+      <option value="Staff - Support">💬 Staff: Customer Support</option>
+    `;
+    switchAdminTab('orders');
+  } 
+  // 2. SUB-ADMIN: Can manage staff & view customers
+  else if(role === "Sub-Admin") {
+    btnOrders.style.display = 'inline-block';
+    btnProducts.style.display = 'inline-block';
+    btnChat.style.display = 'inline-block';
+    btnNotice.style.display = 'inline-block';
+    btnTeam.style.display = 'inline-block';
+    btnUsers.style.display = 'inline-block';
+    btnMail.style.display = 'inline-block';
+    document.getElementById('teamFormTitle').innerHTML = '<b>Add Staff Member (Sub-Admin Restricted)</b>';
+    roleSelect.innerHTML = `
+      <option value="Staff - Order Manager">📦 Staff: Order Manager</option>
+      <option value="Staff - Product Manager">🏷️ Staff: Product Manager</option>
+      <option value="Staff - Delivery Partner">🚚 Staff: Delivery Partner</option>
+      <option value="Staff - Support">💬 Staff: Customer Support</option>
+    `;
+    switchAdminTab('orders');
+  } 
+  // 3. STAFF ROLES: CUSTOMER PASSWORDS STRICTLY BLOCKED & HIDDEN
+  else {
+    btnUsers.style.display = 'none';
+    btnMail.style.display = role.includes('Support') ? 'inline-block' : 'none';
+    btnTeam.style.display = 'none';
+    btnNotice.style.display = 'none';
+    btnChat.style.display = 'inline-block';
+
+    if(role.includes("Product Manager")) {
+      btnOrders.style.display = 'none';
+      btnProducts.style.display = 'inline-block';
+      switchAdminTab('products');
+    } else {
+      btnOrders.style.display = 'inline-block';
+      btnProducts.style.display = 'none';
+      switchAdminTab('orders');
+    }
+  }
+
+  renderAdminMailbox();
+  renderAdminProductsTable();
+  renderAdminTeamTable();
+  renderAdminUsersTable();
+  initChatSystem();
+  renderMailAdmin();
+}
+
+function closeAdminPortal() {
+  document.getElementById('adminPanelModal').style.display = 'none';
+  handleUserLogout();
+}
+
+function switchAdminTab(tab) {
+  document.getElementById('adminOrdersSection').style.display = tab === 'orders' ? 'block' : 'none';
+  document.getElementById('adminProductsSection').style.display = tab === 'products' ? 'block' : 'none';
+  document.getElementById('adminChatSection').style.display = tab === 'chat' ? 'block' : 'none';
+  document.getElementById('adminNoticeSection').style.display = tab === 'notice' ? 'block' : 'none';
+  document.getElementById('adminTeamSection').style.display = tab === 'team' ? 'block' : 'none';
+  document.getElementById('adminUsersSection').style.display = tab === 'users' ? 'block' : 'none';
+  document.getElementById('adminMailSection').style.display = tab === 'mail' ? 'block' : 'none';
+
+  document.querySelectorAll('.admin-tab-btn').forEach(btn => btn.classList.remove('active'));
+  const activeBtn = document.getElementById(`btnTab${tab.charAt(0).toUpperCase() + tab.slice(1)}`);
+  if(activeBtn) activeBtn.classList.add('active');
+
+  if(tab === 'chat') renderChatView();
+  if(tab === 'mail') renderMailAdmin();
+}
+
+// NOTICE BOARD ENGINE
+function renderNoticeDisplay() {
+  document.getElementById('bulletinHeadline').innerText = companyNotice.title;
+  document.getElementById('bulletinDetails').innerText = companyNotice.desc;
+  document.getElementById('bulletinThumb').src = companyNotice.thumb;
+  document.getElementById('bulletinTimestamp').innerText = companyNotice.date;
+}
+
+function handleNoticeFileUpload(e) {
+  const file = e.target.files[0];
+  if(file) {
+    const reader = new FileReader();
+    reader.onload = function(evt) {
+      document.getElementById('noticeThumbUrl').value = evt.target.result;
+      document.getElementById('noticePreviewImg').src = evt.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+function handlePublishNotice(e) {
+  e.preventDefault();
+  const title = document.getElementById('noticeHeadlineInput').value.trim();
+  const desc = document.getElementById('noticeDescInput').value.trim();
+  const thumb = document.getElementById('noticeThumbUrl').value.trim() || "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=200";
+
+  companyNotice = {
+    title,
+    desc,
+    thumb,
+    date: `Published: ${new Date().toLocaleDateString('en-IN', {day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'})}`
+  };
+  persistNotice();
+  showToast("Company Notice published to all staff dashboards!", "success");
+}
+
+// ==========================================
+// 💬 STAFF CHAT WITH BLOCK/UNBLOCK & SEEN RECEIPTS
+// ==========================================
+function initChatSystem() {
+  const staffListEl = document.getElementById('chatStaffList');
+  if(!staffListEl) return;
+
+  const isAdmin = currentUser && (currentUser.role === "Super Admin" || currentUser.role === "Sub-Admin");
+  document.getElementById('btnToggleStaffChatBlock').style.display = isAdmin ? 'inline-block' : 'none';
+
+  if(isAdmin) {
+    if(!teamMembers.length) {
+      staffListEl.innerHTML = '<small style="color:var(--muted)">No staff registered yet.</small>';
+      return;
+    }
+    staffListEl.innerHTML = teamMembers.map(m => `
+      <div class="chat-user-item ${activeChatStaffPhone === m.phone ? 'active' : ''}" onclick="selectChatStaff('${m.phone}')">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <b>${m.name}</b>
+          ${m.isChatBlocked ? '<span style="color:#dc2626;font-size:10px;font-weight:800;">🚫 Blocked</span>' : ''}
+        </div>
+        <small style="color:var(--muted)">${m.role}</small>
+      </div>
+    `).join('');
+
+    if(!activeChatStaffPhone && teamMembers.length) {
+      selectChatStaff(teamMembers[0].phone);
+    }
+  } else {
+    staffListEl.innerHTML = `
+      <div class="chat-user-item active">
+        <b>Management Direct Line</b><br>
+        <small style="color:var(--muted)">Logged in: ${currentUser.name}</small>
+      </div>
+    `;
+    activeChatStaffPhone = currentUser.phone;
+    renderChatView();
+  }
+}
+
+function selectChatStaff(phone) {
+  activeChatStaffPhone = phone;
+  initChatSystem();
+  renderChatView();
+}
+
+function toggleSelectedStaffChatBlock() {
+  const staff = teamMembers.find(t => t.phone === activeChatStaffPhone);
+  if(!staff) return;
+  staff.isChatBlocked = !staff.isChatBlocked;
+  persistTeam();
+  initChatSystem();
+  renderChatView();
+  showToast(`Staff Chat ${staff.isChatBlocked ? 'BLOCKED' : 'UNBLOCKED'} for ${staff.name}`, "info");
+}
+
+function renderChatView() {
+  const stream = document.getElementById('chatMessagesStream');
+  const header = document.getElementById('chatActiveHeader');
+  const lockBadge = document.getElementById('chatLockBadge');
+  const toggleBtn = document.getElementById('btnToggleStaffChatBlock');
+  const sendInput = document.getElementById('chatMsgInput');
+  const sendBtn = document.getElementById('btnSendChat');
+  if(!stream) return;
+
+  const staff = teamMembers.find(t => t.phone === activeChatStaffPhone) || currentUser;
+  const isChatBlocked = staff && !!staff.isChatBlocked;
+  const isStaffLoggedIn = currentUser && !['Super Admin', 'Sub-Admin'].includes(currentUser.role);
+
+  if(header && staff) {
+    header.querySelector('span').innerText = `Task & Chat with: ${staff.name} (${staff.role || 'Staff'})`;
+  }
+
+  if(lockBadge) lockBadge.style.display = isChatBlocked ? 'inline' : 'none';
+  if(toggleBtn && staff) {
+    toggleBtn.innerText = isChatBlocked ? "✅ Unblock Staff Chat" : "🚫 Block Staff Chat";
+    toggleBtn.style.background = isChatBlocked ? "#16a34a" : "#dc2626";
+  }
+
+  if(isStaffLoggedIn && isChatBlocked) {
+    sendInput.disabled = true;
+    sendBtn.disabled = true;
+    sendInput.placeholder = "🚫 Your chat access has been blocked by Admin.";
+  } else {
+    sendInput.disabled = false;
+    sendBtn.disabled = false;
+    sendInput.placeholder = "Type instruction, delivery task, or notice...";
+  }
+
+  const thread = staffChats.filter(c => c.staffPhone === activeChatStaffPhone);
+
+  if(!thread.length) {
+    stream.innerHTML = '<div style="color:var(--muted);text-align:center;margin:auto;">No tasks or messages yet. Type below to send.</div>';
+    return;
+  }
+
+  stream.innerHTML = thread.map((msg, idx) => {
+    const isFromAdmin = msg.senderRole === 'Admin';
+    let receiptHtml = '';
+
+    if(msg.status === 'Accepted') {
+      receiptHtml = '<span class="msg-status-receipt receipt-accepted">✅ Accepted Task</span>';
+    } else if(msg.status === 'Seen') {
+      receiptHtml = '<span class="msg-status-receipt receipt-seen">👁️ Seen by Staff</span>';
+    } else {
+      receiptHtml = '<span class="msg-status-receipt receipt-pending">🕒 Sent (Unread)</span>';
+    }
+
+    let staffActionButtons = '';
+    if(isStaffLoggedIn && msg.senderRole === 'Admin') {
+      if(msg.status === 'Sent') {
+        staffActionButtons = `<button style="background:var(--fk-blue);color:#fff;border:0;padding:3px 8px;border-radius:2px;font-size:10px;cursor:pointer;margin-top:4px;" onclick="markMessageStatus(${idx}, 'Seen')">👁️ Mark as Seen</button>`;
+      } else if(msg.status === 'Seen') {
+        staffActionButtons = `<button style="background:var(--fk-green);color:#fff;border:0;padding:3px 8px;border-radius:2px;font-size:10px;cursor:pointer;margin-top:4px;" onclick="markMessageStatus(${idx}, 'Accepted')">👍 Accept Task</button>`;
+      }
+    }
+
+    return `
+      <div class="chat-bubble ${isFromAdmin ? 'bubble-admin' : 'bubble-staff'}">
+        <div><b>${msg.senderName}:</b> ${msg.text}</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:4px;">
+          <small style="font-size:9px;opacity:.7;">${msg.time}</small>
+          ${receiptHtml}
+        </div>
+        ${staffActionButtons}
+      </div>
+    `;
+  }).join('');
+
+  stream.scrollTop = stream.scrollHeight;
+}
+
+function handleSendStaffMessage(e) {
+  e.preventDefault();
+  const input = document.getElementById('chatMsgInput');
+  const text = input.value.trim();
+  if(!text || !activeChatStaffPhone) return;
+
+  const staff = teamMembers.find(t => t.phone === activeChatStaffPhone) || currentUser;
+  const isStaffLoggedIn = currentUser && !['Super Admin', 'Sub-Admin'].includes(currentUser.role);
+  if(isStaffLoggedIn && staff && staff.isChatBlocked) {
+    showToast("Cannot send message: Your chat is blocked.", "error");
+    return;
+  }
+
+  const isAdmin = ['Super Admin', 'Sub-Admin'].includes(currentUser.role);
+  const newMsg = {
+    staffPhone: activeChatStaffPhone,
+    senderName: currentUser.name,
+    senderRole: isAdmin ? 'Admin' : 'Staff',
+    text: text,
+    time: new Date().toLocaleTimeString('en-IN', {hour:'2-digit', minute:'2-digit'}),
+    status: 'Sent'
+  };
+
+  staffChats.push(newMsg);
+  persistChats();
+  input.value = '';
+  renderChatView();
+}
+
+function markMessageStatus(idx, status) {
+  const staffMsgs = staffChats.filter(c => c.staffPhone === activeChatStaffPhone);
+  if(staffMsgs[idx]) {
+    staffMsgs[idx].status = status;
+    persistChats();
+    renderChatView();
+  }
+}
+
+// TEAM MANAGEMENT
+function adminSaveTeamMember(e) {
+  e.preventDefault();
+  const name = document.getElementById('newTeamName').value.trim();
+  const rawPhone = document.getElementById('newTeamPhone').value.trim();
+  const phone = cleanPhone(rawPhone);
+  const pass = document.getElementById('newTeamPass').value.trim();
+  const role = document.getElementById('newTeamRole').value;
+
+  if(phone === ADMIN_PHONE) {
+    showToast("This number is reserved for Super Admin!", "error");
+    return;
+  }
+
+  if(currentUser && currentUser.role === "Sub-Admin" && role === "Sub-Admin") {
+    showToast("Access Denied: Only Super Admin can create Sub-Admins!", "error");
+    return;
+  }
+
+  if(teamMembers.some(t => cleanPhone(t.phone) === phone)) {
+    showToast("A member with this phone number already exists!", "error");
+    return;
+  }
+
+  teamMembers.push({
+    id: Date.now(),
+    name,
+    phone,
+    pass,
+    role,
+    isBlocked: false,
+    isChatBlocked: false
+  });
+
+  persistTeam();
+  initChatSystem();
+  e.target.reset();
+  showToast(`${role} "${name}" added successfully!`, "success");
+}
+
+function renderAdminTeamTable() {
+  const tbody = document.getElementById('adminTeamTableBody');
+  const countBadge = document.getElementById('adminTeamCountBadge');
+  if(!tbody) return;
+
+  let visibleMembers = teamMembers;
+  if(currentUser && currentUser.role === "Sub-Admin") {
+    visibleMembers = teamMembers.filter(m => m.role !== "Sub-Admin");
+  }
+
+  countBadge.innerText = `${visibleMembers.length} Members`;
+
+  if(!visibleMembers.length) {
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:16px;color:#64748b;">No staff or sub-admins added yet.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = visibleMembers.map((m) => {
+    const isBlocked = !!m.isBlocked;
+    const isChatBlocked = !!m.isChatBlocked;
+    return `
+      <tr style="${isBlocked ? 'background:#fee2e2;' : ''}">
+        <td><b>${m.name}</b></td>
+        <td>${m.phone}</td>
+        <td><code style="background:#f1f5f9;padding:2px 4px;border-radius:2px;">${m.pass}</code></td>
+        <td><span style="background:${m.role === 'Sub-Admin' ? '#e0f2fe' : '#fef3c7'};color:${m.role === 'Sub-Admin' ? '#0369a1' : '#92400e'};padding:2px 8px;border-radius:10px;font-weight:700;">${m.role}</span></td>
+        <td>
+          <span style="background:${isBlocked ? '#ef4444' : '#22c55e'};color:#fff;padding:2px 6px;border-radius:8px;font-weight:700;font-size:10px;">
+            ${isBlocked ? 'BLOCKED' : 'ACTIVE'}
+          </span>
+        </td>
+        <td>
+          <span style="font-size:10px;font-weight:700;color:${isChatBlocked ? '#dc2626' : '#16a34a'}">
+            ${isChatBlocked ? '🚫 Chat Off' : '💬 Chat Open'}
+          </span>
+        </td>
+        <td style="white-space:nowrap;">
+          <button class="btn-override-pass" onclick="adminEditTeamMemberPass('${m.phone}')">Pass</button>
+          <button class="${isBlocked ? 'btn-unblock-user' : 'btn-block-user'}" onclick="toggleTeamMemberBlock('${m.phone}')">
+            ${isBlocked ? 'Unblock' : 'Block Member'}
+          </button>
+          <button class="btn-del-prod" onclick="adminDeleteTeamMember('${m.phone}')">Remove</button>
+        </td>
+      </tr>
+    `;
+  }).join('');
+}
+
+function toggleTeamMemberBlock(phone) {
+  const m = teamMembers.find(t => t.phone === phone);
+  if(!m) return;
+  m.isBlocked = !m.isBlocked;
+  persistTeam();
+  showToast(`${m.role} ${m.name} is now ${m.isBlocked ? 'BLOCKED' : 'UNBLOCKED'}!`, "info");
+}
+
+function adminEditTeamMemberPass(phone) {
+  const m = teamMembers.find(t => t.phone === phone);
+  if(!m) return;
+  const newPass = prompt(`Enter new password for ${m.name} (${m.role}):`, m.pass);
+  if(newPass && newPass.trim().length >= 4) {
+    m.pass = newPass.trim();
+    persistTeam();
+    showToast(`Password updated for ${m.name}`, "success");
+  }
+}
+
+function adminDeleteTeamMember(phone) {
+  const idx = teamMembers.findIndex(t => t.phone === phone);
+  if(idx > -1) {
+    if(confirm(`Are you sure you want to remove ${teamMembers[idx].name}?`)) {
+      teamMembers.splice(idx, 1);
+      persistTeam();
+      initChatSystem();
+    }
+  }
+}
+
+function toggleOtherCatInput(val) {
+  const customBox = document.getElementById('newProdCustomCat');
+  if(val === 'Other') {
+    customBox.style.display = 'block';
+    customBox.setAttribute('required', 'true');
+    customBox.focus();
+  } else {
+    customBox.style.display = 'none';
+    customBox.removeAttribute('required');
+  }
+}
+
+// MULTI-PHOTO UPLOAD HANDLER
+function handleMultipleImagesUpload(e) {
+  const files = Array.from(e.target.files).slice(0, 5);
+  currentMultiUploadedImages = [];
+  const strip = document.getElementById('multiPreviewStrip');
+  strip.innerHTML = '';
+
+  if(!files.length) {
+    strip.innerHTML = '<span style="font-size:11px;color:var(--muted);padding:8px;">No images uploaded yet.</span>';
+    return;
+  }
+
+  files.forEach((file, index) => {
+    const reader = new FileReader();
+    reader.onload = function(evt) {
+      currentMultiUploadedImages.push(evt.target.result);
+      const img = document.createElement('img');
+      img.src = evt.target.result;
+      img.title = `Image ${index + 1}: ${file.name}`;
+      strip.appendChild(img);
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+function handleUrlImagePreview(url) {
+  const trimmed = url.trim();
+  const strip = document.getElementById('multiPreviewStrip');
+  if(trimmed) {
+    currentMultiUploadedImages = [trimmed];
+    strip.innerHTML = `<img src="${trimmed}" title="Primary Image Link" style="width:50px;height:50px;object-fit:contain;border:1px solid #ddd;">`;
+  }
+}
+
+function calculateDiscountPreview() {
+  const orig = Number(document.getElementById('newProdOrig').value) || 0;
+  const price = Number(document.getElementById('newProdPrice').value) || 0;
+  const prev = document.getElementById('discountPreviewText');
+  if(orig > 0 && price > 0 && orig > price) {
+    const disc = Math.round((1 - price / orig) * 100);
+    prev.innerText = `Discount: ${disc}% OFF`;
+  } else {
+    prev.innerText = `Discount: 0% OFF`;
+  }
+}
+
+function adminSaveProduct(e) {
+  e.preventDefault();
+  const name = document.getElementById('newProdName').value.trim();
+  let cat = document.getElementById('newProdCat').value;
+  
+  if(cat === 'Other') {
+    const customCat = document.getElementById('newProdCustomCat').value.trim();
+    if(!customCat) {
+      showToast("Please type a custom category name!", "error");
+      return;
+    }
+    cat = customCat;
+  }
+
+  const orig = Number(document.getElementById('newProdOrig').value);
+  const price = Number(document.getElementById('newProdPrice').value);
+  const stock = Number(document.getElementById('newProdStock').value) || 0;
+  
+  if(price > orig) {
+    showToast("Selling price cannot be greater than original MRP price!", "error");
+    return;
+  }
+
+  const primaryImage = (currentMultiUploadedImages.length > 0) ? currentMultiUploadedImages[0] : "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=400";
+  const galleryImages = currentMultiUploadedImages.slice(1);
+
+  const newProduct = {
+    id: Date.now(),
+    name,
+    cat,
+    price,
+    orig,
+    stock: stock,
+    rating: 4.5,
+    reviews: 1,
+    img: primaryImage,
+    gallery: galleryImages
+  };
+
+  catalog.unshift(newProduct);
+  persistCatalog();
+
+  e.target.reset();
+  currentMultiUploadedImages = [];
+  document.getElementById('multiPreviewStrip').innerHTML = '<span style="font-size:11px;color:var(--muted);padding:8px;">No images uploaded yet.</span>';
+  toggleOtherCatInput('Helmets');
+  calculateDiscountPreview();
+  showToast(`Product "${name}" added with ${stock} inventory units!`, "success");
+}
+
+function renderAdminProductsTable() {
+  const tbody = document.getElementById('adminProductsTableBody');
+  const countBadge = document.getElementById('adminCatalogCountBadge');
+  if(!tbody) return;
+  countBadge.innerText = `${catalog.length} Products`;
+
+  tbody.innerHTML = catalog.map((p) => {
+    const discount = Math.round((1 - p.price / p.orig) * 100);
+    const photoCount = 1 + (p.gallery ? p.gallery.length : 0);
+    const isOut = p.stock <= 0;
+    return `
+      <tr>
+        <td>
+          <img src="${p.img}" style="width:36px;height:36px;object-fit:contain;border:1px solid #ddd;border-radius:2px;">
+          <small style="display:block;font-size:9px;color:var(--muted);text-align:center;">${photoCount} photo(s)</small>
+        </td>
+        <td><b>${p.name}</b></td>
+        <td><span style="background:#e0f2fe;color:#0369a1;padding:2px 6px;border-radius:10px;font-weight:700;">${p.cat}</span></td>
+        <td>
+          <b style="color:${isOut ? '#dc2626' : '#16a34a'}">${p.stock} Units</b>
+          <button type="button" class="btn-stock-quick" onclick="quickUpdateStockPrompt(${p.id})">+ Stock</button>
+        </td>
+        <td><b>₹${p.price.toLocaleString('en-IN')}</b></td>
+        <td><s>₹${p.orig.toLocaleString('en-IN')}</s></td>
+        <td><span style="color:var(--fk-green);font-weight:700;">${discount}% OFF</span></td>
+        <td style="white-space:nowrap;">
+          <button type="button" class="btn-edit-prod" onclick="openEditProductModal(${p.id})">✏️ Edit Product</button>
+          <button type="button" class="btn-del-prod" onclick="adminDeleteProduct(${p.id})">Remove</button>
+        </td>
+      </tr>
+    `;
+  }).join('');
+}
+
+function quickUpdateStockPrompt(productId) {
+  const p = catalog.find(item => item.id == productId);
+  if(!p) return;
+  const newStock = prompt(`Update stock units for "${p.name}" (Current: ${p.stock}):`, p.stock);
+  if(newStock !== null && !isNaN(newStock) && Number(newStock) >= 0) {
+    p.stock = Number(newStock);
+    persistCatalog();
+    showToast(`Stock updated to ${p.stock} units!`, "success");
+  }
+}
+
+// EDIT PRODUCT MODAL ENGINE
+function openEditProductModal(productId) {
+  const p = catalog.find(item => item.id == productId);
+  if(!p) {
+    showToast("Error: Product not found!", "error");
+    return;
+  }
+  
+  document.getElementById('editProdIndex').value = p.id;
+  document.getElementById('editProdName').value = p.name || '';
+  document.getElementById('editProdCat').value = p.cat || '';
+  document.getElementById('editProdStock').value = (p.stock !== undefined) ? p.stock : 20;
+  document.getElementById('editProdOrig').value = p.orig || '';
+  document.getElementById('editProdPrice').value = p.price || '';
+  document.getElementById('editProdImg').value = p.img || '';
+  document.getElementById('editImgPreview').src = p.img || '';
+
+  const overlay = document.getElementById('editProductModalOverlay');
+  overlay.style.display = 'flex';
+}
+
+function closeEditProductModal() {
+  const overlay = document.getElementById('editProductModalOverlay');
+  overlay.style.display = 'none';
+}
+
+function handleEditFileChange(e) {
+  const file = e.target.files[0];
+  if(file) {
+    const reader = new FileReader();
+    reader.onload = function(evt) {
+      document.getElementById('editProdImg').value = evt.target.result;
+      document.getElementById('editImgPreview').src = evt.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+function handleSaveEditedProduct(e) {
+  e.preventDefault();
+  const prodId = document.getElementById('editProdIndex').value;
+  const pIdx = catalog.findIndex(item => item.id == prodId);
+  
+  if(pIdx === -1) {
+    showToast("Product update failed: item ID not found!", "error");
+    return;
+  }
+
+  const name = document.getElementById('editProdName').value.trim();
+  const cat = document.getElementById('editProdCat').value.trim();
+  const stock = Number(document.getElementById('editProdStock').value);
+  const orig = Number(document.getElementById('editProdOrig').value);
+  const price = Number(document.getElementById('editProdPrice').value);
+  const img = document.getElementById('editProdImg').value.trim();
+
+  if(price > orig) {
+    showToast("Selling price cannot be greater than original MRP!", "error");
+    return;
+  }
+
+  catalog[pIdx].name = name;
+  catalog[pIdx].cat = cat;
+  catalog[pIdx].stock = stock;
+  catalog[pIdx].orig = orig;
+  catalog[pIdx].price = price;
+  catalog[pIdx].img = img;
+
+  persistCatalog();
+  closeEditProductModal();
+  showToast("Product details and inventory updated successfully!", "success");
+}
+
+function adminDeleteProduct(productId) {
+  const pIdx = catalog.findIndex(item => item.id == productId);
+  if(pIdx > -1) {
+    if(confirm(`Are you sure you want to remove "${catalog[pIdx].name}" from website?`)) {
+      catalog.splice(pIdx, 1);
+      persistCatalog();
+      showToast("Product removed from catalog.", "info");
+    }
+  }
+}
+
+function syncCategoryMenus() {
+  const cats = Array.from(new Set(catalog.map(p => p.cat)));
+  const navList = document.getElementById('catNavList');
+  const sideFilter = document.getElementById('sidebarFilterGroup');
+  
+  if(navList) {
+    let navHtml = `<li class="active" onclick="filterByCategory('All')">All Products</li>`;
+    cats.forEach(c => {
+      navHtml += `<li onclick="filterByCategory('${c}')">${c}</li>`;
+    });
+    navList.innerHTML = navHtml;
+  }
+
+  if(sideFilter) {
+    let sideHtml = `<b>Categories</b><label><input type="radio" name="f_cat" checked onclick="filterByCategory('All')"> All Products</label>`;
+    cats.forEach(c => {
+      sideHtml += `<label><input type="radio" name="f_cat" onclick="filterByCategory('${c}')"> ${c}</label>`;
+    });
+    sideFilter.innerHTML = sideHtml;
+  }
+}
+
+// 📦 ORDER DETAILS MODAL
+function renderAdminMailbox() {
+  const container = document.getElementById('adminMailboxContainer');
+  const badge = document.getElementById('adminOrdersCountBadge');
+  badge.innerText = `${orders.length} Orders`;
+
+  if(!orders.length) {
+    container.innerHTML = '<div style="padding:30px;text-align:center;color:#64748b;">No customer orders placed yet.</div>';
+    return;
+  }
+
+  const statusNames = ["", "Order Placed", "Packed", "Out for Delivery", "Delivered"];
+
+  container.innerHTML = orders.map((o, idx) => `
+    <div class="mail-row" onclick="openOrderDetailsModal(${idx})">
+      <span class="mail-orderid">${o.id}</span>
+      <span><b>${o.customerName}</b> (${o.customerPhone})</span>
+      <span style="color:#475569;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${o.items} - <b>PIN: ${o.pincode || 'N/A'}</b> - ${o.address}</span>
+      <span>₹${o.totalPayable.toLocaleString('en-IN')}</span>
+      <span class="mail-status-pill st-${o.statusStep}">${statusNames[o.statusStep] || 'Processing'}</span>
+    </div>
+  `).join('');
+}
+
+function openOrderDetailsModal(idx) {
+  const o = orders[idx];
+  if(!o) return;
+  const statusNames = ["", "Order Placed", "Packed", "Out for Delivery", "Delivered"];
+  const isSuperAdmin = currentUser && currentUser.role === "Super Admin";
+
+  document.getElementById('orderDetailModalTitle').innerText = `📦 Order Invoice: ${o.id}`;
+
+  let parsedItems = [];
+
+  if (o.itemList && Array.isArray(o.itemList) && o.itemList.length > 0) {
+    parsedItems = o.itemList.map(item => {
+      const match = catalog.find(p => p.id === item.id || p.name.toLowerCase() === item.name.toLowerCase());
+      return {
+        name: item.name,
+        qty: item.qty || 1,
+        price: item.price || (match ? match.price : 0),
+        img: item.img || (match ? match.img : 'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=100')
+      };
+    });
+  } 
+  else if (o.items && typeof o.items === 'string') {
+    const rawParts = o.items.split(',');
+    parsedItems = rawParts.map(part => {
+      const trimmed = part.trim();
+      let itemName = trimmed;
+      let qty = 1;
+
+      const qtyMatch = trimmed.match(/(.+)\(Qty:\s*(\d+)\)/i);
+      if (qtyMatch) {
+        itemName = qtyMatch[1].trim();
+        qty = parseInt(qtyMatch[2], 10) || 1;
+      }
+
+      const match = catalog.find(p => itemName.toLowerCase().includes(p.name.toLowerCase()) || p.name.toLowerCase().includes(itemName.toLowerCase()));
+
+      return {
+        name: itemName,
+        qty: qty,
+        price: match ? match.price : 0,
+        img: match ? match.img : 'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=100'
+      };
+    });
+  }
+
+  let itemsHtml = '';
+  if (parsedItems.length > 0) {
+    itemsHtml = parsedItems.map((item, index) => `
+      <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #e2e8f0;">
+        <span style="font-weight:900;font-size:14px;color:var(--fk-blue);min-width:20px;">${index + 1}.</span>
+        <img src="${item.img}" style="width:55px;height:55px;object-fit:contain;border:1px solid #cbd5e1;border-radius:4px;background:#fff;" onerror="this.src='https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=100'">
+        <div style="flex:1;">
+          <div style="font-size:14px;font-weight:800;color:#1e293b;">${item.name} <span style="color:#d97706;background:#fef3c7;padding:2px 8px;border-radius:12px;font-size:12px;margin-left:6px;">${item.qty} Pes</span></div>
+          <div style="font-size:12px;color:#64748b;margin-top:2px;">Rate: ₹${item.price.toLocaleString('en-IN')} each ${item.price > 0 ? `· Subtotal: <b>₹${(item.qty * item.price).toLocaleString('en-IN')}</b>` : ''}</div>
+        </div>
+      </div>
+    `).join('');
+  } else {
+    itemsHtml = `
+      <div style="padding:10px;background:#f8fafc;border-radius:4px;font-size:12px;line-height:1.5;">
+        <b>Items:</b> ${o.items}
+      </div>
+    `;
+  }
+
+  let pinBoxHtml = '';
+  if (isSuperAdmin) {
+    pinBoxHtml = `
+      <div style="background:#fef3c7;border:1px dashed #d97706;padding:10px;border-radius:4px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-size:13px;font-weight:700;color:#92400e;">Customer Delivery Secret PIN (Main Admin Only):</span>
+        <span style="font-size:18px;font-weight:900;letter-spacing:2px;background:#fff;padding:2px 8px;border-radius:3px;border:1px solid #fcd34d;color:#b45309;">${o.deliveryPin || 'N/A'}</span>
+      </div>
+    `;
+  } else {
+    pinBoxHtml = `
+      <div style="background:#f1f5f9;border:1px solid #cbd5e1;padding:10px;border-radius:4px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-size:12px;font-weight:700;color:#475569;">Delivery Verification PIN:</span>
+        <span style="font-size:12px;font-weight:800;color:#dc2626;">🔒 Hidden (Customer se lekar verify karein)</span>
+      </div>
+    `;
+  }
+
+  const modalBody = document.getElementById('orderDetailsModalBody');
+  modalBody.innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;border-bottom:1px dashed #cbd5e1;padding-bottom:8px;">
+      <div>
+        <div style="font-size:11px;color:var(--muted)">Order Date:</div>
+        <b>${o.date}</b>
+      </div>
+      <div>
+        <span class="mail-status-pill st-${o.statusStep}" style="font-size:12px;padding:4px 10px;">${statusNames[o.statusStep]}</span>
+      </div>
+    </div>
+
+    ${pinBoxHtml}
+
+    <h4 style="margin:0 0 4px;font-size:13px;color:#334155;">Ordered Items Breakdown:</h4>
+    ${itemsHtml}
+
+    <div style="margin-top:14px;background:#f8fafc;padding:10px;border-radius:4px;font-size:12px;line-height:1.6;">
+      <div><b>Customer Name:</b> ${o.customerName}</div>
+      <div><b>Phone Number:</b> <a href="tel:${o.customerPhone}" style="color:var(--fk-blue);font-weight:700;">${o.customerPhone}</a></div>
+      <div><b>Address:</b> ${o.address}</div>
+      <div><b>Delivery Pincode:</b> <b>${o.pincode || 'N/A'}</b></div>
+      <div><b>Payment Method:</b> ${o.paymentMethod}</div>
+      <div style="font-size:14px;margin-top:4px;color:#15803d;"><b>Total Amount:</b> ₹${o.totalPayable.toLocaleString('en-IN')}</div>
+    </div>
+
+    <div style="display:flex;gap:8px;margin-top:16px;">
+      ${o.statusStep < 3 ? `
+        <button style="background:var(--fk-blue);color:#fff;border:0;padding:10px;flex:1;font-weight:700;border-radius:4px;cursor:pointer;" onclick="progressOrderStatus(${idx})">
+          Update to: ${statusNames[o.statusStep + 1]}
+        </button>
+      ` : ''}
+
+      ${o.statusStep === 3 ? `
+        <button style="background:var(--fk-green);color:#fff;border:0;padding:10px;flex:1;font-weight:700;border-radius:4px;cursor:pointer;" onclick="verifyDeliveryCodePrompt(${idx})">
+          🔐 Verify PIN &amp; Mark Delivered
+        </button>
+      ` : ''}
+
+      <button style="background:#e2e8f0;color:#334155;border:0;padding:10px 16px;font-weight:700;border-radius:4px;cursor:pointer;" onclick="closeOrderDetailsModal()">
+        Close
+      </button>
+    </div>
+  `;
+
+  document.getElementById('orderDetailsModalOverlay').style.display = 'flex';
+}
+
+function closeOrderDetailsModal() {
+  document.getElementById('orderDetailsModalOverlay').style.display = 'none';
+}
+
+function progressOrderStatus(idx) {
+  if (orders[idx] && orders[idx].statusStep < 3) {
+    orders[idx].statusStep += 1;
+    persistOrders();
+    openOrderDetailsModal(idx);
+    showToast("Order status successfully updated!", "success");
+  }
+}
+
+function verifyDeliveryCodePrompt(idx) {
+  const o = orders[idx];
+  if(!o) return;
+
+  const enteredPin = prompt(
+    `🔒 DELIVERY PIN VERIFICATION\n` +
+    `--------------------------------------------------\n` +
+    `Order: ${o.id}\n` +
+    `Customer: ${o.customerName} (${o.customerPhone})\n\n` +
+    `Enter customer's 4-digit secret PIN:`
+  );
+
+  if(!enteredPin) {
+    showToast("Delivery cancelled: PIN not entered.", "error");
+    return;
+  }
+
+  if(enteredPin.trim() === String(o.deliveryPin).trim()) {
+    orders[idx].statusStep = 4;
+    persistOrders();
+    closeOrderDetailsModal();
+    showToast("PIN MATCHED! Order successfully marked as DELIVERED!", "success");
+  } else {
+    showToast("WRONG PIN! Delivery declined.", "error");
+  }
+}
+
+// CUSTOMER ACCOUNTS
+function renderAdminUsersTable() {
+  const tbody = document.getElementById('adminUsersTableBody');
+  const badge = document.getElementById('adminUsersCountBadge');
+  if(!tbody) return;
+  badge.innerText = `${users.length} Customers`;
+
+  if(!users.length) {
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:16px;color:#64748b;">No registered customers found.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = users.map((u, idx) => {
+    const isBlocked = !!u.isBlocked;
+    return `
+      <tr style="${isBlocked ? 'background:#fee2e2;' : ''}">
+        <td><b>${u.name}</b></td>
+        <td>${u.email || '<span style="color:var(--muted)">None</span>'}</td>
+        <td>${u.phone}</td>
+        <td><code style="background:#f1f5f9;padding:2px 4px;border-radius:2px;">${u.pass}</code></td>
+        <td>
+          <span style="background:${isBlocked ? '#ef4444' : '#22c55e'};color:#fff;padding:2px 6px;border-radius:8px;font-weight:700;font-size:10px;">
+            ${isBlocked ? 'BLOCKED' : 'ACTIVE'}
+          </span>
+        </td>
+        <td>${u.secQuestion ? '✅ Secured' : '⚠️ Missing'}</td>
+        <td style="white-space:nowrap;">
+          <button class="btn-override-pass" onclick="overrideCustomerPassword(${idx})">Change Pass</button>
+          <button class="${isBlocked ? 'btn-unblock-user' : 'btn-block-user'}" onclick="toggleBlockCustomer(${idx})">
+            ${isBlocked ? 'Unblock' : 'Block User'}
+          </button>
+        </td>
+      </tr>
+    `;
+  }).join('');
+}
+
+function toggleBlockCustomer(idx) {
+  const u = users[idx];
+  const newStatus = !u.isBlocked;
+  const actionName = newStatus ? "BLOCK" : "UNBLOCK";
+
+  if(confirm(`Are you sure you want to ${actionName} customer "${u.name}" (${u.phone})?`)) {
+    users[idx].isBlocked = newStatus;
+    persistUsers();
+
+    if(currentUser && cleanPhone(currentUser.phone) === cleanPhone(u.phone) && newStatus) {
+      handleUserLogout();
+    }
+
+    showToast(`Customer ${u.name} is now ${newStatus ? 'BLOCKED' : 'UNBLOCKED'}!`, "info");
+  }
+}
+
+function overrideCustomerPassword(idx) {
+  const u = users[idx];
+  const newPass = prompt(`Set new password for ${u.name} (${u.phone}):`, "PAG@123");
+  if(newPass && newPass.trim().length >= 4) {
+    users[idx].pass = newPass.trim();
+    persistUsers();
+    showToast(`Password for ${u.name} updated!`, "success");
+  }
+}
+
+// AUTH & FORGOT PASSWORD
+function openAuthModal(view) {
+  document.getElementById('authOverlay').classList.add('show');
+  document.getElementById('loginSection').style.display = 'none';
+  document.getElementById('signupSection').style.display = 'none';
+  document.getElementById('mandatorySecuritySection').style.display = 'none';
+  document.getElementById('forgotSection').style.display = 'none';
+  document.getElementById('forgotStep2Box').style.display = 'none';
+  document.getElementById('forgotStep3Box').style.display = 'none';
+  document.getElementById('authCloseBtn').style.display = 'block';
+
+  document.querySelectorAll('.auth-msg').forEach(m => { m.className = 'auth-msg'; m.innerText = ''; });
+
+  const title = document.getElementById('authLeftTitle');
+  const desc = document.getElementById('authLeftDesc');
+
+  if(view === 'signup') {
+    document.getElementById('signupSection').style.display = 'block';
+    title.innerText = "Create Account";
+    desc.innerText = "Sign up using Mobile or Email with native password saving.";
+  } else if(view === 'forgot') {
+    document.getElementById('forgotSection').style.display = 'block';
+    document.getElementById('forgotStep1Form').style.display = 'flex';
+    title.innerText = "Account Recovery";
+    desc.innerText = "Recover account via registered mobile or email.";
+  } else if(view === 'mandatory_security') {
+    document.getElementById('mandatorySecuritySection').style.display = 'block';
+    document.getElementById('authCloseBtn').style.display = 'none';
+    title.innerText = "Security Check";
+    desc.innerText = "Your account is missing a security question. Set it now to protect your data.";
+  } else {
+    document.getElementById('loginSection').style.display = 'block';
+    title.innerText = "Login Required";
+    desc.innerText = "Please log in to your account to add items to cart and place orders.";
+  }
+}
+
+function closeAuthModal() {
+  document.getElementById('authOverlay').classList.remove('show');
+}
+
+function checkUserSecurityStatus() {
+  if(currentUser && (!currentUser.secQuestion || !currentUser.secAnswer) && !currentUser.isAdmin) {
+    openAuthModal('mandatory_security');
+  }
+}
+
+function handleSaveMandatorySecurity(e) {
+  e.preventDefault();
+  const q = document.getElementById('mandSecQ').value;
+  const a = document.getElementById('mandSecA').value.trim().toLowerCase();
+  const msg = document.getElementById('mandSecMsg');
+
+  if(!q || !a) {
+    msg.className = "auth-msg err";
+    msg.innerText = "Please select a question and provide an answer.";
+    return;
+  }
+
+  currentUser.secQuestion = q;
+  currentUser.secAnswer = a;
+
+  const uIdx = users.findIndex(u => cleanPhone(u.phone) === cleanPhone(currentUser.phone));
+  if(uIdx > -1) {
+    users[uIdx].secQuestion = q;
+    users[uIdx].secAnswer = a;
+    persistUsers();
+  }
+  persistCurrentUser();
+
+  msg.className = "auth-msg ok";
+  msg.innerText = "Security Question successfully configured!";
+  setTimeout(() => { closeAuthModal(); }, 1000);
+}
+
+function handleLoginSubmit(e) {
+  e.preventDefault();
+  const rawId = document.getElementById('loginId').value.trim();
+  const cleanedId = cleanPhone(rawId);
+  const pass = document.getElementById('loginPass').value.trim();
+  const msg = document.getElementById('loginMsg');
+
+  // 1. SUPER ADMIN CHECK
+  if(cleanedId === ADMIN_PHONE && pass === ADMIN_PASS) {
+    currentUser = { name: "Shop Owner (Super Admin)", phone: ADMIN_PHONE, isAdmin: true, role: "Super Admin" };
+    persistCurrentUser();
+    msg.className = "auth-msg ok";
+    msg.innerText = "Welcome Boss! Opening Super Admin Portal...";
+    showToast("Welcome Boss! Opening Workspace...", "success");
+    setTimeout(() => {
+      openAdminPortal("Super Admin");
+    }, 600);
+    return;
+  }
+
+  // 2. SUB-ADMIN & STAFF CHECK WITH BLOCK CHECK
+  try { teamMembers = JSON.parse(localStorage.getItem('pag_team_db')) || []; } catch(err){ teamMembers = []; }
+  const teamUser = teamMembers.find(t => (cleanPhone(t.phone) === cleanedId || (t.email && t.email.toLowerCase() === rawId.toLowerCase())) && t.pass === pass);
+  if(teamUser) {
+    if(teamUser.isBlocked) {
+      msg.className = "auth-msg err";
+      msg.innerHTML = "🚫 <b>Account Suspended:</b> Your staff account has been blocked by Super Admin.";
+      showToast("Staff account suspended.", "error");
+      return;
+    }
+
+    currentUser = { name: teamUser.name, phone: teamUser.phone, isAdmin: true, role: teamUser.role };
+    persistCurrentUser();
+    msg.className = "auth-msg ok";
+    msg.innerText = `Welcome ${teamUser.name}! Opening ${teamUser.role} Console...`;
+    showToast(`Welcome ${teamUser.name}! Opening Workspace...`, "success");
+    setTimeout(() => {
+      openAdminPortal(teamUser.role);
+    }, 600);
+    return;
+  }
+
+  // 3. REGULAR CUSTOMER CHECK (SUPPORT FOR EMAIL OR PHONE)
+  try { users = JSON.parse(localStorage.getItem('pag_users_db')) || []; } catch(err){ users = []; }
+
+  const user = users.find(u => {
+    const userCleanPhone = cleanPhone(u.phone);
+    return (userCleanPhone && userCleanPhone === cleanedId) || 
+           (u.email && u.email.toLowerCase() === rawId.toLowerCase());
+  });
+
+  if(user) {
+    if(user.isBlocked) {
+      msg.className = "auth-msg err";
+      msg.innerHTML = "🚫 <b>Account Suspended:</b> Your account has been blocked by Shop Admin. Please contact helpline: 8766641866.";
+      showToast("Account suspended by Admin.", "error");
+      return;
+    }
+
+    if(user.pass === pass) {
+      currentUser = user;
+      persistCurrentUser();
+      msg.className = "auth-msg ok";
+      msg.innerText = "Login successful!";
+      showToast(`Welcome back, ${user.name}!`, "success");
+      setTimeout(() => {
+        closeAuthModal();
+        checkUserSecurityStatus();
+      }, 600);
+      return;
+    }
+  }
+
+  msg.className = "auth-msg err";
+  msg.innerText = "Invalid Mobile/Email or Password. Please try again.";
+  showToast("Invalid credentials.", "error");
+}
+
+function handleSignupSubmit(e) {
+  e.preventDefault();
+  const name = document.getElementById('regName').value.trim();
+  const email = document.getElementById('regEmail').value.trim().toLowerCase();
+  const rawPhone = document.getElementById('regPhone').value.trim();
+  const phone = cleanPhone(rawPhone);
+  const pass = document.getElementById('regPass').value.trim();
+  const secQuestion = document.getElementById('regSecQ').value;
+  const secAnswer = document.getElementById('regSecA').value.trim().toLowerCase();
+  const msg = document.getElementById('signupMsg');
+
+  if(phone === ADMIN_PHONE || teamMembers.some(t => cleanPhone(t.phone) === phone)) {
+    msg.className = "auth-msg err";
+    msg.innerText = "This number is reserved for Shop Management Team!";
+    return;
+  }
+
+  try { users = JSON.parse(localStorage.getItem('pag_users_db')) || []; } catch(err){ users = []; }
+
+  if(users.some(u => cleanPhone(u.phone) === phone || (u.email && u.email.toLowerCase() === email))) {
+    msg.className = "auth-msg err";
+    msg.innerText = "This mobile or email is already registered! Please log in.";
+    return;
+  }
+
+  const newUser = { name, email, phone, pass, secQuestion, secAnswer, isBlocked: false };
+  users.push(newUser);
+  persistUsers();
+
+  currentUser = newUser;
+  persistCurrentUser();
+
+  msg.className = "auth-msg ok";
+  msg.innerText = "Account created! Browser will prompt to save password.";
+  showToast("Account created successfully! Save your password in browser.", "success");
+  setTimeout(() => { closeAuthModal(); }, 1000);
+}
+
+let userVerifying = null;
+
+function handleForgotStep1(e) {
+  e.preventDefault();
+  const rawId = document.getElementById('forgotId').value.trim();
+  const cleanedId = cleanPhone(rawId);
+  const msg = document.getElementById('forgotMsg');
+
+  if(cleanedId === ADMIN_PHONE) {
+    userVerifying = { name: "Shop Owner", phone: ADMIN_PHONE, secQuestion: "Admin Master Security Key", secAnswer: ADMIN_MASTER_SEC, isAdmin: true };
+    msg.className = "auth-msg ok";
+    msg.innerText = "Owner identified. Answer security key to reset:";
+    document.getElementById('displaySecQuestion').innerText = "Enter Master Admin Security Key:";
+    document.getElementById('forgotStep1Form').style.display = 'none';
+    document.getElementById('forgotStep2Box').style.display = 'block';
+    return;
+  }
+
+  try { users = JSON.parse(localStorage.getItem('pag_users_db')) || []; } catch(err){ users = []; }
+
+  const user = users.find(u => {
+    const userCleanPhone = cleanPhone(u.phone);
+    return (userCleanPhone && userCleanPhone === cleanedId) || 
+           (u.email && u.email.toLowerCase() === rawId.toLowerCase());
+  });
+
+  if(!user) {
+    msg.className = "auth-msg err";
+    msg.innerHTML = `No account found for <b>${rawId}</b>! <br><small>Please Sign Up or <a target="_blank" href="https://wa.me/918766641866?text=Help%20recovering%20account%20for%20${rawId}" style="color:var(--fk-blue);font-weight:700;">WhatsApp Support</a>.</small>`;
+    return;
+  }
+
+  if(user.isBlocked) {
+    msg.className = "auth-msg err";
+    msg.innerHTML = "🚫 <b>Account Suspended:</b> This account is blocked by Admin.";
+    return;
+  }
+
+  userVerifying = user;
+  msg.className = "auth-msg ok";
+  msg.innerText = `Account located for ${user.name}. Please answer below.`;
+
+  document.getElementById('displaySecQuestion').innerText = user.secQuestion || "What is your secret key?";
+  document.getElementById('forgotStep1Form').style.display = 'none';
+  document.getElementById('forgotStep2Box').style.display = 'block';
+}
+
+function handleForgotStep2(e) {
+  e.preventDefault();
+  const ans = document.getElementById('verifySecAnswer').value.trim().toLowerCase();
+  const msg = document.getElementById('forgotMsg');
+
+  if(ans === userVerifying.secAnswer.toLowerCase() || ans === ADMIN_MASTER_SEC) {
+    msg.className = "auth-msg ok";
+    msg.innerText = "Answer matched! Proceed to reset password.";
+    document.getElementById('forgotStep2Box').style.display = 'none';
+    document.getElementById('forgotStep3Box').style.display = 'block';
+  } else {
+    msg.className = "auth-msg err";
+    msg.innerText = "❌ Incorrect Security Answer! Unauthorized access blocked.";
+  }
+}
+
+function handleForgotStep3(e) {
+  e.preventDefault();
+  const newPass = document.getElementById('newPassFinal').value.trim();
+  const msg = document.getElementById('forgotMsg');
+
+  if(userVerifying.isAdmin) {
+    alert(`Admin password reset! New Pass: ${newPass}`);
+    location.reload();
+    return;
+  }
+
+  userVerifying.pass = newPass;
+  const idx = users.findIndex(u => cleanPhone(u.phone) === cleanPhone(userVerifying.phone));
+  if(idx > -1) {
+    users[idx].pass = newPass;
+    persistUsers();
+  }
+
+  currentUser = userVerifying;
+  persistCurrentUser();
+
+  msg.className = "auth-msg ok";
+  msg.innerText = "🎉 Password updated successfully! Logging you in...";
+  showToast("Password updated successfully!", "success");
+  setTimeout(() => { closeAuthModal(); }, 1000);
+}
+
+function syncAuthUI() {
+  const container = document.getElementById('authHeaderContainer');
+  if(!container) return;
+  if(currentUser) {
+    container.innerHTML = `
+      <div class="user-menu">
+        <button class="user-menu-btn">👤 ${currentUser.name.split(' ')[0]} ▾</button>
+        <div class="user-dropdown">
+          ${currentUser.isAdmin ? `<a onclick="openAdminPortal('${currentUser.role || 'Super Admin'}')" style="color:#d97706;font-weight:700;">⚙️ Workspace</a>` : ''}
+          <a onclick="openMyOrdersModal()">📋 My Orders</a>
+          <a onclick="openTrackModal()">📦 Track Order</a>
+          <a onclick="openAuthModal('mandatory_security')">Update Security</a>
+          <button onclick="handleUserLogout()">Logout</button>
+        </div>
+      </div>
+    `;
+  } else {
+    container.innerHTML = `<button class="btn-login-main" onclick="openAuthModal('login')">Login</button>`;
+  }
+}
+
+function handleUserLogout() {
+  currentUser = null;
+  persistCurrentUser();
+  showToast("Logged out successfully.", "info");
+}
+
+// CART & FLYING ANIMATION
+function syncCartUI() {
+  const totalCount = cart.reduce((acc, it) => acc + it.qty, 0);
+  const totalPrice = cart.reduce((acc, it) => acc + (it.price * it.qty), 0);
+
+  const badge = document.getElementById('cartCountBadge');
+  const totalHead = document.getElementById('headerCartTotal');
+  const drawerCount = document.getElementById('drawerItemCount');
+
+  if(badge) badge.innerText = totalCount;
+  if(totalHead) totalHead.innerText = `₹${totalPrice.toLocaleString('en-IN')}`;
+  if(drawerCount) drawerCount.innerText = totalCount;
+
+  catalog.forEach(item => {
+    const container = document.getElementById(`btn-area-${item.id}`);
+    if(container) {
+      const exist = cart.find(c => c.id === item.id);
+      container.innerHTML = makeButtonHtml(item.id, exist ? exist.qty : 0, item.stock);
+    }
+  });
+
+  if(document.getElementById('cartDrawer').classList.contains('open')) {
+    renderCartDrawerContent();
+  }
+}
+
+function makeButtonHtml(id, qty, stock = 10) {
+  if (stock <= 0) {
+    return `<button class="btn-add-cart" disabled>🔴 Out of Stock</button>`;
+  }
+  if(qty > 0) {
+    return `
+      <div class="qty-stepper">
+        <button onclick="updateItemQuantity(${id}, -1)">−</button>
+        <span>${qty} in Cart</span>
+        <button onclick="handleAddToCartAnimation(${id}, this)">+</button>
+      </div>
+    `;
+  }
+  return `
+    <button class="btn-add-cart" onclick="handleAddToCartAnimation(${id}, this)">
+      <span>🛒</span> Add to Cart
+    </button>
+  `;
+}
+
+// 🔒 STRICT LOGIN CHECK BEFORE ADD TO CART
+function handleAddToCartAnimation(id, btn) {
+  if (!currentUser) {
+    showToast("Kripya pehle Login karein product cart me add karne ke liye!", "error");
+    openAuthModal('login');
+    return;
+  }
+
+  const product = catalog.find(p => p.id === id);
+  if(!product || product.stock <= 0) {
+    showToast("Product is Out of Stock!", "error");
+    return;
+  }
+
+  const exist = cart.find(c => c.id === id);
+  if(exist) {
+    if(exist.qty >= product.stock) {
+      showToast(`Only ${product.stock} units available in stock!`, "error");
+      return;
+    }
+    exist.qty += 1;
+  } else {
+    cart.push({...product, qty: 1});
+  }
+
+  triggerFly(btn);
+  persistCart();
+  showToast(`Added to Cart: ${product.name}`, "success");
+}
+
+function triggerFly(startElem) {
+  const target = document.getElementById('cartTriggerBtn');
+  if(!startElem || !target) return;
+  const sRect = startElem.getBoundingClientRect();
+  const tRect = target.getBoundingClientRect();
+
+  const ball = document.createElement('div');
+  ball.className = 'fly-item';
+  ball.innerText = '+1';
+  ball.style.left = `${sRect.left + (sRect.width / 2) - 10}px`;
+  ball.style.top = `${sRect.top}px`;
+  document.body.appendChild(ball);
+
+  requestAnimationFrame(() => {
+    ball.style.left = `${tRect.left + (tRect.width / 2) - 10}px`;
+    ball.style.top = `${tRect.top + (tRect.height / 2) - 10}px`;
+    ball.style.transform = 'scale(1.2)';
+    ball.style.opacity = '0.3';
+  });
+
+  setTimeout(() => ball.remove(), 560);
+}
+
+function updateItemQuantity(id, delta) {
+  if (!currentUser) {
+    showToast("Kripya pehle Login karein!", "error");
+    openAuthModal('login');
+    return;
+  }
+
+  const idx = cart.findIndex(c => c.id === id);
+  if(idx > -1) {
+    const product = catalog.find(p => p.id === id);
+    if(delta > 0 && product && cart[idx].qty >= product.stock) {
+      showToast(`Max available stock reached: ${product.stock} units`, "error");
+      return;
+    }
+    cart[idx].qty += delta;
+    if(cart[idx].qty <= 0) cart.splice(idx, 1);
+    persistCart();
+  }
+}
+
+function displayProducts(items) {
+  const grid = document.getElementById('productGrid');
+  const countLabel = document.getElementById('totalProductsCount');
+  if(!grid) return;
+  countLabel.innerText = `${items.length} items`;
+
+  if(!items.length) {
+    grid.innerHTML = '<div style="padding:40px;text-align:center;grid-column:1/-1;color:#878787;">No matching products found.</div>';
+    return;
+  }
+
+  grid.innerHTML = items.map(p => {
+    const exist = cart.find(c => c.id === p.id);
+    const qty = exist ? exist.qty : 0;
+    const discount = Math.round((1 - p.price / p.orig) * 100);
+    const isOut = p.stock <= 0;
+
+    return `
+      <div class="product-card">
+        <span class="stock-status-pill ${isOut ? 'stock-out' : 'stock-instock'}">
+          ${isOut ? 'Out of Stock' : `${p.stock} left in stock`}
+        </span>
+        <div class="prod-img-wrap">
+          <img src="${p.img}" alt="${p.name}" loading="lazy">
+          <span class="assured-tag">PAG Assured</span>
+        </div>
+        <div class="prod-title" title="${p.name}">${p.name}</div>
+        <div style="display:flex;align-items:center;margin-bottom:4px;">
+          <span class="rating-pill">${p.rating} ★</span>
+          <span class="rating-count">(${p.reviews.toLocaleString()})</span>
+        </div>
+        <div class="price-row">
+          <span class="final-price">₹${p.price.toLocaleString('en-IN')}</span>
+          <span class="orig-price">₹${p.orig.toLocaleString('en-IN')}</span>
+          <span class="disc-percent">${discount}% off</span>
+        </div>
+        <div class="delivery-badge">Free delivery <span>Tomorrow</span></div>
+        <div class="card-actions" id="btn-area-${p.id}">
+          ${makeButtonHtml(p.id, qty, p.stock)}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function filterByCategory(cat) {
+  document.querySelectorAll('#catNavList li').forEach(li => {
+    li.classList.toggle('active', li.innerText === cat || (cat === 'All' && li.innerText === 'All Products'));
+  });
+  document.getElementById('productSectionTitle').innerText = cat === 'All' ? 'Deals of the Day' : cat;
+  if(cat === 'All') displayProducts(catalog);
+  else displayProducts(catalog.filter(p => p.cat === cat));
+}
+
+function liveSearch() {
+  const query = document.getElementById('searchQuery').value.toLowerCase().trim();
+  displayProducts(catalog.filter(p => p.name.toLowerCase().includes(query) || p.cat.toLowerCase().includes(query)));
+}
+
+function toggleCartDrawer(open) {
+  const drawer = document.getElementById('cartDrawer');
+  const overlay = document.getElementById('cartOverlay');
+  if(open) {
+    drawer.classList.add('open');
+    overlay.classList.add('show');
+    renderCartDrawerContent();
+  } else {
+    drawer.classList.remove('open');
+    overlay.classList.remove('show');
+  }
+}
+
+function renderCartDrawerContent() {
+  const body = document.getElementById('cartBody');
+  if(!cart.length) {
+    body.innerHTML = `
+      <div style="text-align:center;padding:40px 10px;">
+        <div style="font-size:48px;margin-bottom:8px;">🛒</div>
+        <b style="font-size:15px;">Your Cart is Empty!</b>
+        <p style="color:#878787;font-size:12px;margin:4px 0 14px;">Add items to it now to enjoy fast delivery.</p>
+        <button class="btn-place-order" onclick="toggleCartDrawer(false)" style="background:var(--fk-blue)">Shop Now</button>
+      </div>`;
+    return;
+  }
+
+  const subTotal = cart.reduce((acc, it) => acc + (it.price * it.qty), 0);
+  const origTotal = cart.reduce((acc, it) => acc + (it.orig * it.qty), 0);
+  const totalSavings = origTotal - subTotal;
+
+  const defaultName = currentUser ? currentUser.name : '';
+  const defaultPhone = currentUser ? currentUser.phone : '';
+
+  body.innerHTML = `
+    <div>
+      ${cart.map(it => `
+        <div class="cart-item-row">
+          <img src="${it.img}" alt="${it.name}">
+          <div class="cart-item-details">
+            <h4>${it.name}</h4>
+            <div class="price">₹${(it.price * it.qty).toLocaleString('en-IN')} <span style="font-size:10px;color:#878787;font-weight:normal">(₹${it.price} each)</span></div>
+            <div class="cart-item-ctrl">
+              <button onclick="updateItemQuantity(${it.id}, -1)">−</button>
+              <span style="font-weight:700;font-size:12px;">${it.qty}</span>
+              <button onclick="updateItemQuantity(${it.id}, 1)">+</button>
+              <span style="margin-left:auto;font-size:11px;color:#d32f2f;cursor:pointer;font-weight:700;" onclick="updateItemQuantity(${it.id}, -${it.qty})">REMOVE</span>
+            </div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+
+    <div class="price-summary">
+      <div style="font-weight:700;font-size:12px;color:#878787;margin-bottom:8px;text-transform:uppercase;">Price Details</div>
+      <div class="summary-row">
+        <span>Price (${cart.reduce((a,b)=>a+b.qty,0)} items)</span>
+        <span>₹${origTotal.toLocaleString('en-IN')}</span>
+      </div>
+      <div class="summary-row" style="color:var(--fk-green)">
+        <span>Discount</span>
+        <span>− ₹${totalSavings.toLocaleString('en-IN')}</span>
+      </div>
+      <div class="summary-row">
+        <span>Delivery Charges</span>
+        <span style="color:var(--fk-green)">FREE</span>
+      </div>
+      <div class="summary-total">
+        <span>Total Amount</span>
+        <span>₹${subTotal.toLocaleString('en-IN')}</span>
+      </div>
+    </div>
+
+    <div class="checkout-box">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <h3 style="margin:0;">Delivery Address &amp; Location</h3>
+      </div>
+
+      <button type="button" class="btn-detect-loc" id="btnDetectGps" onclick="detectCustomerGpsLocation()">
+        📍 Use My Current Location (Auto-Fill)
+      </button>
+
+      <form onsubmit="processOrderPlacement(event)">
+        <input type="text" id="orderCustName" placeholder="Full Name" value="${defaultName}" required>
+        <input type="tel" id="orderCustPhone" placeholder="10-Digit Mobile Number" value="${defaultPhone}" required pattern="[0-9]{10}">
+        
+        <textarea id="orderCustAddr" placeholder="Flat / House No, Building, Street, Landmark" rows="2" required></textarea>
+        
+        <input type="text" id="orderCustPin" placeholder="Enter 6-Digit Delivery Pincode (e.g. 421001)" required maxlength="6" pattern="^[1-9][0-9]{5}$" title="Please enter a valid 6-digit Indian PIN code">
+
+        <div class="payment-choice">
+          <b style="font-size:12px;color:#334155;">Select Payment Option:</b>
+          
+          <label>
+            <input type="radio" name="payOption" value="UPI / QR Payment (mr.ajaykumarguptaa-3@oksbi)" checked>
+            <span>⚡ Pay via UPI / QR / Google Pay</span>
+            <span class="upi-badge">mr.ajaykumarguptaa-3@oksbi</span>
+          </label>
+
+          <label>
+            <input type="radio" name="payOption" value="Credit / Debit Card">
+            <span>💳 Credit / Debit Card (Visa, MasterCard, RuPay)</span>
+          </label>
+
+          <label>
+            <input type="radio" name="payOption" value="Online Wallet (Paytm / PhonePe)">
+            <span>👛 Wallets (Paytm / PhonePe / Amazon Pay)</span>
+          </label>
+
+          <label>
+            <input type="radio" name="payOption" value="Cash on Delivery (COD)">
+            <span>💵 Cash on Delivery (Pay at Doorstep)</span>
+          </label>
+        </div>
+        
+        <button type="submit" class="btn-place-order">CONFIRM ORDER</button>
+      </form>
+    </div>
+  `;
+}
+
+// 🔒 STRICT LOGIN CHECK BEFORE ORDER PLACEMENT
+function processOrderPlacement(e) {
+  e.preventDefault();
+
+  if (!currentUser) {
+    showToast("Kripya pehle Login karein order place karne ke liye!", "error");
+    openAuthModal('login');
+    return;
+  }
+
+  const name = document.getElementById('orderCustName').value.trim();
+  const rawPhone = document.getElementById('orderCustPhone').value.trim();
+  const phone = cleanPhone(rawPhone);
+  const addr = document.getElementById('orderCustAddr').value.trim();
+  const pincode = document.getElementById('orderCustPin').value.trim();
+  const payment = document.querySelector('input[name="payOption"]:checked').value;
+
+  const pinRegex = /^[1-9][0-9]{5}$/;
+  if (!pinRegex.test(pincode)) {
+    showToast("Invalid Pincode! Please enter a valid 6-digit Indian Postal Code.", "error");
+    document.getElementById('orderCustPin').focus();
+    return;
+  }
+
+  try { users = JSON.parse(localStorage.getItem('pag_users_db')) || []; } catch(err){ users = []; }
+  const matchedUser = users.find(u => cleanPhone(u.phone) === phone);
+  if(matchedUser && matchedUser.isBlocked) {
+    showToast("Order Declined: Your account is blocked by Shop Admin.", "error");
+    return;
+  }
+
+  for (let c of cart) {
+    const prod = catalog.find(p => p.id === c.id);
+    if (!prod || prod.stock < c.qty) {
+      showToast(`Cannot place order: "${c.name}" has only ${prod ? prod.stock : 0} units in stock!`, "error");
+      return;
+    }
+  }
+
+  for (let c of cart) {
+    const prod = catalog.find(p => p.id === c.id);
+    if (prod) {
+      prod.stock = Math.max(0, prod.stock - c.qty);
+    }
+  }
+  persistCatalog();
+
+  const orderId = 'PAG-' + Math.floor(100000 + Math.random() * 900000);
+  const deliveryPin = Math.floor(1000 + Math.random() * 9000);
+  const total = cart.reduce((acc, it) => acc + (it.price * it.qty), 0);
+  const itemsText = cart.map(i => `${i.name} (Qty: ${i.qty})`).join(', ');
+
+  const richItemList = cart.map(i => ({
+    id: i.id,
+    name: i.name,
+    qty: i.qty,
+    price: i.price,
+    img: i.img
+  }));
+
+  const newOrder = {
+    id: orderId,
+    customerName: name,
+    customerPhone: rawPhone,
+    address: addr,
+    pincode: pincode,
+    items: itemsText,
+    itemList: richItemList,
+    totalPayable: total,
+    paymentMethod: payment,
+    date: new Date().toLocaleDateString('en-IN', {day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit'}),
+    statusStep: 1,
+    deliveryPin: deliveryPin
+  };
+
+  orders.unshift(newOrder);
+  persistOrders();
+
+  cart = [];
+  persistCart();
+
+  showToast("Order Placed Successfully! Inventory updated.", "success");
+
+  const body = document.getElementById('cartBody');
+  body.innerHTML = `
+    <div class="success-screen">
+      <div class="icon">✅</div>
+      <h2 style="margin:0 0 6px;color:#212121;font-size:18px;">Order Placed Successfully!</h2>
+      <p style="color:#555;font-size:12px;margin:0 0 8px;">Thank you for shopping with PAG Moters.</p>
+      
+      <div class="order-pill">ORDER ID: ${orderId}</div>
+
+      <div class="delivery-code-pill">
+        <span>🔐 Secret Delivery Code:</span>
+        <span class="code-num">${deliveryPin}</span>
+      </div>
+      <small style="color:#d97706;display:block;margin-bottom:8px;font-size:11px;">⚠️ Keep this 4-digit PIN secret. Delivery person will ask for this code when handing over your parcel.</small>
+
+      <div style="text-align:left;background:#f9f9f9;border:1px solid #e0e0e0;padding:10px;border-radius:4px;font-size:12px;line-height:1.5;margin:10px 0;">
+        <div><b>Name:</b> ${name} (${rawPhone})</div>
+        <div><b>Address:</b> ${addr}</div>
+        <div><b>Pincode:</b> ${pincode}</div>
+        <div><b>Items:</b> ${itemsText}</div>
+        <div><b>Total Amount:</b> ₹${total.toLocaleString('en-IN')}</div>
+        <div><b>Payment Mode:</b> ${payment}</div>
+      </div>
+
+      <a class="btn-wa-order" target="_blank" href="https://wa.me/918766641866?text=${encodeURIComponent(
+        `Hello PAG Moters! I placed an order.\n\n*Order ID:* ${orderId}\n*Name:* ${name}\n*Phone:* ${rawPhone}\n*Address:* ${addr}\n*PIN:* ${pincode}\n*Items:* ${itemsText}\n*Total:* ₹${total}\n*Payment:* ${payment}`
+      )}">
+        Send Order on WhatsApp 💬
+      </a>
+
+      <button onclick="toggleCartDrawer(false); openMyOrdersModal();" class="btn-add-cart" style="margin-top:10px;">View in My Orders</button>
+    </div>
+  `;
+}
+
+// ==========================================
+// 🛠️ NEW: SHARED HELPERS
+// ==========================================
+function esc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function nl2br(s) { return esc(s).replace(/\n/g, '<br>'); }
+function mailNowText() {
+  return new Date().toLocaleDateString('en-IN', {day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'});
+}
+function newMailId() { return 'MAIL-' + Math.floor(100000 + Math.random() * 900000); }
+function persistMails() {
+  localStorage.setItem('pag_mail_db', JSON.stringify(mails));
+  renderMailAdmin();
+}
+
+// ==========================================
+// ✉️ NEW: CUSTOMER MAIL SUPPORT
+// ==========================================
+function openMailSupportModal() {
+  document.getElementById('mailSupportOverlay').classList.add('show');
+  if(currentUser && !currentUser.isAdmin) {
+    const setIfEmpty = (id, val) => { const el = document.getElementById(id); if(el && !el.value) el.value = val || ''; };
+    setIfEmpty('msName', currentUser.name);
+    setIfEmpty('msEmail', currentUser.email);
+    setIfEmpty('msPhone', currentUser.phone);
+    setIfEmpty('mailLookup', currentUser.email || currentUser.phone);
+  }
+  switchMailSupportTab('send');
+}
+
+function closeMailSupportModal() {
+  document.getElementById('mailSupportOverlay').classList.remove('show');
+}
+
+function switchMailSupportTab(tab) {
+  document.getElementById('mailSendPane').style.display = tab === 'send' ? 'block' : 'none';
+  document.getElementById('mailInboxPane').style.display = tab === 'inbox' ? 'block' : 'none';
+  document.getElementById('mstSend').classList.toggle('active', tab === 'send');
+  document.getElementById('mstInbox').classList.toggle('active', tab === 'inbox');
+  if(tab === 'inbox') renderMyMails();
+}
+
+function handleSendSupportMail(e) {
+  e.preventDefault();
+  const name = document.getElementById('msName').value.trim();
+  const email = document.getElementById('msEmail').value.trim().toLowerCase();
+  const phone = cleanPhone(document.getElementById('msPhone').value.trim());
+  const subject = document.getElementById('msSubject').value.trim();
+  const body = document.getElementById('msBody').value.trim();
+  if(!name || !email || !subject || !body) {
+    showToast("Please fill all required fields.", "error");
+    return;
+  }
+  try { mails = JSON.parse(localStorage.getItem('pag_mail_db')) || []; } catch(err){ mails = []; }
+  mails.push({
+    id: newMailId(),
+    direction: 'in',
+    fromName: name,
+    fromEmail: email,
+    fromPhone: phone,
+    subject: subject,
+    body: body,
+    date: mailNowText(),
+    ts: Date.now(),
+    read: false,
+    replied: false
+  });
+  persistMails();
+  document.getElementById('msSubject').value = '';
+  document.getElementById('msBody').value = '';
+  document.getElementById('mailLookup').value = email;
+  showToast("Mail sent to PAG Moters! Reply 'My Mails' me milega.", "success");
+  switchMailSupportTab('inbox');
+}
+
+function renderMyMails() {
+  const box = document.getElementById('myMailsList');
+  try { mails = JSON.parse(localStorage.getItem('pag_mail_db')) || []; } catch(err){ mails = []; }
+  const key = (document.getElementById('mailLookup').value || '').trim().toLowerCase();
+  if(!key) {
+    box.innerHTML = '<div class="mail-empty">Apna Email ya Mobile Number daal kar "Show" dabayein.</div>';
+    return;
+  }
+  const isEmail = key.includes('@');
+  const ph = cleanPhone(key);
+  const match = (email, phone) => isEmail ? (email || '').toLowerCase() === key : (ph && cleanPhone(phone) === ph);
+
+  const ins = mails.filter(m => m.direction === 'in' && match(m.fromEmail, m.fromPhone)).sort((a, b) => b.ts - a.ts);
+  const outs = mails.filter(m => m.direction === 'out' && match(m.toEmail, m.toPhone));
+  const inIds = new Set(ins.map(i => i.id));
+  const standalone = outs.filter(o => !inIds.has(o.threadId)).sort((a, b) => b.ts - a.ts);
+
+  if(!ins.length && !standalone.length) {
+    box.innerHTML = '<div class="mail-empty">📭 Is email/mobile par koi mail nahi mila.</div>';
+    return;
+  }
+
+  const sentCards = ins.map(m => {
+    const replies = outs.filter(o => o.threadId === m.id).sort((a, b) => a.ts - b.ts);
+    return `
+      <div class="mail-card">
+        <div class="mc-head">
+          <b>${esc(m.subject)}</b>
+          <span class="mail-status-pill ${replies.length ? 'st-4' : 'st-1'}">${replies.length ? 'Replied' : 'Awaiting reply'}</span>
+        </div>
+        <div class="mail-bubble in"><small>You · ${esc(m.date)} · ${esc(m.id)}</small>${nl2br(m.body)}</div>
+        ${replies.map(r => `<div class="mail-bubble out"><small>PAG Moters Team · ${esc(r.date)}</small>${nl2br(r.body)}</div>`).join('')}
+      </div>`;
+  }).join('');
+
+  const directCards = standalone.map(o => `
+    <div class="mail-card">
+      <div class="mc-head">
+        <b>${esc(o.subject)}</b>
+        <span class="mail-status-pill st-3">From PAG Moters</span>
+      </div>
+      <div class="mail-bubble out"><small>PAG Moters Team · ${esc(o.date)}</small>${nl2br(o.body)}</div>
+    </div>`).join('');
+
+  box.innerHTML = directCards + sentCards;
+}
+
+// ==========================================
+// 🤖 NEW: CHATBOT (RULE-BASED FAQ + PRODUCT FINDER)
+// ==========================================
+const botState = { opened: false };
+const BOT_DEFAULT_CHIPS = [
+  ['📦 Order track', 'track my order'],
+  ['🚚 Delivery', 'delivery kab milegi'],
+  ['💳 Payment', 'payment options'],
+  ['🕒 Shop timing', 'shop timing and address'],
+  ['🔥 Best deals', 'sasta deals dikhao'],
+  ['✉️ Mail support', 'mail support'],
+  ['🎧 Human se baat', 'human agent']
+];
+const BOT_STOP = ['price','rate','kitna','kitne','kya','hai','hain','the','and','for','stock','available','show','dikhao','dikha','batao','bata','mujhe','chahiye','need','want','best','with','mein','main','aap','you','your','please','pls','plz','kaise','how','much','cost','kahan','mere','mera','meri','hamare','koi','kuch','cheap','sasta','offer','deal','deals','discount','sale','aur','sabse','have','any','get','buy','lena','dena','kar','karo','karna','karu'];
+
+function toggleBot(open) {
+  const w = document.getElementById('botWindow');
+  const fab = document.getElementById('botFab');
+  const show = open === undefined ? !w.classList.contains('open') : open;
+  w.classList.toggle('open', show);
+  fab.style.display = show ? 'none' : 'flex';
+  if(show && !botState.opened) {
+    botState.opened = true;
+    const nm = (currentUser && !currentUser.isAdmin) ? ' ' + esc(currentUser.name.split(' ')[0]) : '';
+    botAppend('bot', `Namaste${nm}! 👋 Main <b>PAG Bot</b> hoon.<br>Aap mujhse order track, delivery, payment, product price/stock ya shop ki jaankari pooch sakte hain. Product ka naam likhein (jaise <i>helmet</i>, <i>charger</i>, <i>battery</i>) ya neeche se option chunein.`);
+    setBotChips();
+  }
+  if(show) setTimeout(() => { const i = document.getElementById('botInput'); if(i) i.focus(); }, 100);
+}
+
+function botAppend(cls, html) {
+  const body = document.getElementById('botBody');
+  const d = document.createElement('div');
+  d.className = 'bot-msg ' + cls;
+  d.innerHTML = html;
+  body.appendChild(d);
+  body.scrollTop = body.scrollHeight;
+  return d;
+}
+
+function setBotChips(list) {
+  const c = document.getElementById('botChips');
+  c.innerHTML = (list || BOT_DEFAULT_CHIPS).map(ch => `<button type="button" class="bot-chip" onclick="botSend('${ch[1]}')">${ch[0]}</button>`).join('');
+}
+
+function botSend(text) {
+  text = (text || '').trim();
+  if(!text) return;
+  botAppend('user', esc(text));
+  const typing = botAppend('bot', '<i>typing...</i>');
+  setTimeout(() => {
+    typing.remove();
+    const r = botAnswer(text);
+    botAppend('bot', r.html);
+    setBotChips(r.chips);
+  }, 450);
+}
+
+function handleBotSubmit(e) {
+  e.preventDefault();
+  const i = document.getElementById('botInput');
+  const v = i.value;
+  i.value = '';
+  botSend(v);
+}
+
+function botAddCart(id, el) { handleAddToCartAnimation(id, el); }
+
+function botProductLines(list) {
+  return list.map(p => {
+    const disc = Math.round((1 - p.price / p.orig) * 100);
+    return `<div class="bot-prod"><b>${esc(p.name)}</b><br>₹${p.price.toLocaleString('en-IN')} <s style="color:#878787">₹${p.orig.toLocaleString('en-IN')}</s> · <span style="color:#388e3c;font-weight:700">${disc}% off</span> · ${p.stock > 0 ? p.stock + ' in stock' : '<span style="color:#dc2626;font-weight:700">Out of stock</span>'}${p.stock > 0 ? `<br><a class="bot-link" onclick="botAddCart(${p.id}, this)">🛒 Add to Cart</a>` : ''}</div>`;
+  }).join('');
+}
+
+function botStem(w) {
+  const map = { battery:'batter', batteries:'batter', chargers:'charger', helmets:'helmet', cables:'cable', earphones:'earphone', earbuds:'earbud', covers:'cover' };
+  if(map[w]) return map[w];
+  return w.length > 4 ? w.replace(/s$/, '') : w;
+}
+
+function botAnswer(raw) {
+  const t = raw.toLowerCase().trim();
+  const words = t.split(/[^a-z0-9]+/).filter(Boolean);
+  const hasS = (...w) => w.some(x => t.includes(x));
+  const hasW = (...w) => w.some(x => words.includes(x));
+  const wa = `<a class="bot-link" target="_blank" href="https://wa.me/918766641866?text=Hello%20PAG%20Moters!%20I%20need%20help.">💬 WhatsApp</a><a class="bot-link" href="tel:+918766641866">📞 Call 8766641866</a>`;
+
+  if(hasS('thanks', 'thank you', 'shukriya', 'dhanyavad', 'thnx')) {
+    return { html: 'Aapka swagat hai! 😊 Aur kuch madad chahiye to bataiye.', chips: null };
+  }
+
+  if(hasW('hi', 'hello', 'hey', 'hii', 'namaste', 'namaskar') && words.length <= 3) {
+    return { html: 'Namaste! 👋 Bataiye, main aapki kya madad kar sakta hoon?', chips: null };
+  }
+
+  if(hasS('human', 'agent', 'insaan', 'representative', 'customer care', 'whatsapp', 'baat karni', 'baat karna', 'contact', 'phone number') || hasW('call')) {
+    return { html: `Hamari team se seedha baat karein 👇<br>${wa}<br><small>Shop: 9:00 AM – 9:00 PM (daily)</small>`, chips: null };
+  }
+
+  if(hasS('mail', 'email', 'complaint', 'shikayat', 'feedback')) {
+    return { html: `Aap hamein mail bhej sakte hain, reply aapko <b>My Mails</b> me milega.<br><a class="bot-link" onclick="closeBotAnd(openMailSupportModal)">✉️ Mail Support kholo</a>`, chips: null };
+  }
+
+  if(hasS('track', 'parcel', 'status') || (hasS('order') && hasS('kahan', 'kab', 'where', 'mera', 'my', 'meri'))) {
+    const statusNames = ['', 'Order Placed', 'Packed', 'Out for Delivery', 'Delivered'];
+    if(currentUser && !currentUser.isAdmin) {
+      let mine = [];
+      try {
+        const all = JSON.parse(localStorage.getItem('pag_orders_db')) || [];
+        const ph = cleanPhone(currentUser.phone);
+        mine = all.filter(o => cleanPhone(o.customerPhone) === ph);
+      } catch(err) {}
+      if(mine.length) {
+        const o = mine[0];
+        return { html: `Aapka latest order:<br><b>${esc(o.id)}</b> · ${esc(o.date)}<br>Status: <b>${esc(statusNames[o.statusStep] || 'Processing')}</b><br>Total: ₹${Number(o.totalPayable).toLocaleString('en-IN')}<br><a class="bot-link" onclick="closeBotAnd(openTrackModal)">📦 Poori tracking dekhein</a>`, chips: null };
+      }
+      return { html: `Aapke number par abhi koi order nahi mila. Naya order karne ke liye products me se cart me add karein.<br><a class="bot-link" onclick="closeBotAnd(openTrackModal)">📦 Order ID se track karein</a>`, chips: null };
+    }
+    return { html: `Order track karne ke liye apna <b>Mobile Number</b> ya <b>Order ID</b> chahiye.<br><a class="bot-link" onclick="closeBotAnd(openTrackModal)">📦 Track Order kholo</a><a class="bot-link" onclick="closeBotAnd(function(){openAuthModal('login')})">🔐 Login</a>`, chips: null };
+  }
+
+  if(hasS('order') && hasS('kaise', 'how', 'place', 'karna', 'karu', 'kare')) {
+    return { html: `Order karna bahut aasaan hai:<br>1️⃣ Login / Signup karein<br>2️⃣ Product par <b>Add to Cart</b> dabayein<br>3️⃣ Cart me address + 6-digit pincode bharein (GPS se auto-fill bhi hota hai)<br>4️⃣ Payment option chunkar <b>CONFIRM ORDER</b> dabayein<br>Order ke baad aapko ek <b>secret delivery PIN</b> milega.`, chips: null };
+  }
+
+  if(hasS('deliver', 'shipping', 'kab milega', 'kab milegi', 'courier')) {
+    return { html: `🚚 Mharal Gaon me <b>2-hour hand-to-hand delivery</b> milti hai aur delivery charges <b>FREE</b> hain.<br>Delivery ke time aapko apna <b>4-digit secret PIN</b> delivery person ko dena hoga.<br>Bahar ke area ke liye pehle humse confirm karein.<br>${wa}`, chips: null };
+  }
+
+  if(hasS('payment', 'pay', 'upi', 'cod', 'cash', 'card', 'paytm', 'phonepe', 'gpay', 'google pay')) {
+    return { html: `💳 Payment options:<br>• UPI / QR / Google Pay<br>• Credit / Debit Card<br>• Wallets (Paytm / PhonePe / Amazon Pay)<br>• 💵 Cash on Delivery (doorstep par)`, chips: null };
+  }
+
+  if(hasS('address', 'location', 'timing', 'open', 'shop', 'dukan', 'store', 'kidhar', 'khula', 'band')) {
+    return { html: `📍 <b>PAG Moters</b><br>Shop no 68, MIDC Gate, Mharal Gaon 421001<br>⏱️ Daily 9:00 AM – 9:00 PM<br><a class="bot-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=MIDC+Gate+Mharal+Gaon+421001">🗺️ Map me dekhein</a><a class="bot-link" href="tel:+918766641866">📞 Call</a>`, chips: null };
+  }
+
+  if(hasS('warranty', 'guarantee', 'return', 'refund', 'exchange', 'replace', 'wapas')) {
+    return { html: `Warranty / return product ke hisaab se alag hoti hai (jaise battery pack par 3 saal warranty listed hai). Kisi specific product ya order ke liye hamari team se confirm karein 👇<br>${wa}<a class="bot-link" onclick="closeBotAnd(openMailSupportModal)">✉️ Mail Support</a>`, chips: null };
+  }
+
+  if(hasS('password', 'login', 'forgot', 'signup', 'sign up', 'register', 'account')) {
+    return { html: `Account help:<br><a class="bot-link" onclick="closeBotAnd(function(){openAuthModal('login')})">🔐 Login</a><a class="bot-link" onclick="closeBotAnd(function(){openAuthModal('signup')})">🆕 Create Account</a><a class="bot-link" onclick="closeBotAnd(function(){openAuthModal('forgot')})">🔑 Forgot Password</a>`, chips: null };
+  }
+
+  // PRODUCT FINDER
+  const dealIntent = hasS('sasta', 'cheap', 'offer', 'deal', 'discount', 'sale', 'sabse');
+  const tokens = t.replace(/[^a-z0-9 ]/g, ' ').split(/\s+/).filter(w => w.length >= 3 && !BOT_STOP.includes(w)).map(botStem);
+  let found = [];
+  if(tokens.length) {
+    found = catalog.map(p => {
+      const hay = (p.name + ' ' + p.cat).toLowerCase();
+      return { p, score: tokens.filter(tk => hay.includes(tk)).length };
+    }).filter(x => x.score > 0).sort((a, b) => b.score - a.score).map(x => x.p);
+  }
+  if(found.length) {
+    if(dealIntent) found.sort((a, b) => (1 - b.price / b.orig) - (1 - a.price / a.orig));
+    const top = found.slice(0, 4);
+    return { html: `Ye products mile 👇${botProductLines(top)}${found.length > 4 ? `<small>...aur ${found.length - 4} products site par hain.</small>` : ''}`, chips: null };
+  }
+  if(dealIntent || hasS('price', 'rate', 'kitna', 'stock', 'available', 'products', 'product')) {
+    const top = catalog.filter(p => p.stock > 0).sort((a, b) => (1 - b.price / b.orig) - (1 - a.price / a.orig)).slice(0, 3);
+    if(top.length) return { html: `🔥 Abhi ke sabse zyada discount wale products:${botProductLines(top)}`, chips: null };
+  }
+
+  return { html: `Maaf kijiye, ye mujhe poori tarah samajh nahi aaya 😅<br>Aap product ka naam likhein (jaise <i>helmet</i>, <i>charger</i>, <i>battery</i>) ya neeche ke options chunein, ya team se baat karein:<br>${wa}<a class="bot-link" onclick="closeBotAnd(openMailSupportModal)">✉️ Mail Support</a>`, chips: null };
+}
+
+function closeBotAnd(fn) {
+  toggleBot(false);
+  if(typeof fn === 'function') fn();
+}
+
+// ==========================================
+// 📧 NEW: ADMIN MAIL CENTRE (RECEIVE / REPLY / SEND)
+// ==========================================
+function mailStatusPill(m) {
+  if(m.direction === 'out') return '<span class="mail-status-pill st-3">Sent</span>';
+  if(!m.read) return '<span class="mail-status-pill st-1">New</span>';
+  if(m.replied) return '<span class="mail-status-pill st-4">Replied</span>';
+  return '<span class="mail-status-pill st-2">Read</span>';
+}
+
+function setAdminMailView(v) {
+  adminMailView = v;
+  renderMailAdmin();
+}
+
+function renderMailAdmin() {
+  const list = document.getElementById('adminMailList');
+  const form = document.getElementById('adminMailComposeForm');
+  if(!list || !form) return;
+
+  const inboxAll = mails.filter(m => m.direction === 'in');
+  const sentAll = mails.filter(m => m.direction === 'out');
+  const unread = inboxAll.filter(m => !m.read).length;
+
+  const tabBtn = document.getElementById('btnTabMail');
+  if(tabBtn) tabBtn.innerHTML = '📧 Mail (Inbox / Send)' + (unread ? ` <span class="mail-unread-badge">${unread}</span>` : '');
+
+  const badge = document.getElementById('adminMailCountBadge');
+  if(badge) badge.innerText = `${inboxAll.length} received · ${sentAll.length} sent`;
+
+  ['inbox', 'sent', 'compose'].forEach(v => {
+    const b = document.getElementById('mailView_' + v);
+    if(b) b.classList.toggle('active', v === adminMailView);
+  });
+  const inboxBtn = document.getElementById('mailView_inbox');
+  if(inboxBtn) inboxBtn.innerHTML = '📥 Inbox (Received)' + (unread ? ` <span class="mail-unread-badge">${unread}</span>` : '');
+
+  if(adminMailView === 'compose') {
+    list.style.display = 'none';
+    form.style.display = 'grid';
+    const dl = document.getElementById('mailToList');
+    if(dl) {
+      const seen = new Set();
+      let opts = '';
+      users.forEach(u => {
+        if(u.email && !seen.has(u.email)) { seen.add(u.email); opts += `<option value="${esc(u.email)}">${esc(u.name)}</option>`; }
+      });
+      inboxAll.forEach(m => {
+        if(m.fromEmail && !seen.has(m.fromEmail)) { seen.add(m.fromEmail); opts += `<option value="${esc(m.fromEmail)}">${esc(m.fromName)}</option>`; }
+      });
+      dl.innerHTML = opts;
+    }
+    return;
+  }
+
+  form.style.display = 'none';
+  list.style.display = 'block';
+
+  const rows = (adminMailView === 'sent' ? sentAll : inboxAll).slice().sort((a, b) => b.ts - a.ts);
+  if(!rows.length) {
+    list.innerHTML = `<div class="mail-empty">${adminMailView === 'sent' ? '📤 Abhi koi mail send nahi hua.' : '📭 Inbox khali hai. Customer mails yaha aayenge.'}</div>`;
+    return;
+  }
+
+  list.innerHTML = rows.map(m => {
+    const unreadRow = m.direction === 'in' && !m.read;
+    const who = m.direction === 'in' ? esc(m.fromName) : esc(m.toName || m.toEmail);
+    const snippet = esc((m.body || '').replace(/\s+/g, ' ').slice(0, 70));
+    return `
+      <div class="mail-row" style="${unreadRow ? 'font-weight:800;background:#f0f9ff;' : ''}" onclick="openMailView('${m.id}')">
+        <span class="mail-orderid">${esc(m.id)}</span>
+        <span>${m.direction === 'in' ? '' : 'To: '}${who}</span>
+        <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"><b>${esc(m.subject)}</b> — <span style="color:#64748b;font-weight:400;">${snippet}</span></span>
+        <span style="font-size:11px;color:#64748b;font-weight:400;">${esc(m.date)}</span>
+        ${mailStatusPill(m)}
+      </div>`;
+  }).join('');
+}
+
+function openMailView(id) {
+  const m = mails.find(x => x.id === id);
+  if(!m) return;
+  if(m.direction === 'in' && !m.read) { m.read = true; persistMails(); }
+
+  const root = mails.find(x => x.id === (m.threadId || m.id)) || m;
+  const thread = mails.filter(x => x.id === root.id || x.threadId === root.id).sort((a, b) => a.ts - b.ts);
+  const cust = root.direction === 'in'
+    ? { name: root.fromName, email: root.fromEmail, phone: root.fromPhone }
+    : { name: root.toName, email: root.toEmail, phone: root.toPhone };
+  const canDelete = currentUser && ['Super Admin', 'Sub-Admin'].includes(currentUser.role);
+
+  document.getElementById('mailViewTitle').innerText = '📧 ' + (root.subject || 'Mail');
+  document.getElementById('mailViewBody').innerHTML = `
+    <div style="background:#f8fafc;padding:8px 10px;border-radius:4px;font-size:12px;line-height:1.6;margin-bottom:8px;">
+      <div><b>Customer:</b> ${esc(cust.name || '—')}</div>
+      <div><b>Email:</b> ${esc(cust.email || '—')}</div>
+      <div><b>Phone:</b> ${cust.phone ? `<a href="tel:${esc(cust.phone)}" style="color:var(--fk-blue);font-weight:700;">${esc(cust.phone)}</a>` : '—'}</div>
+    </div>
+
+    ${thread.map(x => `
+      <div class="mail-bubble ${x.direction}">
+        <small>${x.direction === 'in' ? esc(x.fromName) + ' (Customer)' : esc(x.fromName || 'PAG Team') + ' (PAG Moters)'} · ${esc(x.date)} · ${esc(x.id)}</small>
+        <b>${esc(x.subject)}</b><br>${nl2br(x.body)}
+      </div>`).join('')}
+
+    <div style="margin-top:10px;">
+      <label style="font-size:11px;font-weight:700;color:#475569;">✍️ Reply:</label>
+      <textarea id="mailReplyText" rows="4" style="width:100%;border:1px solid var(--line);border-radius:3px;padding:8px;font:inherit;font-size:12px;" placeholder="Customer ko reply likhein..."></textarea>
+    </div>
+
+    <div class="mail-view-actions">
+      <button type="button" style="background:var(--fk-blue);" onclick="adminReplyMail('${root.id}')">📤 Send Reply</button>
+      <button type="button" style="background:#16a34a;" onclick="adminMailtoReply('${root.id}')">📨 Email App me kholo</button>
+      ${root.direction === 'in' ? `<button type="button" style="background:#d97706;" onclick="markMailUnread('${root.id}')">Mark Unread</button>` : ''}
+      ${canDelete ? `<button type="button" style="background:#dc2626;" onclick="deleteMailThread('${root.id}')">🗑️ Delete</button>` : ''}
+      <button type="button" style="background:#e2e8f0;color:#334155;" onclick="closeMailView()">Close</button>
+    </div>
+  `;
+  document.getElementById('mailViewModalOverlay').style.display = 'flex';
+}
+
+function closeMailView() {
+  document.getElementById('mailViewModalOverlay').style.display = 'none';
+}
+
+function adminReplyMail(rootId) {
+  const root = mails.find(x => x.id === rootId);
+  const txt = document.getElementById('mailReplyText').value.trim();
+  if(!root) return;
+  if(!txt) { showToast("Reply message likhein.", "error"); return; }
+  const to = root.direction === 'in'
+    ? { name: root.fromName, email: root.fromEmail, phone: root.fromPhone }
+    : { name: root.toName, email: root.toEmail, phone: root.toPhone };
+  mails.push({
+    id: newMailId(),
+    direction: 'out',
+    threadId: root.id,
+    toName: to.name,
+    toEmail: to.email,
+    toPhone: to.phone,
+    fromName: currentUser ? currentUser.name : 'PAG Moters',
+    subject: 'Re: ' + String(root.subject || '').replace(/^Re:\s*/i, ''),
+    body: txt,
+    date: mailNowText(),
+    ts: Date.now(),
+    read: true
+  });
+  if(root.direction === 'in') root.replied = true;
+  persistMails();
+  openMailView(root.id);
+  showToast("Reply sent to customer!", "success");
+}
+
+function adminMailtoReply(rootId) {
+  const root = mails.find(x => x.id === rootId);
+  if(!root) return;
+  const email = root.direction === 'in' ? root.fromEmail : root.toEmail;
+  const txt = (document.getElementById('mailReplyText').value || '').trim();
+  const subj = 'Re: ' + String(root.subject || '').replace(/^Re:\s*/i, '');
+  window.location.href = `mailto:${encodeURIComponent(email)}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(txt)}`;
+}
+
+function markMailUnread(rootId) {
+  const root = mails.find(x => x.id === rootId);
+  if(!root) return;
+  root.read = false;
+  persistMails();
+  closeMailView();
+  showToast("Marked as unread.", "info");
+}
+
+function deleteMailThread(rootId) {
+  if(!confirm("Is mail aur uske saare replies delete karne hain?")) return;
+  mails = mails.filter(x => x.id !== rootId && x.threadId !== rootId);
+  persistMails();
+  closeMailView();
+  showToast("Mail deleted.", "info");
+}
+
+function adminSendMail(e) {
+  e.preventDefault();
+  const email = document.getElementById('mailToEmail').value.trim().toLowerCase();
+  let name = document.getElementById('mailToName').value.trim();
+  const subject = document.getElementById('mailSubject').value.trim();
+  const body = document.getElementById('mailBody').value.trim();
+  const alsoMailto = document.getElementById('mailAlsoMailto').checked;
+  if(!email || !subject || !body) { showToast("To, Subject aur Message zaroori hain.", "error"); return; }
+
+  const u = users.find(x => (x.email || '').toLowerCase() === email);
+  if(u && !name) name = u.name;
+  mails.push({
+    id: newMailId(),
+    direction: 'out',
+    toName: name,
+    toEmail: email,
+    toPhone: u ? u.phone : '',
+    fromName: currentUser ? currentUser.name : 'PAG Moters',
+    subject: subject,
+    body: body,
+    date: mailNowText(),
+    ts: Date.now(),
+    read: true
+  });
+  persistMails();
+  e.target.reset();
+  adminMailView = 'sent';
+  renderMailAdmin();
+  showToast("Mail sent successfully!", "success");
+  if(alsoMailto) {
+    window.location.href = `mailto:${encodeURIComponent(email)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  }
+}
+
+// Refresh mail inbox if another tab on this browser sends a mail
+window.addEventListener('storage', (ev) => {
+  if(ev.key === 'pag_mail_db') {
+    const before = mails.filter(m => m.direction === 'in').length;
+    try { mails = JSON.parse(ev.newValue) || []; } catch(err){ mails = []; }
+    renderMailAdmin();
+    const after = mails.filter(m => m.direction === 'in').length;
+    const panel = document.getElementById('adminPanelModal');
+    if(after > before && panel && panel.style.display === 'flex') showToast("📧 Naya customer mail aaya!", "info");
+  }
+});
+
+// SESSION RESTORE ON REFRESH
+window.addEventListener('DOMContentLoaded', () => {
+  displayProducts(catalog);
+  syncCategoryMenus();
+  syncCartUI();
+  syncAuthUI();
+  startSaleTimer();
+  startRealTimeClock();
+
+  if(currentUser && !currentUser.isAdmin) {
+    try { users = JSON.parse(localStorage.getItem('pag_users_db')) || []; } catch(e){ users = []; }
+    const me = users.find(u => cleanPhone(u.phone) === cleanPhone(currentUser.phone));
+    if(me && me.isBlocked) {
+      handleUserLogout();
+    }
+  }
+
+  if(currentUser && currentUser.isAdmin) {
+    openAdminPortal(currentUser.role || "Super Admin");
+  }
+});
+</script>
+</body>
+</html>
