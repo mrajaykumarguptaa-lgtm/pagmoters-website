@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>PAG Moters – EV Spare Parts, Accessories &amp; Service</title>
 <meta name="description" content="PAG Moters – Genuine EV Spare Parts, Fast Chargers, Helmets, Lithium Batteries & Accessories. Hand-to-hand fast delivery.">
@@ -529,6 +530,34 @@ footer a{color:#fff;text-decoration:none}
 .rev-form{background:#f8fafc;border:1px solid var(--line);border-radius:4px;padding:10px;margin:8px 0}
 .rev-form textarea{width:100%;border:1px solid var(--line);border-radius:3px;padding:8px;font:inherit;font-size:12px;margin-top:6px}
 .rev-form button.rev-submit{margin-top:8px;background:var(--fk-green);color:#fff;border:0;padding:9px 16px;font-weight:700;border-radius:3px;cursor:pointer;font-size:12px}
+/* ======================================================== */
+/* 👑 MASTER LIVE EDITOR (NEW) */
+/* ======================================================== */
+#masterBar{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(10px + env(safe-area-inset-bottom,0px));z-index:9990;background:#111827;color:#fff;border:2px solid #f59e0b;border-radius:10px;padding:8px 10px;display:none;align-items:center;gap:6px;flex-wrap:wrap;justify-content:center;width:min(96%,860px);box-shadow:0 6px 24px rgba(0,0,0,.5);font-size:12px}
+#masterBar.show{display:flex}
+#masterBar button{border:0;border-radius:5px;padding:7px 10px;font-weight:700;font-size:12px;cursor:pointer;background:#2874f0;color:#fff;white-space:nowrap}
+#masterBar button.on{background:#16a34a}
+#masterBar button.red{background:#dc2626}
+#masterBar button.gold{background:#d97706}
+#masterBar .mb-chip{font-size:11px;background:#1f2937;border-radius:10px;padding:3px 8px;color:#fde68a}
+#textToolbar{position:fixed;top:calc(8px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);z-index:9995;background:#111827;color:#fff;border:2px solid #16a34a;border-radius:8px;padding:6px 8px;display:none;align-items:center;gap:5px;flex-wrap:wrap;justify-content:center;width:min(96%,560px);box-shadow:0 6px 24px rgba(0,0,0,.5);font-size:12px}
+#textToolbar.show{display:flex}
+#textToolbar button{border:0;border-radius:4px;padding:6px 10px;font-weight:800;font-size:12px;cursor:pointer;background:#374151;color:#fff}
+#textToolbar input[type=color]{width:34px;height:28px;border:0;padding:0;background:none;cursor:pointer}
+body.edit-on [data-eid]{outline:1px dashed rgba(124,58,237,.6);outline-offset:1px;cursor:text}
+body.edit-on [data-eid]:hover{outline:2px solid #7c3aed;background:rgba(124,58,237,.10)}
+body.edit-on .m-editing{outline:2px solid #16a34a !important;background:rgba(22,163,74,.10) !important}
+body.edit-on [data-block]{outline:2px dashed rgba(251,100,27,.65);outline-offset:-2px}
+body.edit-on .product-card{outline:1px dashed #16a34a;outline-offset:-2px;cursor:pointer}
+body.edit-on [data-block]:not(header):not(.sidebar):not(.right-sidebar){position:relative}
+.mhide{display:none !important}
+body.edit-on .mghost{opacity:.35}
+.blk-bar{position:absolute;top:2px;right:2px;z-index:450;display:none;gap:2px;background:#111827;border-radius:5px;padding:2px;align-items:center}
+body.edit-on .blk-bar{display:flex}
+.blk-bar span{font-size:9px;color:#fde68a;padding:0 4px;white-space:nowrap}
+.blk-bar button{border:0;background:#374151;color:#fff;border-radius:3px;padding:3px 6px;font-size:11px;font-weight:800;cursor:pointer;line-height:1}
+.blk-bar button:hover{background:#7c3aed}
+body.edit-on{padding-bottom:90px}
 </style>
 </head>
 <body>
@@ -865,7 +894,48 @@ footer a{color:#fff;text-decoration:none}
   </div>
 </div>
 
-<!-- 🧾 PRODUCT DETAILS MODAL (customer) -->
+<!-- 👑 MASTER LIVE EDITOR BAR -->
+<div id="masterBar">
+  <b>👑 Master Live Editor</b>
+  <button type="button" id="mbEdit" onclick="toggleEditMode()">✏️ Edit Mode: ON</button>
+  <button type="button" class="gold" onclick="openThemePanel()">🎨 Theme</button>
+  <button type="button" onclick="openAdminPortal('Master Admin')">⚙️ Workspace</button>
+  <button type="button" class="red" onclick="resetSiteLayout()">↩️ Reset Layout</button>
+  <span class="mb-chip" id="syncChip">☁️ ...</span>
+  <button type="button" class="red" onclick="handleUserLogout()">🚪 Logout</button>
+  <div style="width:100%;text-align:center;font-size:10px;color:#9ca3af;">Text par click = edit · Block ke upar ⬆️⬇️👁🎨 buttons = layout · Product par click = product edit</div>
+</div>
+
+<!-- ✏️ TEXT STYLE TOOLBAR -->
+<div id="textToolbar">
+  <button type="button" onmousedown="event.preventDefault()" onclick="textStyleStep(-1)">A−</button>
+  <button type="button" onmousedown="event.preventDefault()" onclick="textStyleStep(1)">A+</button>
+  <button type="button" onmousedown="event.preventDefault()" onclick="textStyleBold()"><b>B</b></button>
+  <input type="color" id="ttColor" onmousedown="event.stopPropagation()" oninput="textStyleColor(this.value)">
+  <button type="button" onmousedown="event.preventDefault()" onclick="textStyleAlign('left')">⬅︎</button>
+  <button type="button" onmousedown="event.preventDefault()" onclick="textStyleAlign('center')">↔︎</button>
+  <button type="button" onmousedown="event.preventDefault()" onclick="textStyleAlign('right')">➡︎</button>
+  <button type="button" onmousedown="event.preventDefault()" onclick="textStyleReset()" style="background:#b45309;">Reset</button>
+  <button type="button" onmousedown="event.preventDefault()" onclick="finishTextEdit()" style="background:#16a34a;">✔ Done</button>
+</div>
+
+<!-- 👑 MASTER GENERIC EDIT MODAL -->
+  <div id="masterEditOverlay">
+    <div class="edit-modal-box">
+      <div class="modal-head" style="background:#92400e;color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;">
+        <h3 style="margin:0;font-size:15px;" id="masterEditTitle">Edit</h3>
+        <button class="btn-close" type="button" onclick="closeMasterForm()">✕</button>
+      </div>
+      <div class="modal-body-scrollable">
+        <form class="auth-form" onsubmit="masterSubmitForm(event)">
+          <div id="masterEditFields" style="display:flex;flex-direction:column;gap:8px;"></div>
+          <button type="submit" class="auth-btn-primary" style="background:var(--fk-green);margin-top:10px;">💾 Save Changes</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🧾 PRODUCT DETAILS MODAL (customer) -->
 <div class="overlay" id="productDetailOverlay" onclick="if(event.target===this)closeProductDetail()">
   <div class="pd-box">
     <div class="modal-head">
@@ -928,6 +998,7 @@ footer a{color:#fff;text-decoration:none}
         <button type="button" id="mstInbox" onclick="switchMailSupportTab('inbox')">📬 My Mails &amp; Replies</button>
       </div>
 
+      <div id="mailBlockNotice" class="sec-badge" style="display:none;">⛔ <b>Aapka account block hai.</b> Neeche pre-filled mail bhejein — sirf <b>Admin ya Master</b> aapka account unlock kar sakte hain.</div>
       <div id="mailSendPane">
         <form class="auth-form" onsubmit="handleSendSupportMail(event)">
           <div>
@@ -1017,6 +1088,7 @@ footer a{color:#fff;text-decoration:none}
       <button class="admin-tab-btn" id="btnTabUsers" onclick="switchAdminTab('users')">👥 Customer Accounts &amp; Block</button>
       <button class="admin-tab-btn" id="btnTabMail" onclick="switchAdminTab('mail')">📧 Mail (Inbox / Send)</button>
       <button class="admin-tab-btn" id="btnTabMaster" onclick="switchAdminTab('master')" style="display:none;background:#fef3c7;border-color:#d97706;">👑 Master Control</button>
+      <button class="admin-tab-btn" id="btnTabSecurity" onclick="switchAdminTab('security')" style="display:none;background:#fee2e2;border-color:#dc2626;">🔒 Login Security</button>
     </div>
 
     <!-- 1. ORDERS MAILBOX -->
@@ -1026,6 +1098,23 @@ footer a{color:#fff;text-decoration:none}
         <span id="adminOrdersCountBadge">0 Orders</span>
       </div>
       <div id="adminMailboxContainer"></div>
+    </div>
+
+    <!-- 9. 🔒 LOGIN SECURITY (unlock blocked accounts) -->
+    <div id="adminSecuritySection" class="mailbox-card" style="display:none;padding:14px;">
+      <div class="mailbox-header" style="background:#fff;padding:0 0 10px 0;">
+        <span><b>🔒 Login Security — Blocked / Locked Accounts</b></span>
+        <button type="button" id="btnUnlockAll" class="master-btn green" onclick="securityUnlockAll()">🔓 Unlock All</button>
+      </div>
+      <div class="rev-note" style="margin-top:0;">
+        <b>Rules:</b> 3 se zyada galat login attempts par account <b>2 ghante</b> ke liye block hota hai. 10 se zyada galat attempts par account <b>permanent block</b> ho jata hai aur customer ke saamne Support option khulta hai. Permanent block sirf <b>Admin ya Master</b> unlock kar sakte hain.
+      </div>
+      <div class="users-table-wrap">
+        <table class="users-table">
+          <thead><tr><th>Account</th><th>Type</th><th>Mobile</th><th>Wrong Attempts</th><th>Status</th><th>Last Attempt</th><th>Action</th></tr></thead>
+          <tbody id="securityBody"></tbody>
+        </table>
+      </div>
     </div>
 
     <!-- 8. 👑 MASTER CONTROL -->
@@ -1074,6 +1163,15 @@ footer a{color:#fff;text-decoration:none}
           <thead><tr><th>Product</th><th>Customer</th><th>Rating</th><th>Comment</th><th>Order</th><th>Action</th></tr></thead>
           <tbody id="masterReviewsBody"></tbody>
         </table>
+      </div>
+
+      <h4 class="master-h"><span>☁️ Cloud Sync (sab devices me same data)</span></h4>
+      <div class="rev-note" id="syncInfo" style="margin-top:0;"></div>
+      <div class="admin-prod-form">
+        <input type="text" id="syncTestUrl" placeholder="Firebase Realtime Database URL (https://xxxx-default-rtdb.firebaseio.com)" style="grid-column:1/-1;">
+        <button type="button" style="background:var(--fk-blue);" onclick="pagSyncTestUrl()">🔌 Test Connection</button>
+        <button type="button" style="background:#16a34a;" onclick="pagSyncUploadAll()">⬆️ Upload this device data to Cloud</button>
+        <button type="button" style="background:#7c3aed;" onclick="pagSyncPullNow()">⬇️ Pull latest from Cloud</button>
       </div>
 
       <h4 class="master-h"><span>🔐 Login Credentials Change</span></h4>
@@ -1319,22 +1417,6 @@ footer a{color:#fff;text-decoration:none}
 
   </div>
 
-  <!-- 👑 MASTER GENERIC EDIT MODAL -->
-  <div id="masterEditOverlay">
-    <div class="edit-modal-box">
-      <div class="modal-head" style="background:#92400e;color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;">
-        <h3 style="margin:0;font-size:15px;" id="masterEditTitle">Edit</h3>
-        <button class="btn-close" type="button" onclick="closeMasterForm()">✕</button>
-      </div>
-      <div class="modal-body-scrollable">
-        <form class="auth-form" onsubmit="masterSubmitForm(event)">
-          <div id="masterEditFields" style="display:flex;flex-direction:column;gap:8px;"></div>
-          <button type="submit" class="auth-btn-primary" style="background:var(--fk-green);margin-top:10px;">💾 Save Changes</button>
-        </form>
-      </div>
-    </div>
-  </div>
-
   <!-- ✉️ MAIL VIEW / REPLY MODAL -->
   <div id="mailViewModalOverlay">
     <div class="edit-modal-box">
@@ -1419,6 +1501,319 @@ footer a{color:#fff;text-decoration:none}
 </div>
 
 <script>
+// ==========================================================
+// ☁️ CLOUD SYNC  (same data on desktop, mobile, every device)
+// Paste your Firebase Realtime Database URL below, e.g.
+//   const PAG_SYNC_URL = 'https://your-project-default-rtdb.firebaseio.com';
+// Leave '' to keep everything local to each browser.
+// ==========================================================
+const PAG_SYNC_URL = '';
+
+const PAGSync = {
+  url: String(PAG_SYNC_URL || '').trim().replace(/\/+$/, ''),
+  enabled: false, status: 'off', inited: false, busy: false, polling: false, dirtyVer: false,
+  q: [], last: {}, lastVal: {}, ver: '', lastSync: 0, timer: null
+};
+PAGSync.enabled = /^https:\/\//.test(PAGSync.url) || /^http:\/\/(127\.0\.0\.1|localhost)/.test(PAGSync.url);
+PAGSync.status = PAGSync.enabled ? 'connecting' : 'off';
+
+const _lsSet = Storage.prototype.setItem;
+const _lsRemove = Storage.prototype.removeItem;
+Storage.prototype.setItem = function(k, v) { _lsSet.call(this, k, v); if(this === window.localStorage) pagSyncLocalChange(k); };
+Storage.prototype.removeItem = function(k) { _lsRemove.call(this, k); if(this === window.localStorage) pagSyncLocalChange(k); };
+
+function _shash(s) { let h = 0; s = String(s); for(let i = 0; i < s.length; i++) { h = ((h << 5) - h) + s.charCodeAt(i) | 0; } return Math.abs(h).toString(36); }
+function _sk(k) { return String(k == null ? '' : k).replace(/[.#$\[\]\/]/g, '_'); }
+function _chatKey(c) { return c.id || ((c.staffPhone || 'x') + '_' + _shash((c.senderName || '') + '|' + (c.text || '') + '|' + (c.time || ''))); }
+
+const SYNC_LISTS = {
+  pag_catalog_db: { node: 'catalog', key: i => String(i.id) },
+  pag_orders_db: { node: 'orders', key: o => String(o.id) },
+  pag_users_db: { node: 'users', key: u => cleanPhone(u.phone) },
+  pag_team_db: { node: 'team', key: t => cleanPhone(t.phone) },
+  pag_staff_chats_db: { node: 'chats', key: _chatKey },
+  pag_mail_db: { node: 'mails', key: m => String(m.id) },
+  pag_reviews_db: { node: 'reviews', key: r => String(r.id) }
+};
+const SYNC_MAPS = { pag_login_guard: 'guard' };
+const SYNC_VALUES = {
+  pag_company_notice_db: { node: 'notice' },
+  pag_site_layout: { node: 'layout' },
+  pag_sale_fixed_end_time: { node: 'saleEnd', raw: true },
+  pag_admin_creds: { node: 'adminCreds' },
+  pag_master_creds: { node: 'masterCreds' }
+};
+
+function pagSetStatus(s) {
+  PAGSync.status = s;
+  const chip = document.getElementById('syncChip');
+  const map = { off: '☁️ Sync OFF (sirf is device me)', connecting: '☁️ Connecting...', ok: '☁️ Synced', error: '⚠️ Sync error (retrying)' };
+  if(chip) chip.textContent = map[s] || s;
+}
+
+function _readLocal(k) {
+  const raw = window.localStorage.getItem(k);
+  if(raw == null) return null;
+  try { return JSON.parse(raw); } catch(e) { return raw; }
+}
+
+function pagSyncLocalChange(k) {
+  if(!PAGSync.enabled || !PAGSync.inited) return;
+  if(SYNC_LISTS[k]) pagSyncDiffList(k);
+  else if(SYNC_MAPS[k]) pagSyncDiffMap(k);
+  else if(SYNC_VALUES[k]) pagSyncDiffValue(k);
+}
+
+function pagSyncDiffList(k) {
+  const def = SYNC_LISTS[k];
+  const arr = _readLocal(k);
+  const list = Array.isArray(arr) ? arr : [];
+  const prev = PAGSync.last[def.node] || new Map();
+  const next = new Map();
+  list.forEach(item => { if(!item || typeof item !== 'object') return; const kk = _sk(def.key(item)); if(kk) next.set(kk, JSON.stringify(item)); });
+  next.forEach((json, kk) => { if(prev.get(kk) !== json) pagSyncEnqueue('PUT', def.node + '/' + kk, json); });
+  prev.forEach((json, kk) => { if(!next.has(kk)) pagSyncEnqueue('DELETE', def.node + '/' + kk); });
+  PAGSync.last[def.node] = next;
+}
+
+function pagSyncDiffMap(k) {
+  const node = SYNC_MAPS[k];
+  const obj = _readLocal(k);
+  const o = (obj && typeof obj === 'object' && !Array.isArray(obj)) ? obj : {};
+  const prev = PAGSync.last[node] || new Map();
+  const next = new Map();
+  Object.keys(o).forEach(key => { const kk = _sk(key); if(kk) next.set(kk, JSON.stringify(o[key])); });
+  next.forEach((json, kk) => { if(prev.get(kk) !== json) pagSyncEnqueue('PUT', node + '/' + kk, json); });
+  prev.forEach((json, kk) => { if(!next.has(kk)) pagSyncEnqueue('DELETE', node + '/' + kk); });
+  PAGSync.last[node] = next;
+}
+
+function pagSyncDiffValue(k) {
+  const def = SYNC_VALUES[k];
+  const raw = window.localStorage.getItem(k);
+  if(raw == null) {
+    if(PAGSync.lastVal[k] !== undefined) { pagSyncEnqueue('DELETE', def.node); PAGSync.lastVal[k] = undefined; }
+    return;
+  }
+  if(PAGSync.lastVal[k] === raw) return;
+  PAGSync.lastVal[k] = raw;
+  pagSyncEnqueue('PUT', def.node, def.raw ? JSON.stringify(isNaN(raw) ? raw : Number(raw)) : raw);
+}
+
+function pagSyncEnqueue(method, path, body) {
+  PAGSync.q.push({ method, path, body });
+  pagSyncFlush();
+}
+
+async function pagSyncFlush() {
+  if(PAGSync.busy) return;
+  PAGSync.busy = true;
+  try {
+    while(PAGSync.q.length) {
+      const op = PAGSync.q[0];
+      const res = await fetch(PAGSync.url + '/pag/' + op.path + '.json', {
+        method: op.method,
+        headers: { 'Content-Type': 'application/json' },
+        body: op.method === 'PUT' ? op.body : undefined
+      });
+      if(!res.ok) throw new Error('HTTP ' + res.status);
+      PAGSync.q.shift();
+      PAGSync.dirtyVer = true;
+    }
+    if(PAGSync.dirtyVer) {
+      const v = Date.now() + '-' + Math.floor(Math.random() * 1e6);
+      const r = await fetch(PAGSync.url + '/pag/_ver.json', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(v) });
+      if(!r.ok) throw new Error('HTTP ' + r.status);
+      PAGSync.ver = v; PAGSync.dirtyVer = false; PAGSync.lastSync = Date.now();
+    }
+    pagSetStatus('ok');
+    PAGSync.busy = false;
+    if(PAGSync.q.length) pagSyncFlush();
+  } catch(e) {
+    pagSetStatus('error');
+    setTimeout(() => { PAGSync.busy = false; pagSyncFlush(); }, 6000);
+  }
+}
+
+function pagSortList(node, list) {
+  const byTs = (a, b) => (a.ts || 0) - (b.ts || 0);
+  if(node === 'orders') return list.sort((a, b) => (b.ts || 0) - (a.ts || 0));
+  if(node === 'mails' || node === 'reviews' || node === 'chats') return list.sort(byTs);
+  if(node === 'catalog') {
+    const big = list.filter(p => Number(p.id) > 1e9).sort((a, b) => b.id - a.id);
+    const small = list.filter(p => !(Number(p.id) > 1e9)).sort((a, b) => a.id - b.id);
+    return big.concat(small);
+  }
+  return list;
+}
+
+// Apply a full snapshot of the cloud to this device
+function pagSyncApply(root, first) {
+  const changed = new Set();
+  const toPush = [];
+  Object.keys(SYNC_LISTS).forEach(k => {
+    const def = SYNC_LISTS[k];
+    const remoteObj = root[def.node] && typeof root[def.node] === 'object' ? root[def.node] : {};
+    const remoteKeys = new Set(Object.keys(remoteObj));
+    const remoteItems = Object.keys(remoteObj).map(rk => remoteObj[rk]).filter(x => x && typeof x === 'object');
+    const local = _readLocal(k);
+    const localList = Array.isArray(local) ? local : [];
+    let finalList = remoteItems.slice();
+    const lastMap = new Map();
+    remoteItems.forEach(item => { const kk = _sk(def.key(item)); if(kk) lastMap.set(kk, JSON.stringify(item)); });
+    if(first) {
+      localList.forEach(item => { if(!item || typeof item !== 'object') return; const kk = _sk(def.key(item)); if(kk && !remoteKeys.has(kk)) { finalList.push(item); toPush.push(k); } });
+    }
+    finalList = pagSortList(def.node, finalList);
+    if(def.node === 'catalog' && !finalList.length) return;       // keep built-in default products
+    const json = JSON.stringify(finalList);
+    if(json !== JSON.stringify(localList) && !(local == null && !finalList.length)) { _lsSet.call(window.localStorage, k, json); changed.add(k); }
+    PAGSync.last[def.node] = lastMap;
+  });
+  Object.keys(SYNC_MAPS).forEach(k => {
+    const node = SYNC_MAPS[k];
+    const remoteObj = root[node] && typeof root[node] === 'object' ? root[node] : {};
+    const local = _readLocal(k);
+    const localObj = (local && typeof local === 'object' && !Array.isArray(local)) ? local : {};
+    const finalObj = Object.assign({}, remoteObj);
+    const lastMap = new Map();
+    Object.keys(remoteObj).forEach(key => lastMap.set(_sk(key), JSON.stringify(remoteObj[key])));
+    if(first) Object.keys(localObj).forEach(key => { if(!(key in remoteObj)) { finalObj[key] = localObj[key]; toPush.push(k); } });
+    const json = JSON.stringify(finalObj);
+    if(json !== JSON.stringify(localObj)) { _lsSet.call(window.localStorage, k, json); changed.add(k); }
+    PAGSync.last[node] = lastMap;
+  });
+  Object.keys(SYNC_VALUES).forEach(k => {
+    const def = SYNC_VALUES[k];
+    const rv = root[def.node];
+    const localRaw = window.localStorage.getItem(k);
+    if(rv !== undefined && rv !== null) {
+      const str = def.raw ? String(rv) : JSON.stringify(rv);
+      if(localRaw !== str) { _lsSet.call(window.localStorage, k, str); changed.add(k); }
+      PAGSync.lastVal[k] = str;
+    } else if(first) {
+      PAGSync.lastVal[k] = undefined;
+      if(localRaw != null) toPush.push(k);
+    } else if(localRaw != null) {
+      _lsRemove.call(window.localStorage, k); changed.add(k); PAGSync.lastVal[k] = undefined;
+    }
+  });
+  return { changed, toPush };
+}
+
+async function pagSyncPull(first, timeoutMs) {
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), timeoutMs || 8000);
+  const res = await fetch(PAGSync.url + '/pag.json', { cache: 'no-store', signal: ctrl.signal });
+  clearTimeout(t);
+  if(!res.ok) throw new Error('HTTP ' + res.status);
+  const root = (await res.json()) || {};
+  const out = pagSyncApply(root, first);
+  PAGSync.ver = root._ver || '';
+  PAGSync.lastSync = Date.now();
+  PAGSync.inited = true;
+  if(first) {
+    _lsSet.call(window.localStorage, 'pag_sync_inited', '1');
+    new Set(out.toPush).forEach(k => pagSyncLocalChange(k));     // push things that only existed on this device
+  }
+  return out.changed;
+}
+
+function pagReloadGlobals(changed) {
+  const P = (k, def) => { try { const v = JSON.parse(window.localStorage.getItem(k)); return v == null ? def : v; } catch(e) { return def; } };
+  if(changed.has('pag_catalog_db')) { catalog = P('pag_catalog_db', defaultCatalog); catalog.forEach(p => { if(!Array.isArray(p.gallery)) p.gallery = []; }); }
+  if(changed.has('pag_orders_db')) orders = P('pag_orders_db', []);
+  if(changed.has('pag_users_db')) users = P('pag_users_db', []);
+  if(changed.has('pag_team_db')) teamMembers = P('pag_team_db', []);
+  if(changed.has('pag_staff_chats_db')) staffChats = P('pag_staff_chats_db', []);
+  if(changed.has('pag_mail_db')) mails = P('pag_mail_db', []);
+  if(changed.has('pag_reviews_db') && typeof loadReviews === 'function') loadReviews();
+  if(changed.has('pag_company_notice_db')) companyNotice = P('pag_company_notice_db', companyNotice);
+  if(changed.has('pag_admin_creds')) { const c = P('pag_admin_creds', null); if(c && c.phone && c.pass) { ADMIN_PHONE = c.phone; ADMIN_PASS = c.pass; } }
+  if(changed.has('pag_master_creds')) { const c = P('pag_master_creds', null); if(c && c.id && c.pass) { MASTER_ID = c.id; MASTER_PASS = c.pass; } }
+}
+
+function pagReapplyProductView() {
+  const act = document.querySelector('#catNavList li.active');
+  const cat = act ? act.innerText : 'All Products';
+  const q = (document.getElementById('searchQuery') || {}).value;
+  if(q && q.trim()) { liveSearch(); return; }
+  if(cat === 'All Products') displayProducts(catalog); else filterByCategory(cat);
+}
+
+function pagRenderChanged(changed) {
+  if(!changed || !changed.size) return;
+  pagReloadGlobals(changed);
+  const adminOpen = document.getElementById('adminPanelModal').style.display === 'flex';
+  if(changed.has('pag_catalog_db')) {
+    const act = document.querySelector('#catNavList li.active');
+    const keep = act ? act.innerText : 'All Products';
+    syncCategoryMenus();
+    document.querySelectorAll('#catNavList li').forEach(li => li.classList.toggle('active', li.innerText === keep));
+    pagReapplyProductView();
+    if(adminOpen) renderAdminProductsTable();
+  }
+  if(changed.has('pag_reviews_db')) pagReapplyProductView();
+  if(changed.has('pag_orders_db')) {
+    if(adminOpen) renderAdminMailbox();
+    if(document.getElementById('myOrdersModalOverlay').classList.contains('show')) renderMyOrdersList();
+  }
+  if(changed.has('pag_users_db')) {
+    if(adminOpen) renderAdminUsersTable();
+    if(currentUser && !currentUser.isAdmin) {
+      const me = users.find(u => cleanPhone(u.phone) === cleanPhone(currentUser.phone));
+      if(me && me.isBlocked) handleUserLogout();
+    }
+  }
+  if(changed.has('pag_team_db') && adminOpen) { renderAdminTeamTable(); initChatSystem(); }
+  if(changed.has('pag_staff_chats_db') && adminOpen) renderChatView();
+  if(changed.has('pag_company_notice_db')) renderNoticeDisplay();
+  if(changed.has('pag_mail_db') && adminOpen) renderMailAdmin();
+  if(changed.has('pag_login_guard') && adminOpen) renderSecurityPanel();
+  if(changed.has('pag_site_layout')) { loadSiteLayout(); applySiteLayout(); }
+  if(adminOpen && isMaster()) renderMasterPanel();
+}
+
+async function pagSyncTick() {
+  if(!PAGSync.enabled || PAGSync.busy || PAGSync.q.length || PAGSync.polling) return;
+  PAGSync.polling = true;
+  try {
+    if(!PAGSync.inited) {
+      const first = !window.localStorage.getItem('pag_sync_inited');
+      pagRenderChanged(await pagSyncPull(first, 8000));
+      pagSetStatus('ok');
+      return;
+    }
+    const r = await fetch(PAGSync.url + '/pag/_ver.json', { cache: 'no-store' });
+    if(!r.ok) throw new Error('HTTP ' + r.status);
+    const v = await r.json();
+    if((v || '') !== PAGSync.ver) pagRenderChanged(await pagSyncPull(false, 15000));
+    pagSetStatus('ok');
+  } catch(e) {
+    pagSetStatus('error');
+  } finally {
+    PAGSync.polling = false;
+  }
+}
+
+// Called once on page load: sync first, then start the sale timer with the shared end time
+async function pagSyncBoot() {
+  if(!PAGSync.enabled) { pagSetStatus('off'); startSaleTimer(); return; }
+  try {
+    const first = !window.localStorage.getItem('pag_sync_inited');
+    const changed = await pagSyncPull(first, 6000);
+    pagSetStatus('ok');
+    pagRenderChanged(changed);
+  } catch(e) {
+    pagSetStatus('error');
+  }
+  startSaleTimer();
+  if(!PAGSync.timer) {
+    PAGSync.timer = setInterval(pagSyncTick, 10000);
+    document.addEventListener('visibilitychange', () => { if(!document.hidden) pagSyncTick(); });
+  }
+}
+
 // SUPER ADMIN MASTER CREDENTIALS
 let ADMIN_PHONE = "6306211265";
 let ADMIN_PASS = "Rushtom@1927";
@@ -1487,7 +1882,7 @@ function persistUsers() { localStorage.setItem('pag_users_db', JSON.stringify(us
 function persistTeam() { localStorage.setItem('pag_team_db', JSON.stringify(teamMembers)); renderAdminTeamTable(); }
 function persistChats() { localStorage.setItem('pag_staff_chats_db', JSON.stringify(staffChats)); }
 function persistNotice() { localStorage.setItem('pag_company_notice_db', JSON.stringify(companyNotice)); renderNoticeDisplay(); }
-function persistCurrentUser() { localStorage.setItem('pag_active_user', JSON.stringify(currentUser)); syncAuthUI(); }
+function persistCurrentUser() { localStorage.setItem('pag_active_user', JSON.stringify(currentUser)); syncAuthUI(); if(typeof refreshMasterBar === 'function') refreshMasterBar(); }
 
 function cleanPhone(val) {
   if(!val) return '';
@@ -1798,6 +2193,7 @@ function renderMyOrdersList() {
 function openAdminPortal(role = "Super Admin") {
   closeAuthModal();
   document.getElementById('adminPanelModal').style.display = 'flex';
+  if(typeof refreshMasterBar === 'function') refreshMasterBar();
   document.getElementById('adminRoleDisplay').innerText = role;
 
   const btnOrders = document.getElementById('btnTabOrders');
@@ -1812,6 +2208,7 @@ function openAdminPortal(role = "Super Admin") {
 
   renderNoticeDisplay();
   btnMaster.style.display = role === 'Master Admin' ? 'inline-block' : 'none';
+  document.getElementById('btnTabSecurity').style.display = ['Master Admin', 'Super Admin', 'Sub-Admin'].includes(role) ? 'inline-block' : 'none';
 
   // 1. SUPER ADMIN: Full Access
   if(role === "Super Admin" || role === "Master Admin") {
@@ -1876,11 +2273,13 @@ function openAdminPortal(role = "Super Admin") {
   initChatSystem();
   renderMailAdmin();
   renderMasterPanel();
+  renderSecurityPanel();
   if(role === 'Master Admin') switchAdminTab('master');
 }
 
 function closeAdminPortal() {
   document.getElementById('adminPanelModal').style.display = 'none';
+  if(currentUser && currentUser.role === 'Master Admin') { refreshMasterBar(); return; }   // Master goes back to the live editor
   handleUserLogout();
 }
 
@@ -1893,6 +2292,7 @@ function switchAdminTab(tab) {
   document.getElementById('adminUsersSection').style.display = tab === 'users' ? 'block' : 'none';
   document.getElementById('adminMailSection').style.display = tab === 'mail' ? 'block' : 'none';
   document.getElementById('adminMasterSection').style.display = tab === 'master' ? 'block' : 'none';
+  document.getElementById('adminSecuritySection').style.display = tab === 'security' ? 'block' : 'none';
 
   document.querySelectorAll('.admin-tab-btn').forEach(btn => btn.classList.remove('active'));
   const activeBtn = document.getElementById(`btnTab${tab.charAt(0).toUpperCase() + tab.slice(1)}`);
@@ -1901,6 +2301,7 @@ function switchAdminTab(tab) {
   if(tab === 'chat') renderChatView();
   if(tab === 'mail') renderMailAdmin();
   if(tab === 'master') renderMasterPanel();
+  if(tab === 'security') renderSecurityPanel();
 }
 
 // NOTICE BOARD ENGINE
@@ -2091,7 +2492,9 @@ function handleSendStaffMessage(e) {
     senderRole: isAdmin ? 'Admin' : 'Staff',
     text: text,
     time: new Date().toLocaleTimeString('en-IN', {hour:'2-digit', minute:'2-digit'}),
-    status: 'Sent'
+    status: 'Sent',
+    ts: Date.now(),
+    id: 'CHAT-' + Date.now() + '-' + Math.floor(Math.random() * 1000)
   };
 
   staffChats.push(newMsg);
@@ -2201,6 +2604,7 @@ function toggleTeamMemberBlock(phone) {
   const m = teamMembers.find(t => t.phone === phone);
   if(!m) return;
   m.isBlocked = !m.isBlocked;
+  if(!m.isBlocked) clearGuard(cleanPhone(m.phone));
   persistTeam();
   showToast(`${m.role} ${m.name} is now ${m.isBlocked ? 'BLOCKED' : 'UNBLOCKED'}!`, "info");
 }
@@ -2726,6 +3130,7 @@ function toggleBlockCustomer(idx) {
 
   if(confirm(`Are you sure you want to ${actionName} customer "${u.name}" (${u.phone})?`)) {
     users[idx].isBlocked = newStatus;
+    if(!newStatus) clearGuard(cleanPhone(u.phone));
     persistUsers();
 
     if(currentUser && cleanPhone(currentUser.phone) === cleanPhone(u.phone) && newStatus) {
@@ -2821,7 +3226,7 @@ function handleSaveMandatorySecurity(e) {
   setTimeout(() => { closeAuthModal(); }, 1000);
 }
 
-function handleLoginSubmit(e) {
+function handleLoginSubmitCore(e) {
   e.preventDefault();
   const rawId = document.getElementById('loginId').value.trim();
   const cleanedId = cleanPhone(rawId);
@@ -2836,7 +3241,7 @@ function handleLoginSubmit(e) {
     msg.innerText = "Master access granted! Opening Master Control...";
     showToast("Welcome Master! Full control unlocked.", "success");
     setTimeout(() => {
-      openAdminPortal("Master Admin");
+      enterMasterEditor();
     }, 600);
     return;
   }
@@ -2988,6 +3393,13 @@ function handleForgotStep1(e) {
     return;
   }
 
+  const _gs = guardStatus(cleanPhone(user.phone));
+  if(_gs.state !== 'ok') {
+    msg.className = "auth-msg err";
+    msg.innerHTML = guardMessageHtml(_gs.rec, cleanPhone(user.phone));
+    return;
+  }
+
   userVerifying = user;
   msg.className = "auth-msg ok";
   msg.innerText = `Account located for ${user.name}. Please answer below.`;
@@ -3008,8 +3420,7 @@ function handleForgotStep2(e) {
     document.getElementById('forgotStep2Box').style.display = 'none';
     document.getElementById('forgotStep3Box').style.display = 'block';
   } else {
-    msg.className = "auth-msg err";
-    msg.innerText = "❌ Incorrect Security Answer! Unauthorized access blocked.";
+    forgotWrongAnswer(msg);
   }
 }
 
@@ -3025,6 +3436,7 @@ function handleForgotStep3(e) {
   }
 
   userVerifying.pass = newPass;
+  clearGuard(cleanPhone(userVerifying.phone));
   const idx = users.findIndex(u => cleanPhone(u.phone) === cleanPhone(userVerifying.phone));
   if(idx > -1) {
     users[idx].pass = newPass;
@@ -3204,7 +3616,7 @@ function displayProducts(items) {
     const isOut = p.stock <= 0;
 
     return `
-      <div class="product-card">
+      <div class="product-card" data-pid="${p.id}">
         <span class="stock-status-pill ${isOut ? 'stock-out' : 'stock-instock'}">
           ${isOut ? 'Out of Stock' : `${p.stock} left in stock`}
         </span>
@@ -3439,7 +3851,8 @@ function processOrderPlacement(e) {
     date: new Date().toLocaleDateString('en-IN', {day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit'}),
     statusStep: 1,
     deliveryPin: deliveryPin,
-    etaText: etaTextFor(pincode)
+    etaText: etaTextFor(pincode),
+    ts: Date.now()
   };
 
   orders.unshift(newOrder);
@@ -3506,6 +3919,7 @@ function persistMails() {
 // ==========================================
 function openMailSupportModal() {
   document.getElementById('mailSupportOverlay').classList.add('show');
+  const _bn = document.getElementById('mailBlockNotice'); if(_bn) _bn.style.display = 'none';
   if(currentUser && !currentUser.isAdmin) {
     const setIfEmpty = (id, val) => { const el = document.getElementById(id); if(el && !el.value) el.value = val || ''; };
     setIfEmpty('msName', currentUser.name);
@@ -4161,6 +4575,8 @@ function renderMasterPanel() {
     </tr>`;
   }).join('') : '<tr><td colspan="6" style="text-align:center;padding:14px;color:#64748b;">No customer reviews yet.</td></tr>';
 
+  renderSyncPanel();
+
   // CREDENTIALS
   document.getElementById('mcSuperPhone').value = ADMIN_PHONE;
   document.getElementById('mcSuperPass').value = ADMIN_PASS;
@@ -4252,6 +4668,7 @@ function masterEditUser(idx) {
     u.secQuestion = v.secQuestion.trim();
     u.secAnswer = v.secAnswer.trim().toLowerCase();
     u.isBlocked = v.isBlocked === 'true';
+    if(!u.isBlocked) clearGuard(cleanPhone(u.phone));
     persistUsers();
     closeMasterForm();
     renderMasterPanel();
@@ -4293,6 +4710,7 @@ function masterEditTeam(idx) {
     m.pass = v.pass;
     m.role = v.role;
     m.isBlocked = v.isBlocked === 'true';
+    if(!m.isBlocked) clearGuard(cleanPhone(m.phone));
     m.isChatBlocked = v.isChatBlocked === 'true';
     if(oldPhone !== phone) {
       staffChats.forEach(c => { if(c.staffPhone === oldPhone) c.staffPhone = phone; });
@@ -4332,7 +4750,9 @@ function masterEditProduct(id) {
     {key:'rating', label:'Rating (0-5)', type:'number', step:'0.1', value:p.rating},
     {key:'reviews', label:'Reviews Count', type:'number', value:p.reviews},
     {key:'img', label:'Primary Image URL / Base64', type:'textarea', value:p.img},
-    {key:'gallery', label:'Extra Images (ek line me ek URL)', type:'textarea', value:(p.gallery || []).join('\n')}
+    {key:'gallery', label:'Extra Images (ek line me ek URL)', type:'textarea', value:(p.gallery || []).join('\n')},
+    {key:'specs', label:'Specifications (Label: Value, ek line me ek)', type:'textarea', value:specsToText(getSpecs(p))},
+    {key:'desc', label:'Description', type:'textarea', value:p.desc || ''}
   ], v => {
     const price = Number(v.price), orig = Number(v.orig);
     if(price > orig) { showToast("Selling price MRP se zyada nahi ho sakta!", "error"); return; }
@@ -4345,6 +4765,8 @@ function masterEditProduct(id) {
     p.reviews = Math.max(0, Number(v.reviews) || 0);
     p.img = v.img.trim();
     p.gallery = v.gallery.split('\n').map(s => s.trim()).filter(Boolean);
+    p.specs = textToSpecs(v.specs);
+    p.desc = v.desc.trim();
     persistCatalog();
     closeMasterForm();
     renderMasterPanel();
@@ -4917,15 +5339,684 @@ function masterDeleteReview(id) {
   showToast("Review deleted.", "info");
 }
 
+// ==========================================
+// 🔒 NEW: LOGIN ATTEMPT LIMITS (temporary lock + permanent block)
+// ==========================================
+const GUARD_KEY = 'pag_login_guard';
+const GUARD_MAX_FREE = 3;                    // more than 3 wrong attempts -> 2 hour lock
+const GUARD_LOCK_MS = 2 * 60 * 60 * 1000;    // 2 hours
+const GUARD_PERM_AFTER = 10;                 // more than 10 wrong attempts -> permanent block
+
+function loadGuard() {
+  try { return JSON.parse(localStorage.getItem(GUARD_KEY)) || {}; } catch(e) { return {}; }
+}
+function saveGuard(g) { localStorage.setItem(GUARD_KEY, JSON.stringify(g)); }
+
+// Which customer/staff account does this login ID belong to? (owners Master/Super Admin are never locked out)
+function guardAccountFor(rawId) {
+  const low = String(rawId || '').trim().toLowerCase();
+  const cleaned = cleanPhone(rawId);
+  if(low === String(MASTER_ID).toLowerCase() || cleaned === ADMIN_PHONE) return null;
+  let team = [], usersList = [];
+  try { team = JSON.parse(localStorage.getItem('pag_team_db')) || []; } catch(e) {}
+  try { usersList = JSON.parse(localStorage.getItem('pag_users_db')) || []; } catch(e) {}
+  const t = team.find(x => (cleaned && cleanPhone(x.phone) === cleaned) || (x.email && x.email.toLowerCase() === low));
+  if(t) return { key: cleanPhone(t.phone), type: 'Staff', role: t.role, name: t.name, phone: t.phone, email: t.email || '' };
+  const u = usersList.find(x => (cleaned && cleanPhone(x.phone) === cleaned) || (x.email && x.email.toLowerCase() === low));
+  if(u) return { key: cleanPhone(u.phone), type: 'Customer', role: '', name: u.name, phone: u.phone, email: u.email || '' };
+  return null;
+}
+
+function guardStatus(key) {
+  const rec = loadGuard()[key];
+  if(!rec) return { state: 'ok', rec: null };
+  if(rec.perm) return { state: 'perm', rec };
+  if(rec.lockUntil && rec.lockUntil > Date.now()) return { state: 'locked', rec };
+  return { state: 'ok', rec };
+}
+
+function registerFail(acct) {
+  const g = loadGuard();
+  const rec = g[acct.key] || { fails: 0, lockUntil: 0, perm: false };
+  rec.fails = (rec.fails || 0) + 1;
+  rec.name = acct.name; rec.type = acct.type; rec.role = acct.role || '';
+  rec.phone = acct.phone; rec.email = acct.email || '';
+  rec.lastTs = Date.now();
+  if(rec.fails > GUARD_PERM_AFTER) { rec.perm = true; rec.lockUntil = 0; }
+  else if(rec.fails > GUARD_MAX_FREE) { rec.lockUntil = Date.now() + GUARD_LOCK_MS; }
+  g[acct.key] = rec;
+  saveGuard(g);
+  return rec;
+}
+
+function clearGuard(key) {
+  if(!key) return;
+  const g = loadGuard();
+  if(g[key]) { delete g[key]; saveGuard(g); }
+}
+
+function fmtLockTime(ts) {
+  const d = new Date(ts);
+  return d.toLocaleTimeString('en-IN', {hour: '2-digit', minute: '2-digit'}) + ', ' + d.toLocaleDateString('en-IN', {day: 'numeric', month: 'short'});
+}
+
+function guardMessageHtml(rec, key) {
+  const now = Date.now();
+  if(rec.perm) {
+    return `⛔ <b>Account permanently block ho gaya hai</b> (${GUARD_PERM_AFTER} se zyada galat login attempts).<br>Ye account sirf <b>Admin ya Master</b> unlock kar sakte hain.<br><a class="bot-link" onclick="openBlockedSupport('${esc(key)}')">✉️ Support se sampark karein</a><a class="bot-link" onclick="closeAuthModal();toggleBot(true)">🤖 Chat Bot</a>`;
+  }
+  if(rec.lockUntil && rec.lockUntil > now) {
+    const mins = Math.ceil((rec.lockUntil - now) / 60000);
+    return `🔒 <b>Account 2 ghante ke liye block hai</b> (${GUARD_MAX_FREE} se zyada galat attempts).<br>Dobara try kar sakenge: <b>${fmtLockTime(rec.lockUntil)}</b> (~${Math.floor(mins / 60)}h ${mins % 60}m baaki).<br><small>Ab tak galat attempts: ${rec.fails}. ${GUARD_PERM_AFTER} se zyada galat attempts par account permanent block ho jayega aur sirf Admin/Master unlock kar payenge.</small>`;
+  }
+  const left = Math.max(0, GUARD_MAX_FREE - rec.fails);
+  return `Galat password! Galat attempts: <b>${rec.fails}</b>. ${left > 0 ? left + ' attempt aur baaki hain.' : '<b>Ye aakhri warning hai.</b>'} Uske baad agla galat attempt par account <b>2 ghante</b> ke liye block ho jayega.`;
+}
+
+// Login wrapper: lock check -> original login -> count wrong passwords
+function handleLoginSubmit(e) {
+  e.preventDefault();
+  const rawId = document.getElementById('loginId').value.trim();
+  const msg = document.getElementById('loginMsg');
+  const acct = guardAccountFor(rawId);
+
+  if(acct) {
+    const st = guardStatus(acct.key);
+    if(st.state !== 'ok') {
+      msg.className = 'auth-msg err';
+      msg.innerHTML = guardMessageHtml(st.rec, acct.key);
+      showToast(st.state === 'perm' ? 'Account permanently blocked.' : 'Account temporarily locked.', 'error');
+      return;
+    }
+  }
+
+  handleLoginSubmitCore(e);
+
+  if(!acct) return;
+  if(msg.className.indexOf('ok') > -1) { clearGuard(acct.key); return; }
+  if(msg.innerText.indexOf('Invalid Mobile/Email') === 0) {
+    const wasPerm = !!(loadGuard()[acct.key] && loadGuard()[acct.key].perm);
+    const rec = registerFail(acct);
+    msg.className = 'auth-msg err';
+    msg.innerHTML = guardMessageHtml(rec, acct.key);
+    if(rec.perm && !wasPerm) {
+      showToast('Account permanently blocked. Support open ho raha hai...', 'error');
+      setTimeout(() => openBlockedSupport(acct.key), 1500);
+    } else if(rec.lockUntil && rec.lockUntil > Date.now()) {
+      showToast('Account 2 ghante ke liye block ho gaya.', 'error');
+    }
+  }
+}
+
+// Wrong security answer in "Forgot Password" also counts as a wrong attempt
+function forgotWrongAnswer(msg) {
+  msg.className = 'auth-msg err';
+  if(!userVerifying || userVerifying.isAdmin) {
+    msg.innerText = '❌ Incorrect Security Answer! Unauthorized access blocked.';
+    return;
+  }
+  const acct = { key: cleanPhone(userVerifying.phone), type: 'Customer', role: '', name: userVerifying.name, phone: userVerifying.phone, email: userVerifying.email || '' };
+  const wasPerm = !!(loadGuard()[acct.key] && loadGuard()[acct.key].perm);
+  const rec = registerFail(acct);
+  msg.innerHTML = '❌ Incorrect Security Answer!<br>' + guardMessageHtml(rec, acct.key);
+  if(rec.perm || (rec.lockUntil && rec.lockUntil > Date.now())) {
+    document.getElementById('forgotStep2Box').style.display = 'none';
+    document.getElementById('forgotStep1Form').style.display = 'flex';
+    if(rec.perm && !wasPerm) setTimeout(() => openBlockedSupport(acct.key), 1500);
+  }
+}
+
+// Support option for permanently blocked accounts (pre-filled mail)
+function openBlockedSupport(key) {
+  const rec = loadGuard()[key] || {};
+  closeAuthModal();
+  openMailSupportModal();
+  document.getElementById('msName').value = rec.name || '';
+  document.getElementById('msEmail').value = rec.email || '';
+  document.getElementById('msPhone').value = cleanPhone(rec.phone || '');
+  document.getElementById('msSubject').value = 'Account Blocked - Unlock Request';
+  document.getElementById('msBody').value = `Mera account (${rec.phone || ''}) ${GUARD_PERM_AFTER} se zyada galat login attempts ki wajah se permanently block ho gaya hai. Please verify karke account unlock kar dein.`;
+  const bn = document.getElementById('mailBlockNotice');
+  if(bn) bn.style.display = 'block';
+}
+
+// ---- Admin / Master: Login Security panel
+function canUnlockRec(rec) {
+  if(!currentUser) return false;
+  if(['Master Admin', 'Super Admin'].includes(currentUser.role)) return true;
+  if(currentUser.role === 'Sub-Admin') return rec.role !== 'Sub-Admin';
+  return false;
+}
+
+function renderSecurityPanel() {
+  const g = loadGuard();
+  const now = Date.now();
+  const entries = Object.keys(g).map(k => Object.assign({ key: k }, g[k]))
+    .filter(r => r.perm || (r.lockUntil && r.lockUntil > now) || r.fails > 0)
+    .sort((a, b) => (b.lastTs || 0) - (a.lastTs || 0));
+  const lockedCount = entries.filter(r => r.perm || (r.lockUntil && r.lockUntil > now)).length;
+
+  const tabBtn = document.getElementById('btnTabSecurity');
+  if(tabBtn) tabBtn.innerHTML = '🔒 Login Security' + (lockedCount ? ` <span class="mail-unread-badge">${lockedCount}</span>` : '');
+
+  const body = document.getElementById('securityBody');
+  if(!body) return;
+  const unlockAllBtn = document.getElementById('btnUnlockAll');
+  if(unlockAllBtn) unlockAllBtn.style.display = currentUser && ['Master Admin', 'Super Admin'].includes(currentUser.role) ? 'inline-block' : 'none';
+
+  if(!entries.length) {
+    body.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:16px;color:#64748b;">✅ Koi account locked ya blocked nahi hai.</td></tr>';
+    return;
+  }
+  body.innerHTML = entries.map(r => {
+    let status;
+    if(r.perm) status = '<span style="background:#dc2626;color:#fff;padding:2px 8px;border-radius:10px;font-weight:700;font-size:10px;">⛔ PERMANENT BLOCK</span>';
+    else if(r.lockUntil && r.lockUntil > now) status = `<span style="background:#f59e0b;color:#fff;padding:2px 8px;border-radius:10px;font-weight:700;font-size:10px;">🔒 Locked till ${esc(fmtLockTime(r.lockUntil))}</span>`;
+    else status = '<span style="color:#d97706;font-weight:700;font-size:11px;">⚠️ Warning (not locked)</span>';
+    return `<tr style="${r.perm ? 'background:#fee2e2;' : ''}">
+      <td><b>${esc(r.name || '-')}</b></td>
+      <td>${esc(r.type || '-')}${r.role ? '<br><small style="color:var(--muted)">' + esc(r.role) + '</small>' : ''}</td>
+      <td>${esc(r.phone || r.key)}</td>
+      <td><b>${esc(r.fails)}</b></td>
+      <td>${status}</td>
+      <td style="font-size:11px;">${r.lastTs ? esc(fmtLockTime(r.lastTs)) : '-'}</td>
+      <td>${canUnlockRec(r) ? `<button class="master-btn green" onclick="securityUnlock('${esc(r.key)}')">🔓 Unlock</button>` : '<small style="color:var(--muted)">Only Super Admin / Master</small>'}</td>
+    </tr>`;
+  }).join('');
+}
+
+function securityUnlock(key) {
+  const rec = loadGuard()[key];
+  if(!rec) { renderSecurityPanel(); return; }
+  if(!canUnlockRec(rec)) { showToast('Sirf Admin ya Master unlock kar sakte hain.', 'error'); return; }
+  if(!confirm(`${rec.name || key} ka account unlock karna hai?`)) return;
+  clearGuard(key);
+  renderSecurityPanel();
+  showToast(`${rec.name || key} ka account unlock ho gaya!`, 'success');
+}
+
+function securityUnlockAll() {
+  if(!currentUser || !['Master Admin', 'Super Admin'].includes(currentUser.role)) { showToast('Access denied.', 'error'); return; }
+  if(!confirm('Saare locked/blocked accounts unlock karne hain?')) return;
+  saveGuard({});
+  renderSecurityPanel();
+  showToast('Saare accounts unlock ho gaye!', 'success');
+}
+
+// ==========================================
+// ☁️ NEW: CLOUD SYNC PANEL (Master Control)
+// ==========================================
+function renderSyncPanel() {
+  const box = document.getElementById('syncInfo');
+  if(!box) return;
+  if(!PAGSync.enabled) {
+    box.innerHTML = `<b>☁️ Cloud Sync abhi OFF hai.</b> Isliye har device (desktop / mobile) ka data alag-alag rehta hai.<br>
+      <b>ON karne ke 4 steps:</b><br>
+      1️⃣ <b>console.firebase.google.com</b> par free project banayein.<br>
+      2️⃣ <b>Build → Realtime Database → Create Database</b> (Test mode) karein.<br>
+      3️⃣ Database ka URL copy karein (jaise <code>https://xxxx-default-rtdb.firebaseio.com</code>) aur upar box me paste karke <b>Test Connection</b> dabayein.<br>
+      4️⃣ Wahi URL HTML me <code>const PAG_SYNC_URL = '...';</code> wali line me daal dein (ya mujhe bhej dein, main daal dunga). Phir ek baar <b>Upload this device data</b> dabayein.<br>
+      <small>⚠️ Test mode me database public hota hai — customer data (passwords, orders) koi bhi padh/badal sakta hai. Production ke liye Firebase rules/auth zaroor lagayein.</small>`;
+    return;
+  }
+  box.innerHTML = `<b>Status:</b> ${esc(document.getElementById('syncChip') ? document.getElementById('syncChip').textContent : PAGSync.status)}<br>
+    <b>Database:</b> ${esc(PAGSync.url)}<br>
+    <b>Last sync:</b> ${PAGSync.lastSync ? esc(new Date(PAGSync.lastSync).toLocaleTimeString('en-IN')) : '-'} · har 10 second me check hota hai, aur kisi bhi change par turant upload.`;
+}
+
+async function pagSyncTestUrl() {
+  let u = (document.getElementById('syncTestUrl').value || '').trim().replace(/\/+$/, '') || PAGSync.url;
+  if(!u) { showToast('Pehle Database URL paste karein.', 'error'); return; }
+  try {
+    const r = await fetch(u + '/.json?shallow=true', { cache: 'no-store' });
+    if(r.ok) showToast('✅ Connection OK! Ab ye URL HTML me daalein.', 'success');
+    else if(r.status === 401) showToast('❌ Permission denied — Firebase rules me read/write allow karein.', 'error');
+    else showToast('❌ Connection fail (HTTP ' + r.status + ').', 'error');
+  } catch(e) { showToast('❌ URL tak pahunch nahi paaye. URL check karein.', 'error'); }
+}
+
+function pagSyncUploadAll() {
+  if(!isMaster()) return;
+  if(!PAGSync.enabled) { showToast('Pehle HTML me PAG_SYNC_URL set karein.', 'error'); return; }
+  if(!confirm('Is device ka saara data cloud par upload karna hai?')) return;
+  PAGSync.inited = true; PAGSync.last = {}; PAGSync.lastVal = {};
+  window.localStorage.setItem('pag_catalog_db', JSON.stringify(catalog));
+  Object.keys(SYNC_LISTS).concat(Object.keys(SYNC_MAPS), Object.keys(SYNC_VALUES)).forEach(k => { if(window.localStorage.getItem(k) != null) pagSyncLocalChange(k); });
+  showToast('Upload shuru ho gaya...', 'success');
+  setTimeout(renderSyncPanel, 1500);
+}
+
+async function pagSyncPullNow() {
+  if(!PAGSync.enabled) { showToast('Sync OFF hai.', 'error'); return; }
+  try { pagRenderChanged(await pagSyncPull(false, 15000)); pagSetStatus('ok'); showToast('Cloud se latest data aa gaya!', 'success'); }
+  catch(e) { pagSetStatus('error'); showToast('Pull fail hua.', 'error'); }
+  renderSyncPanel();
+}
+
+// ==========================================
+// 👑 NEW: MASTER LIVE EDITOR (edit text + layout on the customer portal)
+// ==========================================
+let siteLayout = { order: {}, hidden: {}, styles: {}, texts: {}, grid: {}, theme: {} };
+let editMode = false;
+let editingEl = null;
+const BLOCK_EL = {};
+const DEFAULT_ORDER = {};
+const ORIG_HTML = {};
+const BLOCK_DEFS = [
+  { id: 'topStrip', sel: '.top-strip', group: 'page', label: 'Top Bar' },
+  { id: 'header', sel: 'header', group: 'page', label: 'Header' },
+  { id: 'navSub', sel: '.nav-sub', group: 'page', label: 'Category Menu' },
+  { id: 'saleBanner', sel: '#saleBannerSection', group: 'page', label: 'Sale Banner' },
+  { id: 'mainLayout', sel: '.layout', group: 'page', label: 'Main Section' },
+  { id: 'trustStrip', sel: '.trust-strip', group: 'page', label: 'Trust Strip' },
+  { id: 'footer', sel: 'footer', group: 'page', label: 'Footer' },
+  { id: 'bannerCard', sel: '.big-sale-banner', group: '', label: 'Banner Card' },
+  { id: 'leftSidebar', sel: '.sidebar', group: '', label: 'Left Filters' },
+  { id: 'productPanel', sel: '.product-panel', group: '', label: 'Products Panel' },
+  { id: 'pinBar', sel: '.pin-check-bar', group: '', label: 'Pincode Bar' },
+  { id: 'rightSidebar', sel: '.right-sidebar', group: '', label: 'Right Widgets' }
+];
+const EID_CONTAINERS = ['.top-strip', 'header', '#saleBannerSection', '.sidebar', '.right-sidebar', '.pin-check-bar', '.panel-head', '.trust-strip', 'footer'];
+const EID_EXCLUDE_IDS = ['authHeaderContainer', 'cartCountBadge', 'headerCartTotal', 'realTimeClock', 'saleClock', 'saleClockLabel', 'productSectionTitle', 'totalProductsCount', 'pinCheckResult', 'catNavList', 'sidebarFilterGroup', 'productGrid', 'pinCheckInput', 'searchQuery'];
+const EID_TAGS = ['DIV', 'SPAN', 'H1', 'H2', 'H3', 'H4', 'P', 'B', 'A', 'BUTTON', 'LABEL', 'SMALL', 'LI', 'STRONG'];
+
+function loadSiteLayout() {
+  let v = null;
+  try { v = JSON.parse(window.localStorage.getItem('pag_site_layout')); } catch(e) {}
+  siteLayout = Object.assign({ order: {}, hidden: {}, styles: {}, texts: {}, grid: {}, theme: {} }, (v && typeof v === 'object') ? v : {});
+  ['order', 'hidden', 'styles', 'texts', 'grid', 'theme'].forEach(k => { if(!siteLayout[k] || typeof siteLayout[k] !== 'object') siteLayout[k] = {}; });
+}
+function saveSiteLayout() { window.localStorage.setItem('pag_site_layout', JSON.stringify(siteLayout)); }
+
+function sanitizeHtml(html) {
+  const doc = new DOMParser().parseFromString('<div>' + String(html || '') + '</div>', 'text/html');
+  const root = doc.body.firstChild;
+  const allowed = ['B', 'I', 'BR', 'SMALL', 'SPAN', 'STRONG', 'EM', 'U'];
+  (function walk(node) {
+    Array.from(node.childNodes).forEach(ch => {
+      if(ch.nodeType === 1) {
+        if(!allowed.includes(ch.tagName)) { ch.replaceWith(doc.createTextNode(ch.textContent)); }
+        else { Array.from(ch.attributes).forEach(a => ch.removeAttribute(a.name)); walk(ch); }
+      }
+    });
+  })(root);
+  return root.innerHTML;
+}
+
+function tagBlocks() {
+  BLOCK_DEFS.forEach(b => {
+    const el = document.querySelector(b.sel);
+    if(!el) return;
+    el.dataset.block = b.id;
+    BLOCK_EL[b.id] = el;
+    b.el = el;
+  });
+  document.querySelectorAll('.right-sidebar .widget-box').forEach((el, i) => {
+    const id = 'widget' + (i + 1);
+    el.dataset.block = id; BLOCK_EL[id] = el;
+    BLOCK_DEFS.push({ id, sel: null, group: 'right', label: 'Widget ' + (i + 1), el });
+  });
+  document.querySelectorAll('.trust-strip .trust-box').forEach((el, i) => {
+    const id = 'trust' + (i + 1);
+    el.dataset.block = id; BLOCK_EL[id] = el;
+    BLOCK_DEFS.push({ id, sel: null, group: 'trust', label: 'Trust ' + (i + 1), el });
+  });
+  ['page', 'right', 'trust'].forEach(g => {
+    DEFAULT_ORDER[g] = BLOCK_DEFS.filter(b => b.group === g && b.el).map(b => b.id);
+  });
+}
+
+function blockOrder(group) {
+  const saved = Array.isArray(siteLayout.order[group]) ? siteLayout.order[group] : [];
+  const def = DEFAULT_ORDER[group] || [];
+  return saved.filter(id => def.includes(id)).concat(def.filter(id => !saved.includes(id)));
+}
+
+function applyOrder(group) {
+  const ids = blockOrder(group);
+  const els = ids.map(id => BLOCK_EL[id]).filter(Boolean);
+  if(els.length < 2) return;
+  const parent = els[0].parentNode;
+  if(els.some(e => e.parentNode !== parent)) return;
+  const first = els.slice().sort((a, b) => (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING) ? -1 : 1)[0];
+  const marker = document.createComment('m');
+  parent.insertBefore(marker, first);
+  els.forEach(el => parent.insertBefore(el, marker));
+  marker.remove();
+}
+
+function applyHidden() {
+  BLOCK_DEFS.forEach(b => {
+    if(!b.el) return;
+    const hidden = !!siteLayout.hidden[b.id];
+    b.el.classList.toggle('mhide', hidden && !editMode);
+    b.el.classList.toggle('mghost', hidden && editMode);
+  });
+}
+
+function applyStyles() {
+  BLOCK_DEFS.forEach(b => {
+    if(!b.el) return;
+    const s = siteLayout.styles[b.id] || {};
+    b.el.style.background = s.bg || '';
+    b.el.style.color = s.color || '';
+    b.el.style.paddingTop = (s.padY !== undefined && s.padY !== '') ? s.padY + 'px' : '';
+    b.el.style.paddingBottom = (s.padY !== undefined && s.padY !== '') ? s.padY + 'px' : '';
+    b.el.style.borderRadius = (s.radius !== undefined && s.radius !== '') ? s.radius + 'px' : '';
+  });
+}
+
+function applyGrid() {
+  let st = document.getElementById('mGridStyle');
+  if(!st) { st = document.createElement('style'); st.id = 'mGridStyle'; document.head.appendChild(st); }
+  const g = siteLayout.grid || {};
+  let css = '';
+  if(g.d) css += `@media (min-width:769px){.product-grid{grid-template-columns:repeat(${Number(g.d)},minmax(0,1fr)) !important}}`;
+  if(g.m) css += `@media (max-width:768px){.product-grid{grid-template-columns:repeat(${Number(g.m)},minmax(0,1fr)) !important}}`;
+  st.textContent = css;
+}
+
+function applyTheme() {
+  const t = siteLayout.theme || {};
+  const root = document.documentElement;
+  const map = { blue: '--fk-blue', yellow: '--fk-yellow', orange: '--fk-orange', bg: '--bg' };
+  Object.keys(map).forEach(k => { if(t[k]) root.style.setProperty(map[k], t[k]); else root.style.removeProperty(map[k]); });
+}
+
+function assignEids() {
+  const counts = {};
+  const excluded = el => EID_EXCLUDE_IDS.some(id => { const x = document.getElementById(id); return x && (x === el || x.contains(el)); });
+  const interactive = 'a,button,input,select,textarea,img,svg';
+  EID_CONTAINERS.forEach(sel => {
+    document.querySelectorAll(sel).forEach(container => {
+      // wrap loose text of mixed parents (text + links/buttons) so each piece is editable on its own
+      container.querySelectorAll('*').forEach(el => {
+        if(!EID_TAGS.includes(el.tagName) || excluded(el)) return;
+        if(!el.querySelector(interactive)) return;
+        Array.from(el.childNodes).forEach(n => {
+          if(n.nodeType === 3 && n.nodeValue.trim().length) {
+            const sp = document.createElement('span'); sp.className = 'm-txt'; sp.textContent = n.nodeValue;
+            n.replaceWith(sp);
+          }
+        });
+      });
+      container.querySelectorAll('*').forEach(el => {
+        if(el.dataset.eid || !EID_TAGS.includes(el.tagName) || excluded(el)) return;
+        if(el.parentElement && el.parentElement.closest('[data-eid]')) return;
+        if(el.querySelector(interactive)) return;
+        const own = Array.from(el.childNodes).some(n => n.nodeType === 3 && n.nodeValue.trim().length);
+        if(!own) return;
+        const base = el.textContent.replace(/\s+/g, ' ').trim().slice(0, 40);
+        counts[base] = (counts[base] || 0) + 1;
+        const eid = 't_' + _shash(base) + '_' + counts[base];
+        el.dataset.eid = eid;
+        ORIG_HTML[eid] = el.innerHTML;
+      });
+    });
+  });
+}
+
+function applyTexts() {
+  document.querySelectorAll('[data-eid]').forEach(el => {
+    if(el === editingEl) return;
+    const eid = el.dataset.eid;
+    const o = siteLayout.texts[eid];
+    const wantHtml = (o && typeof o.t === 'string') ? sanitizeHtml(o.t) : ORIG_HTML[eid];
+    if(wantHtml !== undefined && el.innerHTML !== wantHtml) el.innerHTML = wantHtml;
+    el.style.color = (o && o.color) || '';
+    el.style.fontSize = (o && o.size) ? o.size + 'px' : '';
+    el.style.fontWeight = (o && o.bold) ? '800' : '';
+    el.style.textAlign = (o && o.align) || '';
+  });
+}
+
+function applySiteLayout() {
+  ['page', 'right', 'trust'].forEach(applyOrder);
+  applyHidden();
+  applyStyles();
+  applyGrid();
+  applyTheme();
+  applyTexts();
+  if(editMode) injectBlockBars();
+}
+
+function initSiteEditor() {
+  tagBlocks();
+  assignEids();
+  loadSiteLayout();
+  applySiteLayout();
+  document.addEventListener('click', editorClickCapture, true);
+  document.addEventListener('keydown', e => {
+    if(editingEl && e.key === 'Enter') { e.preventDefault(); finishTextEdit(); }
+    if(editingEl && e.key === 'Escape') { finishTextEdit(); }
+  }, true);
+}
+
+// ---- block toolbars (move / hide / style)
+function removeBlockBars() { document.querySelectorAll('.blk-bar').forEach(b => b.remove()); }
+function injectBlockBars() {
+  removeBlockBars();
+  BLOCK_DEFS.forEach(b => {
+    if(!b.el) return;
+    const bar = document.createElement('div');
+    bar.className = 'blk-bar';
+    const canMove = b.group && DEFAULT_ORDER[b.group] && DEFAULT_ORDER[b.group].length > 1;
+    bar.innerHTML = `<span>${esc(b.label)}</span>` +
+      (canMove ? `<button type="button" title="Upar / Left" data-act="up">⬆️</button><button type="button" title="Neeche / Right" data-act="down">⬇️</button>` : '') +
+      `<button type="button" title="Show / Hide" data-act="hide">${siteLayout.hidden[b.id] ? '🙈' : '👁'}</button>` +
+      `<button type="button" title="Style" data-act="style">🎨</button>`;
+    bar.addEventListener('click', ev => {
+      const btn = ev.target.closest('button');
+      if(!btn) return;
+      ev.preventDefault(); ev.stopPropagation();
+      blockAction(b.id, btn.dataset.act);
+    });
+    b.el.appendChild(bar);
+  });
+}
+
+function blockAction(id, act) {
+  if(!isMaster()) return;
+  const b = BLOCK_DEFS.find(x => x.id === id);
+  if(!b) return;
+  if(act === 'up' || act === 'down') {
+    const order = blockOrder(b.group);
+    const i = order.indexOf(id);
+    const j = act === 'up' ? i - 1 : i + 1;
+    if(i < 0 || j < 0 || j >= order.length) return;
+    [order[i], order[j]] = [order[j], order[i]];
+    siteLayout.order[b.group] = order;
+    saveSiteLayout();
+    applyOrder(b.group);
+    injectBlockBars();
+    b.el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  } else if(act === 'hide') {
+    siteLayout.hidden[id] = !siteLayout.hidden[id];
+    if(!siteLayout.hidden[id]) delete siteLayout.hidden[id];
+    saveSiteLayout();
+    applyHidden();
+    injectBlockBars();
+  } else if(act === 'style') {
+    openBlockStyle(id);
+  }
+}
+
+function openBlockStyle(id) {
+  const b = BLOCK_DEFS.find(x => x.id === id);
+  if(!b) return;
+  const s = siteLayout.styles[id] || {};
+  const fields = [
+    { key: 'bgOn', label: 'Background', type: 'select', value: s.bg ? '1' : '0', options: [['0', 'Default'], ['1', 'Custom colour']] },
+    { key: 'bg', label: 'Background colour', type: 'color', value: s.bg || '#ffffff' },
+    { key: 'colorOn', label: 'Text colour', type: 'select', value: s.color ? '1' : '0', options: [['0', 'Default'], ['1', 'Custom colour']] },
+    { key: 'color', label: 'Text colour (custom)', type: 'color', value: s.color || '#212121' },
+    { key: 'padY', label: 'Upar/Neeche spacing (px, khali = default)', type: 'number', value: s.padY !== undefined ? s.padY : '' },
+    { key: 'radius', label: 'Corner roundness (px, khali = default)', type: 'number', value: s.radius !== undefined ? s.radius : '' }
+  ];
+  if(id === 'productPanel') {
+    fields.push({ key: 'gd', label: 'Desktop par product columns', type: 'select', value: String(siteLayout.grid.d || ''), options: [['', 'Auto (default)'], ['2', '2'], ['3', '3'], ['4', '4'], ['5', '5'], ['6', '6']] });
+    fields.push({ key: 'gm', label: 'Mobile par product columns', type: 'select', value: String(siteLayout.grid.m || ''), options: [['', 'Default (2)'], ['1', '1'], ['2', '2'], ['3', '3']] });
+  }
+  fields.push({ key: 'reset', label: 'Is block ka style reset karein?', type: 'select', value: '0', options: [['0', 'Nahi'], ['1', 'Haan, reset']] });
+  masterOpenForm('🎨 Style: ' + b.label, fields, v => {
+    if(v.reset === '1') { delete siteLayout.styles[id]; if(id === 'productPanel') siteLayout.grid = {}; }
+    else {
+      const ns = {};
+      if(v.bgOn === '1') ns.bg = v.bg;
+      if(v.colorOn === '1') ns.color = v.color;
+      if(v.padY !== '') ns.padY = Number(v.padY);
+      if(v.radius !== '') ns.radius = Number(v.radius);
+      if(Object.keys(ns).length) siteLayout.styles[id] = ns; else delete siteLayout.styles[id];
+      if(id === 'productPanel') { siteLayout.grid = {}; if(v.gd) siteLayout.grid.d = Number(v.gd); if(v.gm) siteLayout.grid.m = Number(v.gm); }
+    }
+    saveSiteLayout(); applyStyles(); applyGrid(); closeMasterForm();
+    showToast('Layout update ho gaya!', 'success');
+  });
+}
+
+function openThemePanel() {
+  const t = siteLayout.theme || {};
+  masterOpenForm('🎨 Site Theme Colours', [
+    { key: 'blue', label: 'Main colour (header, buttons)', type: 'color', value: t.blue || '#2874f0' },
+    { key: 'yellow', label: 'Accent colour (Add to Cart)', type: 'color', value: t.yellow || '#ffe500' },
+    { key: 'orange', label: 'Highlight colour (Confirm, badges)', type: 'color', value: t.orange || '#fb641b' },
+    { key: 'bg', label: 'Page background', type: 'color', value: t.bg || '#f1f3f6' },
+    { key: 'reset', label: 'Default colours par wapas?', type: 'select', value: '0', options: [['0', 'Nahi'], ['1', 'Haan, reset']] }
+  ], v => {
+    siteLayout.theme = v.reset === '1' ? {} : { blue: v.blue, yellow: v.yellow, orange: v.orange, bg: v.bg };
+    saveSiteLayout(); applyTheme(); closeMasterForm();
+    showToast('Theme update ho gayi!', 'success');
+  });
+}
+
+function resetSiteLayout() {
+  if(!isMaster()) return;
+  if(!confirm('Saare text, layout, colour changes reset karke original design par wapas jana hai?')) return;
+  finishTextEdit();
+  siteLayout = { order: {}, hidden: {}, styles: {}, texts: {}, grid: {}, theme: {} };
+  window.localStorage.removeItem('pag_site_layout');
+  applySiteLayout();
+  showToast('Layout original par reset ho gaya.', 'success');
+}
+
+// ---- text editing
+function editorClickCapture(e) {
+  if(!editMode || !isMaster()) return;
+  if(e.target.closest('#masterBar, #textToolbar, .blk-bar, .drawer, .overlay, #adminPanelModal, #masterEditOverlay, #specEditOverlay, #productDetailOverlay, #botWindow, #botFab')) return;
+  const card = e.target.closest('.product-card');
+  if(card && card.dataset.pid) { e.preventDefault(); e.stopPropagation(); finishTextEdit(); masterEditProduct(Number(card.dataset.pid)); return; }
+  const el = e.target.closest('[data-eid]');
+  if(el) {
+    e.preventDefault(); e.stopPropagation();
+    if(el !== editingEl) startTextEdit(el);
+    return;
+  }
+  if(editingEl) finishTextEdit();
+}
+
+function startTextEdit(el) {
+  finishTextEdit();
+  editingEl = el;
+  el.contentEditable = 'true';
+  el.classList.add('m-editing');
+  el.focus();
+  const sel = window.getSelection(), r = document.createRange();
+  r.selectNodeContents(el); r.collapse(false);
+  sel.removeAllRanges(); sel.addRange(r);
+  const o = siteLayout.texts[el.dataset.eid] || {};
+  document.getElementById('ttColor').value = /^#[0-9a-f]{6}$/i.test(o.color || '') ? o.color : '#212121';
+  document.getElementById('textToolbar').classList.add('show');
+}
+
+function finishTextEdit() {
+  const tb = document.getElementById('textToolbar');
+  if(tb) tb.classList.remove('show');
+  if(!editingEl) return;
+  const el = editingEl;
+  editingEl = null;
+  el.contentEditable = 'false';
+  el.classList.remove('m-editing');
+  const eid = el.dataset.eid;
+  const html = sanitizeHtml(el.innerHTML);
+  const o = siteLayout.texts[eid] || {};
+  if(html !== ORIG_HTML[eid]) o.t = html; else delete o.t;
+  if(Object.keys(o).length) siteLayout.texts[eid] = o; else delete siteLayout.texts[eid];
+  el.innerHTML = html;
+  saveSiteLayout();
+}
+
+function textStylePatch(patch) {
+  if(!editingEl) return;
+  const eid = editingEl.dataset.eid;
+  const o = siteLayout.texts[eid] || {};
+  Object.assign(o, patch);
+  siteLayout.texts[eid] = o;
+  if('color' in patch) editingEl.style.color = patch.color;
+  if('size' in patch) editingEl.style.fontSize = patch.size + 'px';
+  if('bold' in patch) editingEl.style.fontWeight = patch.bold ? '800' : '';
+  if('align' in patch) editingEl.style.textAlign = patch.align;
+}
+function textStyleStep(d) {
+  if(!editingEl) return;
+  const cur = (siteLayout.texts[editingEl.dataset.eid] || {}).size || parseFloat(getComputedStyle(editingEl).fontSize) || 14;
+  textStylePatch({ size: Math.max(8, Math.min(60, Math.round(cur + d))) });
+}
+function textStyleBold() {
+  if(!editingEl) return;
+  const o = siteLayout.texts[editingEl.dataset.eid] || {};
+  textStylePatch({ bold: !o.bold });
+}
+function textStyleColor(c) { textStylePatch({ color: c }); }
+function textStyleAlign(a) { textStylePatch({ align: a }); }
+function textStyleReset() {
+  if(!editingEl) return;
+  const el = editingEl, eid = el.dataset.eid;
+  delete siteLayout.texts[eid];
+  el.style.cssText = '';
+  el.innerHTML = ORIG_HTML[eid];
+  finishTextEdit();
+  applyTexts();
+}
+
+// ---- editor on/off
+function isMasterEditor() { return !!(currentUser && currentUser.role === 'Master Admin'); }
+function setEditMode(on) {
+  if(!on) finishTextEdit();
+  editMode = !!on && isMaster();
+  document.body.classList.toggle('edit-on', editMode);
+  const btn = document.getElementById('mbEdit');
+  if(btn) { btn.textContent = '✏️ Edit Mode: ' + (editMode ? 'ON' : 'OFF'); btn.classList.toggle('on', editMode); }
+  if(editMode) injectBlockBars(); else removeBlockBars();
+  applyHidden();
+}
+function toggleEditMode() { setEditMode(!editMode); }
+function refreshMasterBar() {
+  const bar = document.getElementById('masterBar');
+  if(!bar) return;
+  const master = isMaster();
+  bar.classList.toggle('show', master && document.getElementById('adminPanelModal').style.display !== 'flex');
+  if(!master && editMode) setEditMode(false);
+  const chip = document.getElementById('syncChip');
+  if(chip) pagSetStatus(PAGSync.status);
+}
+function enterMasterEditor() {
+  closeAuthModal();
+  document.getElementById('adminPanelModal').style.display = 'none';
+  refreshMasterBar();
+  setEditMode(true);
+  showToast('👑 Master Live Editor ON: text par click karke edit karein.', 'success');
+}
+
 // SESSION RESTORE ON REFRESH
 window.addEventListener('DOMContentLoaded', () => {
   displayProducts(catalog);
   syncCategoryMenus();
   syncCartUI();
   syncAuthUI();
-  startSaleTimer();
   startRealTimeClock();
   initPinCheckBar();
+  initSiteEditor();
+  pagSyncBoot();
 
   if(currentUser && !currentUser.isAdmin) {
     try { users = JSON.parse(localStorage.getItem('pag_users_db')) || []; } catch(e){ users = []; }
@@ -4936,7 +6027,8 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   if(currentUser && currentUser.isAdmin) {
-    openAdminPortal(currentUser.role || "Super Admin");
+    if(currentUser.role === 'Master Admin') enterMasterEditor();
+    else openAdminPortal(currentUser.role || "Super Admin");
   }
 });
 </script>
