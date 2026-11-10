@@ -1233,17 +1233,24 @@ body.edit-on{padding-bottom:90px}
       <div class="mailbox-header" style="background:#fff;padding:0 0 10px 0;">
         <span><b>Add New Product with Stock Inventory &amp; Multi-Photo Support</b></span>
       </div>
-      <!-- AI Auto-Listing Assistant Box -->
+    <!-- AI Auto-Listing Assistant Box -->
 <div style="grid-column: 1 / -1; border: 2px dashed #007bff; padding: 14px; border-radius: 8px; margin-bottom: 12px; background: #f0f7ff;">
   <div style="font-weight: bold; color: #0056b3; margin-bottom: 6px;">✨ AI Auto-Listing Assistant</div>
-  <div style="font-size: 12px; color: #555; margin-bottom: 8px;">Product photo ya supplier invoice PDF select karein, AI details auto-fill kar dega:</div>
-  <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+  <div style="font-size: 12px; color: #555; margin-bottom: 8px;">Product photo ya supplier invoice PDF select karein:</div>
+  
+  <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 8px;">
     <input type="file" id="aiListingFile" accept="image/*,application/pdf" style="font-size: 13px;" />
     <button type="button" id="aiListingBtn" style="background: #007bff; color: white; border: none; padding: 7px 14px; border-radius: 4px; font-weight: bold; cursor: pointer;">
       Auto Fill Form
     </button>
-    <span id="aiListingStatus" style="font-size: 12px; font-weight: bold; color: #0056b3;"></span>
   </div>
+
+  <!-- Instruction Box: Price ya details change karne ke liye -->
+  <div style="margin-top: 6px;">
+    <input type="text" id="aiCustomPrompt" placeholder="AI ko instruction dein (e.g. Price me 20% profit jodo, MRP 500 rakho)" style="width: 100%; max-width: 500px; padding: 6px 10px; font-size: 12px; border: 1px solid #ccc; border-radius: 4px;" />
+  </div>
+
+  <div id="aiListingStatus" style="font-size: 12px; font-weight: bold; margin-top: 8px;"></div>
 </div>
       <form class="admin-prod-form" onsubmit="adminSaveProduct(event)">
         <input type="text" id="newProdName" placeholder="Product Name (e.g. Smart Helmet)" required>
@@ -6047,6 +6054,7 @@ const GEMINI_API_KEY = "AQ.Ab8RN6LgVVWgYYgRCEngmPThD190n8jwWtBu6kMzgkEu6KAaIw";
 
 document.getElementById('aiListingBtn').addEventListener('click', async () => {
   const fileInput = document.getElementById('aiListingFile');
+  const customPromptInput = document.getElementById('aiCustomPrompt');
   const status = document.getElementById('aiListingStatus');
 
   if (!fileInput.files || !fileInput.files[0]) {
@@ -6055,18 +6063,20 @@ document.getElementById('aiListingBtn').addEventListener('click', async () => {
   }
 
   const file = fileInput.files[0];
+  const userInstruction = customPromptInput ? customPromptInput.value.trim() : "";
+
   status.style.color = "#0056b3";
-  status.innerText = "⏳ AI scan kar raha hai... kripya wait karein...";
+  status.innerText = "⏳ AI file analyze kar raha hai... kripya wait karein...";
 
   const reader = new FileReader();
   reader.readAsDataURL(file);
   reader.onload = async () => {
     try {
       const base64Data = reader.result.split(',')[1];
-      const mimeType = file.type || "image/jpeg";
+      const mimeType = file.type || (file.name.endsWith('.pdf') ? 'application/pdf' : 'image/jpeg');
 
       const promptText = `
-        Is product photo ya supplier invoice/document ko analyze karein aur strictly valid JSON return karein:
+        Is product photo ya supplier invoice/document ko dhyan se padhein aur strictly valid JSON return karein:
         {
           "name": "Clean and short product title",
           "category": "Helmets ya Chargers ya Batteries ya Mobile Cables ya Earphones ya Accessories ya Other",
@@ -6074,10 +6084,11 @@ document.getElementById('aiListingBtn').addEventListener('click', async () => {
           "price": 0,
           "stock": 10
         }
+        Extra user instructions agar di gayi hain to follow karein: "${userInstruction}"
         Rules:
-        - Sirf JSON output karein, koi extra explanation ya markdown backticks nahi.
-        - price me selling offer rate rakhein, mrp me original rate rakhein (agar nahi mila to price se 20% jyada assume karein).
+        - Output strictly JSON hona chahiye, koi markdown backticks ya explanation nahi.
         - category sirf inhi options me se select karein: Helmets, Chargers, Batteries, Mobile Cables, Earphones, Accessories, Other.
+        - price aur mrp pure numbers hone chahiye (bina currency symbols ke).
       `;
 
       const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
@@ -6094,6 +6105,11 @@ document.getElementById('aiListingBtn').addEventListener('click', async () => {
       });
 
       const resData = await response.json();
+      
+      if (!response.ok || resData.error) {
+        throw new Error(resData.error ? resData.error.message : "API Response Failed");
+      }
+
       const rawText = resData.candidates[0].content.parts[0].text;
       const cleanJson = JSON.parse(rawText.replace(/```json|```/g, '').trim());
 
@@ -6103,7 +6119,7 @@ document.getElementById('aiListingBtn').addEventListener('click', async () => {
       if (cleanJson.price) document.getElementById('newProdPrice').value = Number(cleanJson.price);
       if (cleanJson.stock) document.getElementById('newProdStock').value = Number(cleanJson.stock);
 
-      // Category auto-select
+      // Category match
       const catSelect = document.getElementById('newProdCat');
       if (catSelect && cleanJson.category) {
         let matched = false;
@@ -6122,7 +6138,7 @@ document.getElementById('aiListingBtn').addEventListener('click', async () => {
     } catch (err) {
       console.error(err);
       status.style.color = "red";
-      status.innerText = "❌ Scan karne me error aaya. Dubara koshish karein.";
+      status.innerText = "❌ Error: " + (err.message || "File scan nahi ho saki.");
     }
   };
 });
