@@ -6112,6 +6112,9 @@ document.getElementById('aiListingBtn').addEventListener('click', async () => {
         if (!response.ok || resData.error) {
             throw new Error(resData.error ? resData.error.message : "API Response Failed");
         }
+        if (!response.ok || resData.error) {
+            throw new Error(resData.error ? resData.error.message : "API Response Failed");
+        }
 
       const rawText = resData.candidates[0].content.parts[0].text;
       const cleanJson = JSON.parse(rawText.replace(/```json|```/g, '').trim());
