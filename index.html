@@ -558,6 +558,24 @@ body.edit-on .blk-bar{display:flex}
 .blk-bar button{border:0;background:#374151;color:#fff;border-radius:3px;padding:3px 6px;font-size:11px;font-weight:800;cursor:pointer;line-height:1}
 .blk-bar button:hover{background:#7c3aed}
 body.edit-on{padding-bottom:90px}
+/* 🤖 AI ASSISTANT (NEW) */
+.ai-box{background:#f8fafc;border:1px solid var(--line);border-radius:4px;padding:10px;margin-bottom:12px}
+.ai-row{display:flex;flex-direction:column;gap:3px;margin-bottom:8px}
+.ai-row label{font-size:11px;font-weight:700;color:#475569}
+.ai-row input,.ai-row select,.ai-row textarea,.ai-grid input,.ai-grid select{border:1px solid var(--line);border-radius:3px;padding:8px;font:inherit;font-size:12px;width:100%;background:#fff}
+.ai-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:8px 0}
+.ai-grid label{font-size:11px;font-weight:700;color:#475569;display:block;margin-bottom:2px}
+.ai-note{font-size:11px;color:#64748b;line-height:1.5;margin:4px 0 8px}
+.ai-result{margin-top:8px;font-size:12px;line-height:1.5;white-space:pre-wrap;word-break:break-word}
+.ai-result.ok{color:#15803d}
+.ai-result.err{color:#b91c1c}
+.ai-chatlog{border:1px solid var(--line);border-radius:4px;background:#fff;padding:8px;height:340px;overflow-y:auto;margin-bottom:8px}
+.ai-chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.ai-chips button{background:#eff6ff;border:1px solid #bfdbfe;color:var(--fk-blue);padding:5px 10px;border-radius:14px;font-size:11px;font-weight:700;cursor:pointer}
+.ai-send{display:flex;gap:6px}
+.ai-send input{flex:1;border:1px solid var(--line);border-radius:3px;padding:9px;font:inherit;font-size:12px;min-width:0}
+.ai-prev-table input,.ai-prev-table textarea{width:100%;border:1px solid var(--line);border-radius:3px;padding:5px;font:inherit;font-size:11px;min-width:70px}
+.ai-prev-table td{vertical-align:top}
 </style>
 </head>
 <body>
@@ -964,6 +982,7 @@ body.edit-on{padding-bottom:90px}
           <label>Product Description (optional)</label>
           <textarea id="specEditDesc" rows="4" placeholder="Product ke baare me short description..."></textarea>
         </div>
+        <button type="button" class="auth-btn-primary" style="background:#7c3aed;" onclick="aiGenerateSpecs(this)">🤖 AI se Specs / Description likhwayein (draft)</button>
         <button type="submit" class="auth-btn-primary" style="background:var(--fk-green);">💾 Save Specifications</button>
       </form>
     </div>
@@ -1089,6 +1108,7 @@ body.edit-on{padding-bottom:90px}
       <button class="admin-tab-btn" id="btnTabMail" onclick="switchAdminTab('mail')">📧 Mail (Inbox / Send)</button>
       <button class="admin-tab-btn" id="btnTabMaster" onclick="switchAdminTab('master')" style="display:none;background:#fef3c7;border-color:#d97706;">👑 Master Control</button>
       <button class="admin-tab-btn" id="btnTabSecurity" onclick="switchAdminTab('security')" style="display:none;background:#fee2e2;border-color:#dc2626;">🔒 Login Security</button>
+      <button class="admin-tab-btn" id="btnTabAi" onclick="switchAdminTab('ai')" style="display:none;background:#ede9fe;border-color:#7c3aed;">🤖 AI Assistant</button>
     </div>
 
     <!-- 1. ORDERS MAILBOX -->
@@ -1098,6 +1118,69 @@ body.edit-on{padding-bottom:90px}
         <span id="adminOrdersCountBadge">0 Orders</span>
       </div>
       <div id="adminMailboxContainer"></div>
+    </div>
+
+    <!-- 10. 🤖 AI ASSISTANT -->
+    <div id="adminAISection" class="mailbox-card" style="display:none;padding:14px;">
+      <div class="mailbox-header" style="background:#fff;padding:0 0 10px 0;">
+        <span><b>🤖 AI Assistant (Google Gemini) — Master Only</b></span>
+        <span id="aiKeyBadge" style="font-size:11px;"></span>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-row"><label>Google API Key</label><input type="password" id="aiKeyInput" placeholder="AQ.… ya AIza…" autocomplete="off"></div>
+        <div class="ai-row"><label>Model</label><select id="aiModelSelect"></select></div>
+        <button type="button" class="master-btn green" onclick="aiSaveSettings()">💾 Save</button>
+        <button type="button" class="master-btn" onclick="aiTestKey()">🧪 Test Key</button>
+        <button type="button" class="master-btn red" onclick="aiClearKey()">🗑️ Remove Key</button>
+        <div class="ai-note">Key sirf is device ke browser me save hoti hai (cloud sync me nahi jaati). "AQ." wali key Vertex AI ke liye hoti hai, "AIza" wali Gemini API ke liye. App dono endpoints khud try karta hai aur asli error dikhata hai.</div>
+        <div id="aiTestResult" class="ai-result"></div>
+      </div>
+
+      <div class="mail-subtabs">
+        <button type="button" id="aiTab_add" class="active" onclick="aiTab('add')">➕ AI Product Add</button>
+        <button type="button" id="aiTab_chat" onclick="aiTab('chat')">💬 Business Chat</button>
+        <button type="button" id="aiTab_edit" onclick="aiTab('edit')">🛠️ Bulk Edit</button>
+      </div>
+
+      <div id="aiPane_add">
+        <div class="ai-row"><label>Product details / price list / kuch bhi likhein (Hindi, Hinglish ya English)</label>
+          <textarea id="aiAddText" rows="5" placeholder="Jaise: Raftar 12W charger micro cable 79, type-c 84. 65W GaN charger without cable 200, with cable 230. Ya sirf product ki photo / catalog PDF upload karein."></textarea></div>
+        <div class="ai-row"><label>Photo ya PDF (optional)</label><input type="file" id="aiAddFile" accept="image/*,application/pdf"></div>
+        <div class="ai-grid">
+          <div><label>Text me jo price hai wo</label><select id="aiPriceMode"><option value="cost">Cost price (markup lagao)</option><option value="final">Final selling price</option></select></div>
+          <div><label>Markup % (cost par)</label><input type="number" id="aiMarkup" value="50" min="0"></div>
+          <div><label>Default stock</label><input type="number" id="aiStock" value="25" min="0"></div>
+        </div>
+        <label style="font-size:12px;display:flex;align-items:center;gap:6px;margin-bottom:8px;"><input type="checkbox" id="aiUsePhoto" checked style="width:auto;"> Photo ko product image banao (jab ek hi product mile)</label>
+        <button type="button" class="master-btn green" style="padding:9px 16px;font-size:12px;" onclick="aiGenerateProducts()">✨ AI se Products Banao</button>
+        <div id="aiAddStatus" class="ai-result"></div>
+        <div id="aiAddPreview" style="margin-top:8px;"></div>
+      </div>
+
+      <div id="aiPane_chat" style="display:none;">
+        <div class="ai-note">AI ko aapke orders ka summary, products aur stock ka data diya jata hai (customer ka naam, phone, address ya password nahi). Ye data Google ko bheja jata hai.</div>
+        <div class="ai-chips">
+          <button type="button" onclick="aiChatSend('Aaj ka business summary do: orders, sales, pending kaam.')">📊 Summary</button>
+          <button type="button" onclick="aiChatSend('Kaun se products ka stock kam hai? List banao.')">📉 Low stock</button>
+          <button type="button" onclick="aiChatSend('Sabse zyada bikne wale products kaun se hain?')">🏆 Top products</button>
+          <button type="button" onclick="aiChatSend('Pending orders (Placed/Packed/Out for Delivery) ki list aur kya karna chahiye batao.')">📦 Pending orders</button>
+          <button type="button" onclick="aiChatSend('Mere catalog me kya improve kar sakte hain? Pricing, categories, missing products.')">💡 Suggestions</button>
+        </div>
+        <div id="aiChatLog" class="ai-chatlog"></div>
+        <form class="ai-send" onsubmit="aiChatSend();return false;">
+          <input type="text" id="aiChatInput" placeholder="Apna sawal likhein..." autocomplete="off">
+          <button type="submit" class="master-btn" style="padding:9px 16px;">Send</button>
+        </form>
+      </div>
+
+      <div id="aiPane_edit" style="display:none;">
+        <div class="ai-row"><label>Kya badalna hai? (AI changes dikhayega, aap approve karenge)</label>
+          <textarea id="aiEditText" rows="4" placeholder="Jaise: Sab Car Chargers ka price 5% badhao. Jin products ka stock 0 hai unka naam ke aage (Out of Stock) mat likho. Helmets ka stock 10 kar do."></textarea></div>
+        <button type="button" class="master-btn green" style="padding:9px 16px;font-size:12px;" onclick="aiGenerateEdits()">🛠️ AI se Changes Banao</button>
+        <div id="aiEditStatus" class="ai-result"></div>
+        <div id="aiEditPreview" style="margin-top:8px;"></div>
+      </div>
     </div>
 
     <!-- 9. 🔒 LOGIN SECURITY (unlock blocked accounts) -->
@@ -2210,6 +2293,7 @@ function openAdminPortal(role = "Super Admin") {
   renderNoticeDisplay();
   btnMaster.style.display = role === 'Master Admin' ? 'inline-block' : 'none';
   document.getElementById('btnTabSecurity').style.display = ['Master Admin', 'Super Admin', 'Sub-Admin'].includes(role) ? 'inline-block' : 'none';
+  document.getElementById('btnTabAi').style.display = role === 'Master Admin' ? 'inline-block' : 'none';
 
   // 1. SUPER ADMIN: Full Access
   if(role === "Super Admin" || role === "Master Admin") {
@@ -2294,6 +2378,7 @@ function switchAdminTab(tab) {
   document.getElementById('adminMailSection').style.display = tab === 'mail' ? 'block' : 'none';
   document.getElementById('adminMasterSection').style.display = tab === 'master' ? 'block' : 'none';
   document.getElementById('adminSecuritySection').style.display = tab === 'security' ? 'block' : 'none';
+  document.getElementById('adminAISection').style.display = (tab === 'ai' && typeof isMaster === 'function' && isMaster()) ? 'block' : 'none';
 
   document.querySelectorAll('.admin-tab-btn').forEach(btn => btn.classList.remove('active'));
   const activeBtn = document.getElementById(`btnTab${tab.charAt(0).toUpperCase() + tab.slice(1)}`);
@@ -2303,6 +2388,7 @@ function switchAdminTab(tab) {
   if(tab === 'mail') renderMailAdmin();
   if(tab === 'master') renderMasterPanel();
   if(tab === 'security') renderSecurityPanel();
+  if(tab === 'ai') renderAIPanel();
 }
 
 // NOTICE BOARD ENGINE
@@ -4316,6 +4402,7 @@ function openMailView(id) {
 
     <div class="mail-view-actions">
       <button type="button" style="background:var(--fk-blue);" onclick="adminReplyMail('${root.id}')">📤 Send Reply</button>
+      ${(typeof isMaster === 'function' && isMaster()) ? `<button type="button" style="background:#7c3aed;" onclick="aiDraftMailReply('${root.id}', this)">🤖 AI Reply Draft</button>` : ''}
       <button type="button" style="background:#16a34a;" onclick="adminMailtoReply('${root.id}')">📨 Email App me kholo</button>
       ${root.direction === 'in' ? `<button type="button" style="background:#d97706;" onclick="markMailUnread('${root.id}')">Mark Unread</button>` : ''}
       ${canDelete ? `<button type="button" style="background:#dc2626;" onclick="deleteMailThread('${root.id}')">🗑️ Delete</button>` : ''}
@@ -6026,6 +6113,445 @@ function seedRsdProducts(manual) {
   localStorage.setItem('pag_seed_rsd_v1', '1');
   if(added) persistCatalog();
   if(manual) showToast(added ? `${added} RSD products add ho gaye!` : 'Saare RSD products pehle se maujood hain.', added ? 'success' : 'info');
+}
+
+// ==========================================
+// 🤖 NEW: AI ASSISTANT (Google Gemini) — key stays only in this browser
+// ==========================================
+const AI_MODELS = ['gemini-2.5-flash', 'gemini-2.5-flash-lite', 'gemini-2.5-pro', 'gemini-2.0-flash'];
+let _aiEp = '';
+let _aiBusy = false;
+let aiAddRows = [], aiAddPhoto = null, aiEditRows = [], aiChatHist = [];
+
+function aiKey() { try { return (localStorage.getItem('pag_ai_key') || '').trim(); } catch(e) { return ''; } }
+function aiModel() { try { return localStorage.getItem('pag_ai_model') || 'gemini-2.5-flash'; } catch(e) { return 'gemini-2.5-flash'; } }
+function aiNeedKey() {
+  if(aiKey()) return false;
+  showToast('Pehle Master Control → 🤖 AI Assistant me API key save karein.', 'error');
+  return true;
+}
+
+function aiHint(e) {
+  const m = String(e.msg || '').toLowerCase();
+  if(e.status === 0) return 'Internet ya CORS problem: browser se Google tak request nahi ja pa rahi. Net check karein aur site https par kholein.';
+  if(m.indexOf('api key not valid') > -1 || m.indexOf('api_key_invalid') > -1 || m.indexOf('api key expired') > -1) return 'Is endpoint par ye key valid nahi maani gayi.';
+  if(m.indexOf('has not been used') > -1 || m.indexOf('is disabled') > -1 || m.indexOf('not been enabled') > -1) return 'Google Cloud me ye API enable nahi hai (Generative Language API / Vertex AI API enable karein).';
+  if(m.indexOf('referer') > -1 || m.indexOf('referrer') > -1) return 'Key par website restriction lagi hai. Cloud Console → Credentials me apni site ka domain allow karein.';
+  if(e.status === 403) return 'Permission nahi mili: key ke restrictions, billing ya API enablement check karein.';
+  if(e.status === 404) return 'Ye model is key/endpoint par nahi mila. Upar se doosra model chunein.';
+  if(e.status === 429) return 'Quota/limit khatam: kuch der baad try karein ya billing check karein.';
+  return '';
+}
+
+function aiErrorText(errs) {
+  return errs.map(e => `• ${e.ep === 'vertex' ? 'Vertex AI' : 'Gemini API'}: ${e.status ? 'HTTP ' + e.status + ' — ' : ''}${e.msg}${aiHint(e) ? '\n   ↳ ' + aiHint(e) : ''}`).join('\n');
+}
+
+// One call, tries the endpoint that matches the key type first, then the other one.
+async function aiCall(opts) {
+  const key = aiKey();
+  if(!key) throw new Error('API key save nahi hai.');
+  const model = aiModel();
+  const body = { contents: opts.contents, generationConfig: { temperature: opts.temperature == null ? 0.3 : opts.temperature } };
+  if(opts.system) body.systemInstruction = { parts: [{ text: opts.system }] };
+  if(opts.json) body.generationConfig.responseMimeType = 'application/json';
+  let order = key.indexOf('AQ.') === 0 ? ['vertex', 'gl'] : ['gl', 'vertex'];
+  if(_aiEp && order.indexOf(_aiEp) > 0) order = [_aiEp, order.filter(x => x !== _aiEp)[0]];
+  const errs = [];
+  for(const ep of order) {
+    const base = ep === 'gl' ? 'https://generativelanguage.googleapis.com/v1beta/models/' : 'https://aiplatform.googleapis.com/v1/publishers/google/models/';
+    const url = base + encodeURIComponent(model) + ':generateContent?key=' + encodeURIComponent(key);
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 90000);
+    try {
+      const r = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body), signal: ctrl.signal });
+      clearTimeout(timer);
+      const txt = await r.text();
+      let data = null;
+      try { data = JSON.parse(txt); } catch(e) {}
+      if(r.ok && data) {
+        const parts = (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts) || [];
+        const out = parts.map(p => p.text || '').join('');
+        if(out) { _aiEp = ep; return out; }
+        errs.push({ ep, status: r.status, msg: 'Khali jawab aaya' + (data.promptFeedback && data.promptFeedback.blockReason ? ' (blocked: ' + data.promptFeedback.blockReason + ')' : '') });
+        continue;
+      }
+      const msg = (data && data.error && (data.error.message || data.error.status)) || ('HTTP ' + r.status);
+      errs.push({ ep, status: r.status, msg });
+      if(r.status === 429) break;
+    } catch(e) {
+      clearTimeout(timer);
+      errs.push({ ep, status: 0, msg: e.name === 'AbortError' ? 'Timeout (90s)' : 'Network/CORS: ' + e.message });
+    }
+  }
+  const err = new Error(aiErrorText(errs));
+  err.aiErrors = errs;
+  throw err;
+}
+
+function aiParseJson(text) {
+  let t = String(text || '').trim().replace(/^```(?:json)?/i, '').replace(/```$/, '').trim();
+  try { return JSON.parse(t); } catch(e) {}
+  const m = t.match(/[\[{][\s\S]*[\]}]/);
+  if(m) { try { return JSON.parse(m[0]); } catch(e) {} }
+  throw new Error('AI ka jawab samajh nahi aaya (JSON nahi mila). Dobara try karein.');
+}
+
+function aiFmt(t) {
+  return esc(t).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/\n/g, '<br>');
+}
+
+// ---- settings
+function renderAIPanel() {
+  const sel = document.getElementById('aiModelSelect');
+  if(!sel) return;
+  const cur = aiModel();
+  const list = AI_MODELS.indexOf(cur) > -1 ? AI_MODELS : [cur].concat(AI_MODELS);
+  sel.innerHTML = list.map(m => `<option value="${esc(m)}" ${m === cur ? 'selected' : ''}>${esc(m)}</option>`).join('');
+  const k = aiKey();
+  const badge = document.getElementById('aiKeyBadge');
+  if(badge) {
+    badge.innerHTML = k ? `<span style="color:#15803d;font-weight:700;">✅ Key saved (${esc(k.slice(0, 3))}…${esc(k.slice(-4))}) · ${k.indexOf('AQ.') === 0 ? 'Vertex AI key' : 'Gemini API key'}</span>` : '<span style="color:#dc2626;font-weight:700;">⚠️ Key save nahi hai</span>';
+  }
+}
+function aiSaveSettings() {
+  const k = document.getElementById('aiKeyInput').value.trim();
+  if(k) localStorage.setItem('pag_ai_key', k);
+  localStorage.setItem('pag_ai_model', document.getElementById('aiModelSelect').value);
+  document.getElementById('aiKeyInput').value = '';
+  renderAIPanel();
+  showToast(k ? 'API key aur model save ho gaye.' : 'Model save ho gaya.', 'success');
+}
+function aiClearKey() {
+  if(!confirm('Is device se API key hata deni hai?')) return;
+  localStorage.removeItem('pag_ai_key');
+  renderAIPanel();
+  showToast('Key hata di gayi.', 'info');
+}
+async function aiTestKey() {
+  const k = document.getElementById('aiKeyInput').value.trim();
+  if(k) localStorage.setItem('pag_ai_key', k);
+  localStorage.setItem('pag_ai_model', document.getElementById('aiModelSelect').value);
+  document.getElementById('aiKeyInput').value = '';
+  renderAIPanel();
+  const box = document.getElementById('aiTestResult');
+  if(!aiKey()) { box.className = 'ai-result err'; box.textContent = 'Pehle API key paste karein.'; return; }
+  box.className = 'ai-result'; box.textContent = 'Test ho raha hai...';
+  try {
+    const out = await aiCall({ contents: [{ role: 'user', parts: [{ text: 'Reply with exactly: OK' }] }], temperature: 0 });
+    box.className = 'ai-result ok';
+    box.textContent = `✅ Key kaam kar rahi hai! (${_aiEp === 'vertex' ? 'Vertex AI' : 'Gemini API'} · ${aiModel()})\nAI ka jawab: ${out.trim().slice(0, 60)}`;
+  } catch(e) {
+    box.className = 'ai-result err';
+    box.textContent = '❌ Test fail hua:\n' + e.message;
+  }
+}
+function aiTab(t) {
+  ['add', 'chat', 'edit'].forEach(x => {
+    document.getElementById('aiPane_' + x).style.display = x === t ? 'block' : 'none';
+    document.getElementById('aiTab_' + x).classList.toggle('active', x === t);
+  });
+}
+
+// ---- files -> Gemini parts
+function aiReadFile(file) {
+  return new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(r.result); r.onerror = () => rej(new Error('File padh nahi paaye.')); r.readAsDataURL(file); });
+}
+function aiResizeImg(dataUrl, max, q) {
+  return new Promise(res => {
+    const i = new Image();
+    i.onload = () => {
+      const s = Math.min(1, max / Math.max(i.width, i.height));
+      const c = document.createElement('canvas');
+      c.width = Math.max(1, Math.round(i.width * s)); c.height = Math.max(1, Math.round(i.height * s));
+      c.getContext('2d').drawImage(i, 0, 0, c.width, c.height);
+      res(c.toDataURL('image/jpeg', q));
+    };
+    i.onerror = () => res(dataUrl);
+    i.src = dataUrl;
+  });
+}
+async function aiFilePart(file) {
+  if(file.type === 'application/pdf') {
+    if(file.size > 12 * 1024 * 1024) throw new Error('PDF 12MB se chhoti honi chahiye (badi PDF ke pages alag karke bhejein).');
+    const d = await aiReadFile(file);
+    return { part: { inlineData: { mimeType: 'application/pdf', data: d.split(',')[1] } }, thumb: null };
+  }
+  if(file.type.indexOf('image/') === 0) {
+    const d = await aiReadFile(file);
+    const big = await aiResizeImg(d, 1400, 0.82);
+    const thumb = await aiResizeImg(d, 380, 0.7);
+    return { part: { inlineData: { mimeType: 'image/jpeg', data: big.split(',')[1] } }, thumb };
+  }
+  throw new Error('Sirf image ya PDF file chunein.');
+}
+function aiSetStatus(id, text, cls) { const el = document.getElementById(id); if(el) { el.className = 'ai-result ' + (cls || ''); el.textContent = text; } }
+
+// ---- 1) AI PRODUCT ADD
+async function aiGenerateProducts() {
+  if(aiNeedKey() || _aiBusy) return;
+  const text = document.getElementById('aiAddText').value.trim();
+  const file = document.getElementById('aiAddFile').files[0];
+  if(!text && !file) { showToast('Product ka text likhein ya photo/PDF chunein.', 'error'); return; }
+  _aiBusy = true;
+  aiSetStatus('aiAddStatus', '⏳ AI kaam kar raha hai...', '');
+  document.getElementById('aiAddPreview').innerHTML = '';
+  try {
+    const parts = [];
+    aiAddPhoto = null;
+    if(file) { const fp = await aiFilePart(file); parts.push(fp.part); aiAddPhoto = fp.thumb; }
+    const cats = Array.from(new Set(catalog.map(p => p.cat))).join(', ');
+    const system = `You are a catalog assistant for "PAG Moters", an Indian shop selling EV scooter parts, chargers, helmets, batteries and mobile accessories. Extract product listings from the user's text, image or PDF and return ONLY valid JSON (no markdown) in this shape:
+{"products":[{"name":string,"category":string,"source_price":number|null,"stock":number|null,"specs":[{"k":string,"v":string}],"description":string}]}
+Rules:
+- Product names must be clear and customer-friendly (brand, model, key spec, colour/variant).
+- If one product has several price variants (for example with Micro cable / with Type-C cable), output a separate product per variant and put the variant in brackets in the name.
+- category: reuse one of these existing categories when it fits: ${cats}. Otherwise use a short new category name.
+- source_price: the number written in the source for that product (rupees, digits only), or null if none is given.
+- specs: only facts visible in the source (power, voltage, ports, model, warranty...). Never invent model numbers, certifications or warranty.
+- description: one or two plain sentences without claims that are not in the source.
+- Write in English.`;
+    parts.push({ text: 'Owner ka text:\n' + (text || '(sirf attached file dekhein)') });
+    const out = await aiCall({ system, contents: [{ role: 'user', parts }], json: true, temperature: 0.2 });
+    const data = aiParseJson(out);
+    const list = Array.isArray(data) ? data : (data.products || []);
+    if(!list.length) throw new Error('AI ko koi product nahi mila. Text thoda detail me likhein.');
+    const mode = document.getElementById('aiPriceMode').value;
+    const markup = Number(document.getElementById('aiMarkup').value) || 0;
+    const defStock = Number(document.getElementById('aiStock').value) || 0;
+    const usePhoto = document.getElementById('aiUsePhoto').checked && aiAddPhoto && list.length === 1;
+    aiAddRows = list.map(p => {
+      const sp = Number(p.source_price);
+      let price = sp > 0 ? (mode === 'cost' ? Math.ceil(sp * (1 + markup / 100)) : Math.round(sp)) : 0;
+      return {
+        name: String(p.name || '').trim(), cat: String(p.category || 'Accessories').trim() || 'Accessories',
+        price, stock: p.stock != null && Number(p.stock) >= 0 ? Number(p.stock) : defStock,
+        specs: Array.isArray(p.specs) ? p.specs.filter(s => s && s.k && s.v).map(s => ({ k: String(s.k), v: String(s.v) })) : [],
+        desc: String(p.description || '').trim(), img: usePhoto ? aiAddPhoto : ''
+      };
+    });
+    aiRenderAddPreview();
+    aiSetStatus('aiAddStatus', `✅ ${aiAddRows.length} product mile. Neeche check/edit karke "Add" dabayein.${aiAddRows.some(r => !r.price) ? '\n⚠️ Jin products ka price 0 hai unka price khud bharein.' : ''}`, 'ok');
+  } catch(e) {
+    aiSetStatus('aiAddStatus', '❌ ' + e.message, 'err');
+  }
+  _aiBusy = false;
+}
+
+function aiRenderAddPreview() {
+  const box = document.getElementById('aiAddPreview');
+  if(!aiAddRows.length) { box.innerHTML = ''; return; }
+  const cats = Array.from(new Set(catalog.map(p => p.cat)));
+  const rows = aiAddRows.map((r, i) => {
+    const dup = catalog.some(p => String(p.name).toLowerCase() === r.name.toLowerCase());
+    return `<tr>
+      <td><input type="checkbox" id="aiR_${i}_on" checked style="width:auto;"></td>
+      <td><textarea id="aiR_${i}_name" rows="2">${esc(r.name)}</textarea>${dup ? '<small style="color:#d97706;font-weight:700;">⚠️ is naam ka product pehle se hai</small>' : ''}</td>
+      <td><input type="text" id="aiR_${i}_cat" list="aiCatList" value="${esc(r.cat)}"></td>
+      <td><input type="number" id="aiR_${i}_price" min="1" value="${r.price || ''}" placeholder="₹"></td>
+      <td><input type="number" id="aiR_${i}_stock" min="0" value="${r.stock}"></td>
+      <td><textarea id="aiR_${i}_specs" rows="3">${esc(specsToText(r.specs))}</textarea></td>
+    </tr>`;
+  }).join('');
+  box.innerHTML = `<datalist id="aiCatList">${cats.map(c => `<option value="${esc(c)}">`).join('')}</datalist>
+    <div class="users-table-wrap"><table class="users-table ai-prev-table"><thead><tr><th></th><th>Name</th><th>Category</th><th>Price ₹</th><th>Stock</th><th>Specs (Label: Value)</th></tr></thead><tbody>${rows}</tbody></table></div>
+    <div style="margin-top:8px;"><button type="button" class="master-btn green" style="padding:9px 16px;font-size:12px;" onclick="aiAddSelected()">✅ Selected products catalog me add karein</button></div>`;
+}
+
+function aiAddSelected() {
+  const base = Date.now();
+  let n = 0;
+  aiAddRows.forEach((r, i) => {
+    const on = document.getElementById(`aiR_${i}_on`);
+    if(!on || !on.checked) return;
+    const name = document.getElementById(`aiR_${i}_name`).value.trim();
+    const price = Number(document.getElementById(`aiR_${i}_price`).value);
+    if(!name || !(price > 0)) return;
+    catalog.unshift({
+      id: base + n, name, cat: document.getElementById(`aiR_${i}_cat`).value.trim() || 'Accessories',
+      price, orig: price, stock: Math.max(0, Number(document.getElementById(`aiR_${i}_stock`).value) || 0),
+      rating: 0, reviews: 0, img: r.img || 'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=400', gallery: [],
+      specs: textToSpecs(document.getElementById(`aiR_${i}_specs`).value), desc: r.desc || ''
+    });
+    n++;
+  });
+  if(!n) { showToast('Koi valid product select nahi hua (naam aur price zaroori hai).', 'error'); return; }
+  persistCatalog();
+  aiAddRows = [];
+  document.getElementById('aiAddPreview').innerHTML = '';
+  aiSetStatus('aiAddStatus', `✅ ${n} product catalog me add ho gaye!`, 'ok');
+  showToast(`${n} product add ho gaye!`, 'success');
+  if(typeof renderMasterPanel === 'function') renderMasterPanel();
+}
+
+// ---- 2) BUSINESS CHAT (no customer names / phones / addresses / passwords are sent)
+function aiSnapshot() {
+  let ords = [];
+  try { ords = JSON.parse(localStorage.getItem('pag_orders_db')) || []; } catch(e) {}
+  let usersN = 0, teamN = 0, mailN = 0;
+  try { usersN = (JSON.parse(localStorage.getItem('pag_users_db')) || []).length; } catch(e) {}
+  try { teamN = (JSON.parse(localStorage.getItem('pag_team_db')) || []).length; } catch(e) {}
+  try { mailN = (JSON.parse(localStorage.getItem('pag_mail_db')) || []).filter(m => m.direction === 'in' && !m.read).length; } catch(e) {}
+  const st = ['', 'Order Placed', 'Packed', 'Out for Delivery', 'Delivered'];
+  const byStatus = {}, sold = {};
+  ords.forEach(o => {
+    const s = st[o.statusStep] || 'Processing'; byStatus[s] = (byStatus[s] || 0) + 1;
+    (Array.isArray(o.itemList) ? o.itemList : []).forEach(i => { sold[i.name] = (sold[i.name] || 0) + (Number(i.qty) || 1); });
+  });
+  return {
+    now: new Date().toLocaleString('en-IN'),
+    totals: { orders: ords.length, salesRupees: ords.reduce((a, o) => a + (Number(o.totalPayable) || 0), 0), ordersByStatus: byStatus, customers: usersN, staff: teamN, unreadMails: mailN, products: catalog.length },
+    topSoldProducts: Object.keys(sold).map(n => ({ product: n, qty: sold[n] })).sort((a, b) => b.qty - a.qty).slice(0, 15),
+    recentOrders: ords.slice(0, 40).map(o => ({ id: o.id, date: o.date, total: o.totalPayable, status: st[o.statusStep] || '', payment: o.paymentMethod, pincode: o.pincode, items: String(o.items || '').slice(0, 160) })),
+    catalog: catalog.slice(0, 200).map(p => ({ id: p.id, name: p.name, category: p.cat, price: p.price, mrp: p.orig, stock: p.stock }))
+  };
+}
+
+function aiChatPush(cls, text) {
+  const log = document.getElementById('aiChatLog');
+  const d = document.createElement('div');
+  d.className = 'mail-bubble ' + cls;
+  d.innerHTML = aiFmt(text);
+  log.appendChild(d);
+  log.scrollTop = log.scrollHeight;
+  return d;
+}
+async function aiChatSend(text) {
+  const input = document.getElementById('aiChatInput');
+  text = String(text || input.value || '').trim();
+  if(!text || _aiBusy) return;
+  if(aiNeedKey()) return;
+  input.value = '';
+  aiTab('chat');
+  aiChatPush('out', text);
+  const wait = aiChatPush('in', '⏳ soch raha hoon...');
+  _aiBusy = true;
+  try {
+    const system = `You are the business assistant of "PAG Moters", an Indian shop selling EV scooter parts, chargers, helmets, batteries and mobile accessories. You talk to the shop owner. Reply in the same language the owner writes in (Hinglish by default), short and practical, use ₹ and real numbers. Use ONLY the DATA below; if something is not in the data, say so instead of guessing. Never reveal or ask for passwords.\nDATA:\n${JSON.stringify(aiSnapshot())}`;
+    aiChatHist.push({ role: 'user', text });
+    const contents = aiChatHist.slice(-12).map(m => ({ role: m.role, parts: [{ text: m.text }] }));
+    const out = await aiCall({ system, contents, temperature: 0.4 });
+    aiChatHist.push({ role: 'model', text: out });
+    wait.innerHTML = aiFmt(out.trim());
+  } catch(e) {
+    aiChatHist.pop();
+    wait.innerHTML = aiFmt('❌ ' + e.message);
+  }
+  _aiBusy = false;
+  const log = document.getElementById('aiChatLog');
+  log.scrollTop = log.scrollHeight;
+}
+
+// ---- 3) BULK EDIT (AI proposes, owner approves)
+const AI_EDIT_FIELDS = { price: 'Price', orig: 'MRP', stock: 'Stock', name: 'Name', cat: 'Category' };
+async function aiGenerateEdits() {
+  if(aiNeedKey() || _aiBusy) return;
+  const text = document.getElementById('aiEditText').value.trim();
+  if(!text) { showToast('Pehle likhein ki kya badalna hai.', 'error'); return; }
+  _aiBusy = true;
+  aiSetStatus('aiEditStatus', '⏳ AI kaam kar raha hai...', '');
+  document.getElementById('aiEditPreview').innerHTML = '';
+  try {
+    const data = catalog.slice(0, 250).map(p => ({ id: p.id, name: p.name, cat: p.cat, price: p.price, orig: p.orig, stock: p.stock }));
+    const system = `You edit a product catalog for an Indian shop. Apply the owner's instruction to the products in DATA and return ONLY valid JSON:
+{"summary":string,"changes":[{"id":number,"field":"price"|"orig"|"stock"|"name"|"cat","value":number|string,"reason":string}]}
+Rules: use exact ids from DATA; include only products that really change; compute percentage changes yourself as whole rupees (round up); never output negative numbers; do not change anything the owner did not ask for. If the instruction is unclear return {"summary":"<what is unclear>","changes":[]}.
+DATA:\n${JSON.stringify(data)}`;
+    const out = await aiCall({ system, contents: [{ role: 'user', parts: [{ text }] }], json: true, temperature: 0.1 });
+    const res = aiParseJson(out);
+    const ch = (res.changes || []).filter(c => AI_EDIT_FIELDS[c.field] && catalog.some(p => p.id == c.id));
+    aiEditRows = ch;
+    if(!ch.length) throw new Error(res.summary || 'Koi change nahi bana. Instruction aur saaf likhein.');
+    const rows = ch.map((c, i) => {
+      const p = catalog.find(x => x.id == c.id);
+      return `<tr><td><input type="checkbox" id="aiE_${i}_on" checked style="width:auto;"></td><td><b>${esc(p.name)}</b></td><td>${esc(AI_EDIT_FIELDS[c.field])}</td><td>${esc(p[c.field])} → <b>${esc(c.value)}</b></td><td style="color:#64748b;">${esc(c.reason || '')}</td></tr>`;
+    }).join('');
+    document.getElementById('aiEditPreview').innerHTML = `<div class="users-table-wrap"><table class="users-table"><thead><tr><th></th><th>Product</th><th>Field</th><th>Change</th><th>Reason</th></tr></thead><tbody>${rows}</tbody></table></div>
+      <div style="margin-top:8px;"><button type="button" class="master-btn green" style="padding:9px 16px;font-size:12px;" onclick="aiApplyEdits()">✅ Selected changes apply karein</button></div>`;
+    aiSetStatus('aiEditStatus', '✅ ' + (res.summary || `${ch.length} changes taiyar hain.`) + '\nCheck karke Apply dabayein.', 'ok');
+  } catch(e) {
+    aiSetStatus('aiEditStatus', '❌ ' + e.message, 'err');
+  }
+  _aiBusy = false;
+}
+
+function aiApplyEdits() {
+  let n = 0;
+  aiEditRows.forEach((c, i) => {
+    const on = document.getElementById(`aiE_${i}_on`);
+    if(!on || !on.checked) return;
+    const p = catalog.find(x => x.id == c.id);
+    if(!p) return;
+    if(c.field === 'name' || c.field === 'cat') {
+      const v = String(c.value || '').trim();
+      if(!v) return;
+      p[c.field] = v;
+    } else {
+      const v = Number(c.value);
+      if(!(v >= 0) || (c.field !== 'stock' && v < 1)) return;
+      p[c.field] = c.field === 'stock' ? Math.floor(v) : Math.round(v);
+    }
+    if(Number(p.price) > Number(p.orig)) p.orig = p.price;   // never show a negative discount
+    n++;
+  });
+  if(!n) { showToast('Koi change apply nahi hua.', 'error'); return; }
+  persistCatalog();
+  aiEditRows = [];
+  document.getElementById('aiEditPreview').innerHTML = '';
+  aiSetStatus('aiEditStatus', `✅ ${n} changes apply ho gaye.`, 'ok');
+  showToast(`${n} changes apply ho gaye!`, 'success');
+  if(typeof renderMasterPanel === 'function') renderMasterPanel();
+}
+
+// ---- 4) AI reply draft for customer mails (master)
+async function aiDraftMailReply(rootId, btn) {
+  if(aiNeedKey() || _aiBusy) return;
+  const root = mails.find(x => x.id === rootId);
+  if(!root) return;
+  const thread = mails.filter(x => x.id === root.id || x.threadId === root.id).sort((a, b) => a.ts - b.ts);
+  const convo = thread.map(x => `${x.direction === 'in' ? 'CUSTOMER' : 'SHOP'} — ${x.subject}\n${x.body}`).join('\n\n');
+  const products = catalog.slice(0, 80).map(p => `${p.name}: ₹${p.price}`).join('\n');
+  const old = btn ? btn.textContent : '';
+  if(btn) { btn.disabled = true; btn.textContent = '⏳ Draft ban raha hai...'; }
+  _aiBusy = true;
+  try {
+    const system = `You write email replies for "PAG Moters", an Indian shop selling EV scooter parts, chargers and mobile accessories. Write a short, polite, helpful reply to the customer's latest message, in the same language and style the customer used (Hindi/Hinglish/English). Do not invent policies, prices, delivery promises or order status; if information is needed, ask for the Order ID or say the team will confirm. No placeholders like [name]. End with "PAG Moters Team". Output only the reply text.\nSHOP PRODUCTS (reference):\n${products}`;
+    const out = await aiCall({ system, contents: [{ role: 'user', parts: [{ text: 'Conversation:\n' + convo }] }], temperature: 0.5 });
+    document.getElementById('mailReplyText').value = out.trim();
+    showToast('AI draft taiyar hai. Padhkar Send Reply dabayein.', 'success');
+  } catch(e) {
+    alert('AI draft nahi ban paaya:\n\n' + e.message);
+  }
+  _aiBusy = false;
+  if(btn) { btn.disabled = false; btn.textContent = old; }
+}
+
+// ---- 5) AI specs / description draft (Specs editor)
+async function aiGenerateSpecs(btn) {
+  if(aiNeedKey() || _aiBusy) return;
+  const id = document.getElementById('specEditId').value;
+  const p = catalog.find(x => x.id == id);
+  if(!p) return;
+  const old = btn ? btn.textContent : '';
+  if(btn) { btn.disabled = true; btn.textContent = '⏳ AI likh raha hai...'; }
+  _aiBusy = true;
+  try {
+    const system = `You write product specifications for an Indian EV spare parts / mobile accessories shop. Return ONLY valid JSON: {"specs":[{"k":string,"v":string}],"description":string}. Use only facts that follow from the product name and category or that are common knowledge for this exact kind of product; do NOT invent model numbers, certifications, warranty periods, brands or numeric ratings. 4 to 8 short specs. Description: two plain sentences. English.`;
+    const prompt = `Product name: ${p.name}\nCategory: ${p.cat}\nExisting specs: ${specsToText(getSpecs(p)) || '(none)'}`;
+    const out = await aiCall({ system, contents: [{ role: 'user', parts: [{ text: prompt }] }], json: true, temperature: 0.2 });
+    const res = aiParseJson(out);
+    const have = getSpecs(p).slice();
+    const keys = have.map(s => String(s.k).toLowerCase());
+    (res.specs || []).forEach(s => { if(s && s.k && s.v && keys.indexOf(String(s.k).toLowerCase()) === -1) have.push({ k: String(s.k), v: String(s.v) }); });
+    document.getElementById('specEditText').value = specsToText(have);
+    const d = document.getElementById('specEditDesc');
+    if(!d.value.trim() && res.description) d.value = String(res.description).trim();
+    showToast('AI draft bhar diya. Zaroor check karke Save karein.', 'success');
+  } catch(e) {
+    alert('AI specs nahi ban paaye:\n\n' + e.message);
+  }
+  _aiBusy = false;
+  if(btn) { btn.disabled = false; btn.textContent = old; }
 }
 
 // SESSION RESTORE ON REFRESH
