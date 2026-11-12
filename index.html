@@ -576,6 +576,8 @@ body.edit-on{padding-bottom:90px}
 .ai-send input{flex:1;border:1px solid var(--line);border-radius:3px;padding:9px;font:inherit;font-size:12px;min-width:0}
 .ai-prev-table input,.ai-prev-table textarea{width:100%;border:1px solid var(--line);border-radius:3px;padding:5px;font:inherit;font-size:11px;min-width:70px}
 .ai-prev-table td{vertical-align:top}
+/* active admin tab must always be readable */
+.admin-tab-btn.active{color:#fff !important;background:var(--fk-blue) !important;border-color:var(--fk-blue) !important}
 </style>
 </head>
 <body>
@@ -1132,6 +1134,7 @@ body.edit-on{padding-bottom:90px}
         <div class="ai-row"><label>Model</label><select id="aiModelSelect"></select></div>
         <button type="button" class="master-btn green" onclick="aiSaveSettings()">💾 Save</button>
         <button type="button" class="master-btn" onclick="aiTestKey()">🧪 Test Key</button>
+        <button type="button" class="master-btn" onclick="aiRefreshModels()">🔄 Models laayein</button>
         <button type="button" class="master-btn red" onclick="aiClearKey()">🗑️ Remove Key</button>
         <div class="ai-note">Key sirf is device ke browser me save hoti hai (cloud sync me nahi jaati). "AQ." wali key Vertex AI ke liye hoti hai, "AIza" wali Gemini API ke liye. App dono endpoints khud try karta hai aur asli error dikhata hai.</div>
         <div id="aiTestResult" class="ai-result"></div>
@@ -6118,13 +6121,14 @@ function seedRsdProducts(manual) {
 // ==========================================
 // 🤖 NEW: AI ASSISTANT (Google Gemini) — key stays only in this browser
 // ==========================================
-const AI_MODELS = ['gemini-2.5-flash', 'gemini-2.5-flash-lite', 'gemini-2.5-pro', 'gemini-2.0-flash'];
+const AI_MODELS = ['gemini-flash-latest', 'gemini-2.5-flash', 'gemini-2.5-flash-lite', 'gemini-2.5-pro'];
+let _aiModelList = [];
 let _aiEp = '';
 let _aiBusy = false;
 let aiAddRows = [], aiAddPhoto = null, aiEditRows = [], aiChatHist = [];
 
 function aiKey() { try { return (localStorage.getItem('pag_ai_key') || '').trim(); } catch(e) { return ''; } }
-function aiModel() { try { return localStorage.getItem('pag_ai_model') || 'gemini-2.5-flash'; } catch(e) { return 'gemini-2.5-flash'; } }
+function aiModel() { try { return localStorage.getItem('pag_ai_model') || 'gemini-flash-latest'; } catch(e) { return 'gemini-flash-latest'; } }
 function aiNeedKey() {
   if(aiKey()) return false;
   showToast('Pehle Master Control → 🤖 AI Assistant me API key save karein.', 'error');
@@ -6135,10 +6139,10 @@ function aiHint(e) {
   const m = String(e.msg || '').toLowerCase();
   if(e.status === 0) return 'Internet ya CORS problem: browser se Google tak request nahi ja pa rahi. Net check karein aur site https par kholein.';
   if(m.indexOf('api key not valid') > -1 || m.indexOf('api_key_invalid') > -1 || m.indexOf('api key expired') > -1) return 'Is endpoint par ye key valid nahi maani gayi.';
-  if(m.indexOf('has not been used') > -1 || m.indexOf('is disabled') > -1 || m.indexOf('not been enabled') > -1) return 'Google Cloud me ye API enable nahi hai (Generative Language API / Vertex AI API enable karein).';
+  if(m.indexOf('has not been used') > -1 || m.indexOf('is disabled') > -1 || m.indexOf('not been enabled') > -1) return 'Google Cloud project me ye API enable nahi hai. Error me diye link se enable kar sakte hain. Agar doosra raasta (Gemini API) chal raha hai to ye error ignore kar sakte hain.';
   if(m.indexOf('referer') > -1 || m.indexOf('referrer') > -1) return 'Key par website restriction lagi hai. Cloud Console → Credentials me apni site ka domain allow karein.';
   if(e.status === 403) return 'Permission nahi mili: key ke restrictions, billing ya API enablement check karein.';
-  if(e.status === 404) return 'Ye model is key/endpoint par nahi mila. Upar se doosra model chunein.';
+  if(e.status === 404) return 'Ye model ab is key ke liye available nahi hai (Google ne purane models naye users ke liye band kar diye). "🔄 Models laayein" dabayein, app naya model khud chun lega.';
   if(e.status === 429) return 'Quota/limit khatam: kuch der baad try karein ya billing check karein.';
   return '';
 }
@@ -6148,17 +6152,54 @@ function aiErrorText(errs) {
 }
 
 // One call, tries the endpoint that matches the key type first, then the other one.
+async function aiListModels() {
+  const key = aiKey();
+  let out = [], token = '';
+  for(let page = 0; page < 4; page++) {
+    const url = 'https://generativelanguage.googleapis.com/v1beta/models?pageSize=200' + (token ? '&pageToken=' + encodeURIComponent(token) : '') + '&key=' + encodeURIComponent(key);
+    const r = await fetch(url);
+    const d = await r.json().catch(() => null);
+    if(!r.ok || !d) throw new Error('Models list nahi mili: ' + ((d && d.error && d.error.message) || ('HTTP ' + r.status)));
+    out = out.concat(d.models || []);
+    token = d.nextPageToken || '';
+    if(!token) break;
+  }
+  return out.filter(m => (m.supportedGenerationMethods || []).indexOf('generateContent') > -1)
+    .map(m => String(m.name || '').replace(/^models\//, ''))
+    .filter(n => /^gemini/.test(n) && !/(embedding|tts|image|live|audio|native|robotics|computer-use|imagen|veo|aqa|learnlm|thinking-exp)/.test(n));
+}
+
+// prefers the always-latest flash alias, then the newest stable flash, then any flash
+function aiPickModel(names) {
+  if(names.indexOf('gemini-flash-latest') > -1) return 'gemini-flash-latest';
+  let best = '', bestScore = -1;
+  names.forEach(n => {
+    const m = n.match(/^gemini-(\d+(?:\.\d+)?)-flash(-lite)?(.*)$/);
+    let s = /flash/.test(n) ? 1 : 0;
+    if(m) {
+      s = parseFloat(m[1]) * 100 + (m[2] ? 0 : 10);
+      if(/preview|exp/.test(m[3] || '')) s -= 5;
+    }
+    if(s > bestScore) { bestScore = s; best = n; }
+  });
+  return best || names[0] || '';
+}
+
+// One call, tries the endpoint that matches the key type first, then the other one.
 async function aiCall(opts) {
   const key = aiKey();
   if(!key) throw new Error('API key save nahi hai.');
-  const model = aiModel();
+  if(!_aiEp) { try { _aiEp = localStorage.getItem('pag_ai_ep') || ''; } catch(e) {} }
+  let model = aiModel();
   const body = { contents: opts.contents, generationConfig: { temperature: opts.temperature == null ? 0.3 : opts.temperature } };
   if(opts.system) body.systemInstruction = { parts: [{ text: opts.system }] };
   if(opts.json) body.generationConfig.responseMimeType = 'application/json';
   let order = key.indexOf('AQ.') === 0 ? ['vertex', 'gl'] : ['gl', 'vertex'];
   if(_aiEp && order.indexOf(_aiEp) > 0) order = [_aiEp, order.filter(x => x !== _aiEp)[0]];
   const errs = [];
-  for(const ep of order) {
+  let switched = false;
+  for(let i = 0; i < order.length; i++) {
+    const ep = order[i];
     const base = ep === 'gl' ? 'https://generativelanguage.googleapis.com/v1beta/models/' : 'https://aiplatform.googleapis.com/v1/publishers/google/models/';
     const url = base + encodeURIComponent(model) + ':generateContent?key=' + encodeURIComponent(key);
     const ctrl = new AbortController();
@@ -6172,11 +6213,29 @@ async function aiCall(opts) {
       if(r.ok && data) {
         const parts = (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts) || [];
         const out = parts.map(p => p.text || '').join('');
-        if(out) { _aiEp = ep; return out; }
+        if(out) {
+          _aiEp = ep;
+          try { localStorage.setItem('pag_ai_ep', ep); } catch(e) {}
+          return out;
+        }
         errs.push({ ep, status: r.status, msg: 'Khali jawab aaya' + (data.promptFeedback && data.promptFeedback.blockReason ? ' (blocked: ' + data.promptFeedback.blockReason + ')' : '') });
         continue;
       }
       const msg = (data && data.error && (data.error.message || data.error.status)) || ('HTTP ' + r.status);
+      // model retired / unknown on the Gemini API -> look up a model this key can really use and retry once
+      if(r.status === 404 && ep === 'gl' && !switched) {
+        switched = true;
+        try {
+          const pick = aiPickModel(await aiListModels());
+          if(pick && pick !== model) {
+            model = pick;
+            try { localStorage.setItem('pag_ai_model', pick); } catch(e) {}
+            if(typeof renderAIPanel === 'function') renderAIPanel();
+            i--;
+            continue;
+          }
+        } catch(e2) { errs.push({ ep: 'gl', status: 0, msg: e2.message }); }
+      }
       errs.push({ ep, status: r.status, msg });
       if(r.status === 429) break;
     } catch(e) {
@@ -6187,6 +6246,27 @@ async function aiCall(opts) {
   const err = new Error(aiErrorText(errs));
   err.aiErrors = errs;
   throw err;
+}
+
+async function aiRefreshModels() {
+  const box = document.getElementById('aiTestResult');
+  const k = document.getElementById('aiKeyInput').value.trim();
+  if(k) { localStorage.setItem('pag_ai_key', k); localStorage.removeItem('pag_ai_ep'); _aiEp = ''; document.getElementById('aiKeyInput').value = ''; }
+  if(!aiKey()) { box.className = 'ai-result err'; box.textContent = 'Pehle API key paste karke Save karein.'; return; }
+  box.className = 'ai-result'; box.textContent = 'Models dhoondh rahe hain...';
+  try {
+    const names = await aiListModels();
+    if(!names.length) throw new Error('Is key par koi Gemini model nahi mila.');
+    _aiModelList = names;
+    const pick = aiPickModel(names);
+    localStorage.setItem('pag_ai_model', pick);
+    renderAIPanel();
+    box.className = 'ai-result ok';
+    box.textContent = `✅ ${names.length} models mile. Chuna gaya: ${pick}\nAb "🧪 Test Key" dabayein.`;
+  } catch(e) {
+    box.className = 'ai-result err';
+    box.textContent = '❌ ' + e.message;
+  }
 }
 
 function aiParseJson(text) {
@@ -6206,7 +6286,8 @@ function renderAIPanel() {
   const sel = document.getElementById('aiModelSelect');
   if(!sel) return;
   const cur = aiModel();
-  const list = AI_MODELS.indexOf(cur) > -1 ? AI_MODELS : [cur].concat(AI_MODELS);
+  const baseList = _aiModelList.length ? _aiModelList : AI_MODELS;
+  const list = baseList.indexOf(cur) > -1 ? baseList : [cur].concat(baseList);
   sel.innerHTML = list.map(m => `<option value="${esc(m)}" ${m === cur ? 'selected' : ''}>${esc(m)}</option>`).join('');
   const k = aiKey();
   const badge = document.getElementById('aiKeyBadge');
@@ -6216,7 +6297,7 @@ function renderAIPanel() {
 }
 function aiSaveSettings() {
   const k = document.getElementById('aiKeyInput').value.trim();
-  if(k) localStorage.setItem('pag_ai_key', k);
+  if(k) { localStorage.setItem('pag_ai_key', k); localStorage.removeItem('pag_ai_ep'); _aiEp = ''; }
   localStorage.setItem('pag_ai_model', document.getElementById('aiModelSelect').value);
   document.getElementById('aiKeyInput').value = '';
   renderAIPanel();
@@ -6230,7 +6311,7 @@ function aiClearKey() {
 }
 async function aiTestKey() {
   const k = document.getElementById('aiKeyInput').value.trim();
-  if(k) localStorage.setItem('pag_ai_key', k);
+  if(k) { localStorage.setItem('pag_ai_key', k); localStorage.removeItem('pag_ai_ep'); _aiEp = ''; }
   localStorage.setItem('pag_ai_model', document.getElementById('aiModelSelect').value);
   document.getElementById('aiKeyInput').value = '';
   renderAIPanel();
@@ -6238,9 +6319,11 @@ async function aiTestKey() {
   if(!aiKey()) { box.className = 'ai-result err'; box.textContent = 'Pehle API key paste karein.'; return; }
   box.className = 'ai-result'; box.textContent = 'Test ho raha hai...';
   try {
+    const modelBefore = aiModel();
     const out = await aiCall({ contents: [{ role: 'user', parts: [{ text: 'Reply with exactly: OK' }] }], temperature: 0 });
+    renderAIPanel();
     box.className = 'ai-result ok';
-    box.textContent = `✅ Key kaam kar rahi hai! (${_aiEp === 'vertex' ? 'Vertex AI' : 'Gemini API'} · ${aiModel()})\nAI ka jawab: ${out.trim().slice(0, 60)}`;
+    box.textContent = `✅ Key kaam kar rahi hai! (${_aiEp === 'vertex' ? 'Vertex AI' : 'Gemini API'} · ${aiModel()})\nAI ka jawab: ${out.trim().slice(0, 60)}${aiModel() !== modelBefore ? '\nℹ️ Purana model (' + modelBefore + ') band tha, app ne ' + aiModel() + ' chun liya.' : ''}`;
   } catch(e) {
     box.className = 'ai-result err';
     box.textContent = '❌ Test fail hua:\n' + e.message;
