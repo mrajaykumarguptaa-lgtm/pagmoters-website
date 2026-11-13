@@ -1149,7 +1149,7 @@ body.edit-on{padding-bottom:90px}
       <div id="aiPane_add">
         <div class="ai-row"><label>Product details / price list / kuch bhi likhein (Hindi, Hinglish ya English)</label>
           <textarea id="aiAddText" rows="5" placeholder="Jaise: Raftar 12W charger micro cable 79, type-c 84. 65W GaN charger without cable 200, with cable 230. Ya sirf product ki photo / catalog PDF upload karein."></textarea></div>
-        <div class="ai-row"><label>Photo ya PDF (optional)</label><input type="file" id="aiAddFile" accept="image/*,application/pdf"></div>
+        <div class="ai-row"><label>Photo ya PDF (optional)</label><input type="file" id="aiAddFile" accept="image/*,application/pdf" onchange="aiFileInfo(this)"><div id="aiFileInfo" class="ai-note"></div></div>
         <div class="ai-grid">
           <div><label>Text me jo price hai wo</label><select id="aiPriceMode"><option value="cost">Cost price (markup lagao)</option><option value="final">Final selling price</option></select></div>
           <div><label>Markup % (cost par)</label><input type="number" id="aiMarkup" value="50" min="0"></div>
@@ -6139,7 +6139,7 @@ function aiNeedKey() {
 
 function aiHint(e) {
   const m = String(e.msg || '').toLowerCase();
-  if(e.status === 0) return 'Internet ya CORS problem: browser se Google tak request nahi ja pa rahi. Net check karein aur site https par kholein.';
+  if(e.status === 0) return 'Request Google tak pahunch nahi paayi: mobile net kamzor/toot gaya ya file bahut badi thi. Net check karke dobara try karein. (Badi PDF ab app pages me todkar bhejti hai.)';
   if(m.indexOf('api key not valid') > -1 || m.indexOf('api_key_invalid') > -1 || m.indexOf('api key expired') > -1) return 'Is endpoint par ye key valid nahi maani gayi.';
   if(m.indexOf('has not been used') > -1 || m.indexOf('is disabled') > -1 || m.indexOf('not been enabled') > -1) return 'Google Cloud project me ye API enable nahi hai. Error me diye link se enable kar sakte hain. Agar doosra raasta (Gemini API) chal raha hai to ye error ignore kar sakte hain.';
   if(m.indexOf('referer') > -1 || m.indexOf('referrer') > -1) return 'Key par website restriction lagi hai. Cloud Console → Credentials me apni site ka domain allow karein.';
@@ -6263,9 +6263,9 @@ async function aiCallInner(opts, progress) {
         } catch(e2) { errs.push({ ep: 'gl', status: 0, msg: e2.message }); }
       }
       // 2) busy / temporary server problem -> wait and retry, then try other models
-      if([500, 502, 503, 504].indexOf(r.status) > -1 && attempt < 2) {
+      if(([500, 502, 503, 504].indexOf(r.status) > -1 || r.status === 0) && attempt < 2) {
         attempt++;
-        say(`Google par abhi load zyada hai, dobara try ho raha hai (${attempt}/2)...`);
+        say(r.status === 0 ? `Network toot gaya (slow net), dobara try ho raha hai (${attempt}/2)...` : `Google par abhi load zyada hai, dobara try ho raha hai (${attempt}/2)...`);
         await new Promise(res => setTimeout(res, AI_RETRY_BASE_MS * attempt));
         continue;
       }
@@ -6319,11 +6319,29 @@ async function aiRefreshModels() {
   }
 }
 
+// pulls every complete {...} object out of a cut-off JSON answer
+function aiSalvageProducts(t) {
+  const start = t.indexOf('[');
+  if(start < 0) return [];
+  const out = [];
+  let depth = 0, inStr = false, esc2 = false, from = -1;
+  for(let i = start + 1; i < t.length; i++) {
+    const ch = t[i];
+    if(inStr) { if(esc2) esc2 = false; else if(ch === '\\') esc2 = true; else if(ch === '"') inStr = false; continue; }
+    if(ch === '"') { inStr = true; continue; }
+    if(ch === '{') { if(depth === 0) from = i; depth++; }
+    else if(ch === '}') { depth--; if(depth === 0 && from >= 0) { try { out.push(JSON.parse(t.slice(from, i + 1))); } catch(e) {} from = -1; } }
+  }
+  return out;
+}
+
 function aiParseJson(text) {
   let t = String(text || '').trim().replace(/^```(?:json)?/i, '').replace(/```$/, '').trim();
   try { return JSON.parse(t); } catch(e) {}
   const m = t.match(/[\[{][\s\S]*[\]}]/);
   if(m) { try { return JSON.parse(m[0]); } catch(e) {} }
+  const salv = aiSalvageProducts(t);
+  if(salv.length) return { products: salv };
   throw new Error('AI ka jawab samajh nahi aaya (JSON nahi mila). Dobara try karein.');
 }
 
@@ -6422,6 +6440,65 @@ async function aiFilePart(file) {
 function aiSetStatus(id, text, cls) { const el = document.getElementById(id); if(el) { el.className = 'ai-result ' + (cls || ''); el.textContent = text; } }
 
 // ---- 1) AI PRODUCT ADD
+// ---- big PDFs: read page by page (small requests, partial results survive a bad network)
+const PDFJS_VER = '3.11.174';
+const AI_PDF_INLINE_MAX = 2.5 * 1024 * 1024;
+const AI_PDF_BATCH = 3;
+const AI_PDF_MAX_PAGES = 60;
+
+function aiLoadPdfJs() {
+  return new Promise((res, rej) => {
+    if(window.pdfjsLib) { res(window.pdfjsLib); return; }
+    const s = document.createElement('script');
+    s.src = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${PDFJS_VER}/pdf.min.js`;
+    s.onload = () => {
+      try { window.pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${PDFJS_VER}/pdf.worker.min.js`; res(window.pdfjsLib); }
+      catch(e) { rej(e); }
+    };
+    s.onerror = () => rej(new Error('PDF reader load nahi hua (internet check karein).'));
+    document.head.appendChild(s);
+  });
+}
+async function aiLoadPdf(file) {
+  const lib = await aiLoadPdfJs();
+  return await lib.getDocument({ data: await file.arrayBuffer() }).promise;
+}
+async function aiRenderPdfPage(doc, n) {
+  const page = await doc.getPage(n);
+  const v1 = page.getViewport({ scale: 1 });
+  const scale = Math.min(2, 1100 / Math.max(v1.width, v1.height));
+  const vp = page.getViewport({ scale });
+  const c = document.createElement('canvas');
+  c.width = Math.max(1, Math.round(vp.width)); c.height = Math.max(1, Math.round(vp.height));
+  await page.render({ canvasContext: c.getContext('2d'), viewport: vp }).promise;
+  const url = c.toDataURL('image/jpeg', 0.72);
+  c.width = c.height = 0;
+  return url;
+}
+function aiFileInfo(inp) {
+  const f = inp.files[0], el = document.getElementById('aiFileInfo');
+  if(!el) return;
+  if(!f) { el.textContent = ''; return; }
+  const mb = (f.size / 1048576).toFixed(1);
+  el.textContent = `${f.name} — ${mb} MB` + (f.type === 'application/pdf' && f.size > AI_PDF_INLINE_MAX ? ' · badi PDF hai, app ise pages me todkar (3-3 pages) bhejegi.' : '');
+}
+
+function aiAddSystemPrompt() {
+  const cats = Array.from(new Set(catalog.map(p => p.cat))).join(', ');
+  return `You are a catalog assistant for "PAG Moters", an Indian shop selling EV scooter parts, chargers, helmets, batteries and mobile accessories. Extract product listings from the user's text, image or PDF pages and return ONLY valid JSON (no markdown) in this shape:
+{"products":[{"name":string,"category":string,"source_price":number|null,"stock":number|null,"specs":[{"k":string,"v":string}],"description":string}]}
+Rules:
+- Product names must be clear and customer-friendly (brand, model, key spec, colour/variant).
+- If one product has several price variants (for example with Micro cable / with Type-C cable), output a separate product per variant and put the variant in brackets in the name.
+- category: reuse one of these existing categories when it fits: ${cats}. Otherwise use a short new category name.
+- source_price: the number written in the source for that product (rupees, digits only), or null if none is given.
+- specs: only facts visible in the source (power, voltage, ports, model, warranty...). Never invent model numbers, certifications or warranty.
+- description: one or two plain sentences without claims that are not in the source.
+- Skip cover pages, company photos and pages that show no product.
+- Write in English.`;
+}
+function aiNormalizeList(data) { return Array.isArray(data) ? data : ((data && data.products) || []); }
+
 async function aiGenerateProducts() {
   if(aiNeedKey() || _aiBusy) return;
   const text = document.getElementById('aiAddText').value.trim();
@@ -6432,32 +6509,60 @@ async function aiGenerateProducts() {
   _aiProgress = m => aiSetStatus('aiAddStatus', '⏳ ' + m, '');
   document.getElementById('aiAddPreview').innerHTML = '';
   try {
-    const parts = [];
     aiAddPhoto = null;
-    if(file) { const fp = await aiFilePart(file); parts.push(fp.part); aiAddPhoto = fp.thumb; }
-    const cats = Array.from(new Set(catalog.map(p => p.cat))).join(', ');
-    const system = `You are a catalog assistant for "PAG Moters", an Indian shop selling EV scooter parts, chargers, helmets, batteries and mobile accessories. Extract product listings from the user's text, image or PDF and return ONLY valid JSON (no markdown) in this shape:
-{"products":[{"name":string,"category":string,"source_price":number|null,"stock":number|null,"specs":[{"k":string,"v":string}],"description":string}]}
-Rules:
-- Product names must be clear and customer-friendly (brand, model, key spec, colour/variant).
-- If one product has several price variants (for example with Micro cable / with Type-C cable), output a separate product per variant and put the variant in brackets in the name.
-- category: reuse one of these existing categories when it fits: ${cats}. Otherwise use a short new category name.
-- source_price: the number written in the source for that product (rupees, digits only), or null if none is given.
-- specs: only facts visible in the source (power, voltage, ports, model, warranty...). Never invent model numbers, certifications or warranty.
-- description: one or two plain sentences without claims that are not in the source.
-- Write in English.`;
-    parts.push({ text: 'Owner ka text:\n' + (text || '(sirf attached file dekhein)') });
-    const out = await aiCall({ system, contents: [{ role: 'user', parts }], json: true, temperature: 0.2 });
-    const data = aiParseJson(out);
-    const list = Array.isArray(data) ? data : (data.products || []);
-    if(!list.length) throw new Error('AI ko koi product nahi mila. Text thoda detail me likhein.');
+    const system = aiAddSystemPrompt();
+    const userText = 'Owner ka text:\n' + (text || '(sirf attached file dekhein)');
+    let list = [], notes = [], handled = false;
+
+    if(file && file.type === 'application/pdf' && file.size > AI_PDF_INLINE_MAX) {
+      let pdf = null;
+      try { aiSetStatus('aiAddStatus', '⏳ PDF khol raha hai...', ''); pdf = await aiLoadPdf(file); }
+      catch(e) { if(file.size > 12 * 1024 * 1024) throw e; notes.push('PDF reader load nahi hua, poori PDF ek saath bheji.'); }
+      if(pdf) {
+        handled = true;
+        const total = Math.min(pdf.numPages, AI_PDF_MAX_PAGES);
+        const seen = new Set();
+        let fails = 0;
+        for(let start = 1; start <= total; start += AI_PDF_BATCH) {
+          const end = Math.min(total, start + AI_PDF_BATCH - 1);
+          const label = `Pages ${start}-${end} / ${total}: `;
+          _aiProgress = m => aiSetStatus('aiAddStatus', `⏳ ${label}${m}`, '');
+          aiSetStatus('aiAddStatus', `⏳ ${label}padh raha hai... (${list.length} products mile)`, '');
+          try {
+            const parts = [];
+            for(let i = start; i <= end; i++) parts.push({ inlineData: { mimeType: 'image/jpeg', data: (await aiRenderPdfPage(pdf, i)).split(',')[1] } });
+            parts.push({ text: userText + `\n(Ye catalog ke pages ${start}-${end} hain.)` });
+            const out = await aiCall({ system, contents: [{ role: 'user', parts }], json: true, temperature: 0.2 });
+            aiNormalizeList(aiParseJson(out)).forEach(p => {
+              const k = String(p.name || '').trim().toLowerCase();
+              if(k && !seen.has(k)) { seen.add(k); list.push(p); }
+            });
+            fails = 0;
+          } catch(e) {
+            notes.push(`Pages ${start}-${end} nahi ho paye (${String(e.message).split('\n')[0].slice(0, 90)})`);
+            if(++fails >= 2) { notes.push('Lagatar 2 baar fail hua, isliye ruk gaya.'); break; }
+          }
+        }
+        if(pdf.numPages > total) notes.push(`Sirf pehle ${total} pages padhe gaye.`);
+      }
+    }
+
+    if(!handled) {
+      const parts = [];
+      if(file) { const fp = await aiFilePart(file); parts.push(fp.part); aiAddPhoto = fp.thumb; }
+      parts.push({ text: userText });
+      const out = await aiCall({ system, contents: [{ role: 'user', parts }], json: true, temperature: 0.2 });
+      list = aiNormalizeList(aiParseJson(out));
+    }
+
+    if(!list.length) throw new Error('AI ko koi product nahi mila.' + (notes.length ? '\n' + notes.join('\n') : ' Text thoda detail me likhein.'));
     const mode = document.getElementById('aiPriceMode').value;
     const markup = Number(document.getElementById('aiMarkup').value) || 0;
     const defStock = Number(document.getElementById('aiStock').value) || 0;
     const usePhoto = document.getElementById('aiUsePhoto').checked && aiAddPhoto && list.length === 1;
     aiAddRows = list.map(p => {
       const sp = Number(p.source_price);
-      let price = sp > 0 ? (mode === 'cost' ? Math.ceil(sp * (1 + markup / 100)) : Math.round(sp)) : 0;
+      const price = sp > 0 ? (mode === 'cost' ? Math.ceil(sp * (1 + markup / 100)) : Math.round(sp)) : 0;
       return {
         name: String(p.name || '').trim(), cat: String(p.category || 'Accessories').trim() || 'Accessories',
         price, stock: p.stock != null && Number(p.stock) >= 0 ? Number(p.stock) : defStock,
@@ -6466,7 +6571,7 @@ Rules:
       };
     });
     aiRenderAddPreview();
-    aiSetStatus('aiAddStatus', `✅ ${aiAddRows.length} product mile. Neeche check/edit karke "Add" dabayein.${aiAddRows.some(r => !r.price) ? '\n⚠️ Jin products ka price 0 hai unka price khud bharein.' : ''}`, 'ok');
+    aiSetStatus('aiAddStatus', `✅ ${aiAddRows.length} product mile. Neeche check/edit karke "Add" dabayein.${aiAddRows.some(r => !r.price) ? '\n⚠️ Jin products ka price 0 hai unka price khud bharein.' : ''}${notes.length ? '\n⚠️ ' + notes.join(' · ') : ''}${handled ? '\nℹ️ PDF se photo nahi li jaati, product ki photo baad me Edit se lagayein.' : ''}`, notes.length ? '' : 'ok');
   } catch(e) {
     aiSetStatus('aiAddStatus', '❌ ' + e.message, 'err');
   }
